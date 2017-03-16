@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 仿微信 相册多图选择器 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="相册,微信,移动开发,原创,多图选择">
+    <meta name="description" content="摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 仿微信 相册多图选择器">
+<meta property="og:url" content="https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/1.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/2.gif">
+<meta property="og:updated_time" content="2017-03-16T15:58:20.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 仿微信 相册多图选择器">
+<meta name="twitter:description" content="摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/1.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/Categories"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 仿微信 相册多图选择器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 仿微信 相册多图选择器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-07-01T14:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-07-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/">原创</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/JAVA/Android/">Android</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载方式"><span class="post-toc-number">1.</span> <span class="post-toc-text">下载方式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#跳转到-图片选择器页面"><span class="post-toc-number">2.</span> <span class="post-toc-text">跳转到 图片选择器页面</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在Activity的回调里获取到-所有选择的图片地址"><span class="post-toc-number">3.</span> <span class="post-toc-text">在Activity的回调里获取到 所有选择的图片地址</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">4.</span> <span class="post-toc-text">效果</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android 仿微信 相册多图选择器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 仿微信 相册多图选择器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年07月01日 22:37" datetime="2016-07-01T14:37:23.000Z"  itemprop="datePublished">2016-07-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/">原创</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/原创/JAVA/Android/">Android</a></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
+<h3 id="下载方式"><a href="#下载方式" class="headerlink" title="下载方式"></a>下载方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shphotoselectorlibrary<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shphotoselectorlibrary:2.0.9'</span></div></pre></td></tr></table></figure></p>
+<p>该项目依赖 Glide:3.7.0 如果有冲突 可以 修改主项目里的依赖  或者 直接导入Library</p>
+<h3 id="跳转到-图片选择器页面"><a href="#跳转到-图片选择器页面" class="headerlink" title="跳转到 图片选择器页面"></a>跳转到 图片选择器页面</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMGSACTIVITY_REQUEST = <span class="number">10001</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">chise</span><span class="params">(View v)</span> </span>&#123;</div><div class="line"></div><div class="line">		Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">		<span class="comment">//可选择图片的最大数量</span></div><div class="line">		intent.putExtra(PhotoActivity.IMAGE_COUNT,<span class="number">9</span>); </div><div class="line">		<span class="comment">//顶部Toolbar栏背景颜色</span></div><div class="line">		intent.putExtra(PhotoActivity.BAR_COLORS,R.color.colorPrimary);</div><div class="line">		intent.setClass(<span class="keyword">this</span>,PhotoActivity.class);</div><div class="line">		startActivityForResult(intent,IMGSACTIVITY_REQUEST);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="在Activity的回调里获取到-所有选择的图片地址"><a href="#在Activity的回调里获取到-所有选择的图片地址" class="headerlink" title="在Activity的回调里获取到 所有选择的图片地址"></a>在Activity的回调里获取到 所有选择的图片地址</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (requestCode == IMGSACTIVITY_REQUEST &amp;&amp; resultCode == RESULT_OK) &#123;</div><div class="line">			Bundle bundle = data.getExtras();</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (bundle != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">if</span> (bundle.getStringArrayList(<span class="string">"files"</span>) != <span class="keyword">null</span>) &#123;</div><div class="line">					listfile = bundle.getStringArrayList(<span class="string">"files"</span>);</div><div class="line">					listView.setVisibility(View.VISIBLE);</div><div class="line">					ArrayAdapter&lt;String&gt; arryAdapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>, android.R.layout.simple_list_item_1, listfile);</div><div class="line">					listView.setAdapter(arryAdapter);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/1.gif" alt=""><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/2.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>源码地址：<a href="https://github.com/hui46226021/ShPhotoSelector" target="_blank" rel="external">https://github.com/hui46226021/ShPhotoSelector</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        版权声明：<a href="/2016/07/01/Android 仿微信 相册多图选择器/" target="_blank" rel="external">https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/</a>
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多图选择/">多图选择</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/相册/">相册</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&title=《Android 仿微信 相册多图选择器》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&title=《Android 仿微信 相册多图选择器》 — 独角兽之路&source=摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 仿微信 相册多图选择器》 — 独角兽之路&url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/01/hello/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">hello</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android 仿微信 相册多图选择器" data-title="Android 仿微信 相册多图选择器" data-url="https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&title=《Android 仿微信 相册多图选择器》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&title=《Android 仿微信 相册多图选择器》 — 独角兽之路&source=摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 仿微信 相册多图选择器》 — 独角兽之路&url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACxklEQVR42u3aUU7sQAwEwNz/0vCLBIRuO7OAVPl6WvKyqUEamx5fV3y9fbiSzz/fc//Mj/fc33+duPDw8PAWr37/le2dyWt995z7RUzeBA8PD+80734jTl46+SQpCUnBKIoHHh4e3h/gta3trHW+Xyw8PDy8/8XLvyz5+uSZq8ACDw8P7xhv387m5aSIEl6ZteDh4eF1Tyg29L/w7yPne3h4eHjrU/X8SjbxJNRI2ujirfDw8PAO8GaHWzkgP9bKw4W6scbDw8N7lDcMRuOfbkpFGzR8+3vDw8PDe5SX/zhpndtDrFlAPIxu8fDw8A7w2ocmDXTbcM/GF1ZgPDw8vJKXDArk41mbxrdt3IczEXh4eHhrXh4HzMKITTibNNzRLwYPDw/vAC/f4pNC0say+QLt4ww8PDy8Z3nt1yftdRsBt4u1qn54eHh4C167re8b6DzCyIvT1dYWPDw8vBFvNurUFo9k+dqDt2jR8fDw8F7Ia190FmpE6Uh5JIaHh4d3mrePaDcb/aYTrgcR8PDw8B7itUf4m4Or2Y69inHx8PDwjvE24wInBgjaxr0+08PDw8N7iHetr+R127h2FSXj4eHhHeNtxpvazXoWcySwL+7Hw8PDO8BLItTNoX4+gDUbCLtfLDw8PLwTvGTjTl4oHxFoG+hZcHzldQkPDw+v5M3C3LacbCLgzTgXHh4e3gle0mXPmuB2E8+PuIpig4eHh3eA1zbHm+LRtvKbwGLY++Ph4eEF//etvGZRb/5Je0j2w+Li4eHhHeBtGuXZaVv7nNlQAh4eHt5pXl4MNrFF20YnbX30JwEeHh7eMd4mQk1KyCx6yKvZD4UBDw8P75d4+3Z583leMIaFAQ8PD+8Ab3/ENRuoynkP1D08PDy8mJcfes0OroYNcTk0sMpa8PDw8LZ7ex3CJjHEppDkww3XZp3w8PDw7njvFSiccWUWrW4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

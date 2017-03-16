@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-03-15T14:05:21.309Z</updated>
+  <updated>2017-03-16T15:58:20.193Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -16,29 +16,50 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://hui46226021.github.io/2017/03/15/hello-world/"/>
-    <id>https://hui46226021.github.io/2017/03/15/hello-world/</id>
-    <published>2017-03-15T14:03:23.867Z</published>
-    <updated>2017-03-15T14:05:21.309Z</updated>
+    <title>Android 仿微信 相册多图选择器</title>
+    <link href="https://hui46226021.github.io/2016/07/01/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/</id>
+    <published>2016-07-01T14:37:23.000Z</published>
+    <updated>2017-03-16T15:58:20.193Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+    <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
+<h3 id="下载方式"><a href="#下载方式" class="headerlink" title="下载方式"></a>下载方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shphotoselectorlibrary<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shphotoselectorlibrary:2.0.9'</span></div></pre></td></tr></table></figure></p>
+<p>该项目依赖 Glide:3.7.0 如果有冲突 可以 修改主项目里的依赖  或者 直接导入Library</p>
+<h3 id="跳转到-图片选择器页面"><a href="#跳转到-图片选择器页面" class="headerlink" title="跳转到 图片选择器页面"></a>跳转到 图片选择器页面</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMGSACTIVITY_REQUEST = <span class="number">10001</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">chise</span><span class="params">(View v)</span> </span>&#123;</div><div class="line"></div><div class="line">		Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">		<span class="comment">//可选择图片的最大数量</span></div><div class="line">		intent.putExtra(PhotoActivity.IMAGE_COUNT,<span class="number">9</span>); </div><div class="line">		<span class="comment">//顶部Toolbar栏背景颜色</span></div><div class="line">		intent.putExtra(PhotoActivity.BAR_COLORS,R.color.colorPrimary);</div><div class="line">		intent.setClass(<span class="keyword">this</span>,PhotoActivity.class);</div><div class="line">		startActivityForResult(intent,IMGSACTIVITY_REQUEST);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="在Activity的回调里获取到-所有选择的图片地址"><a href="#在Activity的回调里获取到-所有选择的图片地址" class="headerlink" title="在Activity的回调里获取到 所有选择的图片地址"></a>在Activity的回调里获取到 所有选择的图片地址</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (requestCode == IMGSACTIVITY_REQUEST &amp;&amp; resultCode == RESULT_OK) &#123;</div><div class="line">			Bundle bundle = data.getExtras();</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (bundle != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">if</span> (bundle.getStringArrayList(<span class="string">"files"</span>) != <span class="keyword">null</span>) &#123;</div><div class="line">					listfile = bundle.getStringArrayList(<span class="string">"files"</span>);</div><div class="line">					listView.setVisibility(View.VISIBLE);</div><div class="line">					ArrayAdapter&lt;String&gt; arryAdapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>, android.R.layout.simple_list_item_1, listfile);</div><div class="line">					listView.setAdapter(arryAdapter);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/1.gif" alt=""><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShPhotoSelector/master/2.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>源码地址：<a href="https://github.com/hui46226021/ShPhotoSelector" target="_blank" rel="external">https://github.com/hui46226021/ShPhotoSelector</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;p&gt;摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用&lt;br&gt;
     
     </summary>
     
+      <category term="原创" scheme="https://hui46226021.github.io/categories/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/%E5%8E%9F%E5%88%9B/JAVA/"/>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/%E5%8E%9F%E5%88%9B/JAVA/Android/"/>
+    
+    
+      <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
+    
+      <category term="微信" scheme="https://hui46226021.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="多图选择" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
     
   </entry>
   
@@ -47,9 +68,10 @@
     <link href="https://hui46226021.github.io/2015/07/01/hello/"/>
     <id>https://hui46226021.github.io/2015/07/01/hello/</id>
     <published>2015-07-01T14:37:23.000Z</published>
-    <updated>2017-03-15T14:29:59.405Z</updated>
+    <updated>2017-03-16T15:50:10.071Z</updated>
     
-    <content type="html"><![CDATA[<p>摘要:<br><a id="more"></a><br>正文:</p>
+    <content type="html"><![CDATA[<p>摘要:<br><a id="more"></a></p>
+<p>正文:</p>
 ]]></content>
     
     <summary type="html">
@@ -58,12 +80,10 @@
     
     </summary>
     
-      <category term="头一次" scheme="https://hui46226021.github.io/categories/%E5%A4%B4%E4%B8%80%E6%AC%A1/"/>
     
-      <category term="多谢" scheme="https://hui46226021.github.io/categories/%E5%A4%B4%E4%B8%80%E6%AC%A1/%E5%A4%9A%E8%B0%A2/"/>
+      <category term="头一次" scheme="https://hui46226021.github.io/tags/%E5%A4%B4%E4%B8%80%E6%AC%A1/"/>
     
-    
-      <category term="hello" scheme="https://hui46226021.github.io/tags/hello/"/>
+      <category term="多谢" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E8%B0%A2/"/>
     
   </entry>
   
