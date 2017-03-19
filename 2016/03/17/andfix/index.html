@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>andfix 增量升级更新 热补丁修复 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,转载,增量升级,热补丁修复,andfix">
+    <meta name="description" content="摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵">
+<meta property="og:type" content="article">
+<meta property="og:title" content="andfix 增量升级更新 热补丁修复">
+<meta property="og:url" content="https://hui46226021.github.io/2016/03/17/andfix/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵">
+<meta property="og:updated_time" content="2017-03-19T03:15:34.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="andfix 增量升级更新 热补丁修复">
+<meta name="twitter:description" content="摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">andfix 增量升级更新 热补丁修复</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">andfix 增量升级更新 热补丁修复</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-17T14:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-03-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"><span class="post-toc-number">1.</span> <span class="post-toc-text">搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#重要，別忘了這些，不混淆andfix包，不混淆native方法"><span class="post-toc-number"></span> <span class="post-toc-text">重要，別忘了這些，不混淆andfix包，不混淆native方法</span></a>
+        </nav>
+    </aside>
+    
+<article id="post-andfix"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">andfix 增量升级更新 热补丁修复</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月17日 22:37" datetime="2016-03-17T14:37:23.000Z"  itemprop="datePublished">2016-03-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵<br><a id="more"></a></p>
+<h3 id="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"><a href="#搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）" class="headerlink" title="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"></a>搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）</h3><p>1.dexposed     github <a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
+<p>2.andfix   github <a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">https://github.com/alibaba/AndFix</a></p>
+<p>3.bsdiff  <a href="http://blog.csdn.net/lazyer_dog/article/details/47173013" target="_blank" rel="external">http://blog.csdn.net/lazyer_dog/article/details/47173013</a></p>
+<p>dexposed和andfix是alibaba的开源项目，都是apk增量更新的实现框架，目前dexposed的兼容性较差，只有2.3，4.0~4.4兼容，其他Android版本不兼容或未测试，详细可以去dexposed的github项目主页查看，而andfix则兼容2.3~6.0，所以就拿这个项目来实现增量更新吧。至于bsdiff，只是阅览了一下，还没研究过。</p>
+<p>首先 Git clone github <a href="https://github.com/alibaba/AndFix，将andfix项目下载下来，Android" target="_blank" rel="external">https://github.com/alibaba/AndFix，将andfix项目下载下来，Android</a> studio可以在build.gradle里导入andfix，</p>
+<p>compile ‘com.alipay.euler:andfix:0.3.1@aar’<br>但是我是使用module的方式添加andfix，这样可以直接查看编辑源码，而且直接gradle导入的话还有个问题，后面再说。</p>
+<p>andfix项目里有sample，导入也行，自己新建也行，我是自己新建项目，接着导入andfix作为module，demo里就两个类，mainactivity和myapplication</p>
+<p>andfix里有些文件夹不用导入的，例如tools，doc等，记得新建jniLibs文件夹，libs里的so文件移到jniLibs里。<br>~~~java<br>public class MainApplication extends Application {<br>    private static final String TAG = “euler”;</p>
+<pre><code>private static final String APATCH_PATH = &quot;/out.apatch&quot;;
+
+private static final String DIR = &quot;apatch&quot;;//补丁文件夹
+/**
+ * patch manager
+ */
+private PatchManager mPatchManager;
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    // initialize
+    mPatchManager = new PatchManager(this);
+    mPatchManager.init(&quot;1.0&quot;);
+    Log.d(TAG, &quot;inited.&quot;);
+
+    // load patch
+    mPatchManager.loadPatch();
+</code></pre><p>//        Log.d(TAG, “apatch loaded.”);</p>
+<pre><code>    // add patch at runtime
+    try {
+        // .apatch file path
+        String patchFileString = Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + APATCH_PATH;
+        mPatchManager.addPatch(patchFileString);
+        Log.d(TAG, &quot;apatch:&quot; + patchFileString + &quot; added.&quot;);
+
+        //这里我加了个方法，复制加载补丁成功后，删除sdcard的补丁，避免每次进入程序都重新加载一次
+        File f = new File(this.getFilesDir(), DIR + APATCH_PATH);
+        if (f.exists()) {
+            boolean result = new File(patchFileString).delete();
+            if (!result)
+                Log.e(TAG, patchFileString + &quot; delete fail&quot;);
+        }
+    } catch (IOException e) {
+        Log.e(TAG, &quot;&quot;, e);
+    }
+
+}
+</code></pre><p>public class MainActivity extends Activity {<br>    private static final String TAG = “euler”;</p>
+<pre><code>@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    toast();
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    android.os.Process.killProcess(android.os.Process.myPid());
+}
+
+//旧方法，1.apk
+private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH_SHORT).show();    }}
+</code></pre><p>刚刚说的直接在gradle里导入andfix会有个问题，是在原来的项目中，加载一次补丁后，out.apatch文件会copy到getFilesDir目录下的/apatch文件夹中，在下次补丁更新时，会检测补丁是否已经添加在apatch文件夹下，已存在就不会复制加载sdcard的out.apatch。</p>
+<p>原来的addpath方法</p>
+<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if(!src.exists()){<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + path + “] has be loaded.”);<br>        return;<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
+<p>修改后，判断apatch下的out.apatch存在即删除掉，重新复制加载sdcard下的out.apatch</p>
+<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if (!src.exists()) {<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + src.getName() + “] has be loaded.”);<br>        boolean deleteResult = dest.delete();<br>        if (deleteResult)<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] has be delete.”);<br>        else {<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] delete error”);<br>            return;<br>        }<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
+<p>还有源码混淆</p>
+<p>-optimizationpasses 5                                                           # 指定代码的压缩级别<br>-dontusemixedcaseclassnames                                                     # 是否使用大小写混合<br>-dontskipnonpubliclibraryclasses                                                # 是否混淆第三方jar<br>-dontpreverify                                                                  # 混淆时是否做预校验<br>-verbose                                                                        # 混淆时是否记录日志<br>-optimizations !code/simplification/arithmetic,!field/<em>,!class/merging/</em>        # 混淆时所采用的算法</p>
+<h2 id="重要，別忘了這些，不混淆andfix包，不混淆native方法"><a href="#重要，別忘了這些，不混淆andfix包，不混淆native方法" class="headerlink" title="重要，別忘了這些，不混淆andfix包，不混淆native方法"></a>重要，別忘了這些，不混淆andfix包，不混淆native方法</h2><p>-dontwarn android.annotation<br>-dontwarn com.alipay.euler.<strong><br>-keep class com.alipay.euler.</strong> {<em>;}<br>-keep class </em> extends java.lang.annotation.Annotation<br>-keepclasseswithmembernames class * {<br>    native <methods>;<br>}</methods></p>
+<p>接着打包1.apk，</p>
+<p>然后修改mainactivity的toast()，打包2.apk</p>
+<p>//修改Toast內容，2.apk<br>private void toast() {<br>    Toast.makeText(this, “new”, Toast.LENGTH_SHORT).show();<br>}</p>
+<p>cmd输入命令，具体参数看usage</p>
+<p>如无错误，编译后会生成一个apatch文件，改名成out.apatch</p>
+<p>安装打开1.apk</p>
+<p>关闭app，将out.apatch放sdcard根目录后，重新打开app，toast方法改变了</p>
+<p>ps：</p>
+<ol>
+<li><p>这里只是简单的测试了一下，没有复杂的功能，而且andfix不支持布局资源等的修改。</p>
+</li>
+<li><p>github主页的issues反应说Android4.0.4，以及5.0以上版本会crash，不过我使用了两个虚拟机，genymotion的4.2和5.0虚拟机，没有错误，其他请自测</p>
+</li>
+<li><p>使用了apk加固时（360加固，百度加固等等），发现在加固前要先apkpatch制作补丁，不能使用加固后的apk制作，否则补丁无法使用，但是在加固前制作的补丁可以很容易的被反编译出源码</p>
+</li>
+</ol>
+<p>demo下载 <a href="http://download.csdn.net/detail/ityangjun/9177377" target="_blank" rel="external">http://download.csdn.net/detail/ityangjun/9177377</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/andfix/">andfix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增量升级/">增量升级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/热补丁修复/">热补丁修复</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载/">转载</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/17/andfix/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/17/andfix/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&source=摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/17/andfix/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/17/andfix/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/17/andfix/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/07/01/Android 仿微信 相册多图选择器/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android 仿微信 相册多图选择器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/17/Android分包MultiDex原理详解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android分包MultiDex原理详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="andfix" data-title="andfix 增量升级更新 热补丁修复" data-url="https://hui46226021.github.io/2016/03/17/andfix/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/17/andfix/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/17/andfix/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&source=摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/17/andfix/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/17/andfix/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/17/andfix/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3awY7CMAxF0f7/T3e2SGjKfXZAinOzQhWiOVkYO/Z14XW/rPcn5Hn6rusbS4YMGdsy7sdFGJ2DIJ+f9yZDhoxzGM+B7/07//1cjUeoH/YsQ4YMGWC7PGimAVeGDBkyUsZzSO3jZciQIaNTxD5vjid/aSBeXIvLkCFjQ0at1PzN56/0N2TIkLEV4w5Xmq6lLYfakiFDxmwGD3D9y7Li5vB+ZMiQcQKDj1nUUkZe+qZFsgwZMmYzyOVXP1ym42XpNZwMGTJmM1a1JHkRm6aevOUgQ4aM2QzyYh4QeQhOfz84GhkyZAxi8GSOl7v8aHgARUWsDBkyRjPSq//OtAM5jniHMmTIGM2oNQb4E34EaZG8oIUpQ4aMTRi1wMevyWplcHx5J0OGjGMYtXqQX7GR4rk1bCFDhoyhjNpoF790Iy1JfnmHMlwZMmSMZtSakbwc7QxVoJAtQ4aMoYzORtNBDQ4giaMMGTLOYfDQtja9q6WPnQAtQ4aM3Rn9JiUf6uq0Cj4koDJkyDiS0YrT7QNKn8iQIeMERjrO1QmpnXL0w8iFDBkyxjHucNXGxdJEk6eJF++vypAhY1vGqiSPX/GnR7M4YZUhQ8a2jN8Me/HQWQz0MmTIOICRjnl1GpadfwBUi8uQIUMGHhQjAZSUwehdMmTIkBEOQNQSzU4rVIYMGScwVl3lpzd8PBzLkCHjZEY6TsFfkJa4nWEOGTJkDGX8AVmqN/WlaUOxAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

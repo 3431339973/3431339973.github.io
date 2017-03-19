@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android表单映射框架 SHFormLayout 快速生成表单布局 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,原创,Form,框架,表单映射,自定义View">
+    <meta name="description" content="摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android表单映射框架 SHFormLayout 快速生成表单布局">
+<meta property="og:url" content="https://hui46226021.github.io/2017/03/17/ShFormLayout/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png">
+<meta property="og:updated_time" content="2017-03-18T09:47:10.277Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android表单映射框架 SHFormLayout 快速生成表单布局">
+<meta name="twitter:description" content="摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android表单映射框架 SHFormLayout 快速生成表单布局</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android表单映射框架 SHFormLayout 快速生成表单布局</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-17T14:37:23.000Z" itemprop="datePublished" class="page-time">
+  2017-03-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/View/">View</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ShFormUtils"><span class="post-toc-number">1.</span> <span class="post-toc-text">ShFormUtils</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Download"><span class="post-toc-number">2.</span> <span class="post-toc-text">Download</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#功能"><span class="post-toc-number">3.</span> <span class="post-toc-text">功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表单对象映射"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">表单对象映射</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#表单参数检查"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">表单参数检查</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#验证类型"><span class="post-toc-number">3.2.0.1.</span> <span class="post-toc-text">验证类型</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#快速生成表单布局-ShFormLayout"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">快速生成表单布局 ShFormLayout</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#界面预览"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">界面预览</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-ShFormLayout"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android表单映射框架 SHFormLayout 快速生成表单布局</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月17日 22:37" datetime="2017-03-17T14:37:23.000Z"  itemprop="datePublished">2017-03-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/View/">View</a></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
+<h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shform:3.2.2'</span></div></pre></td></tr></table></figure></p>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="表单对象映射"><a href="#表单对象映射" class="headerlink" title="表单对象映射"></a>表单对象映射</h2><ul>
+<li>1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍</li>
+<li><p>2.开启表单注入 FormInit.injection(this);</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      nameEdit = (EditText) findViewById(R.id.name);</div><div class="line">      phoneEdit = (EditText) findViewById(R.id.phone);</div><div class="line">      professionEdit = (EditText) findViewById(R.id.profession);</div><div class="line">      spinner = (Spinner) findViewById(R.id.spinner);</div><div class="line">      married = (CheckBox) findViewById(R.id.married);</div><div class="line">      party = (CheckBox) findViewById(R.id.party);</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * 初始化表单注入  要在 所有控件初始化成功后 调用</div><div class="line">       */</div><div class="line">      FormInit.injection(<span class="keyword">this</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在 onDestroy 里 注销 表单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注销表单</div><div class="line"> */</div><div class="line">FormInit.deleteInjection(<span class="keyword">this</span>);</div><div class="line"><span class="keyword">super</span>.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.通过 @FormInjection 绑定控件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * name 对应 实体类 字段名</div><div class="line"> * message 参数为空的时候 默认提示 的字符串</div><div class="line"> * isNull  该字段是否可以为空  默认 false</div><div class="line"> */</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"name"</span>, message = <span class="string">"名字"</span>,isNull = <span class="keyword">true</span>)</div><div class="line">  EditText nameEdit;</div><div class="line">  <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line">  EditText phoneEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line">  EditText professionEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"workingLife"</span>, message = <span class="string">"工作时间"</span>)</div><div class="line">  Spinner spinner;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"married"</span>)</div><div class="line">  CheckBox married;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.调用映射方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 表单自动生成对象</div><div class="line">  */</div><div class="line"> UserModel userModel = FormUtls.formToObjectAndCheck(<span class="keyword">this</span>,UserModel.class);</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 实体对象 映射到表单 返回true 表示映射成功</div><div class="line">  */</div><div class="line"> FormUtls.objectToForm(<span class="keyword">this</span>,userModel);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="表单参数检查"><a href="#表单参数检查" class="headerlink" title="表单参数检查"></a>表单参数检查</h2><pre><code>* 1.使用 @FormCheck
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//type 是 验证类型枚举   默认 是自定义验证</span></div><div class="line"> <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line"> EditText phoneEdit;</div><div class="line"> <span class="meta">@FormCheck</span></div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line"> EditText professionEdit;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 通过 实现 FormCheckInterface 接口的 formCheck</div><div class="line">      * 自定定义 表单检查 默认要返回true</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@return</span></div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">formCheck</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="keyword">switch</span> (v.getId())&#123;</div><div class="line">             <span class="keyword">case</span> R.id.profession:</div><div class="line">                 <span class="keyword">if</span>(!(professionEdit.getText()+<span class="string">""</span>).contains(<span class="string">"-"</span>))&#123;</div><div class="line">                     Toast.makeText(<span class="keyword">this</span>,<span class="string">"职业格式不正确"</span>,Toast.LENGTH_SHORT).show();</div><div class="line">                     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                 &#125;</div><div class="line">                 <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 表单检查 不合法回调</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@param</span> message</div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">formCheckNullCall</span><span class="params">(View v, String message)</span> </span>&#123;</div><div class="line">         Toast.makeText(<span class="keyword">this</span>,message,Toast.LENGTH_SHORT).show();</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<h4 id="验证类型"><a href="#验证类型" class="headerlink" title="验证类型"></a>验证类型</h4><pre><code>CUSTOM,//自定义
+PHONE,//手机号
+EMAIL,//邮箱
+CHINESE,//中文
+IDCARD,//身份证
+ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
+AMOUNT_MONEY,//金额校验，精确到2位小数
+AMOUNT,//存数字
+URL,//Url
+PASSWORD;//密码强度 是不是6至12位字母组合
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>    
+<h2 id="快速生成表单布局-ShFormLayout"><a href="#快速生成表单布局-ShFormLayout" class="headerlink" title="快速生成表单布局 ShFormLayout"></a>快速生成表单布局 ShFormLayout</h2><p>ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式</p>
+<p><img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png" alt=""></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;com.sh.zsh.code.layout.ShFormLayout</div><div class="line">  &lt;!--该布局 需要在这确定 每行的高度 --&gt;</div><div class="line">              app:less_form_row_height="50dp"</div><div class="line">             android:layout_width="match_parent"</div><div class="line">             android:layout_height="wrap_content"&gt;</div><div class="line">             &lt;TextView</div><div class="line">                 &lt;!--这里表明 这个控件 只是用于显示标题--&gt;</div><div class="line">                 app:less_form_group_titel="true"</div><div class="line">                 android:text="基本信息"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="wrap_content" /&gt;</div><div class="line">             &lt;EditText</div><div class="line">                 &lt;!--该行的标题--&gt;</div><div class="line">                 app:less_form_title="姓名"</div><div class="line">                 &lt;!--该行对应的字段名--&gt;</div><div class="line">                 app:less_form_name="name"</div><div class="line">                 &lt;!--该行是否必填--&gt;</div><div class="line">                 app:less_form_must="true"</div><div class="line">                  android:layout_height="wrap_content"</div><div class="line">                  android:layout_width="match_parent"</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">             &lt;EditText</div><div class="line">                 app:less_form_title="电话"</div><div class="line">                 &lt;!--该行的验证方式--&gt;</div><div class="line">                 app:less_form_check_type="phone"</div><div class="line">                 app:less_form_name="phone"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true"</div><div class="line">                 /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/company"</div><div class="line">                 app:less_form_title="公司"</div><div class="line">                 app:less_form_name="company"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/department"</div><div class="line">                 app:less_form_title="部门"</div><div class="line">                 app:less_form_name="department"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormTimeView</div><div class="line">                 app:less_form_title="出生日期"</div><div class="line">                 app:less_form_name="birthday"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;CheckBox</div><div class="line">                 app:less_form_title="男性："</div><div class="line">                 app:less_form_name="sex"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;LinearLayout</div><div class="line">                 app:less_form_group_top_layout="true"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="150dp"</div><div class="line">                 android:background="@color/white"</div><div class="line">                 android:orientation="horizontal"&gt;</div><div class="line">                 &lt;TextView</div><div class="line">                     android:layout_width="wrap_content"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="18dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:text="签名" /&gt;</div><div class="line"></div><div class="line">                 &lt;EditText</div><div class="line">                     android:id="@+id/sign"</div><div class="line">                     android:gravity="top"</div><div class="line">                     android:layout_width="match_parent"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="16dp"</div><div class="line">                     android:padding="5dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:background="@drawable/bg_text_factoryaudit"</div><div class="line">                     android:hint="多行输入" /&gt;</div><div class="line">             &lt;/LinearLayout&gt;</div><div class="line">         &lt;/com.sh.zsh.code.layout.ShFormLayout&gt;</div></pre></td></tr></table></figure>
+<h3 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了<br>我们来看一下  框架都提供了 哪些表单属性 供我们使用</p>
+<ul>
+<li>ShFormLayout  <br><br>less_form_row_height  表单每行的 高度</li>
+<li>内部控件<br><br>less_form_title   名称<br><br>less_form_title_image  设置名称左侧的icon<br><br>less_form_can_click    该行是否显示 右侧箭头<br><br>less_form_must         该字段是否必填<br><br>less_form_name        该字段对应实体类的字段名称<br><br>less_form_is_null     该字段是否可以为空<br><br>less_form_bottomLine  该行是否显示底部横线<br>less_form_check_type  检查类型<br>less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）<br>less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）</li>
+<li>FormTimeView  时间控件<br><br>less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br></li>
+<li>FormSpinner  选择器  用法参考Demo<br><br>less_form_spi_sel 默认选中第一项</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShFormUtils" target="_blank" rel="external">https://github.com/hui46226021/ShFormUtils</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Form/">Form</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/表单映射/">表单映射</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&title=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&title=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&source=摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/03/17/ShFormLayout/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">友盟封装第三方登录 第三方粉线</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/01/Retrofit2.0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Retrofit2.0 - 网络请求库 注解 详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="ShFormLayout" data-title="Android表单映射框架 SHFormLayout 快速生成表单布局" data-url="https://hui46226021.github.io/2017/03/17/ShFormLayout/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&title=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&title=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&source=摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/03/17/ShFormLayout/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android表单映射框架 SHFormLayout 快速生成表单布局》 — 独角兽之路&url=https://hui46226021.github.io/2017/03/17/ShFormLayout/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/03/17/ShFormLayout/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3aQW7DMAwF0dz/0i7QVYHE8nzSLWpqtDISR+rTgiVFvV54HN/j5/P7J+/fvr95Nif5/IYhQ4aMxzKO5SBLrpHr9/lsF1sjQ4aMDRg8yPLwyr9dr4uCsgwZMmScLFYL0LVnGTJkyKgVruugyUOtDBkyZBBGmuSR5cmhWy31lCFDxm6MWmPgb55/vb8hQ4aMf884wsGbBGnKyIPsh1/JkCFjNGN9lJaG3TQRTGe+CMcyZMgYyqg1KdOUMU344t/KkCFjNKNfJ3YKXRJe04tlMmTImMroB8o+KW1wXhSxMmTIGMS491JX2m6M91uGDBkbM3hZW7sElv6haQtBhgwZsxnrsjA9oCeBNb0Wtl5LhgwZuzFqgP41r376KEOGjB0YfLHahYy7GHF7QIYMGSMYJOXil01rh2hpuhn8x5AhQ8YIRhpe09DJg29aJCOMDBkyRjCOcJADsv6bPPSjHoIMGTLGMdLwlyaOaZqISlwZMmSMZvAUrZb28eZlp5kqQ4aM2Yz0ckOnWCUBtLgpMmTI2IDBL2x1jv77gbXYfZUhQ8bDGelxWP/4rBaC0ZwyZMgYyug3BmobwUM82hoZMmSMZqRT1yJ60IwszSNDhowdGLwZmV7w4rOlKeNpRS5DhozRjLS5yK9fdErWICmUIUOGDBwu0ysa/FcXGyFDhgwZPEXDCWK/jfqhiJUhQ8ZoBk/sOs0AHkbJBhWrZxkyZDyQUSsgixOVAuttGBkyZDyP8QWpXImHQvYZDAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

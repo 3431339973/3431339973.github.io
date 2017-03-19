@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Retrofit2.0 - 网络请求库 注解 详解 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,转贴,Retrofit2.0,网络访问">
+    <meta name="description" content="Retrofit基于注解和动态代理，优化了Android中的网络请求操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrofit2.0 - 网络请求库 注解 详解">
+<meta property="og:url" content="https://hui46226021.github.io/2017/01/01/Retrofit2.0/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="Retrofit基于注解和动态代理，优化了Android中的网络请求操作。">
+<meta property="og:image" content="https://static.oschina.net/uploads/img/201701/19105443_jXYF.png">
+<meta property="og:updated_time" content="2017-03-18T01:24:40.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrofit2.0 - 网络请求库 注解 详解">
+<meta name="twitter:description" content="Retrofit基于注解和动态代理，优化了Android中的网络请求操作。">
+<meta name="twitter:image" content="https://static.oschina.net/uploads/img/201701/19105443_jXYF.png">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Retrofit2.0 - 网络请求库 注解 详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Retrofit2.0 - 网络请求库 注解 详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-01T04:32:21.000Z" itemprop="datePublished" class="page-time">
+  2017-01-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/restful/">restful</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#OverView"><span class="post-toc-number">1.</span> <span class="post-toc-text">OverView</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#这篇笔记基于Retrofit-1-9。"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">这篇笔记基于Retrofit 1.9。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#请求体"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">请求体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FORM-ENCODED-表单-And-MULTIPART"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">FORM ENCODED(表单) And MULTIPART</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配制HEADER"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">配制HEADER</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态更新HEADER"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">动态更新HEADER</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异步与同步"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">异步与同步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#直接获取返回体"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">直接获取返回体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#原文地址：http-www-jianshu-com-p-63723f593695"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">原文地址：http://www.jianshu.com/p/63723f593695</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Retrofit2.0"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Retrofit2.0 - 网络请求库 注解 详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年01月01日 12:32" datetime="2017-01-01T04:32:21.000Z"  itemprop="datePublished">2017-01-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/restful/">restful</a></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Retrofit基于注解和动态代理，优化了Android中的网络请求操作。<br><a id="more"></a></p>
+<h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><h2 id="这篇笔记基于Retrofit-1-9。"><a href="#这篇笔记基于Retrofit-1-9。" class="headerlink" title="这篇笔记基于Retrofit 1.9。"></a>这篇笔记基于Retrofit 1.9。</h2><p><img src="https://static.oschina.net/uploads/img/201701/19105443_jXYF.png" alt=""></p>
+<p>从上图可见，对Retrofit的使用可以分成三部分：</p>
+<ul>
+<li>1.建立POJO或者Model Class<br>服务端返回给客户端的数据一般都是JSON格式，所以可以利用GSON或其他库把JSON直接转换成一个对象。POJO或这个Model Class就是这个对象的类。</li>
+<li>2.定义REST API Interface<br>定义一个Interface，声明我们需要的网络请求方法。<br>例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GitHubService</span> </span>&#123;</div><div class="line">       <span class="meta">@GET</span>(<span class="string">"/users/&#123;user&#125;/repos"</span>)</div><div class="line">       <span class="function">List&lt;Repo&gt; <span class="title">listRepos</span><span class="params">(@Path(<span class="string">"user"</span>)</span> String user)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>Repo，就是第一步中定义的POJO或者Model Class。Retrofit框架会自动把服务端返回的JSON数据，转换成Repo。Retrofit默认采用GSON库。</p>
+<ul>
+<li>3.RestAdapter<br>RestAdapter用来配置网络请求的参数，并且生成一个接口的实现。<br>配置请求参数：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RestAdapter restAdapter = <span class="keyword">new</span> RestAdapter.Builder()</div><div class="line">             .setEndpoint(<span class="string">"https://api.github.com"</span>)</div><div class="line">             .setClient(<span class="keyword">new</span> OkClient(<span class="keyword">new</span> OkHttpClient()))</div><div class="line">             .build();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>生成接口的实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GitHubService service = restAdapter.create(GitHubService.class);</div></pre></td></tr></table></figure></p>
+<p>以上三步完成后，调用接口函数完成与服务器的交互：</p>
+<p>List<repo> repos = service.listRepos(“octocat”);</repo></p>
+<p>请求方法</p>
+<p>Retrofit框架提供了很多注解，其中HTTP注解有五个，用来修饰请求方法（还可以顺便处理URL路径）：</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+<li>HEAD<br>这五个注解正好涵盖了数据的增删改查方法，符合REST标准。每一个请求方法都必须要由这五个注解中的一个修饰。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/users/list"</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以在注解中添加查询参数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/users/list?sort=desc"</span>)</div></pre></td></tr></table></figure></p>
+<p>URL处理</p>
+<ul>
+<li><p>@Path - 替换参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/group/&#123;id&#125;/users"</span>)</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">groupList</span><span class="params">(@Path(<span class="string">"id"</span>)</span> <span class="keyword">int</span> groupId)</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>@Query - 添加查询参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/group/&#123;id&#125;/users"</span>)</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">groupList</span><span class="params">(@Path(<span class="string">"id"</span>)</span> <span class="keyword">int</span> groupId, @<span class="title">Query</span><span class="params">(<span class="string">"sort"</span>)</span> String sort)</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>@QueryMap - 如果有多个查询参数，把它们放在Map中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/group/&#123;id&#125;/users"</span>)</div><div class="line"><span class="function">List&lt;User&gt; <span class="title">groupList</span><span class="params">(@Path(<span class="string">"id"</span>)</span> <span class="keyword">int</span> groupId, @QueryMap Map&lt;String, String&gt; options)</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="请求体"><a href="#请求体" class="headerlink" title="请求体"></a>请求体</h2><p>请求体（RequestBody），一般用于POST方法传递请求参数。<br>@Body<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@POST</span>(<span class="string">"/users/new"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">createUser</span><span class="params">(@Body User user, Call&lt;User&gt; call)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>参数会被指定的转换器转换成字符串或字节流提交到服务器，如果没有指定转换器，Retrofit将会默认使用RequestBody。</p>
+<h2 id="FORM-ENCODED-表单-And-MULTIPART"><a href="#FORM-ENCODED-表单-And-MULTIPART" class="headerlink" title="FORM ENCODED(表单) And MULTIPART"></a>FORM ENCODED(表单) And MULTIPART</h2><ul>
+<li>FORM ENCODED</li>
+</ul>
+<p>使用 @FormUrlEncoded 修饰请求方法，可以把表单数据提交到服务端。<br>用 @Field 修饰key-value对。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormUrlEncoded</span></div><div class="line"><span class="meta">@POST</span>(<span class="string">"/user/edit"</span>)</div><div class="line"><span class="function">User <span class="title">updateUser</span><span class="params">(@Field(<span class="string">"first_name"</span>)</span> String first, @<span class="title">Field</span><span class="params">(<span class="string">"last_name"</span>)</span> String last)</span>;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>MULTIPART</li>
+</ul>
+<p>使用 @Multipart 修饰请求方法，@Part 修饰每一个Part<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Multipart</span></div><div class="line"><span class="meta">@PUT</span>(<span class="string">"/user/photo"</span>)</div><div class="line"><span class="function">User <span class="title">updateUser</span><span class="params">(@Part(<span class="string">"photo"</span>)</span> TypedFile photo, @<span class="title">Part</span><span class="params">(<span class="string">"description"</span>)</span> TypedString description)</span>;</div></pre></td></tr></table></figure></p>
+<p>Multipart 中的Part使用 RestAdapter 的转换器来转换，也可以实现 TypedOutput 自己处理序列化。</p>
+<p>Multipart主要用来上传文件吗？如果是，具体操作又是如何？ 答案在这里</p>
+<h2 id="配制HEADER"><a href="#配制HEADER" class="headerlink" title="配制HEADER"></a>配制HEADER</h2><p>用 @Headers 设置Http请求的header。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Headers</span>(<span class="string">"Cache-Control: max-age=640000"</span>)</div><div class="line"><span class="meta">@GET</span>(<span class="string">"/widget/list"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">widgetList</span><span class="params">(Call&lt;List&lt;Widget&gt;&gt; call)</span></span>;</div><div class="line"></div><div class="line"><span class="meta">@Headers</span>(&#123;</div><div class="line">    <span class="string">"Accept: application/vnd.github.v3.full+json"</span>,</div><div class="line">    <span class="string">"User-Agent: Retrofit-Sample-App"</span></div><div class="line">&#125;)</div><div class="line"><span class="meta">@GET</span>(<span class="string">"/users/&#123;username&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getUser</span><span class="params">(@Path(<span class="string">"username"</span>)</span> String username, Call&lt;User&gt;)</span>;</div></pre></td></tr></table></figure></p>
+<p>Http请求头不会互相覆盖，如果存在多个请求头的名字相同，那么它们全部都会被包含在Http请求中。</p>
+<h2 id="动态更新HEADER"><a href="#动态更新HEADER" class="headerlink" title="动态更新HEADER"></a>动态更新HEADER</h2><ul>
+<li>在请求方法的参数中，用 @Header 动态更新Http请求头<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/user"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getUser</span><span class="params">(@Header(<span class="string">"Authorization"</span>)</span> String authorization, Call&lt;User&gt; call)</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>参数不能为null，否则这个header将会被删掉。</p>
+<ul>
+<li>在RestAdapter中，利用RequestInterceptor动态更新Header<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestInterceptor requestInterceptor = <span class="keyword">new</span> RequestInterceptor() &#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">intercept</span><span class="params">(RequestFacade request)</span> </span>&#123;</div><div class="line">      request.addHeader(<span class="string">"User-Agent"</span>, <span class="string">"Retrofit-Sample-App"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">RestAdapter restAdapter = <span class="keyword">new</span> RestAdapter.Builder()</div><div class="line">  .setEndpoint(<span class="string">"https://api.github.com"</span>)</div><div class="line">  .setRequestInterceptor(requestInterceptor)</div><div class="line">  .build();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="异步与同步"><a href="#异步与同步" class="headerlink" title="异步与同步"></a>异步与同步</h2><p>每个请求方法都可以定义成同步或者异步。</p>
+<ul>
+<li>同步</li>
+</ul>
+<p>同步方法有返回值，且参数中不包含回调<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">    @GET("/users/&#123;user&#125;/repos")</div><div class="line">    List&lt;Repo&gt; listRepos(@Path("user") String user);</div><div class="line">~~</div><div class="line">* 异步</div><div class="line"></div><div class="line">异步方法没有返回值，且最后一个参数须是Callback对象</div><div class="line">~~~java</div><div class="line">    @GET("/users/&#123;user&#125;/repos")</div><div class="line">    void listRepos(@Path("user") String user, Callback&lt;List&lt;Repo&gt;&gt; call);</div><div class="line">~~</div><div class="line">在Android中，callbacks将会在主线程中调用。在普通Java程序中，callbacks将会在执行HTTP请求方法的那个线程中调用。</div><div class="line"></div><div class="line">## 处理服务器返回结果</div><div class="line"></div><div class="line">RestAdapter中的转换器会把服务器的返回结果（一般为JSON）转换成我们在函数返回值或Callback接口中定义的Java对象。</div><div class="line">~~~java</div><div class="line">          @GET("/users/&#123;user&#125;/repos")</div><div class="line">          List&lt;Repo&gt; listRepos(@Path("user") String user);</div><div class="line"></div><div class="line">          @GET("/users/&#123;user&#125;/repos")</div><div class="line">          void listRepos(@Path("user") String user, Callback&lt;List&lt;Repo&gt;&gt; call);</div></pre></td></tr></table></figure></p>
+<p>List<repo>,就是将要被转换成的Java对象。</repo></p>
+<h2 id="直接获取返回体"><a href="#直接获取返回体" class="headerlink" title="直接获取返回体"></a>直接获取返回体</h2><p>如果要直接获取服务器返回的HTTP返回体，在返回值或callback中直接使用 Response对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@GET</span>(<span class="string">"/users/&#123;user&#125;/repos"</span>)</div><div class="line"><span class="function">Response <span class="title">listRepos</span><span class="params">(@Path(<span class="string">"user"</span>)</span> String user)</span>;</div><div class="line"></div><div class="line"><span class="meta">@GET</span>(<span class="string">"/users/&#123;user&#125;/repos"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">listRepos</span><span class="params">(@Path(<span class="string">"user"</span>)</span> String user, Callback&lt;Response&gt; call)</span>;</div></pre></td></tr></table></figure></p>
+<p>参考链接:</p>
+<p>官方文档：<a href="square.github.io/retrofit/">不过是Retrofit2.0</a><br>中文文档：<a href="blog.chengyunfeng.com/?p=491&amp;utm_source=tuicool&amp;utm_medium=referral">这个是Retrofit1.9</a><br>源码解析：[<a href="http://frodoking.github.io/2015/05/16/android-retrofit/](http://frodoking.github.io/2015/05/16/" target="_blank" rel="external">http://frodoking.github.io/2015/05/16/android-retrofit/](http://frodoking.github.io/2015/05/16/</a></p>
+<h2 id="原文地址：http-www-jianshu-com-p-63723f593695"><a href="#原文地址：http-www-jianshu-com-p-63723f593695" class="headerlink" title="原文地址：http://www.jianshu.com/p/63723f593695"></a>原文地址：<a href="http://www.jianshu.com/p/63723f593695" target="_blank" rel="external">http://www.jianshu.com/p/63723f593695</a></h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Retrofit2-0/">Retrofit2.0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络访问/">网络访问</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转贴/">转贴</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&title=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&title=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&source=Retrofit基于注解和动态代理，优化了Android中的网络请求操作。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/01/01/Retrofit2.0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/17/ShFormLayout/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android表单映射框架 SHFormLayout 快速生成表单布局</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/22/JCenter/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android Library项目发布到JCenter最简单的配置方法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Retrofit2.0" data-title="Retrofit2.0 - 网络请求库 注解 详解" data-url="https://hui46226021.github.io/2017/01/01/Retrofit2.0/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&title=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&title=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&source=Retrofit基于注解和动态代理，优化了Android中的网络请求操作。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/01/01/Retrofit2.0/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Retrofit2.0 - 网络请求库 注解 详解》 — 独角兽之路&url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/01/01/Retrofit2.0/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3aS47jMAwFwNz/0u7tANNWP5LOwlJ5FQSKzMpCED+fT/xc/zzJmmT9ep/PNx4MDIzXMq7lk4e4Dj3Z839GEhsGBsY5jPXBV11zF0qyQ/W9GBgYGL1w84M7P3wxMDAwqoxJxpzvjIGBgVE9KNeH43rPp971QC6OgYHxQsb8iPze56/0NzAwMF7FuIpPUujPD81eDL/sg4GBsTUjP+Cq6eU83PLwBwYGxtaMXjlsTep9U135QFUPAwPjtYz1dr1N5+W8ZnMCAwNjC8Yk4XyqcNa7JmJgYJzASBLRSYkt2a3KuK0aYmBgbMqoXuASUg9QHgKb3EMxMDBexUheU70yfmMW4o+/AAMDY2tG3nScNAySRLR3NGNgYJzDqB6akzQ1T1kfSF8xMDA2Ysx7nr2Aqq3TQv6NgYGxEaMXbjWg3uUybyRgYGDszUjK8XmTIGkP9JoH0UUWAwNjU0ZSMpsMUiSkSTqNgYFxAiNvNPZWVgcsmpdCDAyMAxjNKl1xOCP5Pr9o3g5bYGBgbM2Ilg5KadFoV5AG3/59GBgYBzCqgB6ymtAW3o6BgbEp4yo++dBGdYCjen0s5N8YGBgvZ1TT1OrWveAmhTkMDIxdGckhmwdUHc4oNynvdsDAwDiA0Ws6TsYjete+WyQGBgZGa+QiKugH4Ua/wsDAwIjX5OA56YEDFwMD41WM/OjMq3dJWlst2GFgYJzJ6I049FLfXijz1BcDA+O1jB94sdE/FFM/2QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

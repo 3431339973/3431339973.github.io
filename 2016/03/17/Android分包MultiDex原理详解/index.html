@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android分包MultiDex原理详解 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,原创,MultiDex,65535">
+    <meta name="description" content="摘要:windowIsTranslucent 和windowAnimationStyle冲突">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android分包MultiDex原理详解">
+<meta property="og:url" content="https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:windowIsTranslucent 和windowAnimationStyle冲突">
+<meta property="og:image" content="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg">
+<meta property="og:updated_time" content="2017-03-19T04:51:19.546Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android分包MultiDex原理详解">
+<meta name="twitter:description" content="摘要:windowIsTranslucent 和windowAnimationStyle冲突">
+<meta name="twitter:image" content="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android分包MultiDex原理详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android分包MultiDex原理详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-17T14:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-03-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#MultiDex的产生背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">MultiDex的产生背景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MultiDex的简要原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">MultiDex的简要原理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于65K方法限制"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">关于65K方法限制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Multidex支持Android-5-0之前的版本"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">Multidex支持Android 5.0之前的版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Multidex支持Android-5-0及更高版本"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">Multidex支持Android 5.0及更高版本</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#避免65K限制"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">避免65K限制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用Gradle配置使用Multidex"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">用Gradle配置使用Multidex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Multidex的方式的局限性"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Multidex的方式的局限性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#优化multidex开发和构建"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">优化multidex开发和构建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在Android-Studio中使用变种App"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">在Android Studio中使用变种App</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android分包MultiDex原理详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android分包MultiDex原理详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月17日 22:37" datetime="2016-03-17T14:37:23.000Z"  itemprop="datePublished">2016-03-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
+<h1 id="MultiDex的产生背景"><a href="#MultiDex的产生背景" class="headerlink" title="MultiDex的产生背景"></a>MultiDex的产生背景</h1><p>当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
+<p>但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。</p>
+<p>为了解决方法数超限的问题，需要将该dex文件拆成两个或多个，为此谷歌官方推出了multidex兼容包，配合AndroidStudio实现了一个APK包含多个dex的功能。</p>
+<h2 id="MultiDex的简要原理"><a href="#MultiDex的简要原理" class="headerlink" title="MultiDex的简要原理"></a>MultiDex的简要原理</h2><p>我们以APK中有两个dex文件为例，第二个dex文件为classes2.dex。</p>
+<ul>
+<li><p>兼容包在Applicaion实例化之后，会检查系统版本是否支持 multidex，classes2.dex是否需要安装。</p>
+</li>
+<li><p>如果需要安装则会从APK中解压出classes2.dex并将其拷贝到应用的沙盒目录下。</p>
+</li>
+<li><p>通过反射将classes2.dex注入到当前的classloader中。</p>
+</li>
+</ul>
+<p>下面引入一下官方的文档。</p>
+<p><a href="https://developer.android.com/tools/building/multidex.html#about" target="_blank" rel="external">https://developer.android.com/tools/building/multidex.html#about </a><br>笔者，针对官方文档的翻译如下：</p>
+<p>构建超过65K方法的App</p>
+<p>随着Android设备的慢慢发展，App的大小会变得越来越大。当我们在开发App的时候由于报的大小和引用库的原因，我们在编译我们项目的时候通常会遇到下面一个错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Conversion to Dalvik format failed: Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></div></pre></td></tr></table></figure></p>
+<p>当然，也有一些系统设备会出现以下log信息，不过反馈的是同一个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trouble writing output:Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.You may <span class="keyword">try</span> using --multi-dex option.</div></pre></td></tr></table></figure></p>
+<p>这两个错误条件显示一个共同的数字：65536。这个数字，它表示的是你在一个dex包中的函数方法超过了65535个。</p>
+<p>如果你已经构建了一个Android App时，并收到了这个错误，那么恭喜你，你有很多代码！</p>
+<p>下面我们就具体说说，如何解决这个问题。</p>
+<h2 id="关于65K方法限制"><a href="#关于65K方法限制" class="headerlink" title="关于65K方法限制"></a>关于65K方法限制</h2><p>我们知道Android中的可执行伟剑都存储在dex文件中，其中包含已编译的代码来运行你的应用程序。Dalvik虚拟机对可执行dex文件的规格是有方法限制的，即一个单一的dex文件的方法总数最多为65536。</p>
+<p>其中包括：</p>
+<ul>
+<li><p>引用的Android Framework方法</p>
+</li>
+<li><p>library的方法</p>
+</li>
+<li><p>我们自己书写代码的方法。</p>
+</li>
+</ul>
+<p>为了突破这个方法数的限制，我们就提出了一个方案——生成多个dex文件。这个多个dex文件的方案，我们又称为multidex方案配置。</p>
+<h3 id="Multidex支持Android-5-0之前的版本"><a href="#Multidex支持Android-5-0之前的版本" class="headerlink" title="Multidex支持Android 5.0之前的版本"></a>Multidex支持Android 5.0之前的版本</h3><pre><code>Android5.0版本的平台之前，Android使用的是Dalvik Runtime执行的程序代码。默认情况下，限制应用到一个单一的classes.dex。
+</code></pre><p>Dalvik字节码文件每APK。为了绕过这个限制，你可以使用multidex支持库，成为你的应用程序的主要部分和DEX文件进行管理，获得额外的dex文件，它们包含的代码。</p>
+<h3 id="Multidex支持Android-5-0及更高版本"><a href="#Multidex支持Android-5-0及更高版本" class="headerlink" title="Multidex支持Android 5.0及更高版本"></a>Multidex支持Android 5.0及更高版本</h3><pre><code>Android 5.0和更高的Runtime 如art，本身就支持从应用的APK文件加载多个DEX文件。art支持预编译的应用程序在安装时扫描类（..）。Dex文件编译成一个单一的Android设备上执行.oat文件。
+</code></pre><h2 id="避免65K限制"><a href="#避免65K限制" class="headerlink" title="避免65K限制"></a>避免65K限制</h2><p>当你确定使用multidex的分包策略的时候，请你先确定自己的代码中都是优秀的。你还需要做以下几步：</p>
+<ul>
+<li><p>去掉一些未使用的import和library</p>
+</li>
+<li><p>使用ProGuard去掉一些未使用的代码</p>
+</li>
+</ul>
+<h2 id="用Gradle配置使用Multidex"><a href="#用Gradle配置使用Multidex" class="headerlink" title="用Gradle配置使用Multidex"></a>用Gradle配置使用Multidex</h2><p>Android 的 Gradle插件在 Android Build Tool 21.1开始就支持使用multidex了。</p>
+<p>设置你的应用程序开发项目中使用multidex配置，要求你做出一些修改您的应用程序开发项目。：</p>
+<ul>
+<li><p>修改Gradle的配置，支持multidex</p>
+</li>
+<li><p>修改你的manifest。让其支持multidexapplication类</p>
+</li>
+</ul>
+<p>修改Gradle的build如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">21</span></div><div class="line">    buildToolsVersion <span class="string">"21.1.0"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">21</span></div><div class="line">        ...</div><div class="line"></div><div class="line">        <span class="comment">// Enabling multidex support.</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>Tips: 你可以在Gradle配置文件中的 multiDexEnabled 在 defaultConfig、<br>buildType、productFlavor选项设置。</p>
+<p>在manifest文件中，添加MultidexApplication Class的引用，如下所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"com.example.android.multidex.myapplication"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.multidex.MultiDexApplication"</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当然，如果你重写了 Application，就对自定义Application的继承方式做一个修改。</p>
+<h2 id="Multidex的方式的局限性"><a href="#Multidex的方式的局限性" class="headerlink" title="Multidex的方式的局限性"></a>Multidex的方式的局限性</h2><p>虽然我们开起来multidex是一个极好的东西，但是multidex还是存在自己的局限性，我们在开发测试之前要清楚局限性是什么：</p>
+<ul>
+<li><p>如果二DEX文件太大，安装分割dex文件是一个复杂的过程，可能会导致应用程序无响应（ANR）的错误。在这种情况下，你应该尽量的减小dex文件的大小和删除无用的逻辑，而不是完全依赖于multidex。</p>
+</li>
+<li><p>在Android 4.0设备（API Level 14）之前，由于Dalvik linearalloc bug（问题22586），multidex很可能是无法运行的。如果希望运行在Level 14之前的Android系统版本，请先确保完整的测试和使用。</p>
+</li>
+<li><p>应用程序使用了multiedex配置的，会造成使用比较大的内存。当然，可能还会引起dalvik虚拟机的崩溃(issue 78035)。</p>
+</li>
+<li><p>对于应用程序比较复杂的，存在较多的library的项目。multidex可能会造成不同依赖项目间的dex文件函数相互调用，找不到方法。</p>
+</li>
+</ul>
+<h2 id="优化multidex开发和构建"><a href="#优化multidex开发和构建" class="headerlink" title="优化multidex开发和构建"></a>优化multidex开发和构建</h2><p>一个multidex的配置，对系统apk的构建、签名、打包复杂性大大的增加。这就意味着，你每一次的构建过程都是相当耗时的。</p>
+<p>为了加快我们的开发速度，加快构建的过程，我们可以在Gradle productFlavors新建出来一个 development flavor 和 production flavor 来满足我们不同构建需求。</p>
+<p>下面是一个列子演示我们如何设置这些flavors在Gradle build文件中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        <span class="comment">// Define separate dev and prod product flavors.</span></div><div class="line">        dev &#123;</div><div class="line">            <span class="comment">// dev utilizes minSDKVersion = 21 to allow the Android gradle plugin</span></div><div class="line">            <span class="comment">// to pre-dex each module and produce an APK that can be tested on</span></div><div class="line">            <span class="comment">// Android Lollipop without time consuming dex merging processes.</span></div><div class="line">            minSdkVersion <span class="number">21</span></div><div class="line">        &#125;</div><div class="line">        prod &#123;</div><div class="line">            <span class="comment">// The actual minSdkVersion for the application.</span></div><div class="line">            minSdkVersion <span class="number">14</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">          ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            <span class="function">runProguard <span class="keyword">true</span></span></div><div class="line">            proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(‘proguard-android.txt‘)</span>,</div><div class="line">                                                 ‘proguard-rules.pro‘</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>在你完成了伤处的配置修改之后，你配置productFlavor 和 buildType来使用 ，devDebug 变种app。使用这些变种app，可以设置proguard disable、multidex enable方便我们测试。</p>
+<p>这些配置需要针对Android Gradle插件做如下操作：</p>
+<ul>
+<li><p>在分包前，编译应用程序中的每一个module包括依赖项目，这个步骤称为 pre-dexing。</p>
+</li>
+<li><p>include每一个dex文件</p>
+</li>
+<li><p>最重要的是，对于主dex文件，不会做切分。以保证计算速度。</p>
+</li>
+</ul>
+<p>这样设置既能够保证我们的最终报是一个使用了multidex模式的，而又不影响我们平时开发的测试效率。</p>
+<h2 id="在Android-Studio中使用变种App"><a href="#在Android-Studio中使用变种App" class="headerlink" title="在Android Studio中使用变种App"></a>在Android Studio中使用变种App</h2><p>使用multidex工具构建变种App是非常方便的。在Android Studio允许我们选择这种变种构建方式的接口。</p>
+<p>使用Android Studio构建 “devDebug”构建变种app需要完成两步：</p>
+<ul>
+<li><p>打开变种编辑窗口，选择favorites选项。</p>
+</li>
+<li><p>点击编译不同的变种，如下图所示 </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p>原文地址：<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1031299.html</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/65535/">65535</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MultiDex/">MultiDex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&title=《Android分包MultiDex原理详解》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&title=《Android分包MultiDex原理详解》 — 独角兽之路&source=摘要:windowIsTranslucent 和windowAnimationStyle冲突" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android分包MultiDex原理详解》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/17/andfix/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">andfix 增量升级更新 热补丁修复</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">windowIsTranslucent 和windowAnimationStyle冲突</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android分包MultiDex原理详解" data-title="Android分包MultiDex原理详解" data-url="https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&title=《Android分包MultiDex原理详解》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&title=《Android分包MultiDex原理详解》 — 独角兽之路&source=摘要:windowIsTranslucent 和windowAnimationStyle冲突" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android分包MultiDex原理详解》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrklEQVR42u3aQW4bMRAEQP//0841QLJSN4fjCEHtyZBtLosHctScr6/4+f7jefr86be/f/I0cvKur40HDw8Pbzz1yUSTv28nmi/rX0bGw8PDW+M9Dfp66q+Hfnxl8K5k+V6Pg4eHh/dpvKTgnpDw8PDw/j/ea0ZyYEwWDg8PD+8TeEkYkWzr+Tj58v1Q1oKHh4cX887K33/788r9Hh4eHt74Vj0vi8+27/zwOHvw8PDwNnj5hjsvsvOQoggagnni4eHh3eW1EWoe3ebBbr4EOR4PDw/vJ3mTLXsSxbbHSRRM4OHh4S3wzgrZs3Ah39DP4o/ofg8PDw/vEq9tcmoL8Ulj1iSYwMPDw9vg5cHofP3O4ob2euwxjMDDw8Nb4L3e7vMGrFsx7oUdHg8PD2+Bl4cLSbGbLNCFJqqyNMfDw8Pb4CWRaBvUJv87ARze9eHh4eFd5bXlbF4K51Fvsoh5lIyHh4e3x7t7/d+GF21R3l6z4eHh4d3lza/2k09yRltkv/kvPDw8vAVeO63trf/sEu7NzPHw8PCu8vKN+25Qe9Z0VY+Jh4eHt8BrG6fODo8WNmlKKF6Ph4eHN+DlDQRtq0Gy3edF+dlM8PDw8O7y2i/8eWnblshnsfKbgwQPDw9vgXeGObsqu9tcVaTUeHh4eAu8pORtw4uzqKIds/6WgIeHh3eVl2/ZydS3o+H8cg4PDw9vj5fHrO2l/qStKqeOSmo8PDy8mPddPmctAjmyjYDfHBJ4eHh4C7zJeXIWYSSYSbx7+ODh4eGVvHbo/HqsLZrbN0bvwsPDw1vjnRW+89aB+dn1Zhw8PDy8j+FNgtr2UGnLcTw8PLxP451dVuWtWvmhEs0QDw8Pb42Xt1u1082PgTYKKUpqPDw8vKu89gv//AVtk1YbEOPh4eGt8X4BudAiFsqrFOwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

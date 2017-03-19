@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JAVA Web缓存 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="原创,JAVA Web缓存,服务器开发">
+    <meta name="description" content="摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA Web缓存">
+<meta property="og:url" content="https://hui46226021.github.io/2015/09/12/JAVA Web缓存/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧">
+<meta property="og:updated_time" content="2017-03-19T03:32:18.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA Web缓存">
+<meta name="twitter:description" content="摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JAVA Web缓存</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JAVA Web缓存</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-09-12T10:37:23.000Z" itemprop="datePublished" class="page-time">
+  2015-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/">Web</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/">Cache</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/">Ehcache</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/Memcached/">Memcached</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/Memcached/Redis/">Redis</a></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JAVA缓存最简单一种实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">JAVA缓存最简单一种实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#本地文件缓存"><span class="post-toc-number">2.</span> <span class="post-toc-text">本地文件缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Ehcache-缓存"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Ehcache 缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jar包"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">jar包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置-ehcache-xml"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">配置  ehcache.xml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JAVA-代码"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">JAVA  代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ehcache整合MyBatis"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">Ehcache整合MyBatis</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ehcache页面缓存"><span class="post-toc-number">2.1.5.</span> <span class="post-toc-text">Ehcache页面缓存</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Ehcache-Spring-整合"><span class="post-toc-number">2.1.6.</span> <span class="post-toc-text">Ehcache Spring 整合</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#远程缓存"><span class="post-toc-number">3.</span> <span class="post-toc-text">远程缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Memcached"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Memcached</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#java-memcached-client"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">java memcached client</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#java-memcached-client-整合spring"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">java memcached client  整合spring</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mybatis和memcached的整合"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text">mybatis和memcached的整合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#xmemcached-客户端"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text">xmemcached 客户端</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Redis"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Redis</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Jedis客户端"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">Jedis客户端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Spring-Data-Redis"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">Spring Data Redis</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Redis-整合-MyBatis"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">Redis 整合 MyBatis</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-JAVA Web缓存"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JAVA Web缓存</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年09月12日 18:37" datetime="2015-09-12T10:37:23.000Z"  itemprop="datePublished">2015-09-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/">Web</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/">Cache</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/">Ehcache</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/Memcached/">Memcached</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/Cache/Ehcache/Memcached/Redis/">Redis</a></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧<br><a id="more"></a></p>
+<h1 id="JAVA缓存最简单一种实现"><a href="#JAVA缓存最简单一种实现" class="headerlink" title="JAVA缓存最简单一种实现"></a>JAVA缓存最简单一种实现</h1><p>创建一个静态的map     ConcurrentHashMap  线程安全</p>
+<h1 id="本地文件缓存"><a href="#本地文件缓存" class="headerlink" title="本地文件缓存"></a>本地文件缓存</h1><h2 id="Ehcache-缓存"><a href="#Ehcache-缓存" class="headerlink" title="Ehcache 缓存"></a>Ehcache 缓存</h2><h3 id="jar包"><a href="#jar包" class="headerlink" title="jar包"></a>jar包</h3><p>ehcache-core-2.5.2.jar    slf4j-api-1.6.1.jar   slf4j-jdk14-1.6.1.jar</p>
+<h3 id="配置-ehcache-xml"><a href="#配置-ehcache-xml" class="headerlink" title="配置  ehcache.xml"></a>配置  ehcache.xml</h3><p>可配置多个cache<br>通过  Cache sample = cacheManager.getCache(“name”);获取缓存对象</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">ehcache</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></div><div class="line">    <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"../bin/ehcache.xsd"</span>&gt;  </div><div class="line">    <span class="comment">&lt;!--  </span></div><div class="line">    name：Cache的唯一标识  </div><div class="line">    maxElementsInMemory：内存中最大缓存对象数  </div><div class="line">    maxElementsOnDisk：磁盘中最大缓存对象数，若是0表示无穷大  </div><div class="line">    eternal：Element是否永久有效，一但设置了，timeout将不起作用  </div><div class="line">    overflowToDisk：配置此属性，当内存中Element数量达到maxElementsInMemory时，Ehcache将会Element写到磁盘中  </div><div class="line">    timeToIdleSeconds：设置Element在失效前的允许闲置时间。仅当element不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大  </div><div class="line">11.    timeToLiveSeconds：设置Element在失效前允许存活时间。最大时间介于创建时间和失效时间之间。仅当element不是永久有效时使用，默认是0.，也就是element存活时间无穷大   </div><div class="line">    diskPersistent ： 是否持久化磁盘缓存。当这个属性的值为true时，系统在初始化的时候会在磁盘中查找文件名为cache名称，后缀名为index的的文件  </div><div class="line">    diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒  </div><div class="line">    diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区  </div><div class="line">     memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）   </div><div class="line">    --&gt;  </div><div class="line">    <span class="tag">&lt;<span class="name">defaultCache</span> <span class="attr">overflowToDisk</span>=<span class="string">"true"</span> <span class="attr">eternal</span>=<span class="string">"false"</span>/&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">"D:/cache"</span> /&gt;</span>  </div><div class="line">    <span class="comment">&lt;!--  </span></div><div class="line">       &lt;cache name="zzugxy" overflowToDisk="true" eternal="false"  </div><div class="line">        timeToIdleSeconds="300" timeToLiveSeconds="600" maxElementsInMemory="1000" &gt; </div><div class="line">        maxElementsOnDisk="10" diskPersistent="true" diskExpiryThreadIntervalSeconds="300"  </div><div class="line">        diskSpoolBufferSizeMB="100" memoryStoreEvictionPolicy="LRU" /&gt;  </div><div class="line">    --&gt;  </div><div class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="JAVA-代码"><a href="#JAVA-代码" class="headerlink" title="JAVA  代码"></a>JAVA  代码</h3><ul>
+<li><p>1.获取CacheManager 对象  不传参数表示默认路径  可以传入文件路径和网络地址</p>
+</li>
+<li><p>2.CacheManager cacheManager =  CacheManager.create();</p>
+</li>
+</ul>
+<p>获取ehcache.xml 文件里配置好的 cache</p>
+<p>Cache sample = cacheManager.getCache(“SimplePageCachingFilter”);</p>
+<ul>
+<li>3.创建 缓存元素  key 和 val 字面意思</li>
+</ul>
+<p>Element element = new Element(“key”, “val”);</p>
+<ul>
+<li><p>4.sample.put(element);  将缓存对象 加入缓存</p>
+<p>   通过key获取cache中的 缓存元素</p>
+</li>
+</ul>
+<p>Element result = sample.get(“key”);</p>
+<p>注意添加到cache中对象要序列化 实现Serializable接口</p>
+<p>通过 次元素 可获取 val等 属性的值</p>
+<p>删除缓存</p>
+<p>sample.remove(“key”);</p>
+<p>sample.removeAll();</p>
+<p> 获取所有的缓存对象</p>
+<p>for (Object key : cache.getKeys()) {</p>
+<pre><code>System.out.println(key);
+</code></pre><p>}</p>
+<p>得到缓存中的对象数</p>
+<p>cache.getSize();</p>
+<p> 得到缓存对象占用内存的大小</p>
+<p>cache.getMemoryStoreSize();</p>
+<p> 得到缓存读取的命中次数</p>
+<p>cache.getStatistics().getCacheHits();</p>
+<p> 得到缓存读取的错失次数</p>
+<p>cache.getStatistics().getCacheMisses();</p>
+<p>写入磁盘</p>
+<p>cache.flush();</p>
+<p>要想把cache真正持久化到磁盘，写程序时必须注意，在是用net.sf.ehcache.Cache的void put (Element element)方法后要使用void flush()方法</p>
+<p>创建个缓存<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Ehcache cache = <span class="keyword">new</span> Cache(<span class="string">"testCache"</span>, <span class="number">5000</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="number">5</span>, <span class="number">2</span>);</div><div class="line"></div><div class="line">sample.add(cache )</div></pre></td></tr></table></figure></p>
+<h3 id="Ehcache整合MyBatis"><a href="#Ehcache整合MyBatis" class="headerlink" title="Ehcache整合MyBatis"></a>Ehcache整合MyBatis</h3><p>导入 mybatis-ehcache-1.0.0.jar  还有其他myBatis相关包<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;   </div><div class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.qiuqiu.dao.PersonDao"</span>&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- 以下两个&lt;cache&gt;标签二选一,第一个可以输出日志,第二个不输出日志 --&gt;</span>  </div><div class="line">   <span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.ehcache.LoggingEhcache"</span>/&gt;</span>  </div><div class="line">    <span class="comment">&lt;!-- &lt;cache type="org.mybatis.caches.ehcache.EhcacheCache"/&gt; --&gt;</span>  </div><div class="line">      </div><div class="line">   <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUserById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"org.qiuqiu.vo.Person"</span>&gt;</span>  </div><div class="line">        select * from person where id=#&#123;id&#125;   </div><div class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>通过注释的方式 整合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CacheNamespace</span>(implementation=org.mybatis.caches.ehcache.EhcacheCache.class)</div></pre></td></tr></table></figure>
+<p>EhcacheCache 实现了 mybatis的 Cache接口</p>
+<p>默认获取根目录下的ehcache.xml文件</p>
+<p>如果 之前在ehcache.xml  没有配置过 相应的cache</p>
+<p>这里会根据 id创建一个cache</p>
+<p>id= Dao的地址</p>
+<p>在ehcache.xml配置 cache麻烦的话</p>
+<p>可以 自定义类 继承EhcacheCache   重写 获取cache 将@CacheNamespace</p>
+<p>注解里面的参数传进去 自定义 cache</p>
+<h3 id="Ehcache页面缓存"><a href="#Ehcache页面缓存" class="headerlink" title="Ehcache页面缓存"></a>Ehcache页面缓存</h3><p>jar包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>页面缓存主要用Filter过滤器对请求的url进行过滤，如果该url在缓存中出现。那么页面数据就从缓存对象中获取，并以gzip压缩后返回。其速度是没有压缩缓存时速度的3-5倍，效率相当之高！其中页面缓存的过滤器有CachingFilter，一般要扩展filter或是自定义Filter都继承该CachingFilter</p>
+<p>自定义类 继承 SimplePageCachingFilter  </p>
+<p>重写 doFilter 方法  在里面先判断 是否是要缓存的地址</p>
+<p>如果是就调用super.doFilter(request, response, chain);</p>
+<p>如果不是就调用chain.doFilter(request, response);</p>
+<p>SimplePageCachingFilter里面默认获取 名字SimplePageCachingFilter 的 cache配置</p>
+<p>重写 getCacheName方法 设置 cache名字</p>
+<p>默认  key :<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">stringBuffer.append(httpRequest.getMethod()).append(httpRequest.getRequestURI()).append(httpRequest.getQueryString())</div></pre></td></tr></table></figure></p>
+<p>可以重写 SimplePageCachingFilter 的 calculateKey() 方法 自己定义key</p>
+<h3 id="Ehcache-Spring-整合"><a href="#Ehcache-Spring-整合" class="headerlink" title="Ehcache Spring 整合"></a>Ehcache Spring 整合</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"defaultCacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.ehcache.EhCacheManagerFactoryBean"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span> <span class="attr">value</span>=<span class="string">"classpath:ehcache.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"org.springframework.cache.ehcache.EhCacheCacheManager"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"cacheManager"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">local</span>=<span class="string">"defaultCacheManager"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"> <span class="tag">&lt;<span class="name">cache:annotation-driven</span> <span class="attr">cache-manager</span>=<span class="string">"cacheManager"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>在类或方法上@Cacheable</p>
+<p>@Cacheable(value=”cache”)</p>
+<p>这个注释的意思是，当调用这个方法的时候，会从一个名叫 cache的缓存中查询，如果没有，则执行实际的方法（即查询数据库），并将执行的结果存入缓存中，否则返回缓存中的对象。</p>
+<p>同时 还有@CacheEvict  @CachePut 等注解</p>
+<p>详解<a href="http://wenku.baidu.com/link?url=g5ptu1e1vHrJ2FePys7a9ILMhoI_JkX4-3vX9Ir3VfSiTGuE6eOqEx-DuWGMZBWoIa9zKQ9RmM4eiJw86Q_uXx7U1Ux75X2odvUGxqL8JaW" target="_blank" rel="external">http://wenku.baidu.com/link?url=g5ptu1e1vHrJ2FePys7a9ILMhoI_JkX4-3vX9Ir3VfSiTGuE6eOqEx-DuWGMZBWoIa9zKQ9RmM4eiJw86Q_uXx7U1Ux75X2odvUGxqL8JaW</a></p>
+<h1 id="远程缓存"><a href="#远程缓存" class="headerlink" title="远程缓存"></a>远程缓存</h1><h2 id="Memcached"><a href="#Memcached" class="headerlink" title="Memcached"></a>Memcached</h2><h3 id="java-memcached-client"><a href="#java-memcached-client" class="headerlink" title="java memcached client"></a>java memcached client</h3><p>jar包</p>
+<p>commons-pool-1.5.6.jar</p>
+<p>java_memcached-release_2.6.6.jar</p>
+<p>slf4j-api-1.6.1.jar</p>
+<p>slf4j-simple-1.6.1.jar</p>
+<p>主要是两个类</p>
+<p>SockIOPool   和  MemCachedClient</p>
+<p>SockIOPool 这个类用来创建管理客户端和服务器通讯连接池</p>
+<p>MemCachedClient  缓存的管理</p>
+<p>set方法  gei 方法  等</p>
+<p>memcached 缓存对象 需要 实现序列化</p>
+<p>set方法  gei 方法  等    </p>
+<p>注：设置有效时间为5秒是</p>
+<p>   new Date(5000)  不是 new Date(System.currentTimeMillis()+5000) 神逻辑</p>
+<p>更多API <a href="http://wenku.baidu.com/link?url=vxMR6BGKj7_8RHMN9H_trAV4p4NVPfVjxSl08uQcL8eooRTk7g1PQVmiqcKP4MQPr5Hm3NsIlEHqdFcPFroddtzHaOliasg5I2MYGjz0XiC" target="_blank" rel="external">http://wenku.baidu.com/link?url=vxMR6BGKj7_8RHMN9H_trAV4p4NVPfVjxSl08uQcL8eooRTk7g1PQVmiqcKP4MQPr5Hm3NsIlEHqdFcPFroddtzHaOliasg5I2MYGjz0XiC</a></p>
+<h3 id="java-memcached-client-整合spring"><a href="#java-memcached-client-整合spring" class="headerlink" title="java memcached client  整合spring"></a>java memcached client  整合spring</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sockIOPool"</span> <span class="attr">class</span>=<span class="string">"com.danga.MemCached.SockIOPool"</span></span></div><div class="line">          <span class="attr">factory-method</span>=<span class="string">"getInstance"</span> <span class="attr">init-method</span>=<span class="string">"initialize"</span> <span class="attr">destroy-method</span>=<span class="string">"shutDown"</span>&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>neeaMemcachedPool<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"servers"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">value</span>&gt;</span>127.1.0.1:11211<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initConn"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>10<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxConn"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>250<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maintSleep"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>30<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"nagle"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"socketTO"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>3000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"memcachedClient"</span> <span class="attr">class</span>=<span class="string">"com.danga.MemCached.MemCachedClient"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>neeaMemcachedPool<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>参考 Ehcache 整合 Spring</p>
+<p> org.springframework.cache.ehcache.EhCacheCacheManager 重org.springframework.cache.Cache和  org.springframework.cache.support.AbstractCacheManager</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cacheManager"</span> <span class="attr">class</span>=<span class="string">"com.dingxin.kunyu.cache.MemcachedCacheManager"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"memcachedClient"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"memcachedClient"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">cache:annotation-driven</span> <span class="attr">cache-manager</span>=<span class="string">"cacheManager"</span>/&gt;</span>mybatis和memcached的整合</div></pre></td></tr></table></figure>
+<h3 id="mybatis和memcached的整合"><a href="#mybatis和memcached的整合" class="headerlink" title="mybatis和memcached的整合"></a>mybatis和memcached的整合</h3><p>JAR 包<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.caches<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-memcached<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.acme.FooMapper"</span>&gt;</span>  <span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.memcached.MemcachedCache"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>打印日志<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">type</span>=<span class="string">"org.mybatis.caches.memcached.LoggingMemcachedCache"</span> /&gt;</span>  ...<span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>memcache的配置是根据classpath下的 /memcached.properties 配置的，如果没有使用默</p>
+<p>还可以实现  mybatis的 Cache接口  进行整合</p>
+<p>使用Simple-Spring-Memcached注解做缓存操作</p>
+<p>针对xmemcached 客户端</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.simple-spring-memcached<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xmemcached-provider<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span>   </div><div class="line">  <span class="comment">&lt;!--spymemcached客户端 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.simple-spring-memcached<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spymemcached-provider<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Spring 配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"simplesm-context.xml"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p><a href="http://https://code.google.com/p/simple-spring-memcached/wiki/Getting_Started#@CacheKeyMethod" target="_blank" rel="external">http://https://code.google.com/p/simple-spring-memcached/wiki/Getting_Started#@CacheKeyMethod</a></p>
+<p>这里面有针对不同客户端的spring配置    </p>
+<p>simplesm-context.xml 在simple-spring-memcached-3.4.0.jar 包里</p>
+<p>在方法上 使用 @ReadThroughSingleCache     </p>
+<p>两个参数  namespace   key前缀   expiration到期时间</p>
+<p>在参数上@ParameterValueKeyProvider  生成key 多个参数时候 需要指定 order 值</p>
+<p>注 参数不能带空格  或者空的  会报错</p>
+<p>@InvalidateSingleCache</p>
+<p>作用：失效Cache中的数据</p>
+<p>@UpdateSingleCache</p>
+<p>作用：更新Cache中的数据   等等</p>
+<p>@CacheKeyMethod 标记做为参数 的对象方法上  调用该方法生产key  不包含此注解则调用 toString方法</p>
+<h3 id="xmemcached-客户端"><a href="#xmemcached-客户端" class="headerlink" title="xmemcached 客户端"></a>xmemcached 客户端</h3><p> Jar 包</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.googlecode.xmemcached<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>xmemcached<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">MemcachedClientBuilder builder = <span class="keyword">new</span> XMemcachedClientBuilder(</div><div class="line">                AddrUtil.getAddresses(<span class="string">"127.1.0.1:11211"</span>), <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span> &#125;</div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">//设置连接池大小，即客户端个数</span></div><div class="line">        builder.setConnectionPoolSize(<span class="number">50</span>);</div><div class="line"> 		<span class="comment">//宕机报警</span></div><div class="line">        builder.setFailureMode(<span class="keyword">true</span>);</div><div class="line">		<span class="comment">//使用二进制文件</span></div><div class="line">        builder.setCommandFactory(<span class="keyword">new</span> BinaryCommandFactory());</div><div class="line"> MemcachedClient memcachedClient = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            memcachedClient = builder.build();</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                memcachedClient.set(<span class="string">"zlex"</span>, <span class="number">36000</span>, <span class="string">"set/get"</span>);</div><div class="line">		  memcachedClient.get(<span class="string">"zlex"</span>,);</div><div class="line">            &#125; <span class="keyword">catch</span> (TimeoutException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125; <span class="keyword">catch</span> (MemcachedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();&#125;</div></pre></td></tr></table></figure>
+<p>API  <a href="http://www.tuicool.com/articles/qMnQVfe" target="_blank" rel="external">http://www.tuicool.com/articles/qMnQVfe</a></p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="Jedis客户端"><a href="#Jedis客户端" class="headerlink" title="Jedis客户端"></a>Jedis客户端</h3><p>连接池配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//连接池配置</span></div><div class="line">   JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</div><div class="line">        </div><div class="line">        config.setMaxTotal(<span class="number">10</span>);</div><div class="line">         config.setMaxIdle(<span class="number">50</span>);<span class="comment">//设置最大空闲数</span></div><div class="line">         config.setBlockWhenExhausted(<span class="keyword">false</span>);</div><div class="line">         config.setMaxWaitMillis(timeout);<span class="comment">//设置超时时间</span></div><div class="line">         config.setMinEvictableIdleTimeMillis(<span class="number">30000</span>);</div></pre></td></tr></table></figure>
+<p>更多参数 详解 <a href="http://shift-alt-ctrl.iteye.com/blog/1885910" target="_blank" rel="external">http://shift-alt-ctrl.iteye.com/blog/1885910</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获得连接池</span></div><div class="line">JedisPool pool == <span class="keyword">new</span> JedisPool(config, host, port, timeout)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//jedisPool对象 可以通过spring 进行封装</span></div><div class="line"></div><div class="line"><span class="comment">//获得Jedis</span></div><div class="line">Jedis client = jedisPool.getResource(); </div><div class="line"></div><div class="line">    <span class="keyword">try</span>&#123;  </div><div class="line">  </div><div class="line">        client.set(<span class="string">"k1"</span>, <span class="string">"v1"</span>);  </div><div class="line">  	   client.expire(<span class="string">"k1"</span>, time) <span class="comment">//设置有效时间</span></div><div class="line">	   client.get(<span class="string">"k1"</span>);  <span class="comment">//获取值</span></div><div class="line">	   client.del(<span class="string">"k1"</span>); <span class="comment">//删除值</span></div><div class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;  </div><div class="line">        e.printStackTrace();  </div><div class="line">    &#125;<span class="keyword">finally</span>&#123;  </div><div class="line">        jedisPool.returnResource(client); <span class="comment">//必须   释放对象池  </span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>更多API  <a href="http://tool.oschina.net/uploads/apidocs/" target="_blank" rel="external">http://tool.oschina.net/uploads/apidocs/</a></p>
+<p>Redis的key和value都支持二进制安全的字符串</p>
+<p>  保存对象 需要 序列化对象</p>
+<p>序列化工具</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializeUtil</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] serialize(Object object) &#123;</div><div class="line"> 	ObjectOutputStream oos = <span class="keyword">null</span>;</div><div class="line">	ByteArrayOutputStream baos = <span class="keyword">null</span>;</div><div class="line">	   <span class="keyword">try</span> &#123;</div><div class="line">		<span class="comment">//序列化</span></div><div class="line">		baos = <span class="keyword">new</span> ByteArrayOutputStream();</div><div class="line">		oos = <span class="keyword">new</span> ObjectOutputStream(baos);</div><div class="line">		oos.writeObject(object);</div><div class="line">		<span class="keyword">byte</span>[] bytes = baos.toByteArray();</div><div class="line">		<span class="keyword">return</span> bytes;</div><div class="line">	       &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line"> </div><div class="line">     &#125;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">unserialize</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</div><div class="line">	ByteArrayInputStream bais = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">	<span class="comment">//反序列化</span></div><div class="line">		bais = <span class="keyword">new</span> ByteArrayInputStream(bytes);</div><div class="line">		ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(bais);</div><div class="line">		<span class="keyword">return</span> ois.readObject();</div><div class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line"> </div><div class="line">		&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Spring-Data-Redis"><a href="#Spring-Data-Redis" class="headerlink" title="Spring Data Redis"></a>Spring Data Redis</h3><p>在Jedis的基础上，提供了对Redis访问的进一步封装。使用SDR，不在需要手动维护连接的建立、释放，对对象序列化提供了默认实现</p>
+<p>SDR依赖的的是Spring的高版本3.x<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.data<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.5.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Spring 配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">&lt;!--定义连接工厂--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"jedisConnectionFactory"</span>    </span></div><div class="line"> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.connection.jedis.JedisConnectionFactory"</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">ref</span>=<span class="string">"jedisPoolConfig"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hostName"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.host&#125;"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"port"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.port&#125;"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"timeout"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.timeout&#125;"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;redis.password&#125;"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--定义redisTemplate：提供了对Jedis进行的通用API操作。--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"redisTemplate"</span>   </span></div><div class="line">  <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.core.RedisTemplate"</span>&gt;</div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connectionFactory"</span> <span class="attr">ref</span>=<span class="string">"jedisConnectionFactory"</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"keySerializer"</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.data.redis.serializer.StringRedisSerializer"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>SDR默认采用JDK的序列化机制 使用JdkSerializationRedisSerializer类，进行对象和byte[]之间的相互转换，就像上面的序列化代码</p>
+<p>这里是设置 keySerializer  为StringRedisSerializer   所以使用字符串形式的key<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redisTemplate.opsForValue().set(key, value);</div><div class="line">redisTemplate.opsForValue().get(key);</div><div class="line">redisTemplate.delete(key);</div></pre></td></tr></table></figure></p>
+<p>更多api<br><a href="http://docs.spring.io/spring-data/redis/docs/1.0.x/api/org/springframework/data/redis/core/RedisTemplate.html" target="_blank" rel="external">http://docs.spring.io/spring-data/redis/docs/1.0.x/api/org/springframework/data/redis/core/RedisTemplate.html</a></p>
+<h3 id="Redis-整合-MyBatis"><a href="#Redis-整合-MyBatis" class="headerlink" title="Redis 整合 MyBatis"></a>Redis 整合 MyBatis</h3><p>自定义类 继承myBatis 的cache接口    <a href="http://www.tuicool.com/articles/j2AzA3" target="_blank" rel="external">http://www.tuicool.com/articles/j2AzA3</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-Web缓存/">JAVA Web缓存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器开发/">服务器开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&title=《JAVA Web缓存》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&title=《JAVA Web缓存》 — 独角兽之路&source=摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JAVA Web缓存》 — 独角兽之路&url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/23/一个Demo学会用Android兼容包新控件/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">一个Demo学会用Android兼容包新控件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/09/12/JAVA多线程深度解析/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JAVA 多线程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="JAVA Web缓存" data-title="JAVA Web缓存" data-url="https://hui46226021.github.io/2015/09/12/JAVA Web缓存/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&title=《JAVA Web缓存》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&title=《JAVA Web缓存》 — 独角兽之路&source=摘要:去年整理过关于JAVA web的一些缓冲知识 今天无疑见翻出这篇笔记 怕以后弄丢了 就在这里记录下吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JAVA Web缓存》 — 独角兽之路&url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/09/12/JAVA Web缓存/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aQW7DMAwF0dz/0i7QXZFYnU+qBUyNVkFR23paEKTI1wuv63u9/+V93f3P3VPkW9uWDBkyHsu4lmu9IUIimPTNH6gyZMg4gLEOfORjPBCToMz3JkOGDBnk1Tyk1lJJGTJkyEgZtXSwxpMhQ4aMtIjdW5R2ymMZMmScxkgbA//5+w/7GzJkyHgI4woXD5q1hmhxVzJkyBjNWA9AkAv9WsK3jpY8uqIXyZAhYwSDf4a8iG+XtzZJC0GGDBlTGVxZSxCDUywNqMmQIUMGLynjdmP7Du3Hm2XIkDGawUey1oGYF5zpcEZ8KDJkyBjNSB/rtw1qYb3WipAhQ8ZzGTzlSk8lDcRpgvghw5UhQ8ZQBr+C51vpJH+1olqGDBmzGZ0rs3RbnM0LaRkyZJzJ4Fvph9TNwxYyZMgYzViHVIJJW5K1wQ40bCFDhoxxjH6wS9O4TqOUNAxkyJAxj8HTvjQQ7xqYQNd/MmTIGM1IU7q9rU1eEq8PToYMGbMZcc4ImgT85PhI2S/BV4YMGYcxOolgOkjRb2TKkCHjBEa/dOTtzA1ZavqsDBkyRjCucPHGZBqgWy0EGTJkjGbUwlyaovHWZlr6ypAh4xwGCbKkZK0VtGlL4PbgZMiQcQCjf9FWnEFrj1/IkCFDRr8NkA6f1fYjQ4YMGTx9rLUz09AsQ4aMMxm8iOWtAnJAKU+GDBlnMjqNgb2/yZEVATJkyHgq4wv70aOJVnteGgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android动画 详解（一 补间动画） | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="原创,动画">
+    <meta name="description" content="打算整理下 android动画方面的知识，嗯  开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android动画 详解（一 补间动画）">
+<meta property="og:url" content="https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="打算整理下 android动画方面的知识，嗯  开始">
+<meta property="og:updated_time" content="2017-03-19T04:38:12.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android动画 详解（一 补间动画）">
+<meta name="twitter:description" content="打算整理下 android动画方面的知识，嗯  开始">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android动画 详解（一 补间动画）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android动画 详解（一 补间动画）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-23T11:42:33.000Z" itemprop="datePublished" class="page-time">
+  2015-12-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一-android补间动画-分为四大类"><span class="post-toc-number">1.</span> <span class="post-toc-text">一.android补间动画 分为四大类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二-可以通过-XML文件-或者JAVA代码的方式来实现动画"><span class="post-toc-number">2.</span> <span class="post-toc-text">二.可以通过 XML文件 或者JAVA代码的方式来实现动画</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-动过XML来实现动画"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.动过XML来实现动画</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#alpha"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">alpha</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Scale"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Scale</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明：没啥说的了"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">说明：没啥说的了</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明：其实也没啥好说的了"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">说明：其实也没啥好说的了</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在JAVA-代码中调用XML"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">在JAVA 代码中调用XML</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#谢谢"><span class="post-toc-number"></span> <span class="post-toc-text">谢谢</span></a>
+        </nav>
+    </aside>
+    
+<article id="post-Android动画 详解（一 补间动画）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android动画 详解（一 补间动画）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年12月23日 19:42" datetime="2015-12-23T11:42:33.000Z"  itemprop="datePublished">2015-12-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <pre><code>打算整理下 android动画方面的知识，嗯  开始
+</code></pre><a id="more"></a>
+<h2 id="一-android补间动画-分为四大类"><a href="#一-android补间动画-分为四大类" class="headerlink" title="一.android补间动画 分为四大类"></a>一.android补间动画 分为四大类</h2><p>alpha（透明度渐变）、scale（尺寸渐变）、translate（位置移动）、rotate（旋转）</p>
+<p>通过JAVA类来表示 AlphaAnimation    ScaleAnimation   TranslateAnimation RotateAnimation</p>
+<h2 id="二-可以通过-XML文件-或者JAVA代码的方式来实现动画"><a href="#二-可以通过-XML文件-或者JAVA代码的方式来实现动画" class="headerlink" title="二.可以通过 XML文件 或者JAVA代码的方式来实现动画"></a>二.可以通过 XML文件 或者JAVA代码的方式来实现动画</h2><h3 id="1-动过XML来实现动画"><a href="#1-动过XML来实现动画" class="headerlink" title="1.动过XML来实现动画"></a>1.动过XML来实现动画</h3><p>在res目录中新建anim文件夹<br>在anim目录中新建一个anim.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"> <span class="tag">&lt;<span class="name">set</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;<span class="name">alpha</span>/&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">scale</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">translate</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">rotate</span>/&gt;</span>  </div><div class="line"> <span class="tag">&lt;/<span class="name">set</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>XML动画详细解析</p>
+<h3 id="alpha"><a href="#alpha" class="headerlink" title="alpha"></a>alpha</h3><p>说明: 0.0表示完全透明 1.0表示完全不透明   时间以毫秒为单位</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;       </div><div class="line">        &lt;alpha  android:fromAlpha="0.1"   &lt;!--动画起始时透明度        --&gt;        </div><div class="line">                android:toAlpha="1.0"   &lt;!--动画结束时透明度 --&gt;               </div><div class="line">                android:duration="3000"  /&gt; &lt;!--动画持续时间--&gt; </div><div class="line"> &lt;/set&gt;</div></pre></td></tr></table></figure>
+<h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><p>说明: 插入器 下一篇详细说</p>
+<p>pivotX  pivotY 确定了 放大缩小的中心  上面4个属性 定义了开始 和结束的比例 <1缩小>1放大</1缩小></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;scale  </div><div class="line">    android:interpolator=  "@android:anim/accelerate_decelerate_interpolator"                                         </div><div class="line">    &lt;!--interpolator 指定一个动画的插入器              --&gt;</div><div class="line">    android:fromXScale="0.0"   </div><div class="line">    &lt;!--起始时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toXScale="1.4"        </div><div class="line">    &lt;!--结束时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:fromYScale="0.0" </div><div class="line">    &lt;!--起始时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toYScale="1.4"   </div><div class="line">    &lt;!--结束时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:pivotX="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的X坐标的开始位置              --&gt;</div><div class="line">    android:pivotY="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的Y坐标的开始位置              --&gt;</div><div class="line">    android:fillAfter="false"   </div><div class="line">    &lt;!--当设置为true ，该动画转化在动画结束后被应用              --&gt;</div><div class="line">    android:duration="700"   </div><div class="line">    &lt;!--时间       --&gt;</div><div class="line">    /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<p>Translate</p>
+<h3 id="说明：没啥说的了"><a href="#说明：没啥说的了" class="headerlink" title="说明：没啥说的了"></a>说明：没啥说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;translate  </div><div class="line">    android:fromXDelta="30"   </div><div class="line">    &lt;!--始时 X坐标上的位置                   --&gt;</div><div class="line">    android:toXDelta="-80"   </div><div class="line">    &lt;!--结束时 X坐标上的位置                  --&gt;</div><div class="line">    android:fromYDelta="30"   </div><div class="line">    &lt;!--起始时 Y坐标上的位置                  --&gt;</div><div class="line">    android:toYDelta="300"   </div><div class="line">    &lt;!--结束时 Y坐标上的位置                  --&gt;</div><div class="line">    android:duration="2000"  </div><div class="line">    &lt;!--时间--&gt;</div><div class="line">    /&gt; </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<p>Rotate</p>
+<h3 id="说明：其实也没啥好说的了"><a href="#说明：其实也没啥好说的了" class="headerlink" title="说明：其实也没啥好说的了"></a>说明：其实也没啥好说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">    &lt;rotate            </div><div class="line">        android:interpolator="@android:anim/accelerate_decelerate_interpolator"         </div><div class="line">        &lt;!--动画的插入器                   --&gt;</div><div class="line">        android:fromDegrees="0"   </div><div class="line">        &lt;!--动画起始时物件的角度          --&gt;</div><div class="line">        android:toDegrees="+350"   </div><div class="line">        &lt;!--画结束时物件旋转的角度 可以大于360度          --&gt;</div><div class="line">        android:pivotX="50%"   </div><div class="line">        &lt;!--X坐标的开始位置          --&gt;</div><div class="line">        android:pivotY="50%"   </div><div class="line">        &lt;!--Y坐标的开始位置          --&gt;</div><div class="line">        android:duration="3000"      </div><div class="line">        /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<h3 id="在JAVA-代码中调用XML"><a href="#在JAVA-代码中调用XML" class="headerlink" title="在JAVA 代码中调用XML"></a>在JAVA 代码中调用XML</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> Animation myAnimation= AnimationUtils.loadAnimation(<span class="keyword">this</span>, R.anim.my_action); </div><div class="line"><span class="comment">//使用AnimationUtils类的静态方法loadAnimation()来加载XML中的动画XML文件</span></div></pre></td></tr></table></figure>
+<p>2 试用JAVA 代码 来创建动画</p>
+<p>说明 具体参数含义 可对照上面的XML<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在代码中定义 动画实例对象</span></div><div class="line"><span class="keyword">private</span> Animation myAnimation_Alpha;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Scale;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Translate;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Rotate;</div><div class="line"></div><div class="line"><span class="comment">//根据各自的构造方法来初始化一个实例对象</span></div><div class="line">myAnimation_Alpha = <span class="keyword">new</span> AlphaAnimation(<span class="number">0.1f</span>, <span class="number">1.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Scale = <span class="keyword">new</span> ScaleAnimation(<span class="number">0.0f</span>, <span class="number">1.4f</span>, <span class="number">0.0f</span>, <span class="number">1.4f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>, Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line"></div><div class="line">myAnimation_Translate = <span class="keyword">new</span> TranslateAnimation(<span class="number">30.0f</span>, -<span class="number">80.0f</span>, <span class="number">30.0f</span>, <span class="number">300.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Rotate = <span class="keyword">new</span> RotateAnimation(<span class="number">0.0f</span>, +<span class="number">350.0f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>,Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line">设置动画监听，注意 当控件移动后  其点击事件 还在原来的未知 需要调用view.layout(x,x,x,x);方法修改下 控件的未知</div><div class="line"></div><div class="line">animation.setAnimationListener(<span class="keyword">new</span> Animation.AnimationListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">              </div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">最后 就查给控件添加上 创建好的动画 并启动了</div><div class="line"></div><div class="line">view.startAnimation(animation);</div></pre></td></tr></table></figure></p>
+<h1 id="谢谢"><a href="#谢谢" class="headerlink" title="谢谢"></a>谢谢</h1>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&title=《Android动画 详解（一 补间动画）》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&title=《Android动画 详解（一 补间动画）》 — 独角兽之路&source=打算整理下 android动画方面的知识，嗯  开始
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android动画 详解（一 补间动画）》 — 独角兽之路&url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/17/Android动画 详解(二 帧动画 属性动画 )/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android动画 详解(二 帧动画 属性动画 )</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/18/整理 iOS 9 适配中出现的坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">整理 iOS 9 适配中出现的坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android动画 详解（一 补间动画）" data-title="Android动画 详解（一 补间动画）" data-url="https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&title=《Android动画 详解（一 补间动画）》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&title=《Android动画 详解（一 补间动画）》 — 独角兽之路&source=打算整理下 android动画方面的知识，嗯  开始
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android动画 详解（一 补间动画）》 — 独角兽之路&url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3aQW7jQAwEQP//0841QCK5SQ4NHUqnAGtJUzrMcJt8veLr/evKf3N119/fXD3n/pfHLjw8PLzB0u8fnSy3t9DeE+7XjIeHh7fNu3p0dUH5gXH/rvu7kjXj4eHhPZM3KX/vi+9qIY6Hh4f3ZF5SyN6HF/l2X/18eHh4eN/k5Rt9vmXn231y13rWgoeHhxfz8kDhOX+v9Pfw8PDwxl31vOmVjAtUN/T3+MLDw8Pb4FUj17x4zYvgXshbGA7Dw8PDO8qbRLH3Meup6CH/KP8cVHh4eHgLvHw0qjccUKUmTa9maIuHh4d3iFcdparemx8eye/zUQY8PDy8PV5vsKmHnAS+0XBVterHw8PDa/F6r8/Hs3pbf17Kf1gDHh4e3ld41QVFRW2R1DsGLotpPDw8vAVeNbqtHgPVIap8hVHWgoeHh3eUV21u7TWxqqVzITTBw8PDW+CdenG1kTa/N0lr8fDw8DZ489K2+i3zAKLHe82/NB4eHt7Fc/Jj4NQYQTWkqM4AREcCHh4e3oDX2/rnsWwvMu617vDw8PDO8ubhaTWonSDL68HDw8Nb4PXGmyZNsupnGg1d4eHh4S3w8sg1/wTJBt0bVkie9s+5h4eHh7fG68W1vQij98Zy5IGHh4e3wJv3ifJwYRJk5GMHh9tgeHh4eBf/OmlW5YHsfOBgFN3i4eHhrXWFcmTO6JXp1UGBDzMReHh4eGu8amF9qvietOJek5MHDw8PrwXLr1MHxqkBrA+NNzw8PLwF3mSPnZTgpwKRxSMEDw8P75aXB6ZJ2d37EHmRPRoXwMPDwzvKmxe+1XChd4SUAw48PDy8B/B6QXB+CCUFd2FMAQ8PD+8BvN7Lelt/ddQVDw8P75u86mBoHj3k7bReiysqqfHw8PCO8nr/4a+2siZt/kIBPenv4eHh4X2+6wem+0rfvS6OpQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
