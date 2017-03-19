@@ -143,11 +143,96 @@
   </entry>
   
   <entry>
+    <title>友盟封装第三方登录 第三方粉线</title>
+    <link href="https://hui46226021.github.io/2017/03/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
+    <id>https://hui46226021.github.io/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-03-19T07:16:31.649Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="ShUmengSdk"><a href="#ShUmengSdk" class="headerlink" title="ShUmengSdk"></a>ShUmengSdk</h1><p>封装友盟 第三方 分享 登录 微信支付</p>
+<p>###当前友盟SDK版本v6.0.9</p>
+<p>###所需各种 appkey 质询QQ 3431339973</p>
+<p>##使用方法</p>
+<ul>
+<li>导入Module(umeng_sdk)</li>
+<li>替换key_strings.xml下的所有 appkey</li>
+<li>在项目的Application 里调用  UMShareHelper.init(this); 注册友盟</li>
+<li>添加微信 回调页面WXEntryActivity  注意：wxapi 后的路径一定不能变</li>
+<li>通过 ShareDialog.getInstance(this,null,”测试分享”,”<a href="https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单" target="_blank" rel="external">https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单</a></li>
+<li>通过 mShareAPI.getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener); 第三方登录</li>
+</ul>
+<p>##注意：在调用分享的页面 要加入 页面回调<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">    UMShareAPI.get(<span class="keyword">this</span>).onActivityResult(requestCode, resultCode, data);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;ShUmengSdk&quot;&gt;&lt;a href=&quot;#ShUmengSdk&quot; class=&quot;headerlink&quot; title=&quot;ShUmengSdk&quot;&gt;&lt;/a&gt;ShUmengSdk&lt;/h1&gt;&lt;p&gt;封装友盟 第三方 分享 登录 微信支付&lt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="友盟" scheme="https://hui46226021.github.io/tags/%E5%8F%8B%E7%9B%9F/"/>
+    
+      <category term="第三方登录" scheme="https://hui46226021.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
+    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-03-19T06:17:19.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android-PickerView 时间控件，选择权</title>
-    <link href="https://hui46226021.github.io/2017/03/18/Android-PickerView/"/>
-    <id>https://hui46226021.github.io/2017/03/18/Android-PickerView/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T07:27:46.678Z</updated>
+    <link href="https://hui46226021.github.io/2017/03/17/Android-PickerView/"/>
+    <id>https://hui46226021.github.io/2017/03/17/Android-PickerView/</id>
+    <published>2017-03-17T14:37:23.000Z</published>
+    <updated>2017-03-19T09:22:56.976Z</updated>
     
     <content type="html"><![CDATA[<p>在 saiwu-bigkoo 大神以上修改 便于自己使用<br><a id="more"></a></p>
 <h1 id="PickerView-2-x系列"><a href="#PickerView-2-x系列" class="headerlink" title="PickerView (2.x系列)"></a>PickerView (2.x系列)</h1><p>精仿iOS的PickerView控件，有时间选择和选项选择并支持一二三级联动效果<br>——TimePickerView  时间选择器，支持年月日时分，年月日，年月，时分等格式<br>——OptionsPickerView  选项选择器，支持一，二，三级选项选择，并且可以设置是否联动    </p>
@@ -264,91 +349,6 @@
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>友盟封装第三方登录 第三方粉线</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T07:16:31.649Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="ShUmengSdk"><a href="#ShUmengSdk" class="headerlink" title="ShUmengSdk"></a>ShUmengSdk</h1><p>封装友盟 第三方 分享 登录 微信支付</p>
-<p>###当前友盟SDK版本v6.0.9</p>
-<p>###所需各种 appkey 质询QQ 3431339973</p>
-<p>##使用方法</p>
-<ul>
-<li>导入Module(umeng_sdk)</li>
-<li>替换key_strings.xml下的所有 appkey</li>
-<li>在项目的Application 里调用  UMShareHelper.init(this); 注册友盟</li>
-<li>添加微信 回调页面WXEntryActivity  注意：wxapi 后的路径一定不能变</li>
-<li>通过 ShareDialog.getInstance(this,null,”测试分享”,”<a href="https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单" target="_blank" rel="external">https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单</a></li>
-<li>通过 mShareAPI.getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener); 第三方登录</li>
-</ul>
-<p>##注意：在调用分享的页面 要加入 页面回调<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">    UMShareAPI.get(<span class="keyword">this</span>).onActivityResult(requestCode, resultCode, data);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;ShUmengSdk&quot;&gt;&lt;a href=&quot;#ShUmengSdk&quot; class=&quot;headerlink&quot; title=&quot;ShUmengSdk&quot;&gt;&lt;/a&gt;ShUmengSdk&lt;/h1&gt;&lt;p&gt;封装友盟 第三方 分享 登录 微信支付&lt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="友盟" scheme="https://hui46226021.github.io/tags/%E5%8F%8B%E7%9B%9F/"/>
-    
-      <category term="第三方登录" scheme="https://hui46226021.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T06:17:19.432Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
