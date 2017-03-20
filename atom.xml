@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-03-20T14:43:44.774Z</updated>
+  <updated>2017-03-20T14:48:43.002Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>andfix 增量升级更新 热补丁修复</title>
+    <title>Android 通过gardle限制引入so库 版本</title>
     <link href="https://hui46226021.github.io/2017/03/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
     <id>https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/</id>
     <published>2017-03-20T15:37:23.000Z</published>
-    <updated>2017-03-20T14:43:44.774Z</updated>
+    <updated>2017-03-20T14:48:43.002Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
 <p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
@@ -45,45 +45,11 @@
       <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
       <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
     
-  </entry>
-  
-  <entry>
-    <title>ShVideoPlay android视频播放器</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShVideoPlay android视频播放器/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T07:14:30.506Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
-<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
-<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
-    
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
     
   </entry>
   
@@ -130,6 +96,40 @@
       <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
     
       <category term="腾讯IM" scheme="https://hui46226021.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ShVideoPlay android视频播放器</title>
+    <link href="https://hui46226021.github.io/2017/03/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://hui46226021.github.io/2017/03/18/ShVideoPlay android视频播放器/</id>
+    <published>2017-03-18T14:37:23.000Z</published>
+    <updated>2017-03-19T07:14:30.506Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
+<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
+<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
     
   </entry>
   
@@ -181,6 +181,46 @@
   </entry>
   
   <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
+    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-03-19T06:17:19.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>友盟封装第三方登录 第三方粉线</title>
     <link href="https://hui46226021.github.io/2017/03/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
     <id>https://hui46226021.github.io/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
@@ -222,46 +262,6 @@
       <category term="友盟" scheme="https://hui46226021.github.io/tags/%E5%8F%8B%E7%9B%9F/"/>
     
       <category term="第三方登录" scheme="https://hui46226021.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T06:17:19.432Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
@@ -939,13 +939,13 @@ PASSWORD;//密码强度 是不是6至12位字母组合
       <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
     
     
-      <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
-    
-      <category term="微信" scheme="https://hui46226021.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
-    
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
+    
+      <category term="微信" scheme="https://hui46226021.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
     
       <category term="多图选择" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
     
