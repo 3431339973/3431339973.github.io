@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-03-19T07:23:19.016Z</updated>
+  <updated>2017-03-20T14:43:44.774Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>andfix 增量升级更新 热补丁修复</title>
+    <link href="https://hui46226021.github.io/2017/03/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
+    <id>https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/</id>
+    <published>2017-03-20T15:37:23.000Z</published>
+    <updated>2017-03-20T14:43:44.774Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
+<p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
+<p>这就导致  在部分 arm64的 手机上 百度地图的相关功能 会加载不到 so库,导致程序崩溃</p>
+<p>最后找到解决方案 </p>
+<p>在app 的 build.gradle 下的defaultConfig 添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ndk&#123;</div><div class="line">    moduleName <span class="string">"libgenius_blur"</span></div><div class="line">    ldLibs <span class="string">"log"</span></div><div class="line">    abiFilters <span class="string">"armeabi"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>完美运行   谢谢</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="gradle" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/"/>
+    
+      <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ShVideoPlay android视频播放器</title>
+    <link href="https://hui46226021.github.io/2017/03/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://hui46226021.github.io/2017/03/18/ShVideoPlay android视频播放器/</id>
+    <published>2017-03-18T14:37:23.000Z</published>
+    <updated>2017-03-19T07:14:30.506Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
+<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
+<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>腾讯 IM 封装成Library</title>
@@ -58,40 +130,6 @@
       <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
     
       <category term="腾讯IM" scheme="https://hui46226021.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ShVideoPlay android视频播放器</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShVideoPlay android视频播放器/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T07:14:30.506Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
-<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
-<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
     
   </entry>
   
@@ -228,6 +266,104 @@
   </entry>
   
   <entry>
+    <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
+    <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
+    <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
+    <published>2017-03-17T14:37:23.000Z</published>
+    <updated>2017-03-18T09:47:10.277Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
+<h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shform:3.2.2'</span></div></pre></td></tr></table></figure></p>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="表单对象映射"><a href="#表单对象映射" class="headerlink" title="表单对象映射"></a>表单对象映射</h2><ul>
+<li>1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍</li>
+<li><p>2.开启表单注入 FormInit.injection(this);</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      nameEdit = (EditText) findViewById(R.id.name);</div><div class="line">      phoneEdit = (EditText) findViewById(R.id.phone);</div><div class="line">      professionEdit = (EditText) findViewById(R.id.profession);</div><div class="line">      spinner = (Spinner) findViewById(R.id.spinner);</div><div class="line">      married = (CheckBox) findViewById(R.id.married);</div><div class="line">      party = (CheckBox) findViewById(R.id.party);</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * 初始化表单注入  要在 所有控件初始化成功后 调用</div><div class="line">       */</div><div class="line">      FormInit.injection(<span class="keyword">this</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在 onDestroy 里 注销 表单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注销表单</div><div class="line"> */</div><div class="line">FormInit.deleteInjection(<span class="keyword">this</span>);</div><div class="line"><span class="keyword">super</span>.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.通过 @FormInjection 绑定控件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * name 对应 实体类 字段名</div><div class="line"> * message 参数为空的时候 默认提示 的字符串</div><div class="line"> * isNull  该字段是否可以为空  默认 false</div><div class="line"> */</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"name"</span>, message = <span class="string">"名字"</span>,isNull = <span class="keyword">true</span>)</div><div class="line">  EditText nameEdit;</div><div class="line">  <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line">  EditText phoneEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line">  EditText professionEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"workingLife"</span>, message = <span class="string">"工作时间"</span>)</div><div class="line">  Spinner spinner;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"married"</span>)</div><div class="line">  CheckBox married;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.调用映射方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 表单自动生成对象</div><div class="line">  */</div><div class="line"> UserModel userModel = FormUtls.formToObjectAndCheck(<span class="keyword">this</span>,UserModel.class);</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 实体对象 映射到表单 返回true 表示映射成功</div><div class="line">  */</div><div class="line"> FormUtls.objectToForm(<span class="keyword">this</span>,userModel);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="表单参数检查"><a href="#表单参数检查" class="headerlink" title="表单参数检查"></a>表单参数检查</h2><pre><code>* 1.使用 @FormCheck
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//type 是 验证类型枚举   默认 是自定义验证</span></div><div class="line"> <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line"> EditText phoneEdit;</div><div class="line"> <span class="meta">@FormCheck</span></div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line"> EditText professionEdit;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 通过 实现 FormCheckInterface 接口的 formCheck</div><div class="line">      * 自定定义 表单检查 默认要返回true</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@return</span></div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">formCheck</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="keyword">switch</span> (v.getId())&#123;</div><div class="line">             <span class="keyword">case</span> R.id.profession:</div><div class="line">                 <span class="keyword">if</span>(!(professionEdit.getText()+<span class="string">""</span>).contains(<span class="string">"-"</span>))&#123;</div><div class="line">                     Toast.makeText(<span class="keyword">this</span>,<span class="string">"职业格式不正确"</span>,Toast.LENGTH_SHORT).show();</div><div class="line">                     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                 &#125;</div><div class="line">                 <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 表单检查 不合法回调</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@param</span> message</div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">formCheckNullCall</span><span class="params">(View v, String message)</span> </span>&#123;</div><div class="line">         Toast.makeText(<span class="keyword">this</span>,message,Toast.LENGTH_SHORT).show();</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<h4 id="验证类型"><a href="#验证类型" class="headerlink" title="验证类型"></a>验证类型</h4><pre><code>CUSTOM,//自定义
+PHONE,//手机号
+EMAIL,//邮箱
+CHINESE,//中文
+IDCARD,//身份证
+ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
+AMOUNT_MONEY,//金额校验，精确到2位小数
+AMOUNT,//存数字
+URL,//Url
+PASSWORD;//密码强度 是不是6至12位字母组合
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>    
+<h2 id="快速生成表单布局-ShFormLayout"><a href="#快速生成表单布局-ShFormLayout" class="headerlink" title="快速生成表单布局 ShFormLayout"></a>快速生成表单布局 ShFormLayout</h2><p>ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式</p>
+<p><img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png" alt=""></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;com.sh.zsh.code.layout.ShFormLayout</div><div class="line">  &lt;!--该布局 需要在这确定 每行的高度 --&gt;</div><div class="line">              app:less_form_row_height="50dp"</div><div class="line">             android:layout_width="match_parent"</div><div class="line">             android:layout_height="wrap_content"&gt;</div><div class="line">             &lt;TextView</div><div class="line">                 &lt;!--这里表明 这个控件 只是用于显示标题--&gt;</div><div class="line">                 app:less_form_group_titel="true"</div><div class="line">                 android:text="基本信息"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="wrap_content" /&gt;</div><div class="line">             &lt;EditText</div><div class="line">                 &lt;!--该行的标题--&gt;</div><div class="line">                 app:less_form_title="姓名"</div><div class="line">                 &lt;!--该行对应的字段名--&gt;</div><div class="line">                 app:less_form_name="name"</div><div class="line">                 &lt;!--该行是否必填--&gt;</div><div class="line">                 app:less_form_must="true"</div><div class="line">                  android:layout_height="wrap_content"</div><div class="line">                  android:layout_width="match_parent"</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">             &lt;EditText</div><div class="line">                 app:less_form_title="电话"</div><div class="line">                 &lt;!--该行的验证方式--&gt;</div><div class="line">                 app:less_form_check_type="phone"</div><div class="line">                 app:less_form_name="phone"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true"</div><div class="line">                 /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/company"</div><div class="line">                 app:less_form_title="公司"</div><div class="line">                 app:less_form_name="company"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/department"</div><div class="line">                 app:less_form_title="部门"</div><div class="line">                 app:less_form_name="department"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormTimeView</div><div class="line">                 app:less_form_title="出生日期"</div><div class="line">                 app:less_form_name="birthday"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;CheckBox</div><div class="line">                 app:less_form_title="男性："</div><div class="line">                 app:less_form_name="sex"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;LinearLayout</div><div class="line">                 app:less_form_group_top_layout="true"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="150dp"</div><div class="line">                 android:background="@color/white"</div><div class="line">                 android:orientation="horizontal"&gt;</div><div class="line">                 &lt;TextView</div><div class="line">                     android:layout_width="wrap_content"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="18dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:text="签名" /&gt;</div><div class="line"></div><div class="line">                 &lt;EditText</div><div class="line">                     android:id="@+id/sign"</div><div class="line">                     android:gravity="top"</div><div class="line">                     android:layout_width="match_parent"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="16dp"</div><div class="line">                     android:padding="5dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:background="@drawable/bg_text_factoryaudit"</div><div class="line">                     android:hint="多行输入" /&gt;</div><div class="line">             &lt;/LinearLayout&gt;</div><div class="line">         &lt;/com.sh.zsh.code.layout.ShFormLayout&gt;</div></pre></td></tr></table></figure>
+<h3 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了<br>我们来看一下  框架都提供了 哪些表单属性 供我们使用</p>
+<ul>
+<li>ShFormLayout  <br><br>less_form_row_height  表单每行的 高度</li>
+<li>内部控件<br><br>less_form_title   名称<br><br>less_form_title_image  设置名称左侧的icon<br><br>less_form_can_click    该行是否显示 右侧箭头<br><br>less_form_must         该字段是否必填<br><br>less_form_name        该字段对应实体类的字段名称<br><br>less_form_is_null     该字段是否可以为空<br><br>less_form_bottomLine  该行是否显示底部横线<br>less_form_check_type  检查类型<br>less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）<br>less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）</li>
+<li>FormTimeView  时间控件<br><br>less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br></li>
+<li>FormSpinner  选择器  用法参考Demo<br><br>less_form_spi_sel 默认选中第一项</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShFormUtils" target="_blank" rel="external">https://github.com/hui46226021/ShFormUtils</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="View" scheme="https://hui46226021.github.io/categories/Android/JAVA/View/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="Form" scheme="https://hui46226021.github.io/tags/Form/"/>
+    
+      <category term="框架" scheme="https://hui46226021.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
+    
+      <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android-PickerView 时间控件，选择权</title>
     <link href="https://hui46226021.github.io/2017/03/17/Android-PickerView/"/>
     <id>https://hui46226021.github.io/2017/03/17/Android-PickerView/</id>
@@ -349,104 +485,6 @@
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
-    <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
-    <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
-    <published>2017-03-17T14:37:23.000Z</published>
-    <updated>2017-03-18T09:47:10.277Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
-<h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shform:3.2.2'</span></div></pre></td></tr></table></figure></p>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="表单对象映射"><a href="#表单对象映射" class="headerlink" title="表单对象映射"></a>表单对象映射</h2><ul>
-<li>1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍</li>
-<li><p>2.开启表单注入 FormInit.injection(this);</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      nameEdit = (EditText) findViewById(R.id.name);</div><div class="line">      phoneEdit = (EditText) findViewById(R.id.phone);</div><div class="line">      professionEdit = (EditText) findViewById(R.id.profession);</div><div class="line">      spinner = (Spinner) findViewById(R.id.spinner);</div><div class="line">      married = (CheckBox) findViewById(R.id.married);</div><div class="line">      party = (CheckBox) findViewById(R.id.party);</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * 初始化表单注入  要在 所有控件初始化成功后 调用</div><div class="line">       */</div><div class="line">      FormInit.injection(<span class="keyword">this</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.在 onDestroy 里 注销 表单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注销表单</div><div class="line"> */</div><div class="line">FormInit.deleteInjection(<span class="keyword">this</span>);</div><div class="line"><span class="keyword">super</span>.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>4.通过 @FormInjection 绑定控件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * name 对应 实体类 字段名</div><div class="line"> * message 参数为空的时候 默认提示 的字符串</div><div class="line"> * isNull  该字段是否可以为空  默认 false</div><div class="line"> */</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"name"</span>, message = <span class="string">"名字"</span>,isNull = <span class="keyword">true</span>)</div><div class="line">  EditText nameEdit;</div><div class="line">  <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line">  EditText phoneEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line">  EditText professionEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"workingLife"</span>, message = <span class="string">"工作时间"</span>)</div><div class="line">  Spinner spinner;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"married"</span>)</div><div class="line">  CheckBox married;</div></pre></td></tr></table></figure>
-</li>
-<li><p>4.调用映射方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 表单自动生成对象</div><div class="line">  */</div><div class="line"> UserModel userModel = FormUtls.formToObjectAndCheck(<span class="keyword">this</span>,UserModel.class);</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 实体对象 映射到表单 返回true 表示映射成功</div><div class="line">  */</div><div class="line"> FormUtls.objectToForm(<span class="keyword">this</span>,userModel);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h2 id="表单参数检查"><a href="#表单参数检查" class="headerlink" title="表单参数检查"></a>表单参数检查</h2><pre><code>* 1.使用 @FormCheck
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//type 是 验证类型枚举   默认 是自定义验证</span></div><div class="line"> <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line"> EditText phoneEdit;</div><div class="line"> <span class="meta">@FormCheck</span></div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line"> EditText professionEdit;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 通过 实现 FormCheckInterface 接口的 formCheck</div><div class="line">      * 自定定义 表单检查 默认要返回true</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@return</span></div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">formCheck</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="keyword">switch</span> (v.getId())&#123;</div><div class="line">             <span class="keyword">case</span> R.id.profession:</div><div class="line">                 <span class="keyword">if</span>(!(professionEdit.getText()+<span class="string">""</span>).contains(<span class="string">"-"</span>))&#123;</div><div class="line">                     Toast.makeText(<span class="keyword">this</span>,<span class="string">"职业格式不正确"</span>,Toast.LENGTH_SHORT).show();</div><div class="line">                     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                 &#125;</div><div class="line">                 <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 表单检查 不合法回调</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@param</span> message</div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">formCheckNullCall</span><span class="params">(View v, String message)</span> </span>&#123;</div><div class="line">         Toast.makeText(<span class="keyword">this</span>,message,Toast.LENGTH_SHORT).show();</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<h4 id="验证类型"><a href="#验证类型" class="headerlink" title="验证类型"></a>验证类型</h4><pre><code>CUSTOM,//自定义
-PHONE,//手机号
-EMAIL,//邮箱
-CHINESE,//中文
-IDCARD,//身份证
-ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
-AMOUNT_MONEY,//金额校验，精确到2位小数
-AMOUNT,//存数字
-URL,//Url
-PASSWORD;//密码强度 是不是6至12位字母组合
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>    
-<h2 id="快速生成表单布局-ShFormLayout"><a href="#快速生成表单布局-ShFormLayout" class="headerlink" title="快速生成表单布局 ShFormLayout"></a>快速生成表单布局 ShFormLayout</h2><p>ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式</p>
-<p><img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png" alt=""></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;com.sh.zsh.code.layout.ShFormLayout</div><div class="line">  &lt;!--该布局 需要在这确定 每行的高度 --&gt;</div><div class="line">              app:less_form_row_height="50dp"</div><div class="line">             android:layout_width="match_parent"</div><div class="line">             android:layout_height="wrap_content"&gt;</div><div class="line">             &lt;TextView</div><div class="line">                 &lt;!--这里表明 这个控件 只是用于显示标题--&gt;</div><div class="line">                 app:less_form_group_titel="true"</div><div class="line">                 android:text="基本信息"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="wrap_content" /&gt;</div><div class="line">             &lt;EditText</div><div class="line">                 &lt;!--该行的标题--&gt;</div><div class="line">                 app:less_form_title="姓名"</div><div class="line">                 &lt;!--该行对应的字段名--&gt;</div><div class="line">                 app:less_form_name="name"</div><div class="line">                 &lt;!--该行是否必填--&gt;</div><div class="line">                 app:less_form_must="true"</div><div class="line">                  android:layout_height="wrap_content"</div><div class="line">                  android:layout_width="match_parent"</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">             &lt;EditText</div><div class="line">                 app:less_form_title="电话"</div><div class="line">                 &lt;!--该行的验证方式--&gt;</div><div class="line">                 app:less_form_check_type="phone"</div><div class="line">                 app:less_form_name="phone"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true"</div><div class="line">                 /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/company"</div><div class="line">                 app:less_form_title="公司"</div><div class="line">                 app:less_form_name="company"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/department"</div><div class="line">                 app:less_form_title="部门"</div><div class="line">                 app:less_form_name="department"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormTimeView</div><div class="line">                 app:less_form_title="出生日期"</div><div class="line">                 app:less_form_name="birthday"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;CheckBox</div><div class="line">                 app:less_form_title="男性："</div><div class="line">                 app:less_form_name="sex"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;LinearLayout</div><div class="line">                 app:less_form_group_top_layout="true"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="150dp"</div><div class="line">                 android:background="@color/white"</div><div class="line">                 android:orientation="horizontal"&gt;</div><div class="line">                 &lt;TextView</div><div class="line">                     android:layout_width="wrap_content"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="18dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:text="签名" /&gt;</div><div class="line"></div><div class="line">                 &lt;EditText</div><div class="line">                     android:id="@+id/sign"</div><div class="line">                     android:gravity="top"</div><div class="line">                     android:layout_width="match_parent"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="16dp"</div><div class="line">                     android:padding="5dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:background="@drawable/bg_text_factoryaudit"</div><div class="line">                     android:hint="多行输入" /&gt;</div><div class="line">             &lt;/LinearLayout&gt;</div><div class="line">         &lt;/com.sh.zsh.code.layout.ShFormLayout&gt;</div></pre></td></tr></table></figure>
-<h3 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了<br>我们来看一下  框架都提供了 哪些表单属性 供我们使用</p>
-<ul>
-<li>ShFormLayout  <br><br>less_form_row_height  表单每行的 高度</li>
-<li>内部控件<br><br>less_form_title   名称<br><br>less_form_title_image  设置名称左侧的icon<br><br>less_form_can_click    该行是否显示 右侧箭头<br><br>less_form_must         该字段是否必填<br><br>less_form_name        该字段对应实体类的字段名称<br><br>less_form_is_null     该字段是否可以为空<br><br>less_form_bottomLine  该行是否显示底部横线<br>less_form_check_type  检查类型<br>less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）<br>less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）</li>
-<li>FormTimeView  时间控件<br><br>less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br></li>
-<li>FormSpinner  选择器  用法参考Demo<br><br>less_form_spi_sel 默认选中第一项</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShFormUtils" target="_blank" rel="external">https://github.com/hui46226021/ShFormUtils</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="View" scheme="https://hui46226021.github.io/categories/Android/JAVA/View/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="Form" scheme="https://hui46226021.github.io/tags/Form/"/>
-    
-      <category term="框架" scheme="https://hui46226021.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
-    
-      <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
     
   </entry>
   
@@ -914,48 +952,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
   </entry>
   
   <entry>
-    <title>windowIsTranslucent 和windowAnimationStyle冲突</title>
-    <link href="https://hui46226021.github.io/2016/03/17/windowIsTranslucent%20%E5%92%8CwindowAnimationStyle%E5%86%B2%E7%AA%81/"/>
-    <id>https://hui46226021.github.io/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:45:55.636Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
-<p>今天在写 android仿IOS 侧滑销毁的时候   需要把activity的背景设置成透明 在滑出的时候漏出 栈下面一层的activity  在AppTheme里面 设置了windowIsTranslucent 属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>这里之前设置过  activity 切换动画<br>接下来 问题来了 </p>
-<p>设置windowIsTranslucent  后android:windowAnimationStyle 失效了，不好使了</p>
-<p>差了写资料 已解决 再次记录下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyActivitySiwtchAnimation"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Animation.Translucent"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="comment">&lt;!--创建效果--&gt;</span>  </div><div class="line"><span class="comment">&lt;!--&lt;item name="@android:activityOpenEnterAnimation"&gt;@anim/out_from_right&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个被覆盖效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityOpenExitAnimation"&gt;@anim/out_middle&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="comment">&lt;!--&amp;lt;!&amp;ndash;推出效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseExitAnimation"&gt;@anim/out_toleft&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个还原效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseEnterAnimation"&gt;@anim/out_middle2&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>1.让 android:windowAnimationStyle  继承  @android :style/Animation.Translucent<br>此方法 在退出actvity时候动画有效  创建的时候无效</p>
-<p>2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>此方法有效。<br>不过本人是坑爹的锤子手机 在activity切换的时候 自带 一个由下到上的动画  目前的状态是 创建activity是重屏幕右下角出现 ，在其他手机上 还可以</p>
-<h2 id="方法二：绝对完美解决"><a href="#方法二：绝对完美解决" class="headerlink" title="方法二：绝对完美解决"></a>方法二：绝对完美解决</h2><p>取消<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>改在 activity 和 fragment的基类里 重写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 重写 activity切换方法 消除系统自带动画</div><div class="line">     * <span class="doctag">@param</span> intent</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivity(intent);</div><div class="line"></div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.finish();</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode, @Nullable Bundle options)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode, options);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>实现 切换动画 </p>
-<p>这里收集了一些系统动画</p>
-<p>//实现淡入浅出的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);</div></pre></td></tr></table></figure></p>
-<p>// 由左向右滑入的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="windowIsTranslucent" scheme="https://hui46226021.github.io/tags/windowIsTranslucent/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Android分包MultiDex原理详解</title>
     <link href="https://hui46226021.github.io/2016/03/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
     <id>https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/</id>
@@ -1077,6 +1073,48 @@ PASSWORD;//密码强度 是不是6至12位字母组合
       <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
     
       <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windowIsTranslucent 和windowAnimationStyle冲突</title>
+    <link href="https://hui46226021.github.io/2016/03/17/windowIsTranslucent%20%E5%92%8CwindowAnimationStyle%E5%86%B2%E7%AA%81/"/>
+    <id>https://hui46226021.github.io/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/</id>
+    <published>2016-03-17T14:37:23.000Z</published>
+    <updated>2017-03-19T04:45:55.636Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
+<p>今天在写 android仿IOS 侧滑销毁的时候   需要把activity的背景设置成透明 在滑出的时候漏出 栈下面一层的activity  在AppTheme里面 设置了windowIsTranslucent 属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里之前设置过  activity 切换动画<br>接下来 问题来了 </p>
+<p>设置windowIsTranslucent  后android:windowAnimationStyle 失效了，不好使了</p>
+<p>差了写资料 已解决 再次记录下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyActivitySiwtchAnimation"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Animation.Translucent"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="comment">&lt;!--创建效果--&gt;</span>  </div><div class="line"><span class="comment">&lt;!--&lt;item name="@android:activityOpenEnterAnimation"&gt;@anim/out_from_right&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个被覆盖效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityOpenExitAnimation"&gt;@anim/out_middle&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="comment">&lt;!--&amp;lt;!&amp;ndash;推出效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseExitAnimation"&gt;@anim/out_toleft&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个还原效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseEnterAnimation"&gt;@anim/out_middle2&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>1.让 android:windowAnimationStyle  继承  @android :style/Animation.Translucent<br>此方法 在退出actvity时候动画有效  创建的时候无效</p>
+<p>2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>此方法有效。<br>不过本人是坑爹的锤子手机 在activity切换的时候 自带 一个由下到上的动画  目前的状态是 创建activity是重屏幕右下角出现 ，在其他手机上 还可以</p>
+<h2 id="方法二：绝对完美解决"><a href="#方法二：绝对完美解决" class="headerlink" title="方法二：绝对完美解决"></a>方法二：绝对完美解决</h2><p>取消<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>改在 activity 和 fragment的基类里 重写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 重写 activity切换方法 消除系统自带动画</div><div class="line">     * <span class="doctag">@param</span> intent</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivity(intent);</div><div class="line"></div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.finish();</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode, @Nullable Bundle options)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode, options);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>实现 切换动画 </p>
+<p>这里收集了一些系统动画</p>
+<p>//实现淡入浅出的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);</div></pre></td></tr></table></figure></p>
+<p>// 由左向右滑入的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="windowIsTranslucent" scheme="https://hui46226021.github.io/tags/windowIsTranslucent/"/>
     
   </entry>
   
@@ -1388,37 +1426,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="动画" scheme="https://hui46226021.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>整理 iOS 9 适配中出现的坑</title>
-    <link href="https://hui46226021.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
-    <id>https://hui46226021.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
-    <published>2015-12-18T08:17:33.000Z</published>
-    <updated>2017-03-19T05:27:01.979Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要: 整理 iOS 9 适配中出现的坑</p>
-<a id="more"></a>
-<p><a href="http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要: 整理 iOS 9 适配中出现的坑&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/categories/IOS/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="session共享" scheme="https://hui46226021.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
-    
-      <category term="分布式" scheme="https://hui46226021.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-      <category term="IOS 9" scheme="https://hui46226021.github.io/tags/IOS-9/"/>
     
   </entry>
   

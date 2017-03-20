@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>andfix 增量升级更新 热补丁修复 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,原创,so库">
+    <meta name="description" content="摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="andfix 增量升级更新 热补丁修复">
+<meta property="og:url" content="https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况">
+<meta property="og:updated_time" content="2017-03-20T14:43:44.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="andfix 增量升级更新 热补丁修复">
+<meta name="twitter:description" content="摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">andfix 增量升级更新 热补丁修复</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">andfix 增量升级更新 热补丁修复</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-20T15:37:23.000Z" itemprop="datePublished" class="page-time">
+  2017-03-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/gradle/">gradle</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/gradle/so/">so</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-Android 通过gardle限制引入so库 版本"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">andfix 增量升级更新 热补丁修复</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月20日 23:37" datetime="2017-03-20T15:37:23.000Z"  itemprop="datePublished">2017-03-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/gradle/">gradle</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/gradle/so/">so</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
+<p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
+<p>这就导致  在部分 arm64的 手机上 百度地图的相关功能 会加载不到 so库,导致程序崩溃</p>
+<p>最后找到解决方案 </p>
+<p>在app 的 build.gradle 下的defaultConfig 添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ndk&#123;</div><div class="line">    moduleName <span class="string">"libgenius_blur"</span></div><div class="line">    ldLibs <span class="string">"log"</span></div><div class="line">    abiFilters <span class="string">"armeabi"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>完美运行   谢谢</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/so库/">so库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&source=摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/18/ShVideoPlay android视频播放器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ShVideoPlay android视频播放器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android 通过gardle限制引入so库 版本" data-title="andfix 增量升级更新 热补丁修复" data-url="https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&title=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&source=摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《andfix 增量升级更新 热补丁修复》 — 独角兽之路&url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLElEQVR42u3a0U7dQAwEUP7/p6mE+oYIM3audLOcPFU0JHs2Ul2P9+Mjvj6/ru8/ub7aO3+6P3nvxysubGxs7Iew86V/v79dbrKt10++/nm+udjY2NjnsZOlXG9Hwrh3U2brwcbGxv7L7HxT8t/NMcmWYWNjY2PvYZs7sbGxsbE37DbinzHazWrbmJdkadjY2Nhvz24Hve/85xfOt7GxsbHfkv1ZXnkMdP2ufVsyW///38XGxsY+iJ3H9wkvKSSbdiI5HpSPfrGxsbFPYrdlaTOmzTcx34LEUnx5bGxs7AeykwXlbUmLz8tYspJiAIyNjY19ELsN32f/9c+3pi1jbRuDjY2NfRI7D1+S/cuHsvsCOSxX2NjY2Mexk9IyC+hnT86fNntLESphY2NjP5DdhjXtuLc9ErQZEkcubGxs7IPYmyHrvQPdfb8wezs2Njb2c9l5QD8bD+SLa9/eBlXRI7CxsbEfyL7rmE5bxmZtyWz8HA19sbGxsQ9lt21DG+LPgv5N1IWNjY39F9h5O9EObl8xEmijpforYWNjYz+K3Y4K2pZgE2bNjvjMQitsbGzsZ7HbUe4m3NkMcVv2LwUSGxsb+zh2i9lESG1cNSuBv3xCbGxs7KPZsyM47UGcWQy0HzxgY2Njn8q+l5GPWmfx0L5FwcbGxj6b3cY0SVFpi2Jy/2oggY2NjX0Qu20M8kM5edmLSs463sLGxsY+lf3LQHQR5bR/u3ly/sGiJWJjY2M/in1NbctJ0lQMA/24zZhtKDY2NvZz2fsWItnFPL7P25586388soONjY19BHt//KUdKtwVG7V3Fj0WNjY29qPYbUloQ5zN+DYZP+TPjMYD2NjY2I9lb/5tz4Ok/UGfujJfn1TCxsbGPoh9F2PWWsyak2GQ1H43bGxs7LdntwUgWfQsumqDrdmRnXoLsLGxsR/CngVAm2M3LSk/ypO0TNjY2Ninstvh7mZw2w4kZhW4OLKDjY2N/WfYM2o+xM1LVB4qYWNjY2PnodJsYNCS2oM7RX3DxsbGfji7fXTyyv3AuA2z8iEENjY29knszaD3rlYhD4k2kRM2Njb2cex/nGTUmN+tFWIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
