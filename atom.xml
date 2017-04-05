@@ -45,11 +45,11 @@
       <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
     
     
-      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
-    
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
     
   </entry>
   
@@ -181,46 +181,6 @@
   </entry>
   
   <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T06:17:19.432Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
     <title>友盟封装第三方登录 第三方粉线</title>
     <link href="https://hui46226021.github.io/2017/03/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
     <id>https://hui46226021.github.io/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
@@ -266,79 +226,27 @@
   </entry>
   
   <entry>
-    <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
-    <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
-    <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
-    <published>2017-03-17T14:37:23.000Z</published>
-    <updated>2017-03-18T09:47:10.277Z</updated>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
+    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-03-19T06:17:19.432Z</updated>
     
-    <content type="html"><![CDATA[<p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
-<h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shform:3.2.2'</span></div></pre></td></tr></table></figure></p>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="表单对象映射"><a href="#表单对象映射" class="headerlink" title="表单对象映射"></a>表单对象映射</h2><ul>
-<li>1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍</li>
-<li><p>2.开启表单注入 FormInit.injection(this);</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      nameEdit = (EditText) findViewById(R.id.name);</div><div class="line">      phoneEdit = (EditText) findViewById(R.id.phone);</div><div class="line">      professionEdit = (EditText) findViewById(R.id.profession);</div><div class="line">      spinner = (Spinner) findViewById(R.id.spinner);</div><div class="line">      married = (CheckBox) findViewById(R.id.married);</div><div class="line">      party = (CheckBox) findViewById(R.id.party);</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * 初始化表单注入  要在 所有控件初始化成功后 调用</div><div class="line">       */</div><div class="line">      FormInit.injection(<span class="keyword">this</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>3.在 onDestroy 里 注销 表单</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注销表单</div><div class="line"> */</div><div class="line">FormInit.deleteInjection(<span class="keyword">this</span>);</div><div class="line"><span class="keyword">super</span>.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>4.通过 @FormInjection 绑定控件</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * name 对应 实体类 字段名</div><div class="line"> * message 参数为空的时候 默认提示 的字符串</div><div class="line"> * isNull  该字段是否可以为空  默认 false</div><div class="line"> */</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"name"</span>, message = <span class="string">"名字"</span>,isNull = <span class="keyword">true</span>)</div><div class="line">  EditText nameEdit;</div><div class="line">  <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line">  EditText phoneEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line">  EditText professionEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"workingLife"</span>, message = <span class="string">"工作时间"</span>)</div><div class="line">  Spinner spinner;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"married"</span>)</div><div class="line">  CheckBox married;</div></pre></td></tr></table></figure>
-</li>
-<li><p>4.调用映射方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 表单自动生成对象</div><div class="line">  */</div><div class="line"> UserModel userModel = FormUtls.formToObjectAndCheck(<span class="keyword">this</span>,UserModel.class);</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 实体对象 映射到表单 返回true 表示映射成功</div><div class="line">  */</div><div class="line"> FormUtls.objectToForm(<span class="keyword">this</span>,userModel);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h2 id="表单参数检查"><a href="#表单参数检查" class="headerlink" title="表单参数检查"></a>表单参数检查</h2><pre><code>* 1.使用 @FormCheck
-</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//type 是 验证类型枚举   默认 是自定义验证</span></div><div class="line"> <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line"> EditText phoneEdit;</div><div class="line"> <span class="meta">@FormCheck</span></div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line"> EditText professionEdit;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 通过 实现 FormCheckInterface 接口的 formCheck</div><div class="line">      * 自定定义 表单检查 默认要返回true</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@return</span></div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">formCheck</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="keyword">switch</span> (v.getId())&#123;</div><div class="line">             <span class="keyword">case</span> R.id.profession:</div><div class="line">                 <span class="keyword">if</span>(!(professionEdit.getText()+<span class="string">""</span>).contains(<span class="string">"-"</span>))&#123;</div><div class="line">                     Toast.makeText(<span class="keyword">this</span>,<span class="string">"职业格式不正确"</span>,Toast.LENGTH_SHORT).show();</div><div class="line">                     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                 &#125;</div><div class="line">                 <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 表单检查 不合法回调</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@param</span> message</div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">formCheckNullCall</span><span class="params">(View v, String message)</span> </span>&#123;</div><div class="line">         Toast.makeText(<span class="keyword">this</span>,message,Toast.LENGTH_SHORT).show();</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
-<h4 id="验证类型"><a href="#验证类型" class="headerlink" title="验证类型"></a>验证类型</h4><pre><code>CUSTOM,//自定义
-PHONE,//手机号
-EMAIL,//邮箱
-CHINESE,//中文
-IDCARD,//身份证
-ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
-AMOUNT_MONEY,//金额校验，精确到2位小数
-AMOUNT,//存数字
-URL,//Url
-PASSWORD;//密码强度 是不是6至12位字母组合
-</code></pre><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>    
-<h2 id="快速生成表单布局-ShFormLayout"><a href="#快速生成表单布局-ShFormLayout" class="headerlink" title="快速生成表单布局 ShFormLayout"></a>快速生成表单布局 ShFormLayout</h2><p>ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式</p>
-<p><img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png" alt=""></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;com.sh.zsh.code.layout.ShFormLayout</div><div class="line">  &lt;!--该布局 需要在这确定 每行的高度 --&gt;</div><div class="line">              app:less_form_row_height="50dp"</div><div class="line">             android:layout_width="match_parent"</div><div class="line">             android:layout_height="wrap_content"&gt;</div><div class="line">             &lt;TextView</div><div class="line">                 &lt;!--这里表明 这个控件 只是用于显示标题--&gt;</div><div class="line">                 app:less_form_group_titel="true"</div><div class="line">                 android:text="基本信息"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="wrap_content" /&gt;</div><div class="line">             &lt;EditText</div><div class="line">                 &lt;!--该行的标题--&gt;</div><div class="line">                 app:less_form_title="姓名"</div><div class="line">                 &lt;!--该行对应的字段名--&gt;</div><div class="line">                 app:less_form_name="name"</div><div class="line">                 &lt;!--该行是否必填--&gt;</div><div class="line">                 app:less_form_must="true"</div><div class="line">                  android:layout_height="wrap_content"</div><div class="line">                  android:layout_width="match_parent"</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">             &lt;EditText</div><div class="line">                 app:less_form_title="电话"</div><div class="line">                 &lt;!--该行的验证方式--&gt;</div><div class="line">                 app:less_form_check_type="phone"</div><div class="line">                 app:less_form_name="phone"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true"</div><div class="line">                 /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/company"</div><div class="line">                 app:less_form_title="公司"</div><div class="line">                 app:less_form_name="company"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/department"</div><div class="line">                 app:less_form_title="部门"</div><div class="line">                 app:less_form_name="department"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormTimeView</div><div class="line">                 app:less_form_title="出生日期"</div><div class="line">                 app:less_form_name="birthday"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;CheckBox</div><div class="line">                 app:less_form_title="男性："</div><div class="line">                 app:less_form_name="sex"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;LinearLayout</div><div class="line">                 app:less_form_group_top_layout="true"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="150dp"</div><div class="line">                 android:background="@color/white"</div><div class="line">                 android:orientation="horizontal"&gt;</div><div class="line">                 &lt;TextView</div><div class="line">                     android:layout_width="wrap_content"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="18dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:text="签名" /&gt;</div><div class="line"></div><div class="line">                 &lt;EditText</div><div class="line">                     android:id="@+id/sign"</div><div class="line">                     android:gravity="top"</div><div class="line">                     android:layout_width="match_parent"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="16dp"</div><div class="line">                     android:padding="5dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:background="@drawable/bg_text_factoryaudit"</div><div class="line">                     android:hint="多行输入" /&gt;</div><div class="line">             &lt;/LinearLayout&gt;</div><div class="line">         &lt;/com.sh.zsh.code.layout.ShFormLayout&gt;</div></pre></td></tr></table></figure>
-<h3 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h3><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了<br>我们来看一下  框架都提供了 哪些表单属性 供我们使用</p>
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
 <ul>
-<li>ShFormLayout  <br><br>less_form_row_height  表单每行的 高度</li>
-<li>内部控件<br><br>less_form_title   名称<br><br>less_form_title_image  设置名称左侧的icon<br><br>less_form_can_click    该行是否显示 右侧箭头<br><br>less_form_must         该字段是否必填<br><br>less_form_name        该字段对应实体类的字段名称<br><br>less_form_is_null     该字段是否可以为空<br><br>less_form_bottomLine  该行是否显示底部横线<br>less_form_check_type  检查类型<br>less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）<br>less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）</li>
-<li>FormTimeView  时间控件<br><br>less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br></li>
-<li>FormSpinner  选择器  用法参考Demo<br><br>less_form_spi_sel 默认选中第一项</li>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
 </ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShFormUtils" target="_blank" rel="external">https://github.com/hui46226021/ShFormUtils</a></p>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架&lt;br&gt;
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
     
     </summary>
     
@@ -346,20 +254,14 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
       <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
     
-      <category term="View" scheme="https://hui46226021.github.io/categories/Android/JAVA/View/"/>
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
     
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="Form" scheme="https://hui46226021.github.io/tags/Form/"/>
-    
-      <category term="框架" scheme="https://hui46226021.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
-    
-      <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
-    
-      <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
@@ -485,6 +387,104 @@ PASSWORD;//密码强度 是不是6至12位字母组合
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
+    <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
+    <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
+    <published>2017-03-17T14:37:23.000Z</published>
+    <updated>2017-03-18T09:47:10.277Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
+<h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shform:3.2.2'</span></div></pre></td></tr></table></figure></p>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><h2 id="表单对象映射"><a href="#表单对象映射" class="headerlink" title="表单对象映射"></a>表单对象映射</h2><ul>
+<li>1.页面实现 FormCheckInterface 接口   改接口 是页面表单检查的回调 下面有介绍</li>
+<li><p>2.开启表单注入 FormInit.injection(this);</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      nameEdit = (EditText) findViewById(R.id.name);</div><div class="line">      phoneEdit = (EditText) findViewById(R.id.phone);</div><div class="line">      professionEdit = (EditText) findViewById(R.id.profession);</div><div class="line">      spinner = (Spinner) findViewById(R.id.spinner);</div><div class="line">      married = (CheckBox) findViewById(R.id.married);</div><div class="line">      party = (CheckBox) findViewById(R.id.party);</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * 初始化表单注入  要在 所有控件初始化成功后 调用</div><div class="line">       */</div><div class="line">      FormInit.injection(<span class="keyword">this</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>3.在 onDestroy 里 注销 表单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 注销表单</div><div class="line"> */</div><div class="line">FormInit.deleteInjection(<span class="keyword">this</span>);</div><div class="line"><span class="keyword">super</span>.onDestroy();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.通过 @FormInjection 绑定控件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * name 对应 实体类 字段名</div><div class="line"> * message 参数为空的时候 默认提示 的字符串</div><div class="line"> * isNull  该字段是否可以为空  默认 false</div><div class="line"> */</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"name"</span>, message = <span class="string">"名字"</span>,isNull = <span class="keyword">true</span>)</div><div class="line">  EditText nameEdit;</div><div class="line">  <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line">  EditText phoneEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line">  EditText professionEdit;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"workingLife"</span>, message = <span class="string">"工作时间"</span>)</div><div class="line">  Spinner spinner;</div><div class="line">  <span class="meta">@FormInjection</span>(name = <span class="string">"married"</span>)</div><div class="line">  CheckBox married;</div></pre></td></tr></table></figure>
+</li>
+<li><p>4.调用映射方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 表单自动生成对象</div><div class="line">  */</div><div class="line"> UserModel userModel = FormUtls.formToObjectAndCheck(<span class="keyword">this</span>,UserModel.class);</div><div class="line"><span class="comment">/**</span></div><div class="line">  * 实体对象 映射到表单 返回true 表示映射成功</div><div class="line">  */</div><div class="line"> FormUtls.objectToForm(<span class="keyword">this</span>,userModel);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/1.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="表单参数检查"><a href="#表单参数检查" class="headerlink" title="表单参数检查"></a>表单参数检查</h2><pre><code>* 1.使用 @FormCheck
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//type 是 验证类型枚举   默认 是自定义验证</span></div><div class="line"> <span class="meta">@FormCheck</span>(type = CheckType.Phone)</div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"phone"</span>, message = <span class="string">"电话"</span>)</div><div class="line"> EditText phoneEdit;</div><div class="line"> <span class="meta">@FormCheck</span></div><div class="line"> <span class="meta">@FormInjection</span>(name = <span class="string">"profession"</span>, message = <span class="string">"公司-职业"</span>)</div><div class="line"> EditText professionEdit;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 通过 实现 FormCheckInterface 接口的 formCheck</div><div class="line">      * 自定定义 表单检查 默认要返回true</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@return</span></div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">formCheck</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">         <span class="keyword">switch</span> (v.getId())&#123;</div><div class="line">             <span class="keyword">case</span> R.id.profession:</div><div class="line">                 <span class="keyword">if</span>(!(professionEdit.getText()+<span class="string">""</span>).contains(<span class="string">"-"</span>))&#123;</div><div class="line">                     Toast.makeText(<span class="keyword">this</span>,<span class="string">"职业格式不正确"</span>,Toast.LENGTH_SHORT).show();</div><div class="line">                     <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                 &#125;</div><div class="line">                 <span class="keyword">break</span>;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="comment">/**</span></div><div class="line">      * 表单检查 不合法回调</div><div class="line">      * <span class="doctag">@param</span> v</div><div class="line">      * <span class="doctag">@param</span> message</div><div class="line">      */</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">formCheckNullCall</span><span class="params">(View v, String message)</span> </span>&#123;</div><div class="line">         Toast.makeText(<span class="keyword">this</span>,message,Toast.LENGTH_SHORT).show();</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+<h4 id="验证类型"><a href="#验证类型" class="headerlink" title="验证类型"></a>验证类型</h4><pre><code>CUSTOM,//自定义
+PHONE,//手机号
+EMAIL,//邮箱
+CHINESE,//中文
+IDCARD,//身份证
+ISDATA,//“yyyy-mm-dd“ 格式的日期校验，已考虑平闰年
+AMOUNT_MONEY,//金额校验，精确到2位小数
+AMOUNT,//存数字
+URL,//Url
+PASSWORD;//密码强度 是不是6至12位字母组合
+</code></pre><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/2.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>    
+<h2 id="快速生成表单布局-ShFormLayout"><a href="#快速生成表单布局-ShFormLayout" class="headerlink" title="快速生成表单布局 ShFormLayout"></a>快速生成表单布局 ShFormLayout</h2><p>ShFormLayout 可以在使用 系统控件的基础上 实现快速生成表单布局 样式</p>
+<p><img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/3.png" alt=""></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">&lt;com.sh.zsh.code.layout.ShFormLayout</div><div class="line">  &lt;!--该布局 需要在这确定 每行的高度 --&gt;</div><div class="line">              app:less_form_row_height="50dp"</div><div class="line">             android:layout_width="match_parent"</div><div class="line">             android:layout_height="wrap_content"&gt;</div><div class="line">             &lt;TextView</div><div class="line">                 &lt;!--这里表明 这个控件 只是用于显示标题--&gt;</div><div class="line">                 app:less_form_group_titel="true"</div><div class="line">                 android:text="基本信息"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="wrap_content" /&gt;</div><div class="line">             &lt;EditText</div><div class="line">                 &lt;!--该行的标题--&gt;</div><div class="line">                 app:less_form_title="姓名"</div><div class="line">                 &lt;!--该行对应的字段名--&gt;</div><div class="line">                 app:less_form_name="name"</div><div class="line">                 &lt;!--该行是否必填--&gt;</div><div class="line">                 app:less_form_must="true"</div><div class="line">                  android:layout_height="wrap_content"</div><div class="line">                  android:layout_width="match_parent"</div><div class="line">                /&gt;</div><div class="line"></div><div class="line">             &lt;EditText</div><div class="line">                 app:less_form_title="电话"</div><div class="line">                 &lt;!--该行的验证方式--&gt;</div><div class="line">                 app:less_form_check_type="phone"</div><div class="line">                 app:less_form_name="phone"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true"</div><div class="line">                 /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/company"</div><div class="line">                 app:less_form_title="公司"</div><div class="line">                 app:less_form_name="company"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormSpinner</div><div class="line">                 android:id="@+id/department"</div><div class="line">                 app:less_form_title="部门"</div><div class="line">                 app:less_form_name="department"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;com.sh.zsh.code.layout.view.FormTimeView</div><div class="line">                 app:less_form_title="出生日期"</div><div class="line">                 app:less_form_name="birthday"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;CheckBox</div><div class="line">                 app:less_form_title="男性："</div><div class="line">                 app:less_form_name="sex"</div><div class="line">                 android:layout_height="wrap_content"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 app:less_form_must="true" /&gt;</div><div class="line"></div><div class="line">             &lt;LinearLayout</div><div class="line">                 app:less_form_group_top_layout="true"</div><div class="line">                 android:layout_width="match_parent"</div><div class="line">                 android:layout_height="150dp"</div><div class="line">                 android:background="@color/white"</div><div class="line">                 android:orientation="horizontal"&gt;</div><div class="line">                 &lt;TextView</div><div class="line">                     android:layout_width="wrap_content"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="18dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:text="签名" /&gt;</div><div class="line"></div><div class="line">                 &lt;EditText</div><div class="line">                     android:id="@+id/sign"</div><div class="line">                     android:gravity="top"</div><div class="line">                     android:layout_width="match_parent"</div><div class="line">                     android:layout_height="match_parent"</div><div class="line">                     android:layout_margin="16dp"</div><div class="line">                     android:padding="5dp"</div><div class="line">                     android:textSize="@dimen/form_text_size"</div><div class="line">                     android:background="@drawable/bg_text_factoryaudit"</div><div class="line">                     android:hint="多行输入" /&gt;</div><div class="line">             &lt;/LinearLayout&gt;</div><div class="line">         &lt;/com.sh.zsh.code.layout.ShFormLayout&gt;</div></pre></td></tr></table></figure>
+<h3 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShFormUtils/master/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>快看，你不需要去关心 每一行的样式，高度 只需要确定这一行是 TextView  或是EditText 等控件  就可以了<br>我们来看一下  框架都提供了 哪些表单属性 供我们使用</p>
+<ul>
+<li>ShFormLayout  <br><br>less_form_row_height  表单每行的 高度</li>
+<li>内部控件<br><br>less_form_title   名称<br><br>less_form_title_image  设置名称左侧的icon<br><br>less_form_can_click    该行是否显示 右侧箭头<br><br>less_form_must         该字段是否必填<br><br>less_form_name        该字段对应实体类的字段名称<br><br>less_form_is_null     该字段是否可以为空<br><br>less_form_bottomLine  该行是否显示底部横线<br>less_form_check_type  检查类型<br>less_form_group_titel 该组表单的标题 （上面的例子里 基本信息 那一行）<br>less_form_group_top_layout  改控件不 参与表单映射 和布局生成（上面的例子里签名 那个布局）</li>
+<li>FormTimeView  时间控件<br><br>less_time_is_time  时间控件的格式（all，year_month_day，hours_mins，month_day_hour_min，year_month）<br></li>
+<li>FormSpinner  选择器  用法参考Demo<br><br>less_form_spi_sel 默认选中第一项</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShFormUtils" target="_blank" rel="external">https://github.com/hui46226021/ShFormUtils</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="View" scheme="https://hui46226021.github.io/categories/Android/JAVA/View/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="Form" scheme="https://hui46226021.github.io/tags/Form/"/>
+    
+      <category term="框架" scheme="https://hui46226021.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+    
+      <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
+    
+      <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
     
   </entry>
   
@@ -939,140 +939,15 @@ PASSWORD;//密码强度 是不是6至12位字母组合
       <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
       <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
     
       <category term="微信" scheme="https://hui46226021.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
     
-      <category term="多图选择" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android分包MultiDex原理详解</title>
-    <link href="https://hui46226021.github.io/2016/03/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:51:19.546Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
-<h1 id="MultiDex的产生背景"><a href="#MultiDex的产生背景" class="headerlink" title="MultiDex的产生背景"></a>MultiDex的产生背景</h1><p>当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
-<p>但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。</p>
-<p>为了解决方法数超限的问题，需要将该dex文件拆成两个或多个，为此谷歌官方推出了multidex兼容包，配合AndroidStudio实现了一个APK包含多个dex的功能。</p>
-<h2 id="MultiDex的简要原理"><a href="#MultiDex的简要原理" class="headerlink" title="MultiDex的简要原理"></a>MultiDex的简要原理</h2><p>我们以APK中有两个dex文件为例，第二个dex文件为classes2.dex。</p>
-<ul>
-<li><p>兼容包在Applicaion实例化之后，会检查系统版本是否支持 multidex，classes2.dex是否需要安装。</p>
-</li>
-<li><p>如果需要安装则会从APK中解压出classes2.dex并将其拷贝到应用的沙盒目录下。</p>
-</li>
-<li><p>通过反射将classes2.dex注入到当前的classloader中。</p>
-</li>
-</ul>
-<p>下面引入一下官方的文档。</p>
-<p><a href="https://developer.android.com/tools/building/multidex.html#about" target="_blank" rel="external">https://developer.android.com/tools/building/multidex.html#about </a><br>笔者，针对官方文档的翻译如下：</p>
-<p>构建超过65K方法的App</p>
-<p>随着Android设备的慢慢发展，App的大小会变得越来越大。当我们在开发App的时候由于报的大小和引用库的原因，我们在编译我们项目的时候通常会遇到下面一个错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Conversion to Dalvik format failed: Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></div></pre></td></tr></table></figure></p>
-<p>当然，也有一些系统设备会出现以下log信息，不过反馈的是同一个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trouble writing output:Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.You may <span class="keyword">try</span> using --multi-dex option.</div></pre></td></tr></table></figure></p>
-<p>这两个错误条件显示一个共同的数字：65536。这个数字，它表示的是你在一个dex包中的函数方法超过了65535个。</p>
-<p>如果你已经构建了一个Android App时，并收到了这个错误，那么恭喜你，你有很多代码！</p>
-<p>下面我们就具体说说，如何解决这个问题。</p>
-<h2 id="关于65K方法限制"><a href="#关于65K方法限制" class="headerlink" title="关于65K方法限制"></a>关于65K方法限制</h2><p>我们知道Android中的可执行伟剑都存储在dex文件中，其中包含已编译的代码来运行你的应用程序。Dalvik虚拟机对可执行dex文件的规格是有方法限制的，即一个单一的dex文件的方法总数最多为65536。</p>
-<p>其中包括：</p>
-<ul>
-<li><p>引用的Android Framework方法</p>
-</li>
-<li><p>library的方法</p>
-</li>
-<li><p>我们自己书写代码的方法。</p>
-</li>
-</ul>
-<p>为了突破这个方法数的限制，我们就提出了一个方案——生成多个dex文件。这个多个dex文件的方案，我们又称为multidex方案配置。</p>
-<h3 id="Multidex支持Android-5-0之前的版本"><a href="#Multidex支持Android-5-0之前的版本" class="headerlink" title="Multidex支持Android 5.0之前的版本"></a>Multidex支持Android 5.0之前的版本</h3><pre><code>Android5.0版本的平台之前，Android使用的是Dalvik Runtime执行的程序代码。默认情况下，限制应用到一个单一的classes.dex。
-</code></pre><p>Dalvik字节码文件每APK。为了绕过这个限制，你可以使用multidex支持库，成为你的应用程序的主要部分和DEX文件进行管理，获得额外的dex文件，它们包含的代码。</p>
-<h3 id="Multidex支持Android-5-0及更高版本"><a href="#Multidex支持Android-5-0及更高版本" class="headerlink" title="Multidex支持Android 5.0及更高版本"></a>Multidex支持Android 5.0及更高版本</h3><pre><code>Android 5.0和更高的Runtime 如art，本身就支持从应用的APK文件加载多个DEX文件。art支持预编译的应用程序在安装时扫描类（..）。Dex文件编译成一个单一的Android设备上执行.oat文件。
-</code></pre><h2 id="避免65K限制"><a href="#避免65K限制" class="headerlink" title="避免65K限制"></a>避免65K限制</h2><p>当你确定使用multidex的分包策略的时候，请你先确定自己的代码中都是优秀的。你还需要做以下几步：</p>
-<ul>
-<li><p>去掉一些未使用的import和library</p>
-</li>
-<li><p>使用ProGuard去掉一些未使用的代码</p>
-</li>
-</ul>
-<h2 id="用Gradle配置使用Multidex"><a href="#用Gradle配置使用Multidex" class="headerlink" title="用Gradle配置使用Multidex"></a>用Gradle配置使用Multidex</h2><p>Android 的 Gradle插件在 Android Build Tool 21.1开始就支持使用multidex了。</p>
-<p>设置你的应用程序开发项目中使用multidex配置，要求你做出一些修改您的应用程序开发项目。：</p>
-<ul>
-<li><p>修改Gradle的配置，支持multidex</p>
-</li>
-<li><p>修改你的manifest。让其支持multidexapplication类</p>
-</li>
-</ul>
-<p>修改Gradle的build如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">21</span></div><div class="line">    buildToolsVersion <span class="string">"21.1.0"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">21</span></div><div class="line">        ...</div><div class="line"></div><div class="line">        <span class="comment">// Enabling multidex support.</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
-<p>Tips: 你可以在Gradle配置文件中的 multiDexEnabled 在 defaultConfig、<br>buildType、productFlavor选项设置。</p>
-<p>在manifest文件中，添加MultidexApplication Class的引用，如下所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"com.example.android.multidex.myapplication"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.multidex.MultiDexApplication"</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当然，如果你重写了 Application，就对自定义Application的继承方式做一个修改。</p>
-<h2 id="Multidex的方式的局限性"><a href="#Multidex的方式的局限性" class="headerlink" title="Multidex的方式的局限性"></a>Multidex的方式的局限性</h2><p>虽然我们开起来multidex是一个极好的东西，但是multidex还是存在自己的局限性，我们在开发测试之前要清楚局限性是什么：</p>
-<ul>
-<li><p>如果二DEX文件太大，安装分割dex文件是一个复杂的过程，可能会导致应用程序无响应（ANR）的错误。在这种情况下，你应该尽量的减小dex文件的大小和删除无用的逻辑，而不是完全依赖于multidex。</p>
-</li>
-<li><p>在Android 4.0设备（API Level 14）之前，由于Dalvik linearalloc bug（问题22586），multidex很可能是无法运行的。如果希望运行在Level 14之前的Android系统版本，请先确保完整的测试和使用。</p>
-</li>
-<li><p>应用程序使用了multiedex配置的，会造成使用比较大的内存。当然，可能还会引起dalvik虚拟机的崩溃(issue 78035)。</p>
-</li>
-<li><p>对于应用程序比较复杂的，存在较多的library的项目。multidex可能会造成不同依赖项目间的dex文件函数相互调用，找不到方法。</p>
-</li>
-</ul>
-<h2 id="优化multidex开发和构建"><a href="#优化multidex开发和构建" class="headerlink" title="优化multidex开发和构建"></a>优化multidex开发和构建</h2><p>一个multidex的配置，对系统apk的构建、签名、打包复杂性大大的增加。这就意味着，你每一次的构建过程都是相当耗时的。</p>
-<p>为了加快我们的开发速度，加快构建的过程，我们可以在Gradle productFlavors新建出来一个 development flavor 和 production flavor 来满足我们不同构建需求。</p>
-<p>下面是一个列子演示我们如何设置这些flavors在Gradle build文件中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        <span class="comment">// Define separate dev and prod product flavors.</span></div><div class="line">        dev &#123;</div><div class="line">            <span class="comment">// dev utilizes minSDKVersion = 21 to allow the Android gradle plugin</span></div><div class="line">            <span class="comment">// to pre-dex each module and produce an APK that can be tested on</span></div><div class="line">            <span class="comment">// Android Lollipop without time consuming dex merging processes.</span></div><div class="line">            minSdkVersion <span class="number">21</span></div><div class="line">        &#125;</div><div class="line">        prod &#123;</div><div class="line">            <span class="comment">// The actual minSdkVersion for the application.</span></div><div class="line">            minSdkVersion <span class="number">14</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">          ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            <span class="function">runProguard <span class="keyword">true</span></span></div><div class="line">            proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(‘proguard-android.txt‘)</span>,</div><div class="line">                                                 ‘proguard-rules.pro‘</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
-<p>在你完成了伤处的配置修改之后，你配置productFlavor 和 buildType来使用 ，devDebug 变种app。使用这些变种app，可以设置proguard disable、multidex enable方便我们测试。</p>
-<p>这些配置需要针对Android Gradle插件做如下操作：</p>
-<ul>
-<li><p>在分包前，编译应用程序中的每一个module包括依赖项目，这个步骤称为 pre-dexing。</p>
-</li>
-<li><p>include每一个dex文件</p>
-</li>
-<li><p>最重要的是，对于主dex文件，不会做切分。以保证计算速度。</p>
-</li>
-</ul>
-<p>这样设置既能够保证我们的最终报是一个使用了multidex模式的，而又不影响我们平时开发的测试效率。</p>
-<h2 id="在Android-Studio中使用变种App"><a href="#在Android-Studio中使用变种App" class="headerlink" title="在Android Studio中使用变种App"></a>在Android Studio中使用变种App</h2><p>使用multidex工具构建变种App是非常方便的。在Android Studio允许我们选择这种变种构建方式的接口。</p>
-<p>使用Android Studio构建 “devDebug”构建变种app需要完成两步：</p>
-<ul>
-<li><p>打开变种编辑窗口，选择favorites选项。</p>
-</li>
-<li><p>点击编译不同的变种，如下图所示 </p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-</li>
-</ul>
-<p>原文地址：<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1031299.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
-    
-      <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
+      <category term="多图选择" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
     
   </entry>
   
@@ -1235,6 +1110,131 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="热补丁修复" scheme="https://hui46226021.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
     
       <category term="andfix" scheme="https://hui46226021.github.io/tags/andfix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android分包MultiDex原理详解</title>
+    <link href="https://hui46226021.github.io/2016/03/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/</id>
+    <published>2016-03-17T14:37:23.000Z</published>
+    <updated>2017-03-19T04:51:19.546Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
+<h1 id="MultiDex的产生背景"><a href="#MultiDex的产生背景" class="headerlink" title="MultiDex的产生背景"></a>MultiDex的产生背景</h1><p>当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
+<p>但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。</p>
+<p>为了解决方法数超限的问题，需要将该dex文件拆成两个或多个，为此谷歌官方推出了multidex兼容包，配合AndroidStudio实现了一个APK包含多个dex的功能。</p>
+<h2 id="MultiDex的简要原理"><a href="#MultiDex的简要原理" class="headerlink" title="MultiDex的简要原理"></a>MultiDex的简要原理</h2><p>我们以APK中有两个dex文件为例，第二个dex文件为classes2.dex。</p>
+<ul>
+<li><p>兼容包在Applicaion实例化之后，会检查系统版本是否支持 multidex，classes2.dex是否需要安装。</p>
+</li>
+<li><p>如果需要安装则会从APK中解压出classes2.dex并将其拷贝到应用的沙盒目录下。</p>
+</li>
+<li><p>通过反射将classes2.dex注入到当前的classloader中。</p>
+</li>
+</ul>
+<p>下面引入一下官方的文档。</p>
+<p><a href="https://developer.android.com/tools/building/multidex.html#about" target="_blank" rel="external">https://developer.android.com/tools/building/multidex.html#about </a><br>笔者，针对官方文档的翻译如下：</p>
+<p>构建超过65K方法的App</p>
+<p>随着Android设备的慢慢发展，App的大小会变得越来越大。当我们在开发App的时候由于报的大小和引用库的原因，我们在编译我们项目的时候通常会遇到下面一个错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Conversion to Dalvik format failed: Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></div></pre></td></tr></table></figure></p>
+<p>当然，也有一些系统设备会出现以下log信息，不过反馈的是同一个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trouble writing output:Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.You may <span class="keyword">try</span> using --multi-dex option.</div></pre></td></tr></table></figure></p>
+<p>这两个错误条件显示一个共同的数字：65536。这个数字，它表示的是你在一个dex包中的函数方法超过了65535个。</p>
+<p>如果你已经构建了一个Android App时，并收到了这个错误，那么恭喜你，你有很多代码！</p>
+<p>下面我们就具体说说，如何解决这个问题。</p>
+<h2 id="关于65K方法限制"><a href="#关于65K方法限制" class="headerlink" title="关于65K方法限制"></a>关于65K方法限制</h2><p>我们知道Android中的可执行伟剑都存储在dex文件中，其中包含已编译的代码来运行你的应用程序。Dalvik虚拟机对可执行dex文件的规格是有方法限制的，即一个单一的dex文件的方法总数最多为65536。</p>
+<p>其中包括：</p>
+<ul>
+<li><p>引用的Android Framework方法</p>
+</li>
+<li><p>library的方法</p>
+</li>
+<li><p>我们自己书写代码的方法。</p>
+</li>
+</ul>
+<p>为了突破这个方法数的限制，我们就提出了一个方案——生成多个dex文件。这个多个dex文件的方案，我们又称为multidex方案配置。</p>
+<h3 id="Multidex支持Android-5-0之前的版本"><a href="#Multidex支持Android-5-0之前的版本" class="headerlink" title="Multidex支持Android 5.0之前的版本"></a>Multidex支持Android 5.0之前的版本</h3><pre><code>Android5.0版本的平台之前，Android使用的是Dalvik Runtime执行的程序代码。默认情况下，限制应用到一个单一的classes.dex。
+</code></pre><p>Dalvik字节码文件每APK。为了绕过这个限制，你可以使用multidex支持库，成为你的应用程序的主要部分和DEX文件进行管理，获得额外的dex文件，它们包含的代码。</p>
+<h3 id="Multidex支持Android-5-0及更高版本"><a href="#Multidex支持Android-5-0及更高版本" class="headerlink" title="Multidex支持Android 5.0及更高版本"></a>Multidex支持Android 5.0及更高版本</h3><pre><code>Android 5.0和更高的Runtime 如art，本身就支持从应用的APK文件加载多个DEX文件。art支持预编译的应用程序在安装时扫描类（..）。Dex文件编译成一个单一的Android设备上执行.oat文件。
+</code></pre><h2 id="避免65K限制"><a href="#避免65K限制" class="headerlink" title="避免65K限制"></a>避免65K限制</h2><p>当你确定使用multidex的分包策略的时候，请你先确定自己的代码中都是优秀的。你还需要做以下几步：</p>
+<ul>
+<li><p>去掉一些未使用的import和library</p>
+</li>
+<li><p>使用ProGuard去掉一些未使用的代码</p>
+</li>
+</ul>
+<h2 id="用Gradle配置使用Multidex"><a href="#用Gradle配置使用Multidex" class="headerlink" title="用Gradle配置使用Multidex"></a>用Gradle配置使用Multidex</h2><p>Android 的 Gradle插件在 Android Build Tool 21.1开始就支持使用multidex了。</p>
+<p>设置你的应用程序开发项目中使用multidex配置，要求你做出一些修改您的应用程序开发项目。：</p>
+<ul>
+<li><p>修改Gradle的配置，支持multidex</p>
+</li>
+<li><p>修改你的manifest。让其支持multidexapplication类</p>
+</li>
+</ul>
+<p>修改Gradle的build如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">21</span></div><div class="line">    buildToolsVersion <span class="string">"21.1.0"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">21</span></div><div class="line">        ...</div><div class="line"></div><div class="line">        <span class="comment">// Enabling multidex support.</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>Tips: 你可以在Gradle配置文件中的 multiDexEnabled 在 defaultConfig、<br>buildType、productFlavor选项设置。</p>
+<p>在manifest文件中，添加MultidexApplication Class的引用，如下所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"com.example.android.multidex.myapplication"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.multidex.MultiDexApplication"</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当然，如果你重写了 Application，就对自定义Application的继承方式做一个修改。</p>
+<h2 id="Multidex的方式的局限性"><a href="#Multidex的方式的局限性" class="headerlink" title="Multidex的方式的局限性"></a>Multidex的方式的局限性</h2><p>虽然我们开起来multidex是一个极好的东西，但是multidex还是存在自己的局限性，我们在开发测试之前要清楚局限性是什么：</p>
+<ul>
+<li><p>如果二DEX文件太大，安装分割dex文件是一个复杂的过程，可能会导致应用程序无响应（ANR）的错误。在这种情况下，你应该尽量的减小dex文件的大小和删除无用的逻辑，而不是完全依赖于multidex。</p>
+</li>
+<li><p>在Android 4.0设备（API Level 14）之前，由于Dalvik linearalloc bug（问题22586），multidex很可能是无法运行的。如果希望运行在Level 14之前的Android系统版本，请先确保完整的测试和使用。</p>
+</li>
+<li><p>应用程序使用了multiedex配置的，会造成使用比较大的内存。当然，可能还会引起dalvik虚拟机的崩溃(issue 78035)。</p>
+</li>
+<li><p>对于应用程序比较复杂的，存在较多的library的项目。multidex可能会造成不同依赖项目间的dex文件函数相互调用，找不到方法。</p>
+</li>
+</ul>
+<h2 id="优化multidex开发和构建"><a href="#优化multidex开发和构建" class="headerlink" title="优化multidex开发和构建"></a>优化multidex开发和构建</h2><p>一个multidex的配置，对系统apk的构建、签名、打包复杂性大大的增加。这就意味着，你每一次的构建过程都是相当耗时的。</p>
+<p>为了加快我们的开发速度，加快构建的过程，我们可以在Gradle productFlavors新建出来一个 development flavor 和 production flavor 来满足我们不同构建需求。</p>
+<p>下面是一个列子演示我们如何设置这些flavors在Gradle build文件中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        <span class="comment">// Define separate dev and prod product flavors.</span></div><div class="line">        dev &#123;</div><div class="line">            <span class="comment">// dev utilizes minSDKVersion = 21 to allow the Android gradle plugin</span></div><div class="line">            <span class="comment">// to pre-dex each module and produce an APK that can be tested on</span></div><div class="line">            <span class="comment">// Android Lollipop without time consuming dex merging processes.</span></div><div class="line">            minSdkVersion <span class="number">21</span></div><div class="line">        &#125;</div><div class="line">        prod &#123;</div><div class="line">            <span class="comment">// The actual minSdkVersion for the application.</span></div><div class="line">            minSdkVersion <span class="number">14</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">          ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            <span class="function">runProguard <span class="keyword">true</span></span></div><div class="line">            proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(‘proguard-android.txt‘)</span>,</div><div class="line">                                                 ‘proguard-rules.pro‘</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>在你完成了伤处的配置修改之后，你配置productFlavor 和 buildType来使用 ，devDebug 变种app。使用这些变种app，可以设置proguard disable、multidex enable方便我们测试。</p>
+<p>这些配置需要针对Android Gradle插件做如下操作：</p>
+<ul>
+<li><p>在分包前，编译应用程序中的每一个module包括依赖项目，这个步骤称为 pre-dexing。</p>
+</li>
+<li><p>include每一个dex文件</p>
+</li>
+<li><p>最重要的是，对于主dex文件，不会做切分。以保证计算速度。</p>
+</li>
+</ul>
+<p>这样设置既能够保证我们的最终报是一个使用了multidex模式的，而又不影响我们平时开发的测试效率。</p>
+<h2 id="在Android-Studio中使用变种App"><a href="#在Android-Studio中使用变种App" class="headerlink" title="在Android Studio中使用变种App"></a>在Android Studio中使用变种App</h2><p>使用multidex工具构建变种App是非常方便的。在Android Studio允许我们选择这种变种构建方式的接口。</p>
+<p>使用Android Studio构建 “devDebug”构建变种app需要完成两步：</p>
+<ul>
+<li><p>打开变种编辑窗口，选择favorites选项。</p>
+</li>
+<li><p>点击编译不同的变种，如下图所示 </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p>原文地址：<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1031299.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
+    
+      <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
     
   </entry>
   
