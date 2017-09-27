@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-03-20T14:48:43.002Z</updated>
+  <updated>2017-09-27T09:21:21.839Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android系统启动流程</title>
+    <link href="https://hui46226021.github.io/2017/05/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+    <id>https://hui46226021.github.io/2017/05/21/Android系统启动流程/</id>
+    <published>2017-05-21T14:37:23.000Z</published>
+    <updated>2017-09-27T09:21:21.839Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:梳理一下android系统的启动流程，从init进程 到java层面<br><a id="more"></a></p>
+<p>init是一个进程，做完android系统启动的第一个进程，同时也是linux内核启动的第一个进程，init进程在启动过程中起到了重要的责任。</p>
+<h2 id="init进程的工作"><a href="#init进程的工作" class="headerlink" title="init进程的工作"></a>init进程的工作</h2><ul>
+<li>1.解析配置文件<br>  在init进程中会解析两个配置文件，一个是init.rc, 另一个是 与硬件平台相关的 配置</li>
+<li>2.解析Service</li>
+<li>3.启动zygote</li>
+</ul>
+<h2 id="关于-zygote"><a href="#关于-zygote" class="headerlink" title="关于 zygote"></a>关于 zygote</h2><p>zygote本身是个Native程序。原名app_process  ,该名字 在Android.mk中指定，运行在 该进程又将自己的 名字改成zygote，<br>zygote 启动AppRuntime.<br>在AppRuntime 中主要完成了3步</p>
+<ul>
+<li>1.创建虚拟机 startVm</li>
+<li>2.注册JNI函数 startReg</li>
+<li>3.调用com.android.internal.os.Zygotelnit的main函数，正式让系统进入了java语言的世界</li>
+</ul>
+<h2 id="在Zygotelnit-的main函数中"><a href="#在Zygotelnit-的main函数中" class="headerlink" title="在Zygotelnit 的main函数中"></a>在Zygotelnit 的main函数中</h2><ul>
+<li>1.建立IPC通信服务端 </li>
+<li>2.调用registerZygoteSocket ,通过这个函数他可以相应子孙后代的请求，预加载类和资源（预加载相当多的类 1000多个 想想 android启动为啥慢）</li>
+<li>3.启动system_server  分裂出一个子进程（承担一部分责任，建立与Binder的链接，调用init1 和inti2来启动一些系统服务）</li>
+<li>4.zygote完成创世纪调用下runSelectLoopMode 便睡了</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:梳理一下android系统的启动流程，从init进程 到java层面&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="Linux" scheme="https://hui46226021.github.io/categories/Android/JAVA/Linux/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/tags/Android/"/>
+    
+      <category term="系统" scheme="https://hui46226021.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>Android 通过gardle限制引入so库 版本</title>
@@ -231,6 +280,86 @@
     <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
     <published>2017-03-18T13:37:23.000Z</published>
     <updated>2017-03-19T06:17:19.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2017/03/18/Android%20JSON%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7ShJsonUtils/"/>
+    <id>https://hui46226021.github.io/2017/03/18/Android JSON解析工具ShJsonUtils/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-09-27T07:00:30.817Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2017/03/18/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
+    <id>https://hui46226021.github.io/2017/03/18/Android 仿微信 相册多图选择器 - 副本/</id>
+    <published>2017-03-18T13:37:23.000Z</published>
+    <updated>2017-09-27T07:00:31.571Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
 <h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -952,168 +1081,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
   </entry>
   
   <entry>
-    <title>windowIsTranslucent 和windowAnimationStyle冲突</title>
-    <link href="https://hui46226021.github.io/2016/03/17/windowIsTranslucent%20%E5%92%8CwindowAnimationStyle%E5%86%B2%E7%AA%81/"/>
-    <id>https://hui46226021.github.io/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:45:55.636Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
-<p>今天在写 android仿IOS 侧滑销毁的时候   需要把activity的背景设置成透明 在滑出的时候漏出 栈下面一层的activity  在AppTheme里面 设置了windowIsTranslucent 属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>这里之前设置过  activity 切换动画<br>接下来 问题来了 </p>
-<p>设置windowIsTranslucent  后android:windowAnimationStyle 失效了，不好使了</p>
-<p>差了写资料 已解决 再次记录下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyActivitySiwtchAnimation"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Animation.Translucent"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="comment">&lt;!--创建效果--&gt;</span>  </div><div class="line"><span class="comment">&lt;!--&lt;item name="@android:activityOpenEnterAnimation"&gt;@anim/out_from_right&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个被覆盖效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityOpenExitAnimation"&gt;@anim/out_middle&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="comment">&lt;!--&amp;lt;!&amp;ndash;推出效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseExitAnimation"&gt;@anim/out_toleft&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个还原效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseEnterAnimation"&gt;@anim/out_middle2&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>1.让 android:windowAnimationStyle  继承  @android :style/Animation.Translucent<br>此方法 在退出actvity时候动画有效  创建的时候无效</p>
-<p>2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>此方法有效。<br>不过本人是坑爹的锤子手机 在activity切换的时候 自带 一个由下到上的动画  目前的状态是 创建activity是重屏幕右下角出现 ，在其他手机上 还可以</p>
-<h2 id="方法二：绝对完美解决"><a href="#方法二：绝对完美解决" class="headerlink" title="方法二：绝对完美解决"></a>方法二：绝对完美解决</h2><p>取消<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>改在 activity 和 fragment的基类里 重写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 重写 activity切换方法 消除系统自带动画</div><div class="line">     * <span class="doctag">@param</span> intent</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivity(intent);</div><div class="line"></div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.finish();</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode, @Nullable Bundle options)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode, options);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>实现 切换动画 </p>
-<p>这里收集了一些系统动画</p>
-<p>//实现淡入浅出的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);</div></pre></td></tr></table></figure></p>
-<p>// 由左向右滑入的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="windowIsTranslucent" scheme="https://hui46226021.github.io/tags/windowIsTranslucent/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>andfix 增量升级更新 热补丁修复</title>
-    <link href="https://hui46226021.github.io/2016/03/17/andfix/"/>
-    <id>https://hui46226021.github.io/2016/03/17/andfix/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T03:15:34.747Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵<br><a id="more"></a></p>
-<h3 id="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"><a href="#搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）" class="headerlink" title="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"></a>搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）</h3><p>1.dexposed     github <a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
-<p>2.andfix   github <a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">https://github.com/alibaba/AndFix</a></p>
-<p>3.bsdiff  <a href="http://blog.csdn.net/lazyer_dog/article/details/47173013" target="_blank" rel="external">http://blog.csdn.net/lazyer_dog/article/details/47173013</a></p>
-<p>dexposed和andfix是alibaba的开源项目，都是apk增量更新的实现框架，目前dexposed的兼容性较差，只有2.3，4.0~4.4兼容，其他Android版本不兼容或未测试，详细可以去dexposed的github项目主页查看，而andfix则兼容2.3~6.0，所以就拿这个项目来实现增量更新吧。至于bsdiff，只是阅览了一下，还没研究过。</p>
-<p>首先 Git clone github <a href="https://github.com/alibaba/AndFix，将andfix项目下载下来，Android" target="_blank" rel="external">https://github.com/alibaba/AndFix，将andfix项目下载下来，Android</a> studio可以在build.gradle里导入andfix，</p>
-<p>compile ‘com.alipay.euler:andfix:0.3.1@aar’<br>但是我是使用module的方式添加andfix，这样可以直接查看编辑源码，而且直接gradle导入的话还有个问题，后面再说。</p>
-<p>andfix项目里有sample，导入也行，自己新建也行，我是自己新建项目，接着导入andfix作为module，demo里就两个类，mainactivity和myapplication</p>
-<p>andfix里有些文件夹不用导入的，例如tools，doc等，记得新建jniLibs文件夹，libs里的so文件移到jniLibs里。<br>~~~java<br>public class MainApplication extends Application {<br>    private static final String TAG = “euler”;</p>
-<pre><code>private static final String APATCH_PATH = &quot;/out.apatch&quot;;
-
-private static final String DIR = &quot;apatch&quot;;//补丁文件夹
-/**
- * patch manager
- */
-private PatchManager mPatchManager;
-
-@Override
-public void onCreate() {
-    super.onCreate();
-    // initialize
-    mPatchManager = new PatchManager(this);
-    mPatchManager.init(&quot;1.0&quot;);
-    Log.d(TAG, &quot;inited.&quot;);
-
-    // load patch
-    mPatchManager.loadPatch();
-</code></pre><p>//        Log.d(TAG, “apatch loaded.”);</p>
-<pre><code>    // add patch at runtime
-    try {
-        // .apatch file path
-        String patchFileString = Environment.getExternalStorageDirectory()
-                .getAbsolutePath() + APATCH_PATH;
-        mPatchManager.addPatch(patchFileString);
-        Log.d(TAG, &quot;apatch:&quot; + patchFileString + &quot; added.&quot;);
-
-        //这里我加了个方法，复制加载补丁成功后，删除sdcard的补丁，避免每次进入程序都重新加载一次
-        File f = new File(this.getFilesDir(), DIR + APATCH_PATH);
-        if (f.exists()) {
-            boolean result = new File(patchFileString).delete();
-            if (!result)
-                Log.e(TAG, patchFileString + &quot; delete fail&quot;);
-        }
-    } catch (IOException e) {
-        Log.e(TAG, &quot;&quot;, e);
-    }
-
-}
-</code></pre><p>public class MainActivity extends Activity {<br>    private static final String TAG = “euler”;</p>
-<pre><code>@Override
-public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    toast();
-}
-
-@Override
-protected void onDestroy() {
-    super.onDestroy();
-    android.os.Process.killProcess(android.os.Process.myPid());
-}
-
-//旧方法，1.apk
-private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH_SHORT).show();    }}
-</code></pre><p>刚刚说的直接在gradle里导入andfix会有个问题，是在原来的项目中，加载一次补丁后，out.apatch文件会copy到getFilesDir目录下的/apatch文件夹中，在下次补丁更新时，会检测补丁是否已经添加在apatch文件夹下，已存在就不会复制加载sdcard的out.apatch。</p>
-<p>原来的addpath方法</p>
-<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if(!src.exists()){<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + path + “] has be loaded.”);<br>        return;<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
-<p>修改后，判断apatch下的out.apatch存在即删除掉，重新复制加载sdcard下的out.apatch</p>
-<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if (!src.exists()) {<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + src.getName() + “] has be loaded.”);<br>        boolean deleteResult = dest.delete();<br>        if (deleteResult)<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] has be delete.”);<br>        else {<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] delete error”);<br>            return;<br>        }<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
-<p>还有源码混淆</p>
-<p>-optimizationpasses 5                                                           # 指定代码的压缩级别<br>-dontusemixedcaseclassnames                                                     # 是否使用大小写混合<br>-dontskipnonpubliclibraryclasses                                                # 是否混淆第三方jar<br>-dontpreverify                                                                  # 混淆时是否做预校验<br>-verbose                                                                        # 混淆时是否记录日志<br>-optimizations !code/simplification/arithmetic,!field/<em>,!class/merging/</em>        # 混淆时所采用的算法</p>
-<h2 id="重要，別忘了這些，不混淆andfix包，不混淆native方法"><a href="#重要，別忘了這些，不混淆andfix包，不混淆native方法" class="headerlink" title="重要，別忘了這些，不混淆andfix包，不混淆native方法"></a>重要，別忘了這些，不混淆andfix包，不混淆native方法</h2><p>-dontwarn android.annotation<br>-dontwarn com.alipay.euler.<strong><br>-keep class com.alipay.euler.</strong> {<em>;}<br>-keep class </em> extends java.lang.annotation.Annotation<br>-keepclasseswithmembernames class * {<br>    native <methods>;<br>}</methods></p>
-<p>接着打包1.apk，</p>
-<p>然后修改mainactivity的toast()，打包2.apk</p>
-<p>//修改Toast內容，2.apk<br>private void toast() {<br>    Toast.makeText(this, “new”, Toast.LENGTH_SHORT).show();<br>}</p>
-<p>cmd输入命令，具体参数看usage</p>
-<p>如无错误，编译后会生成一个apatch文件，改名成out.apatch</p>
-<p>安装打开1.apk</p>
-<p>关闭app，将out.apatch放sdcard根目录后，重新打开app，toast方法改变了</p>
-<p>ps：</p>
-<ol>
-<li><p>这里只是简单的测试了一下，没有复杂的功能，而且andfix不支持布局资源等的修改。</p>
-</li>
-<li><p>github主页的issues反应说Android4.0.4，以及5.0以上版本会crash，不过我使用了两个虚拟机，genymotion的4.2和5.0虚拟机，没有错误，其他请自测</p>
-</li>
-<li><p>使用了apk加固时（360加固，百度加固等等），发现在加固前要先apkpatch制作补丁，不能使用加固后的apk制作，否则补丁无法使用，但是在加固前制作的补丁可以很容易的被反编译出源码</p>
-</li>
-</ol>
-<p>demo下载 <a href="http://download.csdn.net/detail/ityangjun/9177377" target="_blank" rel="external">http://download.csdn.net/detail/ityangjun/9177377</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="转载" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
-    
-      <category term="增量升级" scheme="https://hui46226021.github.io/tags/%E5%A2%9E%E9%87%8F%E5%8D%87%E7%BA%A7/"/>
-    
-      <category term="热补丁修复" scheme="https://hui46226021.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
-    
-      <category term="andfix" scheme="https://hui46226021.github.io/tags/andfix/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Android分包MultiDex原理详解</title>
     <link href="https://hui46226021.github.io/2016/03/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
     <id>https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/</id>
@@ -1239,6 +1206,168 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
   </entry>
   
   <entry>
+    <title>andfix 增量升级更新 热补丁修复</title>
+    <link href="https://hui46226021.github.io/2016/03/17/andfix/"/>
+    <id>https://hui46226021.github.io/2016/03/17/andfix/</id>
+    <published>2016-03-17T14:37:23.000Z</published>
+    <updated>2017-03-19T03:15:34.747Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵<br><a id="more"></a></p>
+<h3 id="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"><a href="#搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）" class="headerlink" title="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"></a>搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）</h3><p>1.dexposed     github <a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
+<p>2.andfix   github <a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">https://github.com/alibaba/AndFix</a></p>
+<p>3.bsdiff  <a href="http://blog.csdn.net/lazyer_dog/article/details/47173013" target="_blank" rel="external">http://blog.csdn.net/lazyer_dog/article/details/47173013</a></p>
+<p>dexposed和andfix是alibaba的开源项目，都是apk增量更新的实现框架，目前dexposed的兼容性较差，只有2.3，4.0~4.4兼容，其他Android版本不兼容或未测试，详细可以去dexposed的github项目主页查看，而andfix则兼容2.3~6.0，所以就拿这个项目来实现增量更新吧。至于bsdiff，只是阅览了一下，还没研究过。</p>
+<p>首先 Git clone github <a href="https://github.com/alibaba/AndFix，将andfix项目下载下来，Android" target="_blank" rel="external">https://github.com/alibaba/AndFix，将andfix项目下载下来，Android</a> studio可以在build.gradle里导入andfix，</p>
+<p>compile ‘com.alipay.euler:andfix:0.3.1@aar’<br>但是我是使用module的方式添加andfix，这样可以直接查看编辑源码，而且直接gradle导入的话还有个问题，后面再说。</p>
+<p>andfix项目里有sample，导入也行，自己新建也行，我是自己新建项目，接着导入andfix作为module，demo里就两个类，mainactivity和myapplication</p>
+<p>andfix里有些文件夹不用导入的，例如tools，doc等，记得新建jniLibs文件夹，libs里的so文件移到jniLibs里。<br>~~~java<br>public class MainApplication extends Application {<br>    private static final String TAG = “euler”;</p>
+<pre><code>private static final String APATCH_PATH = &quot;/out.apatch&quot;;
+
+private static final String DIR = &quot;apatch&quot;;//补丁文件夹
+/**
+ * patch manager
+ */
+private PatchManager mPatchManager;
+
+@Override
+public void onCreate() {
+    super.onCreate();
+    // initialize
+    mPatchManager = new PatchManager(this);
+    mPatchManager.init(&quot;1.0&quot;);
+    Log.d(TAG, &quot;inited.&quot;);
+
+    // load patch
+    mPatchManager.loadPatch();
+</code></pre><p>//        Log.d(TAG, “apatch loaded.”);</p>
+<pre><code>    // add patch at runtime
+    try {
+        // .apatch file path
+        String patchFileString = Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + APATCH_PATH;
+        mPatchManager.addPatch(patchFileString);
+        Log.d(TAG, &quot;apatch:&quot; + patchFileString + &quot; added.&quot;);
+
+        //这里我加了个方法，复制加载补丁成功后，删除sdcard的补丁，避免每次进入程序都重新加载一次
+        File f = new File(this.getFilesDir(), DIR + APATCH_PATH);
+        if (f.exists()) {
+            boolean result = new File(patchFileString).delete();
+            if (!result)
+                Log.e(TAG, patchFileString + &quot; delete fail&quot;);
+        }
+    } catch (IOException e) {
+        Log.e(TAG, &quot;&quot;, e);
+    }
+
+}
+</code></pre><p>public class MainActivity extends Activity {<br>    private static final String TAG = “euler”;</p>
+<pre><code>@Override
+public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    toast();
+}
+
+@Override
+protected void onDestroy() {
+    super.onDestroy();
+    android.os.Process.killProcess(android.os.Process.myPid());
+}
+
+//旧方法，1.apk
+private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH_SHORT).show();    }}
+</code></pre><p>刚刚说的直接在gradle里导入andfix会有个问题，是在原来的项目中，加载一次补丁后，out.apatch文件会copy到getFilesDir目录下的/apatch文件夹中，在下次补丁更新时，会检测补丁是否已经添加在apatch文件夹下，已存在就不会复制加载sdcard的out.apatch。</p>
+<p>原来的addpath方法</p>
+<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if(!src.exists()){<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + path + “] has be loaded.”);<br>        return;<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
+<p>修改后，判断apatch下的out.apatch存在即删除掉，重新复制加载sdcard下的out.apatch</p>
+<p>public void addPatch(String path) throws IOException {<br>    File src = new File(path);<br>    File dest = new File(mPatchDir, src.getName());<br>    if (!src.exists()) {<br>        throw new FileNotFoundException(path);<br>    }<br>    if (dest.exists()) {<br>        Log.d(TAG, “patch [“ + src.getName() + “] has be loaded.”);<br>        boolean deleteResult = dest.delete();<br>        if (deleteResult)<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] has be delete.”);<br>        else {<br>            Log.e(TAG, “patch [“ + dest.getPath() + “] delete error”);<br>            return;<br>        }<br>    }<br>    FileUtil.copyFile(src, dest);// copy to patch’s directory<br>    Patch patch = addPatch(dest);<br>    if (patch != null) {<br>        loadPatch(patch);<br>    }<br>}</p>
+<p>还有源码混淆</p>
+<p>-optimizationpasses 5                                                           # 指定代码的压缩级别<br>-dontusemixedcaseclassnames                                                     # 是否使用大小写混合<br>-dontskipnonpubliclibraryclasses                                                # 是否混淆第三方jar<br>-dontpreverify                                                                  # 混淆时是否做预校验<br>-verbose                                                                        # 混淆时是否记录日志<br>-optimizations !code/simplification/arithmetic,!field/<em>,!class/merging/</em>        # 混淆时所采用的算法</p>
+<h2 id="重要，別忘了這些，不混淆andfix包，不混淆native方法"><a href="#重要，別忘了這些，不混淆andfix包，不混淆native方法" class="headerlink" title="重要，別忘了這些，不混淆andfix包，不混淆native方法"></a>重要，別忘了這些，不混淆andfix包，不混淆native方法</h2><p>-dontwarn android.annotation<br>-dontwarn com.alipay.euler.<strong><br>-keep class com.alipay.euler.</strong> {<em>;}<br>-keep class </em> extends java.lang.annotation.Annotation<br>-keepclasseswithmembernames class * {<br>    native <methods>;<br>}</methods></p>
+<p>接着打包1.apk，</p>
+<p>然后修改mainactivity的toast()，打包2.apk</p>
+<p>//修改Toast內容，2.apk<br>private void toast() {<br>    Toast.makeText(this, “new”, Toast.LENGTH_SHORT).show();<br>}</p>
+<p>cmd输入命令，具体参数看usage</p>
+<p>如无错误，编译后会生成一个apatch文件，改名成out.apatch</p>
+<p>安装打开1.apk</p>
+<p>关闭app，将out.apatch放sdcard根目录后，重新打开app，toast方法改变了</p>
+<p>ps：</p>
+<ol>
+<li><p>这里只是简单的测试了一下，没有复杂的功能，而且andfix不支持布局资源等的修改。</p>
+</li>
+<li><p>github主页的issues反应说Android4.0.4，以及5.0以上版本会crash，不过我使用了两个虚拟机，genymotion的4.2和5.0虚拟机，没有错误，其他请自测</p>
+</li>
+<li><p>使用了apk加固时（360加固，百度加固等等），发现在加固前要先apkpatch制作补丁，不能使用加固后的apk制作，否则补丁无法使用，但是在加固前制作的补丁可以很容易的被反编译出源码</p>
+</li>
+</ol>
+<p>demo下载 <a href="http://download.csdn.net/detail/ityangjun/9177377" target="_blank" rel="external">http://download.csdn.net/detail/ityangjun/9177377</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="转载" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+      <category term="增量升级" scheme="https://hui46226021.github.io/tags/%E5%A2%9E%E9%87%8F%E5%8D%87%E7%BA%A7/"/>
+    
+      <category term="热补丁修复" scheme="https://hui46226021.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
+    
+      <category term="andfix" scheme="https://hui46226021.github.io/tags/andfix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windowIsTranslucent 和windowAnimationStyle冲突</title>
+    <link href="https://hui46226021.github.io/2016/03/17/windowIsTranslucent%20%E5%92%8CwindowAnimationStyle%E5%86%B2%E7%AA%81/"/>
+    <id>https://hui46226021.github.io/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/</id>
+    <published>2016-03-17T14:37:23.000Z</published>
+    <updated>2017-03-19T04:45:55.636Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
+<p>今天在写 android仿IOS 侧滑销毁的时候   需要把activity的背景设置成透明 在滑出的时候漏出 栈下面一层的activity  在AppTheme里面 设置了windowIsTranslucent 属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里之前设置过  activity 切换动画<br>接下来 问题来了 </p>
+<p>设置windowIsTranslucent  后android:windowAnimationStyle 失效了，不好使了</p>
+<p>差了写资料 已解决 再次记录下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyActivitySiwtchAnimation"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Animation.Translucent"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="comment">&lt;!--创建效果--&gt;</span>  </div><div class="line"><span class="comment">&lt;!--&lt;item name="@android:activityOpenEnterAnimation"&gt;@anim/out_from_right&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个被覆盖效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityOpenExitAnimation"&gt;@anim/out_middle&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="comment">&lt;!--&amp;lt;!&amp;ndash;推出效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseExitAnimation"&gt;@anim/out_toleft&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个还原效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseEnterAnimation"&gt;@anim/out_middle2&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>1.让 android:windowAnimationStyle  继承  @android :style/Animation.Translucent<br>此方法 在退出actvity时候动画有效  创建的时候无效</p>
+<p>2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>此方法有效。<br>不过本人是坑爹的锤子手机 在activity切换的时候 自带 一个由下到上的动画  目前的状态是 创建activity是重屏幕右下角出现 ，在其他手机上 还可以</p>
+<h2 id="方法二：绝对完美解决"><a href="#方法二：绝对完美解决" class="headerlink" title="方法二：绝对完美解决"></a>方法二：绝对完美解决</h2><p>取消<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>改在 activity 和 fragment的基类里 重写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 重写 activity切换方法 消除系统自带动画</div><div class="line">     * <span class="doctag">@param</span> intent</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivity(intent);</div><div class="line"></div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.finish();</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode, @Nullable Bundle options)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode, options);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>实现 切换动画 </p>
+<p>这里收集了一些系统动画</p>
+<p>//实现淡入浅出的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);</div></pre></td></tr></table></figure></p>
+<p>// 由左向右滑入的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="windowIsTranslucent" scheme="https://hui46226021.github.io/tags/windowIsTranslucent/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android代码和JS 相互调用 html js</title>
     <link href="https://hui46226021.github.io/2016/02/12/Android%E4%BB%A3%E7%A0%81%E5%92%8CJS%20%E7%9B%B8%E4%BA%92%E8%B0%83%E7%94%A8%20html%20js/"/>
     <id>https://hui46226021.github.io/2016/02/12/Android代码和JS 相互调用 html js/</id>
@@ -1276,156 +1405,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
       <category term="JS JAVA调用" scheme="https://hui46226021.github.io/tags/JS-JAVA%E8%B0%83%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>总结下 android集成环信SDK遇到的坑</title>
-    <link href="https://hui46226021.github.io/2016/02/01/android%E9%9B%86%E6%88%90%E7%8E%AF%E4%BF%A1SDK%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
-    <id>https://hui46226021.github.io/2016/02/01/android集成环信SDK遇到的坑/</id>
-    <published>2016-02-01T14:37:23.000Z</published>
-    <updated>2017-03-18T01:18:54.616Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:集成了一次环信 sdk 用的是他自带的essyui库 集成的过程中遇到了各种问题  翻来覆去弄个了好几天 记录一下<br><a id="more"></a><br>在官网创建应用 这些都很顺利<br>按照文档 导入EasyUI库<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://g.hiphotos.baidu.com/image/pic/item/bba1cd11728b47101f4ad20ac4cec3fdfd03238a.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure> </p>
-<p>本来预期是 这样就成功了  可是导入后显然不一样<br>怎么办  最后 联系客服 沟通了好半天  最后 确认几次 是不是 直接导入easyui库 即可 客服 信誓旦旦的说 对</p>
-<p>最后经过高人指点  先删除 原easyui项目下的 build.gradle  再次导入 成了 跟文档写的一样了</p>
-<p>过了第一个坑 </p>
-<p>接下来开始编写代码<br>也没什么问题 完美运行起来了   但本还有个 坚果手机 安装测试下  嗯  蹦了 就这么蹦了</p>
-<p>查看报错信息<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://d.hiphotos.baidu.com/image/pic/item/29381f30e924b899526856fe69061d950b7bf6a4.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure><br>百度了一下 说是有 so库没有加载进去<br>看了下demo里面easyui库 在看看 自己的项目 发现确实缺少没导入</p>
-<p>好高兴 发现问题了<br> 接下来把 so库复制进来  在 build.gradle 文件添加代码 android 下面</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">sourceSets &#123;</div><div class="line">            main &#123;</div><div class="line">            jniLibs.srcDirs = ['libs']</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>启动 。。。依然报错</p>
-<p>联系客服  客服又是信誓旦旦 的说 没毛病</p>
-<p>最后 发现 应用中有armeabi-v7a 包</p>
-<p>###所以 将armeabi 的文件在复制出一份 放到armeabi-v7a文件夹里 编译 运行  这回真没毛病了</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:集成了一次环信 sdk 用的是他自带的essyui库 集成的过程中遇到了各种问题  翻来覆去弄个了好几天 记录一下&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="IM" scheme="https://hui46226021.github.io/categories/Android/JAVA/IM/"/>
-    
-    
-      <category term="环信" scheme="https://hui46226021.github.io/tags/%E7%8E%AF%E4%BF%A1/"/>
-    
-      <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android动画 详解(二 帧动画 属性动画 )</title>
-    <link href="https://hui46226021.github.io/2016/01/17/Android%E5%8A%A8%E7%94%BB%20%E8%AF%A6%E8%A7%A3(%E4%BA%8C%20%E5%B8%A7%E5%8A%A8%E7%94%BB%20%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%20)/"/>
-    <id>https://hui46226021.github.io/2016/01/17/Android动画 详解(二 帧动画 属性动画 )/</id>
-    <published>2016-01-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:11:20.807Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="一-帧动画介绍"><a href="#一-帧动画介绍" class="headerlink" title="一 帧动画介绍"></a>一 帧动画介绍</h1><p>帧动画 就类似于 电影那种一张图一张图的切换 </p>
-<h2 id="XML代码"><a href="#XML代码" class="headerlink" title="XML代码"></a>XML代码</h2><p>先通过XML配置好 需要切换的图片 和 执行是否循环 和执行时间等 文件放在res/drawable 目录下</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"><span class="comment">&lt;!--   </span></div><div class="line">    oneshot代表着是否只展示一遍，false 不停的循环播放动画   </div><div class="line">    android:duration 时间长度  </div><div class="line"> --&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">animation-list</span>  </span></div><div class="line">  <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>  </div><div class="line">  <span class="attr">android:oneshot</span>=<span class="string">"true"</span>  </div><div class="line">  &gt;  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon6"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon5"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon4"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon3"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon2"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon1"</span> <span class="attr">android:duration</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">animation-list</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="JAVA调用XML开启动画"><a href="#JAVA调用XML开启动画" class="headerlink" title="JAVA调用XML开启动画"></a>JAVA调用XML开启动画</h2><p>先创建一个IamgeView  将其背景设置成 之前配置好的xml</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ImageView imageView = (ImageView) findViewById(R.id.imageView);</div><div class="line"> imageView.setImageResource(R.drawable.animation1);</div><div class="line"> AnimationDrawable animationDrawable = (AnimationDrawable) animationIV.getDrawable();</div><div class="line"> animationDrawable.start();</div></pre></td></tr></table></figure>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>要在代码中调用 ImageView 的 setBackgroundResource 方法，如果直接在 XML 布局文件中设置其 src 属性当触发动画时会 ForceClose ；</p>
-<p>在动画 start 之前要先 stop，不然在第一次动画之后会停在最后一帧，这样动画就只会触发一次；</p>
-<p>正如SDK中所提到的，不要在 onCreate 中调用 start，因为 AnimationDrawable 还没有完全跟 Window 相关联，如果想要界面显示时就开始动画的话，可以在 onWindowFoucsChanged 中调用 start 。</p>
-<p>属性动画</p>
-<p>属性动画指的是  通过改变view 的属性来实现动画  跟补间动画本质的区别在于 补间动画 在改变的只是样子 例如将一个Button 放大 补间动画 放大后 其点击时间 并没有变 还是原来的大小</p>
-<p>具体先看这篇文章 <a href="http://blog.csdn.net/lmj623565791/article/details/38067475" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38067475</a></p>
-<p>插值器</p>
-<p>Interpolator class  Resource ID 备注</p>
-<ul>
-<li>AccelerateDecelerateInterpolator    @android:anim/accelerate_decelerate_interpolator    加速减速</li>
-<li>AccelerateInterpolator  @android:anim/accelerate_interpolator   加速</li>
-<li>AnticipateInterpolator  @android:anim/anticipate_interpolator   退小步往前冲</li>
-<li>AnticipateOvershootInterpolator @android:anim/anticipate_overshoot_interpolator 退小步冲过头退回</li>
-<li>BounceInterpolator  @android:anim/bounce_interpolator   球落地弹动效果</li>
-<li>CycleInterpolator   @android:anim/cycle_interpolator    周期重复</li>
-<li>DecelerateInterpolator  @android:anim/decelerate_interpolator   减速</li>
-<li>LinearInterpolator  @android:anim/linear_interpolator   匀速</li>
-<li>OvershootInterpolator   @android:anim/overshoot_interpolator    冲过头再退回</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;一-帧动画介绍&quot;&gt;&lt;a href=&quot;#一-帧动画介绍&quot; class=&quot;headerlink&quot; title=&quot;一 帧动画介绍&quot;&gt;&lt;/a&gt;一 帧动画介绍&lt;/h1&gt;&lt;p&gt;帧动画 就类似于 电影那种一张图一张图的切换 &lt;/p&gt;
-&lt;h2 
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="动画" scheme="https://hui46226021.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android动画 详解（一 补间动画）</title>
-    <link href="https://hui46226021.github.io/2015/12/23/Android%E5%8A%A8%E7%94%BB%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%20%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%EF%BC%89/"/>
-    <id>https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/</id>
-    <published>2015-12-23T11:42:33.000Z</published>
-    <updated>2017-03-19T04:38:12.300Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>打算整理下 android动画方面的知识，嗯  开始
-</code></pre><a id="more"></a>
-<h2 id="一-android补间动画-分为四大类"><a href="#一-android补间动画-分为四大类" class="headerlink" title="一.android补间动画 分为四大类"></a>一.android补间动画 分为四大类</h2><p>alpha（透明度渐变）、scale（尺寸渐变）、translate（位置移动）、rotate（旋转）</p>
-<p>通过JAVA类来表示 AlphaAnimation    ScaleAnimation   TranslateAnimation RotateAnimation</p>
-<h2 id="二-可以通过-XML文件-或者JAVA代码的方式来实现动画"><a href="#二-可以通过-XML文件-或者JAVA代码的方式来实现动画" class="headerlink" title="二.可以通过 XML文件 或者JAVA代码的方式来实现动画"></a>二.可以通过 XML文件 或者JAVA代码的方式来实现动画</h2><h3 id="1-动过XML来实现动画"><a href="#1-动过XML来实现动画" class="headerlink" title="1.动过XML来实现动画"></a>1.动过XML来实现动画</h3><p>在res目录中新建anim文件夹<br>在anim目录中新建一个anim.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"> <span class="tag">&lt;<span class="name">set</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;<span class="name">alpha</span>/&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">scale</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">translate</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">rotate</span>/&gt;</span>  </div><div class="line"> <span class="tag">&lt;/<span class="name">set</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>XML动画详细解析</p>
-<h3 id="alpha"><a href="#alpha" class="headerlink" title="alpha"></a>alpha</h3><p>说明: 0.0表示完全透明 1.0表示完全不透明   时间以毫秒为单位</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;       </div><div class="line">        &lt;alpha  android:fromAlpha="0.1"   &lt;!--动画起始时透明度        --&gt;        </div><div class="line">                android:toAlpha="1.0"   &lt;!--动画结束时透明度 --&gt;               </div><div class="line">                android:duration="3000"  /&gt; &lt;!--动画持续时间--&gt; </div><div class="line"> &lt;/set&gt;</div></pre></td></tr></table></figure>
-<h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><p>说明: 插入器 下一篇详细说</p>
-<p>pivotX  pivotY 确定了 放大缩小的中心  上面4个属性 定义了开始 和结束的比例 <1缩小>1放大</1缩小></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;scale  </div><div class="line">    android:interpolator=  "@android:anim/accelerate_decelerate_interpolator"                                         </div><div class="line">    &lt;!--interpolator 指定一个动画的插入器              --&gt;</div><div class="line">    android:fromXScale="0.0"   </div><div class="line">    &lt;!--起始时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toXScale="1.4"        </div><div class="line">    &lt;!--结束时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:fromYScale="0.0" </div><div class="line">    &lt;!--起始时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toYScale="1.4"   </div><div class="line">    &lt;!--结束时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:pivotX="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的X坐标的开始位置              --&gt;</div><div class="line">    android:pivotY="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的Y坐标的开始位置              --&gt;</div><div class="line">    android:fillAfter="false"   </div><div class="line">    &lt;!--当设置为true ，该动画转化在动画结束后被应用              --&gt;</div><div class="line">    android:duration="700"   </div><div class="line">    &lt;!--时间       --&gt;</div><div class="line">    /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>Translate</p>
-<h3 id="说明：没啥说的了"><a href="#说明：没啥说的了" class="headerlink" title="说明：没啥说的了"></a>说明：没啥说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;translate  </div><div class="line">    android:fromXDelta="30"   </div><div class="line">    &lt;!--始时 X坐标上的位置                   --&gt;</div><div class="line">    android:toXDelta="-80"   </div><div class="line">    &lt;!--结束时 X坐标上的位置                  --&gt;</div><div class="line">    android:fromYDelta="30"   </div><div class="line">    &lt;!--起始时 Y坐标上的位置                  --&gt;</div><div class="line">    android:toYDelta="300"   </div><div class="line">    &lt;!--结束时 Y坐标上的位置                  --&gt;</div><div class="line">    android:duration="2000"  </div><div class="line">    &lt;!--时间--&gt;</div><div class="line">    /&gt; </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<p>Rotate</p>
-<h3 id="说明：其实也没啥好说的了"><a href="#说明：其实也没啥好说的了" class="headerlink" title="说明：其实也没啥好说的了"></a>说明：其实也没啥好说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">    &lt;rotate            </div><div class="line">        android:interpolator="@android:anim/accelerate_decelerate_interpolator"         </div><div class="line">        &lt;!--动画的插入器                   --&gt;</div><div class="line">        android:fromDegrees="0"   </div><div class="line">        &lt;!--动画起始时物件的角度          --&gt;</div><div class="line">        android:toDegrees="+350"   </div><div class="line">        &lt;!--画结束时物件旋转的角度 可以大于360度          --&gt;</div><div class="line">        android:pivotX="50%"   </div><div class="line">        &lt;!--X坐标的开始位置          --&gt;</div><div class="line">        android:pivotY="50%"   </div><div class="line">        &lt;!--Y坐标的开始位置          --&gt;</div><div class="line">        android:duration="3000"      </div><div class="line">        /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
-<h3 id="在JAVA-代码中调用XML"><a href="#在JAVA-代码中调用XML" class="headerlink" title="在JAVA 代码中调用XML"></a>在JAVA 代码中调用XML</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> Animation myAnimation= AnimationUtils.loadAnimation(<span class="keyword">this</span>, R.anim.my_action); </div><div class="line"><span class="comment">//使用AnimationUtils类的静态方法loadAnimation()来加载XML中的动画XML文件</span></div></pre></td></tr></table></figure>
-<p>2 试用JAVA 代码 来创建动画</p>
-<p>说明 具体参数含义 可对照上面的XML<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在代码中定义 动画实例对象</span></div><div class="line"><span class="keyword">private</span> Animation myAnimation_Alpha;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Scale;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Translate;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Rotate;</div><div class="line"></div><div class="line"><span class="comment">//根据各自的构造方法来初始化一个实例对象</span></div><div class="line">myAnimation_Alpha = <span class="keyword">new</span> AlphaAnimation(<span class="number">0.1f</span>, <span class="number">1.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Scale = <span class="keyword">new</span> ScaleAnimation(<span class="number">0.0f</span>, <span class="number">1.4f</span>, <span class="number">0.0f</span>, <span class="number">1.4f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>, Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line"></div><div class="line">myAnimation_Translate = <span class="keyword">new</span> TranslateAnimation(<span class="number">30.0f</span>, -<span class="number">80.0f</span>, <span class="number">30.0f</span>, <span class="number">300.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Rotate = <span class="keyword">new</span> RotateAnimation(<span class="number">0.0f</span>, +<span class="number">350.0f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>,Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line">设置动画监听，注意 当控件移动后  其点击事件 还在原来的未知 需要调用view.layout(x,x,x,x);方法修改下 控件的未知</div><div class="line"></div><div class="line">animation.setAnimationListener(<span class="keyword">new</span> Animation.AnimationListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">              </div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">最后 就查给控件添加上 创建好的动画 并启动了</div><div class="line"></div><div class="line">view.startAnimation(animation);</div></pre></td></tr></table></figure></p>
-<h1 id="谢谢"><a href="#谢谢" class="headerlink" title="谢谢"></a>谢谢</h1>]]></content>
-    
-    <summary type="html">
-    
-      &lt;pre&gt;&lt;code&gt;打算整理下 android动画方面的知识，嗯  开始
-&lt;/code&gt;&lt;/pre&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="动画" scheme="https://hui46226021.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
     
   </entry>
   
