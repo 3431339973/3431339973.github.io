@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>JAVA 多线程 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="原创,服务器开发,JAVA 多线程">
+    <meta name="description" content="摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 继续百度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA 多线程">
+<meta property="og:url" content="https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 继续百度学习">
+<meta property="og:updated_time" content="2017-09-29T15:00:03.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA 多线程">
+<meta name="twitter:description" content="摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 继续百度学习">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">JAVA 多线程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">JAVA 多线程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-01-12T10:37:23.000Z" itemprop="datePublished" class="page-time">
+  2015-01-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/">Web</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后台线程"><span class="post-toc-number">1.</span> <span class="post-toc-text">后台线程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#带返回值的线程-Callable"><span class="post-toc-number">2.</span> <span class="post-toc-text">带返回值的线程   Callable</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程本地缓存-ThreadLocal"><span class="post-toc-number">3.</span> <span class="post-toc-text">线程本地缓存 ThreadLocal</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程安全"><span class="post-toc-number">4.</span> <span class="post-toc-text">线程安全</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-即有synchronized关键字修饰的方法。"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1.即有synchronized关键字修饰的方法。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-即有synchronized关键字修饰的语句块。"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2  即有synchronized关键字修饰的语句块。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-使用特殊域变量-volatile-实现线程同步"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">3.使用特殊域变量(volatile)实现线程同步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-使用重入锁实现线程同步"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">4.使用重入锁实现线程同步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-wait-notify"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">5.wait()  notify()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CountDownLatch"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">CountDownLatch</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程池"><span class="post-toc-number">5.</span> <span class="post-toc-text">线程池</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">1.减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下-每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机-。"><span class="post-toc-number">5.0.2.</span> <span class="post-toc-text">2.可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下(每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机)。</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用方法"><span class="post-toc-number">5.0.3.</span> <span class="post-toc-text">常用方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程异常捕获："><span class="post-toc-number">5.1.</span> <span class="post-toc-text">线程异常捕获：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程池捕获异常"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">线程池捕获异常</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-JAVA多线程深度解析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">JAVA 多线程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年01月12日 18:37" datetime="2015-01-12T10:37:23.000Z"  itemprop="datePublished">2015-01-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/Web/">Web</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 继续百度学习<br><a id="more"></a></p>
+<h1 id="后台线程"><a href="#后台线程" class="headerlink" title="后台线程"></a>后台线程</h1><p>所谓的后台线程，是指在程序运行的时候在后台提供一种通用服务的线程，并且这种线程并不属于程序中不可或缺的部分。因此当所有的非后台线程结束时，程序也就终止了，同时会杀死所有后台线程。反过来说，只要有任何非后台线程(用户线程)还在运行，程序就不会终止。后台线程在不执行finally子句的情况下就会终止其run方法。后台线程创建的子线程也是后台线程    main 是非后台线程</p>
+<p>setDaemon(true);  必须在线程start(); 方法前执行   isDaemon() 来判断一个线程是否是守护线程  </p>
+<p>在Daemon线程中产生的新线程也是Daemon的</p>
+<h1 id="带返回值的线程-Callable"><a href="#带返回值的线程-Callable" class="headerlink" title="带返回值的线程   Callable"></a>带返回值的线程   Callable</h1><p> Future f1 = pool.submit();    call()方法   线程阻塞到 所有线程都 返回结果</p>
+<h1 id="线程本地缓存-ThreadLocal"><a href="#线程本地缓存-ThreadLocal" class="headerlink" title="线程本地缓存 ThreadLocal"></a>线程本地缓存 ThreadLocal</h1><p>ThreadLocal.set() 到线程中的对象是该线程自己使用的对象，其他线程是不需要访问的，也访问不到的  </p>
+<p>实际是放到当前线程的ThreadLocalMap这个map中</p>
+<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><h2 id="1-即有synchronized关键字修饰的方法。"><a href="#1-即有synchronized关键字修饰的方法。" class="headerlink" title="1.即有synchronized关键字修饰的方法。"></a>1.即有synchronized关键字修饰的方法。</h2><pre><code>由于java的每个对象都有一个内置锁，当用此关键字修饰方法时，
+</code></pre><p>内置锁会保护整个方法。在调用该方法前，需要获得内置锁，否则就处于阻塞状态。</p>
+<p>代码如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">()</span></span>&#123;&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="2-即有synchronized关键字修饰的语句块。"><a href="#2-即有synchronized关键字修饰的语句块。" class="headerlink" title="2  即有synchronized关键字修饰的语句块。"></a>2  即有synchronized关键字修饰的语句块。</h2><pre><code>被该关键字修饰的语句块会自动被加上内置锁，从而实现同步
+
+代码如：
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">synchronized</span>(object)&#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-使用特殊域变量-volatile-实现线程同步"><a href="#3-使用特殊域变量-volatile-实现线程同步" class="headerlink" title="3.使用特殊域变量(volatile)实现线程同步"></a>3.使用特殊域变量(volatile)实现线程同步</h2><p>当一个共享变量被volatile修饰时，它会保证修改的值会立即被更新到主存，当有其他线程需要读取时，它会去内存中读取新值       </p>
+<p>volatile保证了 可见性 但不保证原子行</p>
+<pre><code>private volatile int account = 100;
+</code></pre><h2 id="4-使用重入锁实现线程同步"><a href="#4-使用重入锁实现线程同步" class="headerlink" title="4.使用重入锁实现线程同步"></a>4.使用重入锁实现线程同步</h2><p> ReentrantLock() : 创建一个ReentrantLock实例 </p>
+<pre><code>lock() : 获得锁 
+
+unlock() : 释放锁
+</code></pre><h2 id="5-wait-notify"><a href="#5-wait-notify" class="headerlink" title="5.wait()  notify()"></a>5.wait()  notify()</h2><p>Obj.wait()，与Obj.notify()必须要与synchronized(Obj)一起使用，也就是wait,与notify是针对已经获取了Obj锁进行操作，从语法角度来说就是Obj.wait(),Obj.notify必须在synchronized(Obj){…}语句块内。从功能上来说wait就是说线程在获取对象锁后，主动释放对象锁，同时本线程休眠。直到有其它线程调用对象的notify()唤醒该线程，才能继续获取对象锁，并继续执行</p>
+<p>调用 notify() 方法导致解除阻塞的线程是从因调用该对象的 wait() 方法而阻塞的线程中随机选取的</p>
+<p>除了 notify()，还有一个方法 notifyAll() 也可起到类似作用，唯一的区别在于，调用 notifyAll() 方法将把因调用该对象的 wait() 方法而阻塞的所有线程一次性全部解除阻塞。</p>
+<p>和 suspend() 和 resume()功能类似  不过后者不会释放锁 </p>
+<p>注 ：Lock有比synchronized更精确的线程语义和更好的性能。synchronized会自动释放锁，而Lock一定要求程序员手工释放，并且必须在finally从句中释放</p>
+<h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><p>CountDownLatch是减计数方式，计数==0时释放所有等待的线程；CyclicBarrier是加计数方式，计数达到构造方法中参数指定的值时释放所有等待的线程。<br>CountDownLatch当计数到0时，计数无法被重置；CyclicBarrier计数达到指定值时，计数置为0重新开始。<br>CountDownLatch每次调用countDown()方法计数减一，调用await()方法只进行阻塞，对计数没任何影响；CyclicBarrier只有一个await()方法，调用await()方法计数加1，若加1后的值不等于构造方法的值，则线程阻塞</p>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><h3 id="1-减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。"><a href="#1-减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。" class="headerlink" title="1.减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。"></a>1.减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。</h3><h3 id="2-可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下-每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机-。"><a href="#2-可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下-每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机-。" class="headerlink" title="2.可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下(每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机)。"></a>2.可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下(每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机)。</h3><p>Java里面线程池的顶级接口是Executor，但是严格意义上讲Executor并不是一个线程池，而只是一个执行线程的工具。真正的线程池接口是ExecutorService。</p>
+<ul>
+<li><p>Executors 静态方法</p>
+</li>
+<li><p>newSingleThreadExecutor   创建一个单线程的线程池</p>
+</li>
+<li><p>newFixedThreadPool         创建固定大小的线程池</p>
+</li>
+<li><p>newCachedThreadPool        创建一个可缓存的线程池</p>
+</li>
+<li><p>newScheduledThreadPool    创建一个大小无限的线程池</p>
+</li>
+</ul>
+<p>ThreadPoolExecutor的完整构造方法的签名是：ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler)</runnable></p>
+<ul>
+<li><p>corePoolSize：核心池的大小</p>
+</li>
+<li><p>maximumPoolSize：线程池最大线程数     </p>
+</li>
+<li><p>keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止</p>
+</li>
+<li><p>unit：参数keepAliveTime的时间单位</p>
+</li>
+<li><p>workQueue：一个阻塞队列</p>
+</li>
+<li><p>threadFactory：线程工厂，主要用来创建线程</p>
+</li>
+<li><p>handler：表示当拒绝处理任务时的策略，有以下四种取值</p>
+</li>
+</ul>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><p>execute()</p>
+</li>
+<li><p>submit()</p>
+</li>
+<li><p>shutdown()</p>
+</li>
+<li><p>shutdownNow()</p>
+</li>
+</ul>
+<h2 id="线程异常捕获："><a href="#线程异常捕获：" class="headerlink" title="线程异常捕获："></a>线程异常捕获：</h2><p>线程代码不能抛出任何checked异常。所有的线程中的checked异常都只能被线程本身消化掉当</p>
+<p>线程代码抛出运行级别异常之后，线程会中断。</p>
+<p>在thread.start()之前 设置 异常回调<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> Thread.UncaughtExceptionHandler() &#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line"></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</div><div class="line"></div><div class="line">                System.out.println(<span class="string">"线程"</span>+t.getName()+<span class="string">"--异常信息"</span>);</div><div class="line"></div><div class="line">                e.printStackTrace();</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">       &#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="线程池捕获异常"><a href="#线程池捕获异常" class="headerlink" title="线程池捕获异常"></a>线程池捕获异常</h2><p>而在线程池中却比较特殊。默认情况下，线程池 java.util.concurrent.ThreadPoolExecutor 会Catch住所有异常  </p>
+<p>通过覆盖ThreadPoolExecutor.afterExecute 方法，我们才能捕获到任务的异常<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterExecute</span><span class="params">(Runnable r, Throwable t)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">super</span>.afterExecute(r, t);</div><div class="line"></div><div class="line">  </div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-多线程/">JAVA 多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器开发/">服务器开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&title=《JAVA 多线程》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&title=《JAVA 多线程》 — 独角兽之路&source=摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JAVA 多线程》 — 独角兽之路&url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/01/12/Linux中vi编辑器的使用详解 - 副本/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Linux环境配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2014/12/17/基于注解的mybatis/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">基于注解的mybatis</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="JAVA多线程深度解析" data-title="JAVA 多线程" data-url="https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&title=《JAVA 多线程》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&title=《JAVA 多线程》 — 独角兽之路&source=摘要:之前学习过一下JAVA的多线程知识 当时也没有 做记录 等再次用到的时候 发现已经忘干净了 所以这次记录下来 可能不是很详细 以后看不到 就单个点 ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《JAVA 多线程》 — 独角兽之路&url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/01/12/JAVA多线程深度解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3aW47qQAwE0Nn/pucuYESoarcRujr5QjxCnyDFTdk/P/Hx++d49eqrz/59/Oqzfx8/n//CgYeHhzde+quvTF59XmKOfL40yZrx8PDwtnn5DT25QUdffFR+8jXj4eHhfQ/v+T35hWgBeHh4eP8fLy8Jz1vzs3fi4eHhfZ6XxA1nMWt+nrbkXM5a8PDw8GJe3kX6nscr/T08PDy8cVf9bFvcNqvy89erxcPDw1vgzRta86GBvBS168TDw8Pb5iURQ3tz34hu69AZDw8Pb4E3GXh6/rI2ij3jRWUDDw8P7yovX2K79GSY4OyZuiTg4eHhrW2m25t428hvz5lEFU0ygYeHh7fLa1tZSZnJzz8vOXh4eHh7vGRg9Pn5eYw7LwNv/ivg4eHhXeW1LajJiMB8E59v6PHw8PA2eNHLwSLaheaRRJstFPNieHh4eANeEhzk2+g2SmgjjzawwMPDw7vLy0tCu6C74cXZD4CHh4e3wUsC3LOm1FlE227u66waDw8Pb8ybRAb5tjtvWeW7/iguwcPDw/sILx+uakPbu82tKF/Bw8PDW+C1I00572wgYNIkw8PDw/sM76zV1G5tW8ytQS48PDy8Dd7zgs4YZ0tMwoh8WAEPDw9vm5ffcOvd+niIKilRb8oMHh4e3hovHw5oS0K7Kc8vRJG14OHh4S3z8ibZxijVrQECPDw8vG3eZIlteJFHDz/B8ebC4eHh4V3l/ZZHXkgmxeZsgAAPDw/vM7z8GH04HtvKm1v5thsPDw9vg3e34TS5rm0j7cLGGg8PD2/Ayze+bcHIL9YkjHjzvwEPDw/va3jJEEB+zvwSFAMEeHh4eF/Aa5thk2LQhrmH8wV4eHh4R7y26TUfab0V+L65uHh4eHgLvMkf/rPTtQOsd1txeHh4eAPeP/qySt9bIHU6AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

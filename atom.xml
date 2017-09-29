@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-09-27T09:21:21.839Z</updated>
+  <updated>2017-03-18T09:47:10.277Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -14,510 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Android系统启动流程</title>
-    <link href="https://hui46226021.github.io/2017/05/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
-    <id>https://hui46226021.github.io/2017/05/21/Android系统启动流程/</id>
-    <published>2017-05-21T14:37:23.000Z</published>
-    <updated>2017-09-27T09:21:21.839Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:梳理一下android系统的启动流程，从init进程 到java层面<br><a id="more"></a></p>
-<p>init是一个进程，做完android系统启动的第一个进程，同时也是linux内核启动的第一个进程，init进程在启动过程中起到了重要的责任。</p>
-<h2 id="init进程的工作"><a href="#init进程的工作" class="headerlink" title="init进程的工作"></a>init进程的工作</h2><ul>
-<li>1.解析配置文件<br>  在init进程中会解析两个配置文件，一个是init.rc, 另一个是 与硬件平台相关的 配置</li>
-<li>2.解析Service</li>
-<li>3.启动zygote</li>
-</ul>
-<h2 id="关于-zygote"><a href="#关于-zygote" class="headerlink" title="关于 zygote"></a>关于 zygote</h2><p>zygote本身是个Native程序。原名app_process  ,该名字 在Android.mk中指定，运行在 该进程又将自己的 名字改成zygote，<br>zygote 启动AppRuntime.<br>在AppRuntime 中主要完成了3步</p>
-<ul>
-<li>1.创建虚拟机 startVm</li>
-<li>2.注册JNI函数 startReg</li>
-<li>3.调用com.android.internal.os.Zygotelnit的main函数，正式让系统进入了java语言的世界</li>
-</ul>
-<h2 id="在Zygotelnit-的main函数中"><a href="#在Zygotelnit-的main函数中" class="headerlink" title="在Zygotelnit 的main函数中"></a>在Zygotelnit 的main函数中</h2><ul>
-<li>1.建立IPC通信服务端 </li>
-<li>2.调用registerZygoteSocket ,通过这个函数他可以相应子孙后代的请求，预加载类和资源（预加载相当多的类 1000多个 想想 android启动为啥慢）</li>
-<li>3.启动system_server  分裂出一个子进程（承担一部分责任，建立与Binder的链接，调用init1 和inti2来启动一些系统服务）</li>
-<li>4.zygote完成创世纪调用下runSelectLoopMode 便睡了</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:梳理一下android系统的启动流程，从init进程 到java层面&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="Linux" scheme="https://hui46226021.github.io/categories/Android/JAVA/Linux/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/tags/Android/"/>
-    
-      <category term="系统" scheme="https://hui46226021.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android 通过gardle限制引入so库 版本</title>
-    <link href="https://hui46226021.github.io/2017/03/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
-    <id>https://hui46226021.github.io/2017/03/20/Android 通过gardle限制引入so库 版本/</id>
-    <published>2017-03-20T15:37:23.000Z</published>
-    <updated>2017-03-20T14:48:43.002Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
-<p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
-<p>这就导致  在部分 arm64的 手机上 百度地图的相关功能 会加载不到 so库,导致程序崩溃</p>
-<p>最后找到解决方案 </p>
-<p>在app 的 build.gradle 下的defaultConfig 添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ndk&#123;</div><div class="line">    moduleName <span class="string">"libgenius_blur"</span></div><div class="line">    ldLibs <span class="string">"log"</span></div><div class="line">    abiFilters <span class="string">"armeabi"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>完美运行   谢谢</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="gradle" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/"/>
-    
-      <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ShVideoPlay android视频播放器</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShVideoPlay android视频播放器/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T07:14:30.506Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
-<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
-<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>腾讯 IM 封装成Library</title>
-    <link href="https://hui46226021.github.io/2017/03/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
-    <id>https://hui46226021.github.io/2017/03/18/腾讯IM封装 ShIMLibrary/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T07:23:19.016Z</updated>
-    
-    <content type="html"><![CDATA[<p>把腾讯 IM 封装成Library<br><a id="more"></a></p>
-<h1 id="IM-Demo"><a href="#IM-Demo" class="headerlink" title="IM_Demo"></a>IM_Demo</h1><h2 id="把腾讯-IM-封装成Library"><a href="#把腾讯-IM-封装成Library" class="headerlink" title="把腾讯 IM 封装成Library"></a>把腾讯 IM 封装成Library</h2><p>依照Demo主项目</p>
-<p>先到腾讯IM 管理平台创建应用  <a href="https://www.qcloud.com/document/product/269/1504" target="_blank" rel="external">传送门</a></p>
-<ul>
-<li>1.导入JrImLibrary</li>
-<li>2.复制 主项目下im 下面的三个类</li>
-<li>3.在Application 中初始化IM模块</li>
-<li>4.替换string.xml 下面的 sdk_appid 和 account_type</li>
-<li>5.还有部分功能 没有实现 例如 上传图片，和搜索用户（考虑在主项目里实现）</li>
-<li>6.服务器端 签名生成 JAVA 代码  [下载地址] (<a href="https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar</a>)</li>
-</ul>
-<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/1.gif" alt=""> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/2.gif" alt=""></p>
-<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/3.gif" alt=""></p>
-<p> 源码地址:<a href="https://github.com/hui46226021/ShIMLibrary" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;把腾讯 IM 封装成Library&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="IM" scheme="https://hui46226021.github.io/categories/Android/JAVA/IM/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
-    
-      <category term="腾讯IM" scheme="https://hui46226021.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ShVideoDemo android 适配录制，压缩</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShVideoDemo%20android%20%E9%80%82%E9%85%8D%E5%BD%95%E5%88%B6%EF%BC%8C%E5%8E%8B%E7%BC%A9/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShVideoDemo android 适配录制，压缩/</id>
-    <published>2017-03-18T14:37:23.000Z</published>
-    <updated>2017-03-19T06:50:28.536Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要：Android 视频录制Demo 仿微信小视频 视频压缩（FFmpeg）<br><a id="more"></a></p>
-<h1 id="ShVideoDemo"><a href="#ShVideoDemo" class="headerlink" title="ShVideoDemo"></a>ShVideoDemo</h1><p>Android 视频录制Demo 防微信小视频 视频压缩（FFmpeg）</p>
-<p>#Download</p>
-<p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.shvideo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideolibrary<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.shvideo:shvideolibrary:1.0.3'</span></div></pre></td></tr></table></figure></p>
-<font color="#ff0022ff" size="7" face="黑体">注意:targetSdkVersion 23 及以上 要注意 6.0运行时权限 或干脆用23以下</font>
-
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/hui46226021/ShVideoDemo/master/1.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>源码地址:<a href="https://github.com/hui46226021/ShVideoDemo" target="_blank" rel="external">https://github.com/hui46226021/ShVideoDemo</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要：Android 视频录制Demo 仿微信小视频 视频压缩（FFmpeg）&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="视频压缩" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/"/>
-    
-      <category term="视频录制" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/Android%20JSON%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7ShJsonUtils/"/>
-    <id>https://hui46226021.github.io/2017/03/18/Android JSON解析工具ShJsonUtils/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-09-27T07:00:30.817Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
-    <id>https://hui46226021.github.io/2017/03/18/Android 仿微信 相册多图选择器 - 副本/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-09-27T07:00:31.571Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>友盟封装第三方登录 第三方粉线</title>
-    <link href="https://hui46226021.github.io/2017/03/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
-    <id>https://hui46226021.github.io/2017/03/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T07:16:31.649Z</updated>
-    
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="ShUmengSdk"><a href="#ShUmengSdk" class="headerlink" title="ShUmengSdk"></a>ShUmengSdk</h1><p>封装友盟 第三方 分享 登录 微信支付</p>
-<p>###当前友盟SDK版本v6.0.9</p>
-<p>###所需各种 appkey 质询QQ 3431339973</p>
-<p>##使用方法</p>
-<ul>
-<li>导入Module(umeng_sdk)</li>
-<li>替换key_strings.xml下的所有 appkey</li>
-<li>在项目的Application 里调用  UMShareHelper.init(this); 注册友盟</li>
-<li>添加微信 回调页面WXEntryActivity  注意：wxapi 后的路径一定不能变</li>
-<li>通过 ShareDialog.getInstance(this,null,”测试分享”,”<a href="https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单" target="_blank" rel="external">https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单</a></li>
-<li>通过 mShareAPI.getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener); 第三方登录</li>
-</ul>
-<p>##注意：在调用分享的页面 要加入 页面回调<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">    UMShareAPI.get(<span class="keyword">this</span>).onActivityResult(requestCode, resultCode, data);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h1 id=&quot;ShUmengSdk&quot;&gt;&lt;a href=&quot;#ShUmengSdk&quot; class=&quot;headerlink&quot; title=&quot;ShUmengSdk&quot;&gt;&lt;/a&gt;ShUmengSdk&lt;/h1&gt;&lt;p&gt;封装友盟 第三方 分享 登录 微信支付&lt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="友盟" scheme="https://hui46226021.github.io/tags/%E5%8F%8B%E7%9B%9F/"/>
-    
-      <category term="第三方登录" scheme="https://hui46226021.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2017/03/18/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2017/03/18/JSON解析/</id>
-    <published>2017-03-18T13:37:23.000Z</published>
-    <updated>2017-03-19T06:17:19.432Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android-PickerView 时间控件，选择权</title>
-    <link href="https://hui46226021.github.io/2017/03/17/Android-PickerView/"/>
-    <id>https://hui46226021.github.io/2017/03/17/Android-PickerView/</id>
-    <published>2017-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T09:22:56.976Z</updated>
-    
-    <content type="html"><![CDATA[<p>在 saiwu-bigkoo 大神以上修改 便于自己使用<br><a id="more"></a></p>
-<h1 id="PickerView-2-x系列"><a href="#PickerView-2-x系列" class="headerlink" title="PickerView (2.x系列)"></a>PickerView (2.x系列)</h1><p>精仿iOS的PickerView控件，有时间选择和选项选择并支持一二三级联动效果<br>——TimePickerView  时间选择器，支持年月日时分，年月日，年月，时分等格式<br>——OptionsPickerView  选项选择器，支持一，二，三级选项选择，并且可以设置是否联动    </p>
-<p>2.x是全新的3D效果，比1.x版本更加贴近iOS的效果，从外观细节上也得到了改善。api兼容1.x版本，只需要把依赖的版本号升级即可，几乎不用修改代码即可完成升级。</p>
-<p>####使用maven 依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pickerview<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>####使用gradle 依赖:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">  compile <span class="string">'com.sh.zsh.code:pickerview:2.1.2'</span></div><div class="line"><span class="comment">//这个是支持农历的分支 compile 'com.bigkoo:pickerview:lunar.1.0'</span></div></pre></td></tr></table></figure></p>
-<h2 id="Demo-图片"><a href="#Demo-图片" class="headerlink" title="Demo 图片"></a>Demo 图片</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<ul>
-<li><a href="https://github.com/saiwu-bigkoo/Android-PickerView/blob/master/app/src/main/java/com/bigkoo/pickerviewdemo/MainActivity.java" target="_blank" rel="external">demo代码请看戳这里</a></li>
-</ul>
-<blockquote>
-<h2 id="更新说明"><a href="#更新说明" class="headerlink" title="更新说明"></a>更新说明</h2><p>v2.1.2</p>
-<ul>
-<li>增加设置选中item方法。<br></li>
-</ul>
-<p>v2.1.1</p>
-<ul>
-<li>修复dismiss时候点击背景会重复dismiss动画问题。<br></li>
-</ul>
-<p>v2.1.0</p>
-<ul>
-<li>去掉反射获取字符串，改为通过继承IPickerViewData。<br></li>
-<li>解决多个PickerView同时存在时取消不了弹窗问题。<br></li>
-</ul>
-<p>v2.0.9</p>
-<ul>
-<li>解决属性和其他第三方库冲突问题。<br></li>
-</ul>
-<p>v2.0.8</p>
-<ul>
-<li>修复＃41 未选中项有错乱数据问题。<br></li>
-<li>加入pickerview_customTextSize 和 pickerview_textsize 到 xml 中 来控制自定义文字大小<br></li>
-</ul>
-<p>v2.0.7</p>
-<ul>
-<li>修复设置初始化position ，第三级数据不对的BUG。 <br></li>
-</ul>
-<p>v2.0.6</p>
-<ul>
-<li>修复不循环模式下点击超出范围问题，修复后点击空白的地方，只能滚到最顶或最底，不会滚出数据范围。 <br></li>
-</ul>
-<p>v2.0.5</p>
-<ul>
-<li>修复不循环模式下底部超出范围问题 <br></li>
-</ul>
-<p>v2.0.4</p>
-<ul>
-<li>修复不循环模式下顶部超出范围问题 <br></li>
-<li>wheel view文字颜色通过xml配置 <br></li>
-</ul>
-<p>v2.0.3</p>
-<ul>
-<li>修复时间选择的时候部分数字选不到直接跳到下一个数字的问题 <br></li>
-</ul>
-<p>v2.0.2</p>
-<ul>
-<li>修复不循环模式下点击空白item处出现数组越界问题 <br></li>
-<li>修复循环模式下只有一条数据的时候只显示三条而不是填充满高度问题  <br></li>
-</ul>
-<p>v2.0.1</p>
-<ul>
-<li>去掉popupWindow，改用View，类名也对应修改为TimePickerView和 OptionsPickerView <br></li>
-<li>加入遮罩效果  <br></li>
-</ul>
-<p>v2.0.0 不需修改任何代码就可以兼容1.x</p>
-<ul>
-<li>外观大整改  <br></li>
-<li>支持反射获取getPickerViewText()来获取要展示数据，以前只能传String的对象，现在可以传任意对象只要有getPickerViewText()函数即可显示对应的字符串，如果没有getPickerViewText()函数则使用对象toString作为显示  <br></li>
-<li>加入setTitle  <br></li>
-</ul>
-</blockquote>
-<p>-－－－－－－－－－－－－－－－－－－－－华丽丽的分割线－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
-<h1 id="PickerView1-x-我已经把1-0-3版本分到v1-x的分支去了，停止维护1-x的分支"><a href="#PickerView1-x-我已经把1-0-3版本分到v1-x的分支去了，停止维护1-x的分支" class="headerlink" title="PickerView1.x (我已经把1.0.3版本分到v1.x的分支去了，停止维护1.x的分支)"></a>PickerView1.x (我已经把1.0.3版本分到v1.x的分支去了，停止维护1.x的分支)</h1><p>####使用gradle 依赖:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.bigkoo:pickerview:1.0.3'</span></div></pre></td></tr></table></figure></p>
-<h2 id="Demo-图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）"><a href="#Demo-图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）" class="headerlink" title="Demo 图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）"></a>Demo 图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）</h2><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo1.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo_zhangshangshenghuo.gif" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><ul>
-<li>WheelView</li>
-<li><a href="https://github.com/weidongjian/androidWheelView/" target="_blank" rel="external">androidWheelView</a></li>
-</ul>
-<p>源码地址:<a href="https://github.com/hui46226021/Android-PickerView" target="_blank" rel="external">https://github.com/hui46226021/Android-PickerView</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在 saiwu-bigkoo 大神以上修改 便于自己使用&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
-    
-  </entry>
   
   <entry>
     <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
@@ -614,6 +110,102 @@ PASSWORD;//密码强度 是不是6至12位字母组合
       <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
     
       <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ShVideoDemo android 适配录制，压缩</title>
+    <link href="https://hui46226021.github.io/2017/02/18/ShVideoDemo%20android%20%E9%80%82%E9%85%8D%E5%BD%95%E5%88%B6%EF%BC%8C%E5%8E%8B%E7%BC%A9/"/>
+    <id>https://hui46226021.github.io/2017/02/18/ShVideoDemo android 适配录制，压缩/</id>
+    <published>2017-02-18T14:37:23.000Z</published>
+    <updated>2017-09-29T14:59:42.913Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要：Android 视频录制Demo 仿微信小视频 视频压缩（FFmpeg）<br><a id="more"></a></p>
+<h1 id="ShVideoDemo"><a href="#ShVideoDemo" class="headerlink" title="ShVideoDemo"></a>ShVideoDemo</h1><p>Android 视频录制Demo 防微信小视频 视频压缩（FFmpeg）</p>
+<p>#Download</p>
+<p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.shvideo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideolibrary<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.shvideo:shvideolibrary:1.0.3'</span></div></pre></td></tr></table></figure></p>
+<font color="#ff0022ff" size="7" face="黑体">注意:targetSdkVersion 23 及以上 要注意 6.0运行时权限 或干脆用23以下</font>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/ShVideoDemo/master/1.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>源码地址:<a href="https://github.com/hui46226021/ShVideoDemo" target="_blank" rel="external">https://github.com/hui46226021/ShVideoDemo</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要：Android 视频录制Demo 仿微信小视频 视频压缩（FFmpeg）&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="视频压缩" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/"/>
+    
+      <category term="视频录制" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android系统启动流程</title>
+    <link href="https://hui46226021.github.io/2017/01/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+    <id>https://hui46226021.github.io/2017/01/21/Android系统启动流程/</id>
+    <published>2017-01-21T14:37:23.000Z</published>
+    <updated>2017-09-29T14:59:40.158Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:梳理一下android系统的启动流程，从init进程 到java层面<br><a id="more"></a></p>
+<p>init是一个进程，做完android系统启动的第一个进程，同时也是linux内核启动的第一个进程，init进程在启动过程中起到了重要的责任。</p>
+<h2 id="init进程的工作"><a href="#init进程的工作" class="headerlink" title="init进程的工作"></a>init进程的工作</h2><ul>
+<li>1.解析配置文件<br>  在init进程中会解析两个配置文件，一个是init.rc, 另一个是 与硬件平台相关的 配置</li>
+<li>2.解析Service</li>
+<li>3.启动zygote</li>
+</ul>
+<h2 id="关于-zygote"><a href="#关于-zygote" class="headerlink" title="关于 zygote"></a>关于 zygote</h2><p>zygote本身是个Native程序。原名app_process  ,该名字 在Android.mk中指定，运行在 该进程又将自己的 名字改成zygote，<br>zygote 启动AppRuntime.<br>在AppRuntime 中主要完成了3步</p>
+<ul>
+<li>1.创建虚拟机 startVm</li>
+<li>2.注册JNI函数 startReg</li>
+<li>3.调用com.android.internal.os.Zygotelnit的main函数，正式让系统进入了java语言的世界</li>
+</ul>
+<h2 id="在Zygotelnit-的main函数中"><a href="#在Zygotelnit-的main函数中" class="headerlink" title="在Zygotelnit 的main函数中"></a>在Zygotelnit 的main函数中</h2><ul>
+<li>1.建立IPC通信服务端 </li>
+<li>2.调用registerZygoteSocket ,通过这个函数他可以相应子孙后代的请求，预加载类和资源（预加载相当多的类 1000多个 想想 android启动为啥慢）</li>
+<li>3.启动system_server  分裂出一个子进程（承担一部分责任，建立与Binder的链接，调用init1 和inti2来启动一些系统服务）</li>
+<li>4.zygote完成创世纪调用下runSelectLoopMode 便睡了</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:梳理一下android系统的启动流程，从init进程 到java层面&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="Linux" scheme="https://hui46226021.github.io/categories/Android/JAVA/Linux/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/tags/Android/"/>
+    
+      <category term="系统" scheme="https://hui46226021.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -964,39 +556,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
   </entry>
   
   <entry>
-    <title>基于Redis的Session共享示例</title>
-    <link href="https://hui46226021.github.io/2016/12/17/%E5%9F%BA%E4%BA%8ERedis%E7%9A%84Session%E5%85%B1%E4%BA%AB%E7%A4%BA%E4%BE%8B/"/>
-    <id>https://hui46226021.github.io/2016/12/17/基于Redis的Session共享示例/</id>
-    <published>2016-12-17T08:17:33.000Z</published>
-    <updated>2017-03-19T06:00:08.118Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要: 在单机情况下，Session可由部署在服务器上的Web容器来管理 (如Tomcat、JBoss)。</p>
-<p>在负载均衡的集群环境下，负载均衡可能将请求分发到不同的服务器上去，在这种情况，需要将有状态的session统一管理起来<br><a id="more"></a><br><a href="https://my.oschina.net/wangmengjun/blog/810179#0-tsina-1-15650-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">https://my.oschina.net/wangmengjun/blog/810179#0-tsina-1-15650-397232819ff9a47a7b7e80a40613cfe1</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要: 在单机情况下，Session可由部署在服务器上的Web容器来管理 (如Tomcat、JBoss)。&lt;/p&gt;
-&lt;p&gt;在负载均衡的集群环境下，负载均衡可能将请求分发到不同的服务器上去，在这种情况，需要将有状态的session统一管理起来&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/JAVA/"/>
-    
-      <category term="Redis" scheme="https://hui46226021.github.io/categories/JAVA/Redis/"/>
-    
-      <category term="Session" scheme="https://hui46226021.github.io/categories/JAVA/Redis/Session/"/>
-    
-    
-      <category term="Redis" scheme="https://hui46226021.github.io/tags/Redis/"/>
-    
-      <category term="session共享" scheme="https://hui46226021.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
-    
-      <category term="分布式" scheme="https://hui46226021.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>关于JVM类加载器</title>
     <link href="https://hui46226021.github.io/2016/10/21/%E5%85%B3%E4%BA%8EJAVA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
     <id>https://hui46226021.github.io/2016/10/21/关于JAVA类加载器/</id>
@@ -1066,6 +625,97 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
   </entry>
   
   <entry>
+    <title>友盟封装第三方登录 第三方粉线</title>
+    <link href="https://hui46226021.github.io/2016/10/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
+    <id>https://hui46226021.github.io/2016/10/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
+    <published>2016-10-18T13:37:23.000Z</published>
+    <updated>2017-09-29T14:59:24.662Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h1 id="ShUmengSdk"><a href="#ShUmengSdk" class="headerlink" title="ShUmengSdk"></a>ShUmengSdk</h1><p>封装友盟 第三方 分享 登录 微信支付</p>
+<p>###当前友盟SDK版本v6.0.9</p>
+<p>###所需各种 appkey 质询QQ 3431339973</p>
+<p>##使用方法</p>
+<ul>
+<li>导入Module(umeng_sdk)</li>
+<li>替换key_strings.xml下的所有 appkey</li>
+<li>在项目的Application 里调用  UMShareHelper.init(this); 注册友盟</li>
+<li>添加微信 回调页面WXEntryActivity  注意：wxapi 后的路径一定不能变</li>
+<li>通过 ShareDialog.getInstance(this,null,”测试分享”,”<a href="https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单" target="_blank" rel="external">https://www.baidu.co,&quot;,&quot;测试分享&quot;).showDialog();弹出分享菜单</a></li>
+<li>通过 mShareAPI.getPlatformInfo(MainActivity.this, SHARE_MEDIA.WEIXIN, umAuthListener); 第三方登录</li>
+</ul>
+<p>##注意：在调用分享的页面 要加入 页面回调<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">    UMShareAPI.get(<span class="keyword">this</span>).onActivityResult(requestCode, resultCode, data);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h1 id=&quot;ShUmengSdk&quot;&gt;&lt;a href=&quot;#ShUmengSdk&quot; class=&quot;headerlink&quot; title=&quot;ShUmengSdk&quot;&gt;&lt;/a&gt;ShUmengSdk&lt;/h1&gt;&lt;p&gt;封装友盟 第三方 分享 登录 微信支付&lt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="友盟" scheme="https://hui46226021.github.io/tags/%E5%8F%8B%E7%9B%9F/"/>
+    
+      <category term="第三方登录" scheme="https://hui46226021.github.io/tags/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>腾讯 IM 封装成Library</title>
+    <link href="https://hui46226021.github.io/2016/09/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
+    <id>https://hui46226021.github.io/2016/09/18/腾讯IM封装 ShIMLibrary/</id>
+    <published>2016-09-18T14:37:23.000Z</published>
+    <updated>2017-09-29T14:59:17.599Z</updated>
+    
+    <content type="html"><![CDATA[<p>把腾讯 IM 封装成Library<br><a id="more"></a></p>
+<h1 id="IM-Demo"><a href="#IM-Demo" class="headerlink" title="IM_Demo"></a>IM_Demo</h1><h2 id="把腾讯-IM-封装成Library"><a href="#把腾讯-IM-封装成Library" class="headerlink" title="把腾讯 IM 封装成Library"></a>把腾讯 IM 封装成Library</h2><p>依照Demo主项目</p>
+<p>先到腾讯IM 管理平台创建应用  <a href="https://www.qcloud.com/document/product/269/1504" target="_blank" rel="external">传送门</a></p>
+<ul>
+<li>1.导入JrImLibrary</li>
+<li>2.复制 主项目下im 下面的三个类</li>
+<li>3.在Application 中初始化IM模块</li>
+<li>4.替换string.xml 下面的 sdk_appid 和 account_type</li>
+<li>5.还有部分功能 没有实现 例如 上传图片，和搜索用户（考虑在主项目里实现）</li>
+<li>6.服务器端 签名生成 JAVA 代码  [下载地址] (<a href="https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar</a>)</li>
+</ul>
+<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/1.gif" alt=""> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/2.gif" alt=""></p>
+<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/3.gif" alt=""></p>
+<p> 源码地址:<a href="https://github.com/hui46226021/ShIMLibrary" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;把腾讯 IM 封装成Library&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="IM" scheme="https://hui46226021.github.io/categories/Android/JAVA/IM/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
+    
+      <category term="腾讯IM" scheme="https://hui46226021.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
+    
+  </entry>
+  
+  <entry>
     <title>DecorView</title>
     <link href="https://hui46226021.github.io/2016/09/17/DecorView/"/>
     <id>https://hui46226021.github.io/2016/09/17/DecorView/</id>
@@ -1100,6 +750,249 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
       <category term="源码" scheme="https://hui46226021.github.io/tags/%E6%BA%90%E7%A0%81/"/>
     
       <category term="setContentView" scheme="https://hui46226021.github.io/tags/setContentView/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-PickerView 时间控件，选择权</title>
+    <link href="https://hui46226021.github.io/2016/08/17/Android-PickerView/"/>
+    <id>https://hui46226021.github.io/2016/08/17/Android-PickerView/</id>
+    <published>2016-08-17T14:37:23.000Z</published>
+    <updated>2017-09-29T14:59:16.595Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 saiwu-bigkoo 大神以上修改 便于自己使用<br><a id="more"></a></p>
+<h1 id="PickerView-2-x系列"><a href="#PickerView-2-x系列" class="headerlink" title="PickerView (2.x系列)"></a>PickerView (2.x系列)</h1><p>精仿iOS的PickerView控件，有时间选择和选项选择并支持一二三级联动效果<br>——TimePickerView  时间选择器，支持年月日时分，年月日，年月，时分等格式<br>——OptionsPickerView  选项选择器，支持一，二，三级选项选择，并且可以设置是否联动    </p>
+<p>2.x是全新的3D效果，比1.x版本更加贴近iOS的效果，从外观细节上也得到了改善。api兼容1.x版本，只需要把依赖的版本号升级即可，几乎不用修改代码即可完成升级。</p>
+<p>####使用maven 依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pickerview<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>####使用gradle 依赖:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">  compile <span class="string">'com.sh.zsh.code:pickerview:2.1.2'</span></div><div class="line"><span class="comment">//这个是支持农历的分支 compile 'com.bigkoo:pickerview:lunar.1.0'</span></div></pre></td></tr></table></figure></p>
+<h2 id="Demo-图片"><a href="#Demo-图片" class="headerlink" title="Demo 图片"></a>Demo 图片</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li><a href="https://github.com/saiwu-bigkoo/Android-PickerView/blob/master/app/src/main/java/com/bigkoo/pickerviewdemo/MainActivity.java" target="_blank" rel="external">demo代码请看戳这里</a></li>
+</ul>
+<blockquote>
+<h2 id="更新说明"><a href="#更新说明" class="headerlink" title="更新说明"></a>更新说明</h2><p>v2.1.2</p>
+<ul>
+<li>增加设置选中item方法。<br></li>
+</ul>
+<p>v2.1.1</p>
+<ul>
+<li>修复dismiss时候点击背景会重复dismiss动画问题。<br></li>
+</ul>
+<p>v2.1.0</p>
+<ul>
+<li>去掉反射获取字符串，改为通过继承IPickerViewData。<br></li>
+<li>解决多个PickerView同时存在时取消不了弹窗问题。<br></li>
+</ul>
+<p>v2.0.9</p>
+<ul>
+<li>解决属性和其他第三方库冲突问题。<br></li>
+</ul>
+<p>v2.0.8</p>
+<ul>
+<li>修复＃41 未选中项有错乱数据问题。<br></li>
+<li>加入pickerview_customTextSize 和 pickerview_textsize 到 xml 中 来控制自定义文字大小<br></li>
+</ul>
+<p>v2.0.7</p>
+<ul>
+<li>修复设置初始化position ，第三级数据不对的BUG。 <br></li>
+</ul>
+<p>v2.0.6</p>
+<ul>
+<li>修复不循环模式下点击超出范围问题，修复后点击空白的地方，只能滚到最顶或最底，不会滚出数据范围。 <br></li>
+</ul>
+<p>v2.0.5</p>
+<ul>
+<li>修复不循环模式下底部超出范围问题 <br></li>
+</ul>
+<p>v2.0.4</p>
+<ul>
+<li>修复不循环模式下顶部超出范围问题 <br></li>
+<li>wheel view文字颜色通过xml配置 <br></li>
+</ul>
+<p>v2.0.3</p>
+<ul>
+<li>修复时间选择的时候部分数字选不到直接跳到下一个数字的问题 <br></li>
+</ul>
+<p>v2.0.2</p>
+<ul>
+<li>修复不循环模式下点击空白item处出现数组越界问题 <br></li>
+<li>修复循环模式下只有一条数据的时候只显示三条而不是填充满高度问题  <br></li>
+</ul>
+<p>v2.0.1</p>
+<ul>
+<li>去掉popupWindow，改用View，类名也对应修改为TimePickerView和 OptionsPickerView <br></li>
+<li>加入遮罩效果  <br></li>
+</ul>
+<p>v2.0.0 不需修改任何代码就可以兼容1.x</p>
+<ul>
+<li>外观大整改  <br></li>
+<li>支持反射获取getPickerViewText()来获取要展示数据，以前只能传String的对象，现在可以传任意对象只要有getPickerViewText()函数即可显示对应的字符串，如果没有getPickerViewText()函数则使用对象toString作为显示  <br></li>
+<li>加入setTitle  <br></li>
+</ul>
+</blockquote>
+<p>-－－－－－－－－－－－－－－－－－－－－华丽丽的分割线－－－－－－－－－－－－－－－－－－－－－－－－－－</p>
+<h1 id="PickerView1-x-我已经把1-0-3版本分到v1-x的分支去了，停止维护1-x的分支"><a href="#PickerView1-x-我已经把1-0-3版本分到v1-x的分支去了，停止维护1-x的分支" class="headerlink" title="PickerView1.x (我已经把1.0.3版本分到v1.x的分支去了，停止维护1.x的分支)"></a>PickerView1.x (我已经把1.0.3版本分到v1.x的分支去了，停止维护1.x的分支)</h1><p>####使用gradle 依赖:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'com.bigkoo:pickerview:1.0.3'</span></div></pre></td></tr></table></figure></p>
+<h2 id="Demo-图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）"><a href="#Demo-图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）" class="headerlink" title="Demo 图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）"></a>Demo 图片（招行信用卡的“掌上生活”里面条件选择器他们用的就是我这个库，大家可以当实际项目参考）</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo1.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/Bigkoo/Android-PickerView/master/preview/pickerdemo_zhangshangshenghuo.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><ul>
+<li>WheelView</li>
+<li><a href="https://github.com/weidongjian/androidWheelView/" target="_blank" rel="external">androidWheelView</a></li>
+</ul>
+<p>源码地址:<a href="https://github.com/hui46226021/Android-PickerView" target="_blank" rel="external">https://github.com/hui46226021/Android-PickerView</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在 saiwu-bigkoo 大神以上修改 便于自己使用&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 通过gardle限制引入so库 版本</title>
+    <link href="https://hui46226021.github.io/2016/07/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
+    <id>https://hui46226021.github.io/2016/07/20/Android 通过gardle限制引入so库 版本/</id>
+    <published>2016-07-20T15:37:23.000Z</published>
+    <updated>2017-09-29T14:59:14.728Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
+<p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
+<p>这就导致  在部分 arm64的 手机上 百度地图的相关功能 会加载不到 so库,导致程序崩溃</p>
+<p>最后找到解决方案 </p>
+<p>在app 的 build.gradle 下的defaultConfig 添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ndk&#123;</div><div class="line">    moduleName <span class="string">"libgenius_blur"</span></div><div class="line">    ldLibs <span class="string">"log"</span></div><div class="line">    abiFilters <span class="string">"armeabi"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>完美运行   谢谢</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="gradle" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/"/>
+    
+      <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2016/07/20/JSON%E8%A7%A3%E6%9E%90/"/>
+    <id>https://hui46226021.github.io/2016/07/20/JSON解析/</id>
+    <published>2016-07-20T13:37:23.000Z</published>
+    <updated>2017-09-29T14:59:44.133Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2016/07/18/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
+    <id>https://hui46226021.github.io/2016/07/18/Android 仿微信 相册多图选择器 - 副本/</id>
+    <published>2016-07-18T13:37:23.000Z</published>
+    <updated>2017-09-29T14:59:38.319Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
@@ -1150,112 +1043,21 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
   </entry>
   
   <entry>
-    <title>Android分包MultiDex原理详解</title>
-    <link href="https://hui46226021.github.io/2016/03/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://hui46226021.github.io/2016/03/17/Android分包MultiDex原理详解/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:51:19.546Z</updated>
+    <title>ShVideoPlay android视频播放器</title>
+    <link href="https://hui46226021.github.io/2016/05/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://hui46226021.github.io/2016/05/18/ShVideoPlay android视频播放器/</id>
+    <published>2016-05-18T14:37:23.000Z</published>
+    <updated>2017-09-29T14:59:41.499Z</updated>
     
-    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
-<h1 id="MultiDex的产生背景"><a href="#MultiDex的产生背景" class="headerlink" title="MultiDex的产生背景"></a>MultiDex的产生背景</h1><p>当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
-<p>但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。</p>
-<p>为了解决方法数超限的问题，需要将该dex文件拆成两个或多个，为此谷歌官方推出了multidex兼容包，配合AndroidStudio实现了一个APK包含多个dex的功能。</p>
-<h2 id="MultiDex的简要原理"><a href="#MultiDex的简要原理" class="headerlink" title="MultiDex的简要原理"></a>MultiDex的简要原理</h2><p>我们以APK中有两个dex文件为例，第二个dex文件为classes2.dex。</p>
-<ul>
-<li><p>兼容包在Applicaion实例化之后，会检查系统版本是否支持 multidex，classes2.dex是否需要安装。</p>
-</li>
-<li><p>如果需要安装则会从APK中解压出classes2.dex并将其拷贝到应用的沙盒目录下。</p>
-</li>
-<li><p>通过反射将classes2.dex注入到当前的classloader中。</p>
-</li>
-</ul>
-<p>下面引入一下官方的文档。</p>
-<p><a href="https://developer.android.com/tools/building/multidex.html#about" target="_blank" rel="external">https://developer.android.com/tools/building/multidex.html#about </a><br>笔者，针对官方文档的翻译如下：</p>
-<p>构建超过65K方法的App</p>
-<p>随着Android设备的慢慢发展，App的大小会变得越来越大。当我们在开发App的时候由于报的大小和引用库的原因，我们在编译我们项目的时候通常会遇到下面一个错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Conversion to Dalvik format failed: Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></div></pre></td></tr></table></figure></p>
-<p>当然，也有一些系统设备会出现以下log信息，不过反馈的是同一个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trouble writing output:Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.You may <span class="keyword">try</span> using --multi-dex option.</div></pre></td></tr></table></figure></p>
-<p>这两个错误条件显示一个共同的数字：65536。这个数字，它表示的是你在一个dex包中的函数方法超过了65535个。</p>
-<p>如果你已经构建了一个Android App时，并收到了这个错误，那么恭喜你，你有很多代码！</p>
-<p>下面我们就具体说说，如何解决这个问题。</p>
-<h2 id="关于65K方法限制"><a href="#关于65K方法限制" class="headerlink" title="关于65K方法限制"></a>关于65K方法限制</h2><p>我们知道Android中的可执行伟剑都存储在dex文件中，其中包含已编译的代码来运行你的应用程序。Dalvik虚拟机对可执行dex文件的规格是有方法限制的，即一个单一的dex文件的方法总数最多为65536。</p>
-<p>其中包括：</p>
-<ul>
-<li><p>引用的Android Framework方法</p>
-</li>
-<li><p>library的方法</p>
-</li>
-<li><p>我们自己书写代码的方法。</p>
-</li>
-</ul>
-<p>为了突破这个方法数的限制，我们就提出了一个方案——生成多个dex文件。这个多个dex文件的方案，我们又称为multidex方案配置。</p>
-<h3 id="Multidex支持Android-5-0之前的版本"><a href="#Multidex支持Android-5-0之前的版本" class="headerlink" title="Multidex支持Android 5.0之前的版本"></a>Multidex支持Android 5.0之前的版本</h3><pre><code>Android5.0版本的平台之前，Android使用的是Dalvik Runtime执行的程序代码。默认情况下，限制应用到一个单一的classes.dex。
-</code></pre><p>Dalvik字节码文件每APK。为了绕过这个限制，你可以使用multidex支持库，成为你的应用程序的主要部分和DEX文件进行管理，获得额外的dex文件，它们包含的代码。</p>
-<h3 id="Multidex支持Android-5-0及更高版本"><a href="#Multidex支持Android-5-0及更高版本" class="headerlink" title="Multidex支持Android 5.0及更高版本"></a>Multidex支持Android 5.0及更高版本</h3><pre><code>Android 5.0和更高的Runtime 如art，本身就支持从应用的APK文件加载多个DEX文件。art支持预编译的应用程序在安装时扫描类（..）。Dex文件编译成一个单一的Android设备上执行.oat文件。
-</code></pre><h2 id="避免65K限制"><a href="#避免65K限制" class="headerlink" title="避免65K限制"></a>避免65K限制</h2><p>当你确定使用multidex的分包策略的时候，请你先确定自己的代码中都是优秀的。你还需要做以下几步：</p>
-<ul>
-<li><p>去掉一些未使用的import和library</p>
-</li>
-<li><p>使用ProGuard去掉一些未使用的代码</p>
-</li>
-</ul>
-<h2 id="用Gradle配置使用Multidex"><a href="#用Gradle配置使用Multidex" class="headerlink" title="用Gradle配置使用Multidex"></a>用Gradle配置使用Multidex</h2><p>Android 的 Gradle插件在 Android Build Tool 21.1开始就支持使用multidex了。</p>
-<p>设置你的应用程序开发项目中使用multidex配置，要求你做出一些修改您的应用程序开发项目。：</p>
-<ul>
-<li><p>修改Gradle的配置，支持multidex</p>
-</li>
-<li><p>修改你的manifest。让其支持multidexapplication类</p>
-</li>
-</ul>
-<p>修改Gradle的build如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">21</span></div><div class="line">    buildToolsVersion <span class="string">"21.1.0"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">21</span></div><div class="line">        ...</div><div class="line"></div><div class="line">        <span class="comment">// Enabling multidex support.</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
-<p>Tips: 你可以在Gradle配置文件中的 multiDexEnabled 在 defaultConfig、<br>buildType、productFlavor选项设置。</p>
-<p>在manifest文件中，添加MultidexApplication Class的引用，如下所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"com.example.android.multidex.myapplication"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.multidex.MultiDexApplication"</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当然，如果你重写了 Application，就对自定义Application的继承方式做一个修改。</p>
-<h2 id="Multidex的方式的局限性"><a href="#Multidex的方式的局限性" class="headerlink" title="Multidex的方式的局限性"></a>Multidex的方式的局限性</h2><p>虽然我们开起来multidex是一个极好的东西，但是multidex还是存在自己的局限性，我们在开发测试之前要清楚局限性是什么：</p>
-<ul>
-<li><p>如果二DEX文件太大，安装分割dex文件是一个复杂的过程，可能会导致应用程序无响应（ANR）的错误。在这种情况下，你应该尽量的减小dex文件的大小和删除无用的逻辑，而不是完全依赖于multidex。</p>
-</li>
-<li><p>在Android 4.0设备（API Level 14）之前，由于Dalvik linearalloc bug（问题22586），multidex很可能是无法运行的。如果希望运行在Level 14之前的Android系统版本，请先确保完整的测试和使用。</p>
-</li>
-<li><p>应用程序使用了multiedex配置的，会造成使用比较大的内存。当然，可能还会引起dalvik虚拟机的崩溃(issue 78035)。</p>
-</li>
-<li><p>对于应用程序比较复杂的，存在较多的library的项目。multidex可能会造成不同依赖项目间的dex文件函数相互调用，找不到方法。</p>
-</li>
-</ul>
-<h2 id="优化multidex开发和构建"><a href="#优化multidex开发和构建" class="headerlink" title="优化multidex开发和构建"></a>优化multidex开发和构建</h2><p>一个multidex的配置，对系统apk的构建、签名、打包复杂性大大的增加。这就意味着，你每一次的构建过程都是相当耗时的。</p>
-<p>为了加快我们的开发速度，加快构建的过程，我们可以在Gradle productFlavors新建出来一个 development flavor 和 production flavor 来满足我们不同构建需求。</p>
-<p>下面是一个列子演示我们如何设置这些flavors在Gradle build文件中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        <span class="comment">// Define separate dev and prod product flavors.</span></div><div class="line">        dev &#123;</div><div class="line">            <span class="comment">// dev utilizes minSDKVersion = 21 to allow the Android gradle plugin</span></div><div class="line">            <span class="comment">// to pre-dex each module and produce an APK that can be tested on</span></div><div class="line">            <span class="comment">// Android Lollipop without time consuming dex merging processes.</span></div><div class="line">            minSdkVersion <span class="number">21</span></div><div class="line">        &#125;</div><div class="line">        prod &#123;</div><div class="line">            <span class="comment">// The actual minSdkVersion for the application.</span></div><div class="line">            minSdkVersion <span class="number">14</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">          ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            <span class="function">runProguard <span class="keyword">true</span></span></div><div class="line">            proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(‘proguard-android.txt‘)</span>,</div><div class="line">                                                 ‘proguard-rules.pro‘</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
-<p>在你完成了伤处的配置修改之后，你配置productFlavor 和 buildType来使用 ，devDebug 变种app。使用这些变种app，可以设置proguard disable、multidex enable方便我们测试。</p>
-<p>这些配置需要针对Android Gradle插件做如下操作：</p>
-<ul>
-<li><p>在分包前，编译应用程序中的每一个module包括依赖项目，这个步骤称为 pre-dexing。</p>
-</li>
-<li><p>include每一个dex文件</p>
-</li>
-<li><p>最重要的是，对于主dex文件，不会做切分。以保证计算速度。</p>
-</li>
-</ul>
-<p>这样设置既能够保证我们的最终报是一个使用了multidex模式的，而又不影响我们平时开发的测试效率。</p>
-<h2 id="在Android-Studio中使用变种App"><a href="#在Android-Studio中使用变种App" class="headerlink" title="在Android Studio中使用变种App"></a>在Android Studio中使用变种App</h2><p>使用multidex工具构建变种App是非常方便的。在Android Studio允许我们选择这种变种构建方式的接口。</p>
-<p>使用Android Studio构建 “devDebug”构建变种app需要完成两步：</p>
-<ul>
-<li><p>打开变种编辑窗口，选择favorites选项。</p>
-</li>
-<li><p>点击编译不同的变种，如下图所示 </p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-</li>
-</ul>
-<p>原文地址：<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1031299.html</a></p>
+    <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
+<h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shvideoplayer:1.0.2'</span></div></pre></td></tr></table></figure></p>
+<p>源码地址:<a href="https://github.com/hui46226021/ShVideoPlay" target="_blank" rel="external">https://github.com/hui46226021/ShVideoPlay</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+      &lt;p&gt;摘要：Android 视频播放器&lt;br&gt;
     
     </summary>
     
@@ -1263,43 +1065,39 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
     
+      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
+    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
-    
-      <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
+      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
     
   </entry>
   
   <entry>
-    <title>windowIsTranslucent 和windowAnimationStyle冲突</title>
-    <link href="https://hui46226021.github.io/2016/03/17/windowIsTranslucent%20%E5%92%8CwindowAnimationStyle%E5%86%B2%E7%AA%81/"/>
-    <id>https://hui46226021.github.io/2016/03/17/windowIsTranslucent 和windowAnimationStyle冲突/</id>
-    <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T04:45:55.636Z</updated>
+    <title>Android JSON解析工具ShJsonUtils</title>
+    <link href="https://hui46226021.github.io/2016/03/18/Android%20JSON%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7ShJsonUtils/"/>
+    <id>https://hui46226021.github.io/2016/03/18/Android JSON解析工具ShJsonUtils/</id>
+    <published>2016-03-18T13:37:23.000Z</published>
+    <updated>2017-09-29T14:59:36.005Z</updated>
     
-    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
-<p>今天在写 android仿IOS 侧滑销毁的时候   需要把activity的背景设置成透明 在滑出的时候漏出 栈下面一层的activity  在AppTheme里面 设置了windowIsTranslucent 属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>#333333<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  　</div><div class="line">　<span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span>  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>这里之前设置过  activity 切换动画<br>接下来 问题来了 </p>
-<p>设置windowIsTranslucent  后android:windowAnimationStyle 失效了，不好使了</p>
-<p>差了写资料 已解决 再次记录下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyActivitySiwtchAnimation"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Animation.Translucent"</span>&gt;</span><span class="xml">  </span></div><div class="line"><span class="comment">&lt;!--创建效果--&gt;</span>  </div><div class="line"><span class="comment">&lt;!--&lt;item name="@android:activityOpenEnterAnimation"&gt;@anim/out_from_right&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个被覆盖效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityOpenExitAnimation"&gt;@anim/out_middle&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="comment">&lt;!--&amp;lt;!&amp;ndash;推出效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseExitAnimation"&gt;@anim/out_toleft&lt;/item&gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&amp;lt;!&amp;ndash;上一个还原效果&amp;ndash;&amp;gt;--&gt;</span> </div><div class="line"> <span class="comment">&lt;!--&lt;item name="@android:activityCloseEnterAnimation"&gt;@anim/out_middle2&lt;/item&gt;--&gt;</span> </div><div class="line">  <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>1.让 android:windowAnimationStyle  继承  @android :style/Animation.Translucent<br>此方法 在退出actvity时候动画有效  创建的时候无效</p>
-<p>2<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowEnterAnimation"</span>&gt;</span>@anim/out_from_right<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowExitAnimation"</span>&gt;</span>@anim/out_toleft<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>此方法有效。<br>不过本人是坑爹的锤子手机 在activity切换的时候 自带 一个由下到上的动画  目前的状态是 创建activity是重屏幕右下角出现 ，在其他手机上 还可以</p>
-<h2 id="方法二：绝对完美解决"><a href="#方法二：绝对完美解决" class="headerlink" title="方法二：绝对完美解决"></a>方法二：绝对完美解决</h2><p>取消<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowAnimationStyle"</span>&gt;</span>@style/MyActivitySiwtchAnimation<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>改在 activity 和 fragment的基类里 重写<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 重写 activity切换方法 消除系统自带动画</div><div class="line">     * <span class="doctag">@param</span> intent</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivity(intent);</div><div class="line"></div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">finish</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.finish();</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode, @Nullable Bundle options)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode, options);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startActivityForResult</span><span class="params">(Intent intent, <span class="keyword">int</span> requestCode)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startActivityForResult(intent, requestCode);</div><div class="line">        overridePendingTransition(R.anim.out_from_right,android.R.anim.slide_out_right);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>实现 切换动画 </p>
-<p>这里收集了一些系统动画</p>
-<p>//实现淡入浅出的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);</div></pre></td></tr></table></figure></p>
-<p>// 由左向右滑入的效果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+      &lt;p&gt;摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用&lt;br&gt;
     
     </summary>
     
@@ -1307,12 +1105,14 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
     
+      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
+    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="windowIsTranslucent" scheme="https://hui46226021.github.io/tags/windowIsTranslucent/"/>
+      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
@@ -1433,6 +1233,115 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="热补丁修复" scheme="https://hui46226021.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
     
       <category term="andfix" scheme="https://hui46226021.github.io/tags/andfix/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android动画 详解（一 补间动画）</title>
+    <link href="https://hui46226021.github.io/2015/12/23/Android%E5%8A%A8%E7%94%BB%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%20%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%EF%BC%89/"/>
+    <id>https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/</id>
+    <published>2015-12-23T11:42:33.000Z</published>
+    <updated>2017-03-19T04:38:12.300Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>打算整理下 android动画方面的知识，嗯  开始
+</code></pre><a id="more"></a>
+<h2 id="一-android补间动画-分为四大类"><a href="#一-android补间动画-分为四大类" class="headerlink" title="一.android补间动画 分为四大类"></a>一.android补间动画 分为四大类</h2><p>alpha（透明度渐变）、scale（尺寸渐变）、translate（位置移动）、rotate（旋转）</p>
+<p>通过JAVA类来表示 AlphaAnimation    ScaleAnimation   TranslateAnimation RotateAnimation</p>
+<h2 id="二-可以通过-XML文件-或者JAVA代码的方式来实现动画"><a href="#二-可以通过-XML文件-或者JAVA代码的方式来实现动画" class="headerlink" title="二.可以通过 XML文件 或者JAVA代码的方式来实现动画"></a>二.可以通过 XML文件 或者JAVA代码的方式来实现动画</h2><h3 id="1-动过XML来实现动画"><a href="#1-动过XML来实现动画" class="headerlink" title="1.动过XML来实现动画"></a>1.动过XML来实现动画</h3><p>在res目录中新建anim文件夹<br>在anim目录中新建一个anim.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"> <span class="tag">&lt;<span class="name">set</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;<span class="name">alpha</span>/&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">scale</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">translate</span>/&gt;</span>       </div><div class="line">  <span class="tag">&lt;<span class="name">rotate</span>/&gt;</span>  </div><div class="line"> <span class="tag">&lt;/<span class="name">set</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>XML动画详细解析</p>
+<h3 id="alpha"><a href="#alpha" class="headerlink" title="alpha"></a>alpha</h3><p>说明: 0.0表示完全透明 1.0表示完全不透明   时间以毫秒为单位</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android" &gt;       </div><div class="line">        &lt;alpha  android:fromAlpha="0.1"   &lt;!--动画起始时透明度        --&gt;        </div><div class="line">                android:toAlpha="1.0"   &lt;!--动画结束时透明度 --&gt;               </div><div class="line">                android:duration="3000"  /&gt; &lt;!--动画持续时间--&gt; </div><div class="line"> &lt;/set&gt;</div></pre></td></tr></table></figure>
+<h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><p>说明: 插入器 下一篇详细说</p>
+<p>pivotX  pivotY 确定了 放大缩小的中心  上面4个属性 定义了开始 和结束的比例 <1缩小>1放大</1缩小></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;scale  </div><div class="line">    android:interpolator=  "@android:anim/accelerate_decelerate_interpolator"                                         </div><div class="line">    &lt;!--interpolator 指定一个动画的插入器              --&gt;</div><div class="line">    android:fromXScale="0.0"   </div><div class="line">    &lt;!--起始时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toXScale="1.4"        </div><div class="line">    &lt;!--结束时 X坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:fromYScale="0.0" </div><div class="line">    &lt;!--起始时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:toYScale="1.4"   </div><div class="line">    &lt;!--结束时Y坐标上的伸缩尺寸              --&gt;</div><div class="line">    android:pivotX="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的X坐标的开始位置              --&gt;</div><div class="line">    android:pivotY="50%"   </div><div class="line">    &lt;!--属性为动画相对于物件的Y坐标的开始位置              --&gt;</div><div class="line">    android:fillAfter="false"   </div><div class="line">    &lt;!--当设置为true ，该动画转化在动画结束后被应用              --&gt;</div><div class="line">    android:duration="700"   </div><div class="line">    &lt;!--时间       --&gt;</div><div class="line">    /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<p>Translate</p>
+<h3 id="说明：没啥说的了"><a href="#说明：没啥说的了" class="headerlink" title="说明：没啥说的了"></a>说明：没啥说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;   </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">&lt;translate  </div><div class="line">    android:fromXDelta="30"   </div><div class="line">    &lt;!--始时 X坐标上的位置                   --&gt;</div><div class="line">    android:toXDelta="-80"   </div><div class="line">    &lt;!--结束时 X坐标上的位置                  --&gt;</div><div class="line">    android:fromYDelta="30"   </div><div class="line">    &lt;!--起始时 Y坐标上的位置                  --&gt;</div><div class="line">    android:toYDelta="300"   </div><div class="line">    &lt;!--结束时 Y坐标上的位置                  --&gt;</div><div class="line">    android:duration="2000"  </div><div class="line">    &lt;!--时间--&gt;</div><div class="line">    /&gt; </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<p>Rotate</p>
+<h3 id="说明：其实也没啥好说的了"><a href="#说明：其实也没啥好说的了" class="headerlink" title="说明：其实也没啥好说的了"></a>说明：其实也没啥好说的了</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line">&lt;set xmlns:android="http://schemas.android.com/apk/res/android"&gt;       </div><div class="line">    &lt;rotate            </div><div class="line">        android:interpolator="@android:anim/accelerate_decelerate_interpolator"         </div><div class="line">        &lt;!--动画的插入器                   --&gt;</div><div class="line">        android:fromDegrees="0"   </div><div class="line">        &lt;!--动画起始时物件的角度          --&gt;</div><div class="line">        android:toDegrees="+350"   </div><div class="line">        &lt;!--画结束时物件旋转的角度 可以大于360度          --&gt;</div><div class="line">        android:pivotX="50%"   </div><div class="line">        &lt;!--X坐标的开始位置          --&gt;</div><div class="line">        android:pivotY="50%"   </div><div class="line">        &lt;!--Y坐标的开始位置          --&gt;</div><div class="line">        android:duration="3000"      </div><div class="line">        /&gt;   </div><div class="line">&lt;/set&gt;</div></pre></td></tr></table></figure>
+<h3 id="在JAVA-代码中调用XML"><a href="#在JAVA-代码中调用XML" class="headerlink" title="在JAVA 代码中调用XML"></a>在JAVA 代码中调用XML</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"> Animation myAnimation= AnimationUtils.loadAnimation(<span class="keyword">this</span>, R.anim.my_action); </div><div class="line"><span class="comment">//使用AnimationUtils类的静态方法loadAnimation()来加载XML中的动画XML文件</span></div></pre></td></tr></table></figure>
+<p>2 试用JAVA 代码 来创建动画</p>
+<p>说明 具体参数含义 可对照上面的XML<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在代码中定义 动画实例对象</span></div><div class="line"><span class="keyword">private</span> Animation myAnimation_Alpha;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Scale;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Translate;</div><div class="line"><span class="keyword">private</span> Animation myAnimation_Rotate;</div><div class="line"></div><div class="line"><span class="comment">//根据各自的构造方法来初始化一个实例对象</span></div><div class="line">myAnimation_Alpha = <span class="keyword">new</span> AlphaAnimation(<span class="number">0.1f</span>, <span class="number">1.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Scale = <span class="keyword">new</span> ScaleAnimation(<span class="number">0.0f</span>, <span class="number">1.4f</span>, <span class="number">0.0f</span>, <span class="number">1.4f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>, Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line"></div><div class="line">myAnimation_Translate = <span class="keyword">new</span> TranslateAnimation(<span class="number">30.0f</span>, -<span class="number">80.0f</span>, <span class="number">30.0f</span>, <span class="number">300.0f</span>);</div><div class="line"></div><div class="line">myAnimation_Rotate = <span class="keyword">new</span> RotateAnimation(<span class="number">0.0f</span>, +<span class="number">350.0f</span>,</div><div class="line">Animation.RELATIVE_TO_SELF,<span class="number">0.5f</span>,Animation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);</div><div class="line">设置动画监听，注意 当控件移动后  其点击事件 还在原来的未知 需要调用view.layout(x,x,x,x);方法修改下 控件的未知</div><div class="line"></div><div class="line">animation.setAnimationListener(<span class="keyword">new</span> Animation.AnimationListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationStart</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationRepeat</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">              </div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">最后 就查给控件添加上 创建好的动画 并启动了</div><div class="line"></div><div class="line">view.startAnimation(animation);</div></pre></td></tr></table></figure></p>
+<h1 id="谢谢"><a href="#谢谢" class="headerlink" title="谢谢"></a>谢谢</h1>]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;&lt;code&gt;打算整理下 android动画方面的知识，嗯  开始
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
+    
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="动画" scheme="https://hui46226021.github.io/tags/%E5%8A%A8%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>整理 iOS 9 适配中出现的坑</title>
+    <link href="https://hui46226021.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
+    <id>https://hui46226021.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
+    <published>2015-12-18T08:17:33.000Z</published>
+    <updated>2017-03-19T05:27:01.979Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要: 整理 iOS 9 适配中出现的坑</p>
+<a id="more"></a>
+<p><a href="http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要: 整理 iOS 9 适配中出现的坑&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/categories/IOS/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="session共享" scheme="https://hui46226021.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
+    
+      <category term="分布式" scheme="https://hui46226021.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="IOS 9" scheme="https://hui46226021.github.io/tags/IOS-9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单个ViewControl适配不同ios版本xib文件实现</title>
+    <link href="https://hui46226021.github.io/2015/12/07/%E5%8D%95%E4%B8%AAViewControl%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8Cios%E7%89%88%E6%9C%ACxib%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://hui46226021.github.io/2015/12/07/单个ViewControl适配不同ios版本xib文件实现/</id>
+    <published>2015-12-07T08:17:33.000Z</published>
+    <updated>2017-03-19T05:29:45.643Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要: IOS 适配不同的界面xib</p>
+<a id="more"></a>
+<p>方法如下：</p>
+<p>在跳转本界面时，在代码里面实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">float</span> systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];</div><div class="line"><span class="keyword">if</span> (systemVersion &gt;= <span class="number">7.0</span>)</div><div class="line">&#123;</div><div class="line">    AboutUSView *aboutUSView= [[[AboutUSView alloc] initWithNibName:@<span class="string">"AboutUSView1"</span> bundle:nil] autorelease];</div><div class="line">    [self.navigationController pushViewController:aboutUSView animated:TRUE];</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span></div><div class="line">&#123;</div><div class="line">    AboutUSView *aboutUSView= [[[AboutUSView alloc] initWithNibName:@<span class="string">"AboutUSView"</span> bundle:nil] autorelease];</div><div class="line">    [self.navigationController pushViewController:aboutUSView animated:TRUE];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要: IOS 适配不同的界面xib&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/categories/IOS/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="IOS" scheme="https://hui46226021.github.io/tags/IOS/"/>
+    
+      <category term="xib" scheme="https://hui46226021.github.io/tags/xib/"/>
+    
+      <category term="屏幕适配" scheme="https://hui46226021.github.io/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"/>
     
   </entry>
   

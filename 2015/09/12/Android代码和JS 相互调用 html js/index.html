@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android代码和JS 相互调用 html js | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,原创,JS JAVA调用">
+    <meta name="description" content="摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android代码和JS 相互调用 html js">
+<meta property="og:url" content="https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势">
+<meta property="og:updated_time" content="2017-09-29T15:00:08.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android代码和JS 相互调用 html js">
+<meta name="twitter:description" content="摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android代码和JS 相互调用 html js</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android代码和JS 相互调用 html js</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-09-12T03:37:23.000Z" itemprop="datePublished" class="page-time">
+  2015-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/Html5/">Html5</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/Html5/JS/">JS</a></li></ul></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一-JS调用-JAVA"><span class="post-toc-number">1.</span> <span class="post-toc-text">一:JS调用 JAVA</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-首先让webview-支持JS"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">1.首先让webview 支持JS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-注入-Java-对象到-WebView-中。"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">2.注入 Java 对象到 WebView 中。</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意：在-JELLY-BEAN-MR1以后-需要在被调用的方法上加-JavascriptInterface-要不然调用会失败"><span class="post-toc-number">2.</span> <span class="post-toc-text">注意：在 JELLY_BEAN_MR1以后 需要在被调用的方法上加 @JavascriptInterface 要不然调用会失败</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-JS代码"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">3.JS代码</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二：JAVA调用JS"><span class="post-toc-number">3.</span> <span class="post-toc-text">二：JAVA调用JS</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android代码和JS 相互调用 html js"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android代码和JS 相互调用 html js</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年09月12日 11:37" datetime="2015-09-12T03:37:23.000Z"  itemprop="datePublished">2015-09-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/">JAVA</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/Html5/">Html5</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/JAVA/Html5/JS/">JS</a></li></ul></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势<br><a id="more"></a></p>
+<h1 id="一-JS调用-JAVA"><a href="#一-JS调用-JAVA" class="headerlink" title="一:JS调用 JAVA"></a>一:JS调用 JAVA</h1><h3 id="1-首先让webview-支持JS"><a href="#1-首先让webview-支持JS" class="headerlink" title="1.首先让webview 支持JS"></a>1.首先让webview 支持JS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">webView.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<h3 id="2-注入-Java-对象到-WebView-中。"><a href="#2-注入-Java-对象到-WebView-中。" class="headerlink" title="2.注入 Java 对象到 WebView 中。"></a>2.注入 Java 对象到 WebView 中。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">JSKit js = <span class="keyword">new</span> JSKit(<span class="keyword">this</span>);</div><div class="line"> mWebView.addJavascriptInterface(js, <span class="string">"myjs"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by zhush on 2016/5/3.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JSKit</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> MainActivity ma;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JSKit</span><span class="params">(MainActivity context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ma = context;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@JavascriptInterface</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showMsg</span><span class="params">(String msg)</span> </span>&#123;</div><div class="line">        Toast.makeText(ma, msg, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="注意：在-JELLY-BEAN-MR1以后-需要在被调用的方法上加-JavascriptInterface-要不然调用会失败"><a href="#注意：在-JELLY-BEAN-MR1以后-需要在被调用的方法上加-JavascriptInterface-要不然调用会失败" class="headerlink" title="注意：在 JELLY_BEAN_MR1以后 需要在被调用的方法上加 @JavascriptInterface 要不然调用会失败"></a>注意：在 JELLY_BEAN_MR1以后 需要在被调用的方法上加 @JavascriptInterface 要不然调用会失败</h1><p>[Android版本和API Level对应关系]（<a href="http://blog.csdn.net/huiguixian/article/details/39928027）" target="_blank" rel="external">http://blog.csdn.net/huiguixian/article/details/39928027）</a></p>
+<h3 id="3-JS代码"><a href="#3-JS代码" class="headerlink" title="3.JS代码"></a>3.JS代码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">HTML</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">HEAD</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, target-densitydpi=device-dpi"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">META</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">   function showMsgInAndroid()&#123;</div><div class="line">       myjs.showMsg('标识符');</div><div class="line"></div><div class="line"></div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">HEAD</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">BODY</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>测试js使用<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'btntest'</span> <span class="attr">onclick</span>=<span class="string">'showMsgInAndroid()'</span>&gt;</span>调用android方法<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">HTML</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="二：JAVA调用JS"><a href="#二：JAVA调用JS" class="headerlink" title="二：JAVA调用JS"></a>二：JAVA调用JS</h1><p>1.JAVA 代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mWebView.loadUrl(<span class="string">"javascript:funFromjs('"</span>+imageUrl+<span class="string">"')"</span>)</div></pre></td></tr></table></figure></p>
+<p>2.JS代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">function <span class="title">funFromjs</span><span class="params">(str)</span></span>&#123;</div><div class="line">         alert(str);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>Demo下载：<a href="https://github.com/hui46226021/JSAndroidCallCamera.git" target="_blank" rel="external">https://github.com/hui46226021/JSAndroidCallCamera.git</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS-JAVA调用/">JS JAVA调用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&title=《Android代码和JS 相互调用 html js》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&title=《Android代码和JS 相互调用 html js》 — 独角兽之路&source=摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android代码和JS 相互调用 html js》 — 独角兽之路&url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/09/17/windowIsTranslucent 和windowAnimationStyle冲突/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">windowIsTranslucent 和windowAnimationStyle冲突</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/08/17/Intent-filter属性详解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android开发--Intent-filter属性详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android代码和JS 相互调用 html js" data-title="Android代码和JS 相互调用 html js" data-url="https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&title=《Android代码和JS 相互调用 html js》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&title=《Android代码和JS 相互调用 html js》 — 独角兽之路&source=摘要:今天接到需求要调用相机拍照 但页面是H5写的 所以研究了下 android里 JAVA 代码和JS 相互调用这方面的姿势" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android代码和JS 相互调用 html js》 — 独角兽之路&url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/09/12/Android代码和JS 相互调用 html js/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3aS27DMAwFwNz/0um2QRH78aMgBUaronVsjwqIDMnHI17PX+vdb66vrD4r//3CwsPDwxu8+t91fc3145NPzTf35v54eHh4x3jXB3ESAK4/O7k+DzZ4eHh438mrptd56pw8BQ8PD+8/8qpFhK2Nw8PDw/s2XjWFzZPspITRCxLLtRY8PDy8mDc/yj//85H+Hh4eHt64q54f6HkIqQah52Dh4eHhneBVCw356MB8JCu5WzJkgIeHh3eOlxdPq2MB1WS9Wra4Sb7x8PDwjvG2SrTJ1lQZo03Ew8PDW+X1XiVn5Mf9pCV2U4bAw8PDO8abH815MWI3ga5UJvDw8PB2eJMHJ2lu0uJKtjV/z5f+Hh4eHt4qL29KbSXNk6S8WlLBw8PDO8GrHuh5I793lJcP/evNxcPDwzvAywupSaFhMm6V37McNvDw8PBWeVvlhmpomQeJ6AsAHh4e3gFe71W2Chl5Qp+n7ws7jYeHh1dMqZOXSz7Va2jlYamwZXh4eHirvOotcljvr/M7v1jw8PDwjvHypv6kOjofusoHDvDw8PDO8apFh2rJIG/z90ohaxUXPDw8vHG1Mznuq6ta/O2VPAqjV3h4eHgt3lolOO495aNX1VT+ZjICDw8Pb4mXt+3zMm5yxPeu7LXc8PDw8E7wkkN/Uj6Yjw5US7rl6S08PDy8AW+SClebWNUt7v1j8PDw8D7DyztmvYAxSc3z8gceHh7eCV6viVU94pMCcS/A3AQJPDw8vAO86oGbH+uT2afqE3shBA8PD2/Cy4NBPiLQGwVInlL+AoCHh4d3jJe/dK/UO0m782DzttaCh4eH9wW8nF0dLJi06NYCAx4eHt4qr3eUF8ak4iJFlI7j4eHhHePlTa95wp1f32ub4eHh4Z3mLXzhvzzKqwXZatBaWHh4eHgp7weVDuQpozfIyAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
