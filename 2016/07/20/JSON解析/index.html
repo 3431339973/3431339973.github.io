@@ -13,23 +13,23 @@
     
     
     
-    <title>基于注解的mybatis | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <title>Android JSON解析工具ShJsonUtils | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#2caa29">
     
     
-    <meta name="keywords" content="数据库,注解">
-    <meta name="description" content="原文地址：http://wwww.iteye.com/blog/1235996">
+    <meta name="keywords" content="移动开发,原创,JSON解析">
+    <meta name="description" content="摘要:封装了一个 json解析的库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于注解的mybatis">
-<meta property="og:url" content="https://hui46226021.github.io/2014/12/17/基于注解的mybatis/index.html">
+<meta property="og:title" content="Android JSON解析工具ShJsonUtils">
+<meta property="og:url" content="https://hui46226021.github.io/2016/07/20/JSON解析/index.html">
 <meta property="og:site_name" content="独角兽之路">
-<meta property="og:description" content="原文地址：http://wwww.iteye.com/blog/1235996">
-<meta property="og:updated_time" content="2017-10-01T12:46:37.668Z">
+<meta property="og:description" content="摘要:封装了一个 json解析的库">
+<meta property="og:updated_time" content="2017-10-01T12:49:52.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于注解的mybatis">
-<meta name="twitter:description" content="原文地址：http://wwww.iteye.com/blog/1235996">
+<meta name="twitter:title" content="Android JSON解析工具ShJsonUtils">
+<meta name="twitter:description" content="摘要:封装了一个 json解析的库">
     
         <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
     
@@ -127,7 +127,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">基于注解的mybatis</div>
+        <div class="flex-col header-title ellipsis">Android JSON解析工具ShJsonUtils</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -149,15 +149,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">基于注解的mybatis</h1>
+        <h1 class="title">Android JSON解析工具ShJsonUtils</h1>
         <h5 class="subtitle">
             
-                <time datetime="2014-12-17T08:17:33.000Z" itemprop="datePublished" class="page-time">
-  2014-12-17
+                <time datetime="2016-07-20T13:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-07-20
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/DB/">DB</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
 
             
         </h5>
@@ -170,16 +170,23 @@
 
 <div class="container body-wrap">
     
-<article id="post-基于注解的mybatis"
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ShJsonUtils"><span class="post-toc-number">1.</span> <span class="post-toc-text">ShJsonUtils</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-JSON解析"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">基于注解的mybatis</h1>
+        <h1 class="post-card-title">Android JSON解析工具ShJsonUtils</h1>
         <div class="post-meta">
-            <time class="post-time" title="2014年12月17日 16:17" datetime="2014-12-17T08:17:33.000Z"  itemprop="datePublished">2014-12-17</time>
+            <time class="post-time" title="2016年07月20日 21:37" datetime="2016-07-20T13:37:23.000Z"  itemprop="datePublished">2016-07-20</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/DB/">DB</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
 
 
 
@@ -193,8 +200,16 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <a id="more"></a>
-<p>原文地址：<a href="http://wwww.iteye.com/blog/1235996" target="_blank" rel="external">http://wwww.iteye.com/blog/1235996</a></p>
+            <p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
+<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
+<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>创建 JSONUtil 对象，传入json字符串</li>
+<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
+<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
+</ul>
+<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
 
         </div>
 
@@ -221,7 +236,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注解/">注解</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSON解析/">JSON解析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
 
 
             
@@ -231,7 +246,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&title=《基于注解的mybatis》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/07/20/JSON解析/&title=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -241,22 +256,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&title=《基于注解的mybatis》 — 独角兽之路&source=到了含堡，我们每天必须演足8小时" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/07/20/JSON解析/&title=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&source=摘要:封装了一个 json解析的库" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/07/20/JSON解析/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于注解的mybatis》 — 独角兽之路&url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&via=https://hui46226021.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&url=https://hui46226021.github.io/2016/07/20/JSON解析/&via=https://hui46226021.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/07/20/JSON解析/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -279,18 +294,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2014/12/17/基于Redis的Session共享示例/" id="post-prev" class="post-nav-link">
+      <a href="/2016/07/20/Android 通过gardle限制引入so库 版本/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">基于Redis的Session共享示例</h4>
+        <h4 class="title">Android 通过gardle限制引入so库 版本</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2014/12/05/Java程序打包成jar包/" id="post-next" class="post-nav-link">
+      <a href="/2016/07/18/Android 仿微信 相册多图选择器 - 副本/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Java程序打包成jar包/</h4>
+        <h4 class="title">Android JSON解析工具ShJsonUtils</h4>
       </a>
     </div>
   
@@ -301,7 +316,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="基于注解的mybatis" data-title="基于注解的mybatis" data-url="https://hui46226021.github.io/2014/12/17/基于注解的mybatis/"></div>
+    <div class="ds-thread" data-thread-key="JSON解析" data-title="Android JSON解析工具ShJsonUtils" data-url="https://hui46226021.github.io/2016/07/20/JSON解析/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -383,7 +398,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&title=《基于注解的mybatis》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/07/20/JSON解析/&title=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -393,22 +408,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&title=《基于注解的mybatis》 — 独角兽之路&source=到了含堡，我们每天必须演足8小时" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/07/20/JSON解析/&title=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&source=摘要:封装了一个 json解析的库" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/07/20/JSON解析/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《基于注解的mybatis》 — 独角兽之路&url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/&via=https://hui46226021.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android JSON解析工具ShJsonUtils》 — 独角兽之路&url=https://hui46226021.github.io/2016/07/20/JSON解析/&via=https://hui46226021.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2014/12/17/基于注解的mybatis/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/07/20/JSON解析/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -419,7 +434,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqklEQVR42u3aMW7DMBAEQP//0w6QKkUk7/JI28WoCiRH4jiAjtm7xyM+nr/H/Zm/5/9efV4c91evPvk4ceDh4eEtLT2/9T0sx18h78/ka8bDw8M7zUuWew9oX/GXC4p5SQHDw8PD+yxv7TP559vCgIeHh/f9vORh9wXjxPYaDw8P71O8tbB1b5FoA5HNWQseHh5ezGsbYN/w88H+Hh4eHt6gq56/cNt4d775jlaLh4eHd4C3d6AqiTDuzydb5zaewMPDw9vLW4sY5kViToqoeHh4eId5ySLyt24eIqzFwVHEjIeHh3eANxmEWtvs5pvvPBbBw8PD+xQveX237fnJPdvAIqpgeHh4eJt4k43yfOApLy3t1hwPDw/vHG+OSRpm+Z3b5llR9/Dw8PDGvHzLm7/Q2whjEm1EKTUeHh7eMV4b5s7Hp9rIuA1Q8PDw8E7w1thtfJCMJrQlqo0q8PDw8Hbxku1pvtXOt8jtMNaGuoeHh4d3gPccHGttqvYraMew8PDw8M7x6o7Z0ss6P9822y6v4uHh4R3jtYVhMjjVhsJtWdpQ9/Dw8PCCHCD/hcmi8/i1ZbzYyuPh4eEd4K01wObNs0nguzg0gIeHhzfm7QoUkqfsCj6KeAIPDw/vLby2wd9u0OehxmgyAg8PD+8AL4HtDWTzTXP7LDw8PLwTvLVxq/w//TZgXSsML/4keHh4eFt5bUAwaVm1X81a6PxP3cPDw8M7zGvHreb4yX3w8PDw3s+bDBO05WQyWDAJQfDw8PBO8Naih3ZEoB0FmJzHw8PDew+vLQbnlrU2uPAizMXDw8P7EK8dtMrbbGuNsejpeHh4eF/Gy0ltFpK30KIwAg8PD+8Ar23/5+/etVZW/qxtWQseHh7eeu/+0QLWSsXagiaBBR4eHt6Y9wN2U4i9aNPuWgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aQY6EMAxEUe5/aeYArc78skGtOJ8VYhjg9aIU27kufNzLY33n+pn8+gOHDBkytmWQTySfxd/y+bnrc/LzyZAh4wTGOvjWwUquc9j6vV+vy5AhQwZYAnZCk5zLkCFDRspIF3wkZH8QuDJkyNiKUXscL187QfxwLS5DhowNGf1Pee/8lfmGDBkytmLc4cGLWD7O5PH69Y0yZMgYzeABV9tCwReF/aGCDBkyZjP4a/qDgbTNFy8WZciQMY5BFna1Fj/5gfio4J/nyJAhYzQjXd6lAVorg3nrTYYMGSczngrKWquu38KTIUPGVEYaozz4+CKPl7VxH06GDBmbM3gjnjDu9pGGvgwZMmYz0rEiD03eJusMRGXIkHEOI23x1wK0dj8qX2XIkDGa0cHUNlLU/hoUsTJkyBjH4O2tdCtGuihsFbQyZMg4hsEDlw8a03DnW75kyJBxDiNtb/FITa+n40wZMmScyUiXieQ6v6czyJQhQ8YJjH6jrdY+I+EeFM8yZMg4gJEODvnCsYMMhhYyZMg4gNEZTPISN0UGz5QhQ8ZQRm2DVy2m0wUf+S+U0DJkyNickcZcbQNZv7lWG3PKkCFjEoMXjel4IGWng8yr9mIZMmRsy6htvKgNLHnDLkDKkCFDBl7e9QtavnXjgcCVIUPGMYwOlURtPImVIUPGUEZadqZBWduQ8Uq7TYYMGRsyalsc+BiyxkvLaRkyZAxl/AEUvPAu+IICkQAAAABJRU5ErkJggg==" alt="微信分享二维码">
 </div>
 
 
