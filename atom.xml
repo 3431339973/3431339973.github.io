@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hui46226021.github.io/"/>
-  <updated>2017-03-18T09:47:10.277Z</updated>
+  <updated>2017-10-01T12:50:27.948Z</updated>
   <id>https://hui46226021.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
     <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
     <published>2017-03-17T14:37:23.000Z</published>
-    <updated>2017-03-18T09:47:10.277Z</updated>
+    <updated>2017-10-01T12:50:27.948Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:由于公司业务 有大量表单页面的需求 故独立封装一套表单映射 布局框架<br><a id="more"></a></p>
 <h1 id="ShFormUtils"><a href="#ShFormUtils" class="headerlink" title="ShFormUtils"></a>ShFormUtils</h1><h1 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h1><p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shform<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -94,10 +94,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="View" scheme="https://hui46226021.github.io/categories/Android/JAVA/View/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -118,7 +114,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     <link href="https://hui46226021.github.io/2017/02/18/ShVideoDemo%20android%20%E9%80%82%E9%85%8D%E5%BD%95%E5%88%B6%EF%BC%8C%E5%8E%8B%E7%BC%A9/"/>
     <id>https://hui46226021.github.io/2017/02/18/ShVideoDemo android 适配录制，压缩/</id>
     <published>2017-02-18T14:37:23.000Z</published>
-    <updated>2017-09-29T14:59:42.913Z</updated>
+    <updated>2017-10-01T12:50:37.769Z</updated>
     
     <content type="html"><![CDATA[<p>摘要：Android 视频录制Demo 仿微信小视频 视频压缩（FFmpeg）<br><a id="more"></a></p>
 <h1 id="ShVideoDemo"><a href="#ShVideoDemo" class="headerlink" title="ShVideoDemo"></a>ShVideoDemo</h1><p>Android 视频录制Demo 防微信小视频 视频压缩（FFmpeg）</p>
@@ -145,10 +141,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -165,7 +157,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     <link href="https://hui46226021.github.io/2017/01/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
     <id>https://hui46226021.github.io/2017/01/21/Android系统启动流程/</id>
     <published>2017-01-21T14:37:23.000Z</published>
-    <updated>2017-09-29T14:59:40.158Z</updated>
+    <updated>2017-10-01T12:47:29.039Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:梳理一下android系统的启动流程，从init进程 到java层面<br><a id="more"></a></p>
 <p>init是一个进程，做完android系统启动的第一个进程，同时也是linux内核启动的第一个进程，init进程在启动过程中起到了重要的责任。</p>
@@ -196,10 +188,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="Linux" scheme="https://hui46226021.github.io/categories/Android/JAVA/Linux/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -214,7 +202,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     <link href="https://hui46226021.github.io/2017/01/01/Retrofit2.0/"/>
     <id>https://hui46226021.github.io/2017/01/01/Retrofit2.0/</id>
     <published>2017-01-01T04:32:21.000Z</published>
-    <updated>2017-03-18T01:24:40.644Z</updated>
+    <updated>2017-10-01T12:50:24.642Z</updated>
     
     <content type="html"><![CDATA[<p>Retrofit基于注解和动态代理，优化了Android中的网络请求操作。<br><a id="more"></a></p>
 <h1 id="OverView"><a href="#OverView" class="headerlink" title="OverView"></a>OverView</h1><h2 id="这篇笔记基于Retrofit-1-9。"><a href="#这篇笔记基于Retrofit-1-9。" class="headerlink" title="这篇笔记基于Retrofit 1.9。"></a>这篇笔记基于Retrofit 1.9。</h2><p><img src="https://static.oschina.net/uploads/img/201701/19105443_jXYF.png" alt=""></p>
@@ -297,10 +285,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="restful" scheme="https://hui46226021.github.io/categories/Android/JAVA/restful/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -317,7 +301,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     <link href="https://hui46226021.github.io/2016/12/22/JCenter/"/>
     <id>https://hui46226021.github.io/2016/12/22/JCenter/</id>
     <published>2016-12-22T04:32:21.000Z</published>
-    <updated>2017-03-18T00:57:54.385Z</updated>
+    <updated>2017-10-01T12:49:44.526Z</updated>
     
     <content type="html"><![CDATA[<p>为了方便 需要把jar发布到Maven服务器<br>网上的步骤看起来实在太麻烦，gituhb上偶然间看到的一个项目，经过实际验证确实可行。github连接：<a href="https://github.com/xiaopansky/android-library-publish-to-jcenter" target="_blank" rel="external">https://github.com/xiaopansky/android-library-publish-to-jcenter</a></p>
 <p>这是一个帮助Android开发者将aar发布到jcenter的项目，这个项目已经将需要写的脚本封装好了，我们只需要配置相关属性即可在5分钟之内发布我们的项目到JCenter</p>
@@ -534,15 +518,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="gradle" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/"/>
-    
-      <category term="Maven" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/Maven/"/>
-    
-      <category term="JCenter" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/Maven/JCenter/"/>
+      <category term="Maven" scheme="https://hui46226021.github.io/categories/Maven/"/>
     
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
@@ -560,7 +536,7 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     <link href="https://hui46226021.github.io/2016/10/21/%E5%85%B3%E4%BA%8EJAVA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
     <id>https://hui46226021.github.io/2016/10/21/关于JAVA类加载器/</id>
     <published>2016-10-21T12:37:23.000Z</published>
-    <updated>2017-09-29T14:47:13.082Z</updated>
+    <updated>2017-10-01T12:46:13.957Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧<br><a id="more"></a></p>
 <h3 id="首先来了解一下字节码和class文件的区别："><a href="#首先来了解一下字节码和class文件的区别：" class="headerlink" title="首先来了解一下字节码和class文件的区别："></a>首先来了解一下字节码和class文件的区别：</h3><p>我们知道，新建一个java对象的时候，JVM要将这个对象对应的字节码加载到内存中，这个字节码的原始信息存放在classpath(就是我们新建Java工程的bin目录下)指定的目录下的.class文件,类加载需要将.class文件导入到硬盘中，经过一些处理之后变成字节码在加载到内存中。</p>
@@ -611,11 +587,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
     </summary>
     
-      <category term="JVM" scheme="https://hui46226021.github.io/categories/JVM/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/JVM/JAVA/"/>
-    
-      <category term="Linux" scheme="https://hui46226021.github.io/categories/JVM/JAVA/Linux/"/>
+      <category term="JAVA" scheme="https://hui46226021.github.io/categories/JAVA/"/>
     
     
       <category term="AppClassLoader" scheme="https://hui46226021.github.io/tags/AppClassLoader/"/>
@@ -629,7 +601,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/10/18/ShUmengSdk%20%E5%8F%8B%E7%9B%9F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%88%86%E4%BA%AB%20%E7%99%BB%E5%BD%95%20%E5%B0%81%E8%A3%85/"/>
     <id>https://hui46226021.github.io/2016/10/18/ShUmengSdk 友盟第三方分享 登录 封装/</id>
     <published>2016-10-18T13:37:23.000Z</published>
-    <updated>2017-09-29T14:59:24.662Z</updated>
+    <updated>2017-10-01T12:50:31.040Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h1 id="ShUmengSdk"><a href="#ShUmengSdk" class="headerlink" title="ShUmengSdk"></a>ShUmengSdk</h1><p>封装友盟 第三方 分享 登录 微信支付</p>
@@ -656,8 +628,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -674,7 +644,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/09/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
     <id>https://hui46226021.github.io/2016/09/18/腾讯IM封装 ShIMLibrary/</id>
     <published>2016-09-18T14:37:23.000Z</published>
-    <updated>2017-09-29T14:59:17.599Z</updated>
+    <updated>2017-10-01T12:47:02.213Z</updated>
     
     <content type="html"><![CDATA[<p>把腾讯 IM 封装成Library<br><a id="more"></a></p>
 <h1 id="IM-Demo"><a href="#IM-Demo" class="headerlink" title="IM_Demo"></a>IM_Demo</h1><h2 id="把腾讯-IM-封装成Library"><a href="#把腾讯-IM-封装成Library" class="headerlink" title="把腾讯 IM 封装成Library"></a>把腾讯 IM 封装成Library</h2><p>依照Demo主项目</p>
@@ -700,10 +670,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="IM" scheme="https://hui46226021.github.io/categories/Android/JAVA/IM/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -720,7 +686,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/09/17/DecorView/"/>
     <id>https://hui46226021.github.io/2016/09/17/DecorView/</id>
     <published>2016-09-17T08:17:33.000Z</published>
-    <updated>2017-03-17T23:07:17.958Z</updated>
+    <updated>2017-10-01T12:48:07.585Z</updated>
     
     <content type="html"><![CDATA[<p>摘要: Activity 的结构  setContentView  的执行<br><a id="more"></a></p>
 <h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p>Activity的setContentView 方法里 调用了 getWindow().setContentView(layoutResID);  </p>
@@ -742,8 +708,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="DecorView" scheme="https://hui46226021.github.io/tags/DecorView/"/>
     
@@ -758,7 +722,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/08/17/Android-PickerView/"/>
     <id>https://hui46226021.github.io/2016/08/17/Android-PickerView/</id>
     <published>2016-08-17T14:37:23.000Z</published>
-    <updated>2017-09-29T14:59:16.595Z</updated>
+    <updated>2017-10-01T12:48:04.370Z</updated>
     
     <content type="html"><![CDATA[<p>在 saiwu-bigkoo 大神以上修改 便于自己使用<br><a id="more"></a></p>
 <h1 id="PickerView-2-x系列"><a href="#PickerView-2-x系列" class="headerlink" title="PickerView (2.x系列)"></a>PickerView (2.x系列)</h1><p>精仿iOS的PickerView控件，有时间选择和选项选择并支持一二三级联动效果<br>——TimePickerView  时间选择器，支持年月日时分，年月日，年月，时分等格式<br>——OptionsPickerView  选项选择器，支持一，二，三级选项选择，并且可以设置是否联动    </p>
@@ -867,8 +831,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -883,7 +845,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/07/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
     <id>https://hui46226021.github.io/2016/07/20/Android 通过gardle限制引入so库 版本/</id>
     <published>2016-07-20T15:37:23.000Z</published>
-    <updated>2017-09-29T14:59:14.728Z</updated>
+    <updated>2017-10-01T12:47:56.915Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:android 的cpu不同 需要引入的so版本也不尽相同，有时候 会出现由于so库加载不到 崩溃的情况<br><a id="more"></a></p>
 <p>今天 集成百度地图api的时候  同时项目里 还有 之前实现的一个 模糊图像的功能，<br>由于 百度地图 提供了 armeabi 的so库，而模糊功能的 依赖    compile ‘net.qiujuer.genius:blur:2.0.0-beta4’实现的，这个库里面 包含了  armeabi  armeabi-v7a arm64-v8a  每个里面 有libgenius_blur.so</p>
@@ -899,13 +861,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="gradle" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/"/>
-    
-      <category term="so" scheme="https://hui46226021.github.io/categories/Android/JAVA/gradle/so/"/>
+      <category term="Maven" scheme="https://hui46226021.github.io/categories/Maven/"/>
     
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
@@ -918,50 +874,10 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
   
   <entry>
     <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2016/07/20/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2016/07/20/JSON解析/</id>
-    <published>2016-07-20T13:37:23.000Z</published>
-    <updated>2017-09-29T14:59:44.133Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:封装了一个 json解析的库&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
     <link href="https://hui46226021.github.io/2016/07/18/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8%20-%20%E5%89%AF%E6%9C%AC/"/>
     <id>https://hui46226021.github.io/2016/07/18/Android 仿微信 相册多图选择器 - 副本/</id>
     <published>2016-07-18T13:37:23.000Z</published>
-    <updated>2017-09-29T14:59:38.319Z</updated>
+    <updated>2017-10-01T12:47:40.255Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:封装了一个 json解析的库<br><a id="more"></a></p>
 <h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -982,10 +898,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     </summary>
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
     
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
@@ -1001,7 +913,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/07/01/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     <id>https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/</id>
     <published>2016-07-01T14:37:23.000Z</published>
-    <updated>2017-03-17T23:06:27.668Z</updated>
+    <updated>2017-10-01T12:47:44.779Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
 <h3 id="下载方式"><a href="#下载方式" class="headerlink" title="下载方式"></a>下载方式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shphotoselectorlibrary<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -1027,8 +939,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
     
@@ -1047,7 +957,7 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     <link href="https://hui46226021.github.io/2016/05/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
     <id>https://hui46226021.github.io/2016/05/18/ShVideoPlay android视频播放器/</id>
     <published>2016-05-18T14:37:23.000Z</published>
-    <updated>2017-09-29T14:59:41.499Z</updated>
+    <updated>2017-10-01T12:50:41.888Z</updated>
     
     <content type="html"><![CDATA[<p>摘要：Android 视频播放器<br><a id="more"></a></p>
 <h1 id="ShVideoPlay"><a href="#ShVideoPlay" class="headerlink" title="ShVideoPlay"></a>ShVideoPlay</h1><p>android 视频播放封装<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shvideoplayer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
@@ -1063,10 +973,6 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="FFmpeg" scheme="https://hui46226021.github.io/categories/Android/JAVA/FFmpeg/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -1077,51 +983,11 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
   </entry>
   
   <entry>
-    <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2016/03/18/Android%20JSON%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7ShJsonUtils/"/>
-    <id>https://hui46226021.github.io/2016/03/18/Android JSON解析工具ShJsonUtils/</id>
-    <published>2016-03-18T13:37:23.000Z</published>
-    <updated>2017-09-29T14:59:36.005Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用<br><a id="more"></a></p>
-<h1 id="ShJsonUtils"><a href="#ShJsonUtils" class="headerlink" title="ShJsonUtils"></a>ShJsonUtils</h1><p>android json解析框架<br>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.sh.zsh.code<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.sh.zsh.code:shjson:1.2.3'</span></div></pre></td></tr></table></figure></p>
-<p>#使用方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">JSONUtil jsonUtil = <span class="keyword">new</span> JSONUtil(jsonStr);</div><div class="line"><span class="comment">//二维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class);</div><div class="line"><span class="comment">//三维数组</span></div><div class="line">List&lt;People&gt; peoples =jsonUtil.getList(People.class,<span class="string">"people"</span>,Look.class,En.class);</div><div class="line">List&lt;People&gt; peoples2 =jsonUtil.getList(People.class,<span class="string">"data.people"</span>);</div><div class="line">String animal = jsonUtil.getObject(String.class,<span class="string">"data.animal"</span>);</div><div class="line">Look look = jsonUtil.getObject(Look.class,<span class="string">"data.look"</span>);</div></pre></td></tr></table></figure></p>
-<ul>
-<li>创建 JSONUtil 对象，传入json字符串</li>
-<li>通过getObject方法 获取 实体对象 ，层级用.隔开</li>
-<li>通过getList方法 获取 数组对象 ，层级用.隔开</li>
-</ul>
-<p>源码地址：<a href="https://github.com/hui46226021/ShJsonUtils/edit/master/README.md" target="_blank" rel="external">https://github.com/hui46226021/ShJsonUtils/edit/master/README.md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要:公司需要多图选择并上传，自己实现了一个并 封装成 Library，方便以后使用&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
-    
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
-      <category term="JSON" scheme="https://hui46226021.github.io/categories/Android/JAVA/JSON/"/>
-    
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
     <title>andfix 增量升级更新 热补丁修复</title>
     <link href="https://hui46226021.github.io/2016/03/17/andfix/"/>
     <id>https://hui46226021.github.io/2016/03/17/andfix/</id>
     <published>2016-03-17T14:37:23.000Z</published>
-    <updated>2017-03-19T03:15:34.747Z</updated>
+    <updated>2017-10-01T12:47:06.109Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:最近想着Android有没有什么热补丁更新技术的实现，于是上网搜索。接着实现了这一功能后，记录一下，免得自己忘了，可能文章会有出错的地方，望指出，呵呵<br><a id="more"></a></p>
 <h3 id="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"><a href="#搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）" class="headerlink" title="搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）"></a>搜索发现有这3种方式可以实现（至于其他的方式，暂不清楚）</h3><p>1.dexposed     github <a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">https://github.com/alibaba/dexposed</a></p>
@@ -1221,8 +1087,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
@@ -1241,7 +1105,7 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     <link href="https://hui46226021.github.io/2015/12/23/Android%E5%8A%A8%E7%94%BB%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%20%E8%A1%A5%E9%97%B4%E5%8A%A8%E7%94%BB%EF%BC%89/"/>
     <id>https://hui46226021.github.io/2015/12/23/Android动画 详解（一 补间动画）/</id>
     <published>2015-12-23T11:42:33.000Z</published>
-    <updated>2017-03-19T04:38:12.300Z</updated>
+    <updated>2017-10-01T12:47:20.413Z</updated>
     
     <content type="html"><![CDATA[<pre><code>打算整理下 android动画方面的知识，嗯  开始
 </code></pre><a id="more"></a>
@@ -1272,8 +1136,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
       <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/Android/JAVA/"/>
-    
     
       <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
@@ -1286,7 +1148,7 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     <link href="https://hui46226021.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
     <id>https://hui46226021.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
     <published>2015-12-18T08:17:33.000Z</published>
-    <updated>2017-03-19T05:27:01.979Z</updated>
+    <updated>2017-10-01T12:46:58.339Z</updated>
     
     <content type="html"><![CDATA[<p>摘要: 整理 iOS 9 适配中出现的坑</p>
 <a id="more"></a>
@@ -1300,8 +1162,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     </summary>
     
       <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
-    
-      <category term="移动开发" scheme="https://hui46226021.github.io/categories/IOS/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
     
       <category term="session共享" scheme="https://hui46226021.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
@@ -1317,7 +1177,7 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     <link href="https://hui46226021.github.io/2015/12/07/%E5%8D%95%E4%B8%AAViewControl%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8Cios%E7%89%88%E6%9C%ACxib%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/"/>
     <id>https://hui46226021.github.io/2015/12/07/单个ViewControl适配不同ios版本xib文件实现/</id>
     <published>2015-12-07T08:17:33.000Z</published>
-    <updated>2017-03-19T05:29:45.643Z</updated>
+    <updated>2017-10-01T12:46:19.311Z</updated>
     
     <content type="html"><![CDATA[<p>摘要: IOS 适配不同的界面xib</p>
 <a id="more"></a>
@@ -1334,14 +1194,193 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
       <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/categories/IOS/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
     
       <category term="IOS" scheme="https://hui46226021.github.io/tags/IOS/"/>
     
       <category term="xib" scheme="https://hui46226021.github.io/tags/xib/"/>
     
       <category term="屏幕适配" scheme="https://hui46226021.github.io/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一个Demo学会用Android兼容包新控件</title>
+    <link href="https://hui46226021.github.io/2015/11/23/%E4%B8%80%E4%B8%AADemo%E5%AD%A6%E4%BC%9A%E7%94%A8Android%E5%85%BC%E5%AE%B9%E5%8C%85%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
+    <id>https://hui46226021.github.io/2015/11/23/一个Demo学会用Android兼容包新控件/</id>
+    <published>2015-11-23T11:42:23.000Z</published>
+    <updated>2017-10-01T12:46:06.994Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:伟大的Google为Android推出了一系列的兼容包，最新的就是Design Support Library了，这里我们结合v7和v4中的几个控件，来主要学习Design Support Library中的几个新控件！一个Demo学会用它们！<br><a id="more"></a></p>
+<h1 id="效果动图GIF："><a href="#效果动图GIF：" class="headerlink" title="效果动图GIF："></a>效果动图GIF：</h1><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://static.oschina.net/uploads/img/201604/15120339_bupE.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h1 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容"></a>学习内容</h1><h3 id="通过本实例可以学习到以下内容："><a href="#通过本实例可以学习到以下内容：" class="headerlink" title="通过本实例可以学习到以下内容："></a>通过本实例可以学习到以下内容：</h3><ul>
+<li>Drawerlayout和NavigationView实现优雅的Google范儿侧边栏；</li>
+<li>新控件CoordinatorLayout、AppBarLayout、Toolbar、FloatingActionButton的用法，以及Toolbar的渐变隐藏动画效果；</li>
+<li>官方Tabs组件TabLayout和ViewPager结合实现主界面内容区域；</li>
+<li>SwipeRefreshLayout和RecyclerView结合实现下拉刷新，以及RecyclerView的数据适配器RecyclerView.Adapter的用法，还有RecyclerView中item的点击事件的实现方法；</li>
+<li>卡片式CardView的用法；</li>
+<li>类似Toast的新控件Snackbar的用法。<h2 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h2></li>
+</ul>
+<p>学习Android解释再多代码都没有用，因为解释过了还是不会用。因此，我们这里将布局文件XML源码贴出来供学习，放心，所有知识点都已经注释在源码中。</p>
+<p>styles.xml源码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"AppTheme"</span> <span class="attr">parent</span>=<span class="string">"MyThemeBlue"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 蓝色为主色调 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"MyThemeBlue"</span> <span class="attr">parent</span>=<span class="string">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="xml"></span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--选中状态icon的颜色和字体颜色--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimary"</span>&gt;</span>@color/main_blue_light<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorPrimaryDark"</span>&gt;</span>@color/main_blue_dark<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"colorAccent"</span>&gt;</span>@color/main_blue_light<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--正常状态下字体颜色和icon颜色--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColorPrimary"</span>&gt;</span>@color/main_white<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>colorPrimary、colorPrimaryDark、colorAccent、textColorPrimary的含义，请看博文 <a href="http://sunjiajia.com/2015/06/19/android-material-theme-and-toolbar/" target="_blank" rel="external">《Android L+ Theme 与 Toolbar 实例》</a> 。</p>
+<p>主布局activity_my.xml源码（重点）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.DrawerLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/id_drawerlayout"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 第一个位置 --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 你的主界面内容，必须放置在Drawerlayout中的第一个位置</span></div><div class="line">    根据自己的需要来放置控件，</div><div class="line">        例如：LinearLayout布局或者RelativeLayout布局；</div><div class="line">    也可以是单个控件，</div><div class="line">        如 TextView等  --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/content_main"</span> /&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- 第二个位置 --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 用来放Drawerlayout中的内容，</span></div><div class="line">    这里使用NavigationView来实现类似Google pLay中的侧滑栏效果，</div><div class="line">    必须在build.gradle中添加compile 'com.android.support:design:22.2.0'；</div><div class="line">    另外，如果不需要NavigationView效果，</div><div class="line">    也可以放置一个普通布局文件就是一个普通的侧滑栏了。</div><div class="line">     --&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">     注意：</div><div class="line">        如果使用NavigationView（其他控件也是一样）的特有属性，需要加上命名空间：</div><div class="line">                xmlns:app="http://schemas.android.com/apk/res-auto"；</div><div class="line">        另外，一定要添加android:layout_gravity="left"属性。</div><div class="line">     --&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">        属性解析：</div><div class="line">            app:headerLayout：    NavigationView中头部的head部分的布局，是自己实现的；</div><div class="line">            app:menu：            指定Nav中的Menu布局，就是自己写Menu中的按钮，要放在res/menu/文件夹下；</div><div class="line">            app:itemTextColor：  用来设置Nav中，menu item的颜色选择器。</div><div class="line">        还有一些属性：           和itemTextColor用法一样，指定一个颜色选择器，实现不同的颜色效果。</div><div class="line">            app:itemIconTint:</div><div class="line">            app:itemBackground:</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.NavigationView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_navigationview"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">app:itemTextColor</span>=<span class="string">"@color/selector_nav_menu_textcolor"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"left"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.DrawerLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="content-main-xml源码（重点）"><a href="#content-main-xml源码（重点）" class="headerlink" title="content_main.xml源码（重点）"></a>content_main.xml源码（重点）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="comment">&lt;!--</span></div><div class="line">    CoordinatorLayout是这次新添加的一个增强型的FrameLayout，通过它可以实现很多东西：</div><div class="line">        例如：</div><div class="line">            1.界面向上滚动逐渐隐藏Toolbar；</div><div class="line">            2.在其中可以放置浮动的View，就像Floating Action Button。</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.design.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/id_coordinatorlayout"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:fitsSystemWindows</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">        AppBarLayout跟它的名字一样，把容器类的组件全部作为AppBar。</div><div class="line">            将AppBarLayout放在CoordinatorLayout中，就可以实现滚动效果。</div><div class="line">            本例中，TabLayout在界面滚动时，随着Toolbar的逐渐隐藏，将占据Toolbar的位置，</div><div class="line">                达到节省屏幕空间，界面动画效果的目的。</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.AppBarLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_appbarlayout"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--</span></div><div class="line"></div><div class="line">        属性解析：</div><div class="line">            app:theme：指定Toolbar的样式，包括ActionbarToggle和popupMenu的指示图标颜色</div><div class="line">            app:popupTheme：指定popupMenu溢出后的样式</div><div class="line">            app:title:    指定Toolbar中主Title的内容</div><div class="line">        --&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!--</span></div><div class="line">            app:layout_scrollFlags的意思是：</div><div class="line"></div><div class="line">                设置的layout_scrollFlags有如下几种选项：</div><div class="line">                    scroll: 所有想滚动出屏幕的view都需要设置这个flag- 没有设置这个flag的view将被固定在屏幕顶部。</div><div class="line">                    enterAlways: 这个flag让任意向下的滚动都会导致该view变为可见，启用快速“返回模式”。</div><div class="line">                    enterAlwaysCollapsed: 当你的视图已经设置minHeight属性又使用此标志时，你的视图只能以最小高度进入，只有当滚动视图到达顶部时才扩大到完整高度。</div><div class="line">                    exitUntilCollapsed: 当视图会在滚动时，它一直滚动到设置的minHeight时完全隐藏。</div><div class="line"></div><div class="line">            需要注意的是，后面两种模式基本只有在CollapsingToolbarLayout才有用，</div><div class="line">            而前面两种模式基本是需要一起使用的，也就是说，这些flag的使用场景，基本已经固定了。</div><div class="line">        --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">android.support.v7.widget.Toolbar</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/id_toolbar"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"?attr/actionBarSize"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"?attr/colorPrimary"</span></div><div class="line">            <span class="attr">app:layout_scrollFlags</span>=<span class="string">"scroll|enterAlways"</span></div><div class="line">            <span class="attr">app:popupTheme</span>=<span class="string">"@style/ThemeOverlay.AppCompat.Light"</span></div><div class="line">            <span class="attr">app:theme</span>=<span class="string">"@style/ThemeOverlay.AppCompat.ActionBar"</span></div><div class="line">            <span class="attr">app:title</span>=<span class="string">"@string/toolbar_title"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!--</span></div><div class="line">            Tabs选项卡，和ViewPager搭配使用可以增大界面的内容展示量，实现各种个性化分类内容展示而不互相干扰！</div><div class="line">            Google在Design support library中提供官方的Tab组件，它就是TabLayout。</div><div class="line">            相比Github上面开源的第三方库，这个更加简单易用。</div><div class="line"></div><div class="line">            有以下常用属性：</div><div class="line">                app:tabGravity="fill"  表示TabLayout中的Tabs要占满屏幕的width；</div><div class="line">                app:tabSelectedTextColor：Tab被选中字体的颜色；</div><div class="line">                app:tabTextColor：Tab未被选中字体的颜色；</div><div class="line">                app:tabIndicatorColor：Tab指示器下标的颜色；</div><div class="line">        --&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">android.support.design.widget.TabLayout</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/id_tablayout"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">app:tabGravity</span>=<span class="string">"fill"</span></div><div class="line">            <span class="attr">app:tabIndicatorColor</span>=<span class="string">"@color/main_white"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">android.support.design.widget.AppBarLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">        我们常用的ViewPager，不多说了。你会发现多了一个 app:layout_behavior 属性，没错，</div><div class="line">            如果你使用CoordinatorLayout来实现Toolbar滚动渐变消失动画效果，那就必须在它下面的那个控件中加入这个属性，</div><div class="line">            并且下面的这个控件必须是可滚动的。</div><div class="line">        当设置了layout_behavior的控件滑动时，就会触发设置了layout_scrollFlags的控件发生状态的改变。</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.v4.view.ViewPager</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_viewpager"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span> /&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">        这是一个浮动按钮。由于FloatingActionButton是重写ImageView的，</div><div class="line">        所有FloatingActionButton拥有ImageView的一切属性。</div><div class="line"></div><div class="line">        属性介绍：</div><div class="line">            app:backgroundTint : FAB的背景色。</div><div class="line">            app:elevation      ：FAB的阴影效果。</div><div class="line">            app:rippleColor    ：设置涟漪的颜色，默认是由背景色生成的暗色调，可以自己指定。</div><div class="line">            app:pressedTranslationZ  ：FAB动画效果，在它被按下的时候阴影就会增大。</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.design.widget.FloatingActionButton</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_floatingactionbutton"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"bottom|end"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_action_plusone"</span></div><div class="line">        <span class="attr">app:backgroundTint</span>=<span class="string">"@color/main_blue_light"</span></div><div class="line">        <span class="attr">app:elevation</span>=<span class="string">"6dp"</span></div><div class="line">        <span class="attr">app:pressedTranslationZ</span>=<span class="string">"12dp"</span></div><div class="line">        <span class="attr">app:rippleColor</span>=<span class="string">"@color/main_blue_dark"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.design.widget.CoordinatorLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="frag-main-xml源码（Fragment的布局）"><a href="#frag-main-xml源码（Fragment的布局）" class="headerlink" title="frag_main.xml源码（Fragment的布局）"></a>frag_main.xml源码（Fragment的布局）</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">&lt;!--</span></div><div class="line"></div><div class="line">SwipeRefreshLayout是伟大的Google在v4包中给出的下拉刷新组件。</div><div class="line"></div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.SwipeRefreshLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/id_swiperefreshlayout"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">app:layout_behavior</span>=<span class="string">"@string/appbar_scrolling_view_behavior"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--</span></div><div class="line">            使用RecyclerView需要在build.gradle中添加</div><div class="line">           compile 'com.android.support:recyclerview-v7:22.2.0'</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_recyclerview"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</div><div class="line"></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.SwipeRefreshLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>item_main.xml源码（RecyclerView中item）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--</span></div><div class="line">    CardView就是一个卡片样式的FrameLayout。</div><div class="line"></div><div class="line">    参数介绍：</div><div class="line">        app:cardBackgroundColor  :   背景颜色</div><div class="line">        app:cardCornerRadius    ：   设置圆角。</div><div class="line">        app:cardElevation       ：    阴影。</div><div class="line">        app:cardMaxElevation    ：       最大阴影。</div><div class="line">        app:cardPreventCornerOverlap  ： 在v20和之前的版本中添加内边距，</div><div class="line">                                    这个属性是为了防止卡片内容和边角的重叠。</div><div class="line"></div><div class="line">       app:cardUseCompatPadding  ：  设置内边距，v21+的版本和之前的版本仍旧具有一样的计算方式</div><div class="line">--&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.v7.widget.CardView</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/id_cardview"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">    <span class="attr">app:cardBackgroundColor</span>=<span class="string">"@color/main_blue_light"</span></div><div class="line">    <span class="attr">app:cardCornerRadius</span>=<span class="string">"4dp"</span></div><div class="line">    <span class="attr">app:cardElevation</span>=<span class="string">"5dp"</span></div><div class="line">    <span class="attr">app:cardMaxElevation</span>=<span class="string">"10dp"</span></div><div class="line">    <span class="attr">app:cardPreventCornerOverlap</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">app:cardUseCompatPadding</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_textview"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"200dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"@color/main_white"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"30sp"</span> /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v7.widget.CardView</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>menu_nav.xml的源码（NavagationView中菜单）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">menu</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">group</span> <span class="attr">android:checkableBehavior</span>=<span class="string">"single"</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">item</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/nav_menu_home"</span></div><div class="line">            <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_home_white_48dp"</span></div><div class="line">            <span class="attr">android:title</span>=<span class="string">"主页"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">item</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/nav_menu_categories"</span></div><div class="line">            <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_sort_by_alpha_white_48dp"</span></div><div class="line">            <span class="attr">android:title</span>=<span class="string">"分类"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">item</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/nav_menu_feedback"</span></div><div class="line">            <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_message_white_48dp"</span></div><div class="line">            <span class="attr">android:title</span>=<span class="string">"反馈"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">item</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/nav_menu_setting"</span></div><div class="line">            <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_settings_white_48dp"</span></div><div class="line">            <span class="attr">android:title</span>=<span class="string">"设置"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">group</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">menu</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>header_nav.xml源码（NavagationView的head）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"220dp"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@drawable/ic_user_background"</span></div><div class="line">    <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">        <span class="comment">&lt;!--</span></div><div class="line">            一个显示圆形头像的自定义ImageView</div><div class="line">        --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">com.sunjiajia.androidnewwidgetsdemo.view.RoundedImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_header_face"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"110dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"110dp"</span></div><div class="line">        <span class="attr">android:scaleType</span>=<span class="string">"fitXY"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/author"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_header_authorname"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"@string/header_author_name"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"@android:color/black"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"16sp"</span> /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_header_url"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"@string/header_author_url"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"@android:color/black"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"18sp"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Java代码"><a href="#Java代码" class="headerlink" title="Java代码"></a>Java代码</h2><p>Java代码写法比较简单，这里只给出RecyclerView.Adapter的写法（包括item点击事件）。</p>
+<h3 id="RecyclerView-Adapter写法源码"><a href="#RecyclerView-Adapter写法源码" class="headerlink" title="RecyclerView.Adapter写法源码"></a>RecyclerView.Adapter写法源码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.sunjiajia.androidnewwidgetsdemo.adapter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.support.v7.widget.RecyclerView;</div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.sunjiajia.androidnewwidgetsdemo.R;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Monkey on 2015/6/29.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRecyclerViewAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">MyRecyclerViewHolder</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 点击事件接口</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnItemClickListener</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span></span>;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">void</span> <span class="title">onItemLongClick</span><span class="params">(View view, <span class="keyword">int</span> position)</span></span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> OnItemClickListener mOnItemClickListener;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnItemClickListener</span><span class="params">(OnItemClickListener listener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mOnItemClickListener = listener;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> Context mContext;</div><div class="line">    <span class="keyword">public</span> List&lt;String&gt; mDatas;</div><div class="line">    <span class="keyword">public</span> LayoutInflater mLayoutInflater;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyRecyclerViewAdapter</span><span class="params">(Context mContext)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mContext = mContext;</div><div class="line">        mLayoutInflater = LayoutInflater.from(mContext);</div><div class="line">        <span class="comment">// 这里是模拟数据。</span></div><div class="line">        mDatas = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="string">'A'</span>; i &lt;= <span class="string">'z'</span>; i++) &#123;</div><div class="line">            mDatas.add((<span class="keyword">char</span>) i + <span class="string">""</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建ViewHolder</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> MyRecyclerViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</div><div class="line">        View mView = mLayoutInflater.inflate(R.layout.item_main, parent, <span class="keyword">false</span>);</div><div class="line">        MyRecyclerViewHolder mViewHolder = <span class="keyword">new</span> MyRecyclerViewHolder(mView);</div><div class="line">        <span class="keyword">return</span> mViewHolder;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 绑定ViewHoler，给item中的控件设置数据</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(<span class="keyword">final</span> MyRecyclerViewHolder holder, <span class="keyword">final</span> <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="comment">//点击事件在这里实现，主要是利用RecyclerView中填充的布局控件可以被点击这个原理</span></div><div class="line">        <span class="keyword">if</span> (mOnItemClickListener != <span class="keyword">null</span>) &#123;</div><div class="line">            holder.itemView.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                    mOnItemClickListener.onItemClick(holder.itemView, position);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line"></div><div class="line">            <span class="comment">// 长点击事件</span></div><div class="line">            holder.itemView.setOnLongClickListener(<span class="keyword">new</span> View.OnLongClickListener() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onLongClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                    mOnItemClickListener.onItemLongClick(holder.itemView, position);</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        holder.mTextView.setText(mDatas.get(position));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mDatas.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="MyRecyclerViewHolder-java源码"><a href="#MyRecyclerViewHolder-java源码" class="headerlink" title="MyRecyclerViewHolder.java源码"></a>MyRecyclerViewHolder.java源码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.sunjiajia.androidnewwidgetsdemo.adapter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.support.v7.widget.RecyclerView;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.sunjiajia.androidnewwidgetsdemo.R;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by Monkey on 2015/6/29.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRecyclerViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> TextView mTextView;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyRecyclerViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(itemView);</div><div class="line">        mTextView = (TextView) itemView.findViewById(R.id.id_textview);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>在源码中学习Android，是有种身临其境的感觉的。</p>
+<p>整个Demo的源码我放在了GitHub上，谢谢star一下~<br>在看源码过程中如果发现什么问题，请在留言，看到一定回复。</p>
+<p>源码地址：<br><a href="https://github.com/git0pen/AndroidNewWidgetsDemo" target="_blank" rel="external">AndroidNewWidgetsDemo</a></p>
+<p>原文地址：<a href="http://sunjiajia.com/2015/07/02/android-new-widgets-demo/" target="_blank" rel="external">http://sunjiajia.com/2015/07/02/android-new-widgets-demo/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:伟大的Google为Android推出了一系列的兼容包，最新的就是Design Support Library了，这里我们结合v7和v4中的几个控件，来主要学习Design Support Library中的几个新控件！一个Demo学会用它们！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="转载" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+      <category term="support v7 新控件" scheme="https://hui46226021.github.io/tags/support-v7-%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android分包MultiDex原理详解</title>
+    <link href="https://hui46226021.github.io/2015/09/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://hui46226021.github.io/2015/09/17/Android分包MultiDex原理详解/</id>
+    <published>2015-09-17T14:37:23.000Z</published>
+    <updated>2017-10-01T12:47:17.117Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:windowIsTranslucent 和windowAnimationStyle冲突<br><a id="more"></a></p>
+<h1 id="MultiDex的产生背景"><a href="#MultiDex的产生背景" class="headerlink" title="MultiDex的产生背景"></a>MultiDex的产生背景</h1><p>当Android系统安装一个应用的时候，有一步是对Dex进行优化，这个过程有一个专门的工具来处理，叫DexOpt。DexOpt的执行过程是在第一次加载Dex文件的时候执行的。这个过程会生成一个ODEX文件，即Optimised Dex。执行ODex的效率会比直接执行Dex文件的效率要高很多。</p>
+<p>但是在早期的Android系统中，DexOpt有一个问题，DexOpt会把每一个类的方法id检索起来，存在一个链表结构里面。但是这个链表的长度是用一个short类型来保存的，导致了方法id的数目不能够超过65536个。当一个项目足够大的时候，显然这个方法数的上限是不够的。尽管在新版本的Android系统中，DexOpt修复了这个问题，但是我们仍然需要对低版本的Android系统做兼容。</p>
+<p>为了解决方法数超限的问题，需要将该dex文件拆成两个或多个，为此谷歌官方推出了multidex兼容包，配合AndroidStudio实现了一个APK包含多个dex的功能。</p>
+<h2 id="MultiDex的简要原理"><a href="#MultiDex的简要原理" class="headerlink" title="MultiDex的简要原理"></a>MultiDex的简要原理</h2><p>我们以APK中有两个dex文件为例，第二个dex文件为classes2.dex。</p>
+<ul>
+<li><p>兼容包在Applicaion实例化之后，会检查系统版本是否支持 multidex，classes2.dex是否需要安装。</p>
+</li>
+<li><p>如果需要安装则会从APK中解压出classes2.dex并将其拷贝到应用的沙盒目录下。</p>
+</li>
+<li><p>通过反射将classes2.dex注入到当前的classloader中。</p>
+</li>
+</ul>
+<p>下面引入一下官方的文档。</p>
+<p><a href="https://developer.android.com/tools/building/multidex.html#about" target="_blank" rel="external">https://developer.android.com/tools/building/multidex.html#about </a><br>笔者，针对官方文档的翻译如下：</p>
+<p>构建超过65K方法的App</p>
+<p>随着Android设备的慢慢发展，App的大小会变得越来越大。当我们在开发App的时候由于报的大小和引用库的原因，我们在编译我们项目的时候通常会遇到下面一个错误：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Conversion to Dalvik format failed: Unable to execute dex: method ID not in [<span class="number">0</span>, <span class="number">0xffff</span>]: <span class="number">65536</span></div></pre></td></tr></table></figure></p>
+<p>当然，也有一些系统设备会出现以下log信息，不过反馈的是同一个问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trouble writing output:Too many field references: <span class="number">131000</span>; max is <span class="number">65536</span>.You may <span class="keyword">try</span> using --multi-dex option.</div></pre></td></tr></table></figure></p>
+<p>这两个错误条件显示一个共同的数字：65536。这个数字，它表示的是你在一个dex包中的函数方法超过了65535个。</p>
+<p>如果你已经构建了一个Android App时，并收到了这个错误，那么恭喜你，你有很多代码！</p>
+<p>下面我们就具体说说，如何解决这个问题。</p>
+<h2 id="关于65K方法限制"><a href="#关于65K方法限制" class="headerlink" title="关于65K方法限制"></a>关于65K方法限制</h2><p>我们知道Android中的可执行伟剑都存储在dex文件中，其中包含已编译的代码来运行你的应用程序。Dalvik虚拟机对可执行dex文件的规格是有方法限制的，即一个单一的dex文件的方法总数最多为65536。</p>
+<p>其中包括：</p>
+<ul>
+<li><p>引用的Android Framework方法</p>
+</li>
+<li><p>library的方法</p>
+</li>
+<li><p>我们自己书写代码的方法。</p>
+</li>
+</ul>
+<p>为了突破这个方法数的限制，我们就提出了一个方案——生成多个dex文件。这个多个dex文件的方案，我们又称为multidex方案配置。</p>
+<h3 id="Multidex支持Android-5-0之前的版本"><a href="#Multidex支持Android-5-0之前的版本" class="headerlink" title="Multidex支持Android 5.0之前的版本"></a>Multidex支持Android 5.0之前的版本</h3><pre><code>Android5.0版本的平台之前，Android使用的是Dalvik Runtime执行的程序代码。默认情况下，限制应用到一个单一的classes.dex。
+</code></pre><p>Dalvik字节码文件每APK。为了绕过这个限制，你可以使用multidex支持库，成为你的应用程序的主要部分和DEX文件进行管理，获得额外的dex文件，它们包含的代码。</p>
+<h3 id="Multidex支持Android-5-0及更高版本"><a href="#Multidex支持Android-5-0及更高版本" class="headerlink" title="Multidex支持Android 5.0及更高版本"></a>Multidex支持Android 5.0及更高版本</h3><pre><code>Android 5.0和更高的Runtime 如art，本身就支持从应用的APK文件加载多个DEX文件。art支持预编译的应用程序在安装时扫描类（..）。Dex文件编译成一个单一的Android设备上执行.oat文件。
+</code></pre><h2 id="避免65K限制"><a href="#避免65K限制" class="headerlink" title="避免65K限制"></a>避免65K限制</h2><p>当你确定使用multidex的分包策略的时候，请你先确定自己的代码中都是优秀的。你还需要做以下几步：</p>
+<ul>
+<li><p>去掉一些未使用的import和library</p>
+</li>
+<li><p>使用ProGuard去掉一些未使用的代码</p>
+</li>
+</ul>
+<h2 id="用Gradle配置使用Multidex"><a href="#用Gradle配置使用Multidex" class="headerlink" title="用Gradle配置使用Multidex"></a>用Gradle配置使用Multidex</h2><p>Android 的 Gradle插件在 Android Build Tool 21.1开始就支持使用multidex了。</p>
+<p>设置你的应用程序开发项目中使用multidex配置，要求你做出一些修改您的应用程序开发项目。：</p>
+<ul>
+<li><p>修改Gradle的配置，支持multidex</p>
+</li>
+<li><p>修改你的manifest。让其支持multidexapplication类</p>
+</li>
+</ul>
+<p>修改Gradle的build如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion <span class="number">21</span></div><div class="line">    buildToolsVersion <span class="string">"21.1.0"</span></div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        ...</div><div class="line">        minSdkVersion <span class="number">14</span></div><div class="line">        targetSdkVersion <span class="number">21</span></div><div class="line">        ...</div><div class="line"></div><div class="line">        <span class="comment">// Enabling multidex support.</span></div><div class="line">        multiDexEnabled <span class="keyword">true</span></div><div class="line">    &#125;</div><div class="line">    ...&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>Tips: 你可以在Gradle配置文件中的 multiDexEnabled 在 defaultConfig、<br>buildType、productFlavor选项设置。</p>
+<p>在manifest文件中，添加MultidexApplication Class的引用，如下所示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;<span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"com.example.android.multidex.myapplication"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.multidex.MultiDexApplication"</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当然，如果你重写了 Application，就对自定义Application的继承方式做一个修改。</p>
+<h2 id="Multidex的方式的局限性"><a href="#Multidex的方式的局限性" class="headerlink" title="Multidex的方式的局限性"></a>Multidex的方式的局限性</h2><p>虽然我们开起来multidex是一个极好的东西，但是multidex还是存在自己的局限性，我们在开发测试之前要清楚局限性是什么：</p>
+<ul>
+<li><p>如果二DEX文件太大，安装分割dex文件是一个复杂的过程，可能会导致应用程序无响应（ANR）的错误。在这种情况下，你应该尽量的减小dex文件的大小和删除无用的逻辑，而不是完全依赖于multidex。</p>
+</li>
+<li><p>在Android 4.0设备（API Level 14）之前，由于Dalvik linearalloc bug（问题22586），multidex很可能是无法运行的。如果希望运行在Level 14之前的Android系统版本，请先确保完整的测试和使用。</p>
+</li>
+<li><p>应用程序使用了multiedex配置的，会造成使用比较大的内存。当然，可能还会引起dalvik虚拟机的崩溃(issue 78035)。</p>
+</li>
+<li><p>对于应用程序比较复杂的，存在较多的library的项目。multidex可能会造成不同依赖项目间的dex文件函数相互调用，找不到方法。</p>
+</li>
+</ul>
+<h2 id="优化multidex开发和构建"><a href="#优化multidex开发和构建" class="headerlink" title="优化multidex开发和构建"></a>优化multidex开发和构建</h2><p>一个multidex的配置，对系统apk的构建、签名、打包复杂性大大的增加。这就意味着，你每一次的构建过程都是相当耗时的。</p>
+<p>为了加快我们的开发速度，加快构建的过程，我们可以在Gradle productFlavors新建出来一个 development flavor 和 production flavor 来满足我们不同构建需求。</p>
+<p>下面是一个列子演示我们如何设置这些flavors在Gradle build文件中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    productFlavors &#123;</div><div class="line">        <span class="comment">// Define separate dev and prod product flavors.</span></div><div class="line">        dev &#123;</div><div class="line">            <span class="comment">// dev utilizes minSDKVersion = 21 to allow the Android gradle plugin</span></div><div class="line">            <span class="comment">// to pre-dex each module and produce an APK that can be tested on</span></div><div class="line">            <span class="comment">// Android Lollipop without time consuming dex merging processes.</span></div><div class="line">            minSdkVersion <span class="number">21</span></div><div class="line">        &#125;</div><div class="line">        prod &#123;</div><div class="line">            <span class="comment">// The actual minSdkVersion for the application.</span></div><div class="line">            minSdkVersion <span class="number">14</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">          ...</div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            <span class="function">runProguard <span class="keyword">true</span></span></div><div class="line">            proguardFiles <span class="title">getDefaultProguardFile</span><span class="params">(‘proguard-android.txt‘)</span>,</div><div class="line">                                                 ‘proguard-rules.pro‘</div><div class="line">        &#125;</div><div class="line">    &#125;&#125;dependencies &#123;</div><div class="line">  compile ‘com.android.support:multidex:<span class="number">1.0</span>.0‘&#125;</div></pre></td></tr></table></figure></p>
+<p>在你完成了伤处的配置修改之后，你配置productFlavor 和 buildType来使用 ，devDebug 变种app。使用这些变种app，可以设置proguard disable、multidex enable方便我们测试。</p>
+<p>这些配置需要针对Android Gradle插件做如下操作：</p>
+<ul>
+<li><p>在分包前，编译应用程序中的每一个module包括依赖项目，这个步骤称为 pre-dexing。</p>
+</li>
+<li><p>include每一个dex文件</p>
+</li>
+<li><p>最重要的是，对于主dex文件，不会做切分。以保证计算速度。</p>
+</li>
+</ul>
+<p>这样设置既能够保证我们的最终报是一个使用了multidex模式的，而又不影响我们平时开发的测试效率。</p>
+<h2 id="在Android-Studio中使用变种App"><a href="#在Android-Studio中使用变种App" class="headerlink" title="在Android Studio中使用变种App"></a>在Android Studio中使用变种App</h2><p>使用multidex工具构建变种App是非常方便的。在Android Studio允许我们选择这种变种构建方式的接口。</p>
+<p>使用Android Studio构建 “devDebug”构建变种app需要完成两步：</p>
+<ul>
+<li><p>打开变种编辑窗口，选择favorites选项。</p>
+</li>
+<li><p>点击编译不同的变种，如下图所示 </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://static.oschina.net/uploads/img/201604/11162817_F0W1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ul>
+<p>原文地址：<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-1031299.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:windowIsTranslucent 和windowAnimationStyle冲突&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+    
+    
+      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+    
+      <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
+    
+      <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
     
   </entry>
   
