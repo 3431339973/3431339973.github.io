@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>谈谈Android ROOT 原理 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,系统,ROOT">
+    <meta name="description" content="摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈Android ROOT 原理">
+<meta property="og:url" content="https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？">
+<meta property="og:updated_time" content="2017-10-02T11:41:09.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈Android ROOT 原理">
+<meta name="twitter:description" content="摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">谈谈Android ROOT 原理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">谈谈Android ROOT 原理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-08-21T13:17:28.000Z" itemprop="datePublished" class="page-time">
+  2015-08-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ROOT-是什么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">ROOT 是什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#怎么切换到ROOT用户"><span class="post-toc-number">2.</span> <span class="post-toc-text">怎么切换到ROOT用户</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结：手机ROOT-实际上就是干了3件事"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结：手机ROOT 实际上就是干了3件事</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一切都是那么完美，就差干了，但是-我们是不是想简单了-ROOT-真的这么容易吗"><span class="post-toc-number">4.</span> <span class="post-toc-text">一切都是那么完美，就差干了，但是 我们是不是想简单了 ROOT 真的这么容易吗</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。"><span class="post-toc-number">5.</span> <span class="post-toc-text">这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入理解Root机制-来源-http-blog-csdn-net-chaihuasong-article-details-8463212"><span class="post-toc-number">6.</span> <span class="post-toc-text">深入理解Root机制 来源 http://blog.csdn.net/chaihuasong/article/details/8463212/</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#以上就是关于ROOT-的一部知识"><span class="post-toc-number">7.</span> <span class="post-toc-text">以上就是关于ROOT 的一部知识</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-谈谈AndroidRoot原理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">谈谈Android ROOT 原理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年08月21日 21:17" datetime="2015-08-21T13:17:28.000Z"  itemprop="datePublished">2015-08-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？<br><a id="more"></a></p>
+<h2 id="ROOT-是什么？"><a href="#ROOT-是什么？" class="headerlink" title="ROOT 是什么？"></a>ROOT 是什么？</h2><p>在操作系统里，一般有两种用户，管理员 和普通用户，两者最大的区别在于 用户对系统的操作权限有高有低。管理员权限 对系统有着毁天灭地的能力，熟悉windows的人都知道 一般有个Administrator（管理员）用户，而在Linux系统里（包括Android）这个管理用户的统一名字 叫ROOT</p>
+<h2 id="怎么切换到ROOT用户"><a href="#怎么切换到ROOT用户" class="headerlink" title="怎么切换到ROOT用户"></a>怎么切换到ROOT用户</h2><p>熟悉Linux的同学都知道 一般情况下，Linux下root用户默认是没有密码 可以 用su root 命令 切换到 root用户。</p>
+<ul>
+<li><p>但是在android中 没有su命令。但是我们可以通过adb 把su文件放到/system/bin/下面<br>这样 我们就可以执行su命令了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb push su /system/bin</div></pre></td></tr></table></figure>
+</li>
+<li><p>当我们在root的过程中，还会给系统装一个程序，用来作为运行提示，由用户来决定，是否给予最高权限。这个程序的名字叫做Superuser.apk。当某些程序执行su指令想取得系统最高权限的时候，Superuser就会自动启动，拦截该动作并作出询问，当用户认为该程序可以安全使用的时候，那么我们就选择允许，否则，可以禁止该程序继续取得最高权限 我们将这个APK放到system/app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb push su /system/bin</div></pre></td></tr></table></figure>
+</li>
+<li><p>这还没完 ，我们还需要让 su 文件可以让任何用户都能执行，所系需要设置他的访问权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell chmod 4755 /system/bin/su</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="总结：手机ROOT-实际上就是干了3件事"><a href="#总结：手机ROOT-实际上就是干了3件事" class="headerlink" title="总结：手机ROOT 实际上就是干了3件事"></a>总结：手机ROOT 实际上就是干了3件事</h2><ul>
+<li>1：把su文件放到/system/bin/下面</li>
+<li>2：把Superuser.apk放到/system/app/下面</li>
+<li>3：修改su文件的访问权限</li>
+</ul>
+<h2 id="一切都是那么完美，就差干了，但是-我们是不是想简单了-ROOT-真的这么容易吗"><a href="#一切都是那么完美，就差干了，但是-我们是不是想简单了-ROOT-真的这么容易吗" class="headerlink" title="一切都是那么完美，就差干了，但是 我们是不是想简单了 ROOT 真的这么容易吗"></a>一切都是那么完美，就差干了，但是 我们是不是想简单了 ROOT 真的这么容易吗</h2><p>如果是eng 版本的android系统（先理解成开发版吧） 那么完成这3部我们就大工告成了，但是现实就是这么苟且，我们的手机不是eng版而是user版，最大的问题在于 user版system/bin只有只读权限。 我们需要ROOT权限才能 把 su文件push到system/bin目录下，然后获取ROOT权限 却需要把su文件，这里就出现了一个 逻辑的死循环。还有些系统 会在启动的时候 就删除su文件。哈哈哈 </p>
+<h2 id="这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。"><a href="#这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。" class="headerlink" title="这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。"></a>这就搞不下去了。那怎么办，只有去找每个厂商发布系统的漏洞了。</h2><h2 id="深入理解Root机制-来源-http-blog-csdn-net-chaihuasong-article-details-8463212"><a href="#深入理解Root机制-来源-http-blog-csdn-net-chaihuasong-article-details-8463212" class="headerlink" title="深入理解Root机制 来源 http://blog.csdn.net/chaihuasong/article/details/8463212/"></a>深入理解Root机制 来源 <a href="http://blog.csdn.net/chaihuasong/article/details/8463212/" target="_blank" rel="external">http://blog.csdn.net/chaihuasong/article/details/8463212/</a></h2><p>其流程是：</p>
+<ul>
+<li><p>Su 被用户调用  </p>
+</li>
+<li><p>Su 创建了一个socket监听  </p>
+</li>
+<li><p>Su 向Superuser发送了一个广播，说是有一个程序要请求root  </p>
+</li>
+<li><p>Su 等待socket 数据接收。有超时处理。  </p>
+</li>
+<li><p>Superuser 界面收到广播后，弹出一个对话框，询问用户  </p>
+</li>
+<li><p>Superuser 向传来的数据中的socket写回用户应答结果。  </p>
+</li>
+<li><p>Su 根据socket得到的结果处理应该不应该继续执行  </p>
+</li>
+<li><p>完成提权管理<br>superuser.apk这个程序是root成功后，专门用来管理root权限使用的，防止被恶意程序滥用。</p>
+</li>
+</ul>
+<p>源码地址： <a href="http://superuser.googlecode.com/svn/trunk" target="_blank" rel="external">http://superuser.googlecode.com/svn/trunk</a></p>
+<p>我们有两点疑问：</p>
+<ul>
+<li><p>superuser是怎么知道谁想用root权限？ </p>
+</li>
+<li><p>superuser是如何把用户的选择告诉su程序的？</p>
+</li>
+</ul>
+<p>即superuser和su程序是如何通讯的，他们俩位于不通的时空，一个在java虚拟中，一个在linux的真实进程中。</p>
+<p>superuser共有两个activity: SuperuserActivity和 SuperuserRequestActivity，其中SuperuserActivity主要是用来管理白名单的，就是记住哪个程序已经被允许使用root权限了，省的每次用时都问用户。</p>
+<p>SuperuserRequestActivity 就是用来询问用户目前有个程序想使用root权限，是否允许，是否一直允许，即放入白名单。</p>
+<p>这个白名单比较关键，是一个sqlite数据库文件，位置：</p>
+<p>/data/data/com.koushikdutta.superuser/databases/superuser.sqlite</p>
+<p>上文说过，root的本质就是往 /system/bin/下放一个su文件，不检查调用者权限的su文件。普通程序可以调用该su来运行root权限的命令。superuser.apk中就自带了一个这样的su程序。一开始superuser会检测/system/bin/su是否存在:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">File su = new File("/system/bin/su");  </div><div class="line">  </div><div class="line">// 检测su文件是否存在,如果不存在则直接返回  </div><div class="line">  </div><div class="line">if (!su.exists())  &#123;  </div><div class="line">  </div><div class="line">Toast toast = Toast.makeText(this, "Unable to find /system/bin/su.", Toast.LENGTH_LONG);  </div><div class="line">  </div><div class="line">toast.show();  </div><div class="line">  </div><div class="line">return;  </div><div class="line">  </div><div class="line">&#125;   </div><div class="line">  </div><div class="line">//如果大小一样，则认为su文件正确，直接返回了事。  </div><div class="line">  </div><div class="line">if (su.length() == suStream.available())   </div><div class="line">  </div><div class="line">&#123;  </div><div class="line">  </div><div class="line">  suStream.close();   </div><div class="line">  </div><div class="line">  return;   //  </div><div class="line">  </div><div class="line">&#125;   </div><div class="line">  </div><div class="line"></div><div class="line">  </div><div class="line">// 如果检测到/system/bin/su文件存在，但是不对头，则把自带的su先写到"/data/data/com.koushikdutta.superuser/su"  </div><div class="line">  </div><div class="line">//再写到/system/bin/su。  </div><div class="line">  </div><div class="line">byte[] bytes = new byte[suStream.available()];  </div><div class="line">  </div><div class="line">DataInputStream dis = new DataInputStream(suStream);  </div><div class="line">  </div><div class="line">dis.readFully(bytes);  </div><div class="line">  </div><div class="line">FileOutputStream suOutStream = new FileOutputStream("/data/data/com.koushikdutta.superuser/su");  </div><div class="line">  </div><div class="line">   suOutStream.write(bytes);  </div><div class="line">  </div><div class="line">   suOutStream.close();  </div><div class="line">  </div><div class="line">     </div><div class="line">  </div><div class="line">   Process process = Runtime.getRuntime().exec("su");  </div><div class="line">  </div><div class="line">   DataOutputStream os = new DataOutputStream(process.getOutputStream());  </div><div class="line">  </div><div class="line">   os.writeBytes("mount -oremount,rw /dev/block/mtdblock3 /system\n");  </div><div class="line">  </div><div class="line">   os.writeBytes("busybox cp /data/data/com.koushikdutta.superuser/su /system/bin/su\n");  </div><div class="line">  </div><div class="line">   os.writeBytes("busybox chown 0:0 /system/bin/su\n");  </div><div class="line">  </div><div class="line">   os.writeBytes("chmod 4755 /system/bin/su\n");  </div><div class="line">  </div><div class="line">   os.writeBytes("exit\n");  </div><div class="line">  </div><div class="line">   os.flush();  </div><div class="line"></div><div class="line"> ~~~ </div><div class="line">有进程使用root权限，superuser是怎么知道的呢，关键是句：</div><div class="line"></div><div class="line">~~~c++</div><div class="line">sprintf(sysCmd, "am start -a android.intent.action.MAIN  </div><div class="line">  </div><div class="line">                                    -n com.koushikdutta.superuser/com.koushikdutta.superuser.SuperuserRequestActivity  </div><div class="line">  </div><div class="line">                                 --ei uid %d --ei pid %d &gt; /dev/null", g_puid, ppid);  </div><div class="line">  </div><div class="line">  if (system(sysCmd))  </div><div class="line">  </div><div class="line">   return executionFailure("am.");</div></pre></td></tr></table></figure>
+<p>   原理是am命令，am的用法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">usage: am [subcommand] [options]  </div><div class="line">  </div><div class="line">   start an Activity: am start [-D] [-W] &lt;INTENT&gt;  </div><div class="line">  </div><div class="line">       -D: enable debugging  </div><div class="line">  </div><div class="line">       -W: wait for launch to complete  </div><div class="line">  </div><div class="line">   start a Service: am startservice &lt;INTENT&gt;  </div><div class="line">  </div><div class="line">   send a broadcast Intent: am broadcast &lt;INTENT&gt;  </div><div class="line">  </div><div class="line">   start an Instrumentation: am instrument [flags] &lt;COMPONENT&gt;  </div><div class="line">  </div><div class="line">       -r: print raw results (otherwise decode REPORT_KEY_STREAMRESULT)  </div><div class="line">  </div><div class="line">       -e &lt;NAME&gt; &lt;VALUE&gt;: set argument &lt;NAME&gt; to &lt;VALUE&gt;  </div><div class="line">  </div><div class="line">       -p &lt;FILE&gt;: write profiling data to &lt;FILE&gt;  </div><div class="line">  </div><div class="line">       -w: wait for instrumentation to finish before returning  </div><div class="line">  </div><div class="line">   start profiling: am profile &lt;PROCESS&gt; start &lt;FILE&gt;  </div><div class="line">  </div><div class="line">   stop profiling: am profile &lt;PROCESS&gt; stop  </div><div class="line">  </div><div class="line">  </div><div class="line">  </div><div class="line">   &lt;INTENT&gt; specifications include these flags:  </div><div class="line">  </div><div class="line">       [-a &lt;ACTION&gt;] [-d &lt;DATA_URI&gt;] [-t &lt;MIME_TYPE&gt;]  </div><div class="line">  </div><div class="line">       [-c &lt;CATEGORY&gt; [-c &lt;CATEGORY&gt;] ...]  </div><div class="line">  </div><div class="line">       [-e|--es &lt;EXTRA_KEY&gt; &lt;EXTRA_STRING_VALUE&gt; ...]  </div><div class="line">  </div><div class="line">       [--esn &lt;EXTRA_KEY&gt; ...]  </div><div class="line">  </div><div class="line">       [--ez &lt;EXTRA_KEY&gt; &lt;EXTRA_BOOLEAN_VALUE&gt; ...]  </div><div class="line">  </div><div class="line">       [-e|--ei &lt;EXTRA_KEY&gt; &lt;EXTRA_INT_VALUE&gt; ...]  </div><div class="line">  </div><div class="line">       [-n &lt;COMPONENT&gt;] [-f &lt;FLAGS&gt;]  </div><div class="line">  </div><div class="line">       [--grant-read-uri-permission] [--grant-write-uri-permission]  </div><div class="line">  </div><div class="line">       [--debug-log-resolution]  </div><div class="line">  </div><div class="line">       [--activity-brought-to-front] [--activity-clear-top]  </div><div class="line">  </div><div class="line">       [--activity-clear-when-task-reset] [--activity-exclude-from-recents]  </div><div class="line">  </div><div class="line">       [--activity-launched-from-history] [--activity-multiple-task]  </div><div class="line">  </div><div class="line">       [--activity-no-animation] [--activity-no-history]  </div><div class="line">  </div><div class="line">       [--activity-no-user-action] [--activity-previous-is-top]  </div><div class="line">  </div><div class="line">       [--activity-reorder-to-front] [--activity-reset-task-if-needed]  </div><div class="line">  </div><div class="line">       [--activity-single-top]  </div><div class="line">  </div><div class="line">       [--receiver-registered-only] [--receiver-replace-pending]  </div><div class="line">  </div><div class="line">       [&lt;URI&gt;]&lt;span style="font-family:Calibri;font-size:14px;"&gt; &lt;/span&gt;</div></pre></td></tr></table></figure>
+<p>还有个疑点，就是su怎么知道用户是允许root权限还是反对呢？原来是上面提到的白名单起来作用，superuser把用户的选择放入：</p>
+<p>/data/data/com.koushikdutta.superuser/databases/superuser.sqlite   数据库中，然后su进程再去读该数据库来判断是否允许。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">checkWhitelist</span><span class="params">()</span>  </span></div><div class="line">  </div><div class="line">&#123;  </div><div class="line">  </div><div class="line"> sqlite3 *db;  </div><div class="line">  </div><div class="line"> <span class="keyword">int</span> rc = sqlite3_open_v2(DBPATH, &amp;db, SQLITE_OPEN_READWRITE, NULL);  </div><div class="line">  </div><div class="line"> <span class="keyword">if</span> (!rc)  </div><div class="line">  </div><div class="line"> &#123;  </div><div class="line">  </div><div class="line">  <span class="keyword">char</span> *errorMessage;  </div><div class="line">  </div><div class="line">  <span class="keyword">char</span> query[<span class="number">1024</span>];  </div><div class="line">  </div><div class="line">  sprintf(query, <span class="string">"select * from whitelist where _id=%d limit 1;"</span>, g_puid);  </div><div class="line">  </div><div class="line">  struct whitelistCallInfo callInfo;  </div><div class="line">  </div><div class="line">  callInfo.count = <span class="number">0</span>;  </div><div class="line">  </div><div class="line">  callInfo.db = db;  </div><div class="line">  </div><div class="line">  rc = sqlite3_exec(db, query, whitelistCallback, &amp;callInfo, &amp;errorMessage);  </div><div class="line">  </div><div class="line">  <span class="keyword">if</span> (rc != SQLITE_OK)  </div><div class="line">  </div><div class="line">  &#123;  </div><div class="line">  </div><div class="line">   sqlite3_close(db);  </div><div class="line">  </div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">  </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  sqlite3_close(db);  </div><div class="line">  </div><div class="line">  <span class="keyword">return</span> callInfo.count;  </div><div class="line">  </div><div class="line"> &#125;  </div><div class="line">  </div><div class="line"> sqlite3_close(db);  </div><div class="line">  </div><div class="line"> <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="以上就是关于ROOT-的一部知识"><a href="#以上就是关于ROOT-的一部知识" class="headerlink" title="以上就是关于ROOT 的一部知识"></a>以上就是关于ROOT 的一部知识</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ROOT/">ROOT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&title=《谈谈Android ROOT 原理》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&title=《谈谈Android ROOT 原理》 — 独角兽之路&source=摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《谈谈Android ROOT 原理》 — 独角兽之路&url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/09/12/Android代码和JS 相互调用 html js/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android代码和JS 相互调用 html js</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/08/17/Intent-filter属性详解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android开发--Intent-filter属性详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="谈谈AndroidRoot原理" data-title="谈谈Android ROOT 原理" data-url="https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&title=《谈谈Android ROOT 原理》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&title=《谈谈Android ROOT 原理》 — 独角兽之路&source=摘要:经常有人问，你手机root了吗，那么root了到底是什么意思，root了之后能赶上吗？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《谈谈Android ROOT 原理》 — 独角兽之路&url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuUlEQVR42u3ay24cMQwEQP//T2/OQfbRTUq2A9ScDFg7qxoDI7rJr6/4evxzvVrzfv2Nzx648PDw8NZbf3XrfHOv7p+vSajv94yHh4d3m5dv+tUmkjfz+zUJNd8zHh4e3u/h5UV2Uuu2hwceHh7e/8h7BNf7++eF+ybUwMPDw7vNS8KI/GBIyvG2ZL+eteDh4eHFvFn5+7M/X+nv4eHh4a276rNX/+Zb9jv86254eHh4F3j5CzcvuNtwNm+YDT+Lh4eHd5SXB7WbwYI8um0Hvz7sDQ8PD+8CL4flyFlzKz8Y6mMDDw8P7yhv3+bPB6Ty+7QroyMBDw8P7ygvKkxHTbKcnUcSRYiMh4eH94282QjU7J6nvutDfw8PDw/vKC8/DPajBnkk0R4DT9bg4eHhfQtvE862Q1TJAZAEyvW4FR4eHt4h3j4a2ISzsxGBDwo8PDy8C7z8VdvGBDm7/bkONfDw8PCu8ZJ2Vx5V5OMIm8PgQJcPDw8Pb8FrQ4FZ+2oTfCSP+8l6PDw8vKO8WROrLalnm2sHwj5MRuDh4eEd4u3/+W8bY/vmVj2CgIeHh3eBl7zEN4NTOSxpsA3X4OHh4R3lzUaaTj2OtnRe/d3w8PDwjvLyQYF741Ob2OJDSo2Hh4d3lPf+F5sCun1AbdldtNzw8PDwjvJm41Y3gtp8fKFotuHh4eFd423GCPIyN49i27EtPDw8vJ/itQdGGzrkIUIbW0QxLh4eHt6a9yivWXOrRc7u/OSeeHh4eBd4s9fupsjOH1NbpuclOB4eHt6el48FtCX1rCyeDVfVQ1d4eHh4a15e+G5e/cmn2kcTHQx4eHh4v4A3CwXyGLeNiQ8fDHh4eHjXeG1B3L768wGseqYMDw8Pb83Lm095TBB9fdkGS9bj4eHh3eZtAtb9637z4L5OXXh4eHgp7w9zWrtgqUW5mwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
