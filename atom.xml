@@ -4,9 +4,9 @@
   <subtitle>到了汉堡，我们每天必须演足8小时</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://hui46226021.github.io/"/>
+  <link href="https://3431339973.github.io/"/>
   <updated>2017-10-01T12:50:27.948Z</updated>
-  <id>https://hui46226021.github.io/</id>
+  <id>https://3431339973.github.io/</id>
   
   <author>
     <name>Harlan Zhush</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Android表单映射框架 SHFormLayout 快速生成表单布局</title>
-    <link href="https://hui46226021.github.io/2017/03/17/ShFormLayout/"/>
-    <id>https://hui46226021.github.io/2017/03/17/ShFormLayout/</id>
+    <link href="https://3431339973.github.io/2017/03/17/ShFormLayout/"/>
+    <id>https://3431339973.github.io/2017/03/17/ShFormLayout/</id>
     <published>2017-03-17T14:37:23.000Z</published>
     <updated>2017-10-01T12:50:27.948Z</updated>
     
@@ -92,27 +92,27 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="Form" scheme="https://hui46226021.github.io/tags/Form/"/>
+      <category term="Form" scheme="https://3431339973.github.io/tags/Form/"/>
     
-      <category term="框架" scheme="https://hui46226021.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
+      <category term="框架" scheme="https://3431339973.github.io/tags/%E6%A1%86%E6%9E%B6/"/>
     
-      <category term="表单映射" scheme="https://hui46226021.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
+      <category term="表单映射" scheme="https://3431339973.github.io/tags/%E8%A1%A8%E5%8D%95%E6%98%A0%E5%B0%84/"/>
     
-      <category term="自定义View" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
+      <category term="自定义View" scheme="https://3431339973.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89View/"/>
     
   </entry>
   
   <entry>
     <title>ShVideoDemo android 适配录制，压缩</title>
-    <link href="https://hui46226021.github.io/2017/02/18/ShVideoDemo%20android%20%E9%80%82%E9%85%8D%E5%BD%95%E5%88%B6%EF%BC%8C%E5%8E%8B%E7%BC%A9/"/>
-    <id>https://hui46226021.github.io/2017/02/18/ShVideoDemo android 适配录制，压缩/</id>
+    <link href="https://3431339973.github.io/2017/02/18/ShVideoDemo%20android%20%E9%80%82%E9%85%8D%E5%BD%95%E5%88%B6%EF%BC%8C%E5%8E%8B%E7%BC%A9/"/>
+    <id>https://3431339973.github.io/2017/02/18/ShVideoDemo android 适配录制，压缩/</id>
     <published>2017-02-18T14:37:23.000Z</published>
     <updated>2017-10-01T12:50:37.769Z</updated>
     
@@ -139,23 +139,23 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="视频压缩" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/"/>
+      <category term="视频压缩" scheme="https://3431339973.github.io/tags/%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9/"/>
     
-      <category term="视频录制" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/"/>
+      <category term="视频录制" scheme="https://3431339973.github.io/tags/%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6/"/>
     
   </entry>
   
   <entry>
     <title>Retrofit2.0 - 网络请求库 注解 详解</title>
-    <link href="https://hui46226021.github.io/2017/01/01/Retrofit2.0/"/>
-    <id>https://hui46226021.github.io/2017/01/01/Retrofit2.0/</id>
+    <link href="https://3431339973.github.io/2017/01/01/Retrofit2.0/"/>
+    <id>https://3431339973.github.io/2017/01/01/Retrofit2.0/</id>
     <published>2017-01-01T04:32:21.000Z</published>
     <updated>2017-10-01T12:50:24.642Z</updated>
     
@@ -238,23 +238,23 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="转贴" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%B4%B4/"/>
+      <category term="转贴" scheme="https://3431339973.github.io/tags/%E8%BD%AC%E8%B4%B4/"/>
     
-      <category term="Retrofit2.0" scheme="https://hui46226021.github.io/tags/Retrofit2-0/"/>
+      <category term="Retrofit2.0" scheme="https://3431339973.github.io/tags/Retrofit2-0/"/>
     
-      <category term="网络访问" scheme="https://hui46226021.github.io/tags/%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE/"/>
+      <category term="网络访问" scheme="https://3431339973.github.io/tags/%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE/"/>
     
   </entry>
   
   <entry>
     <title>腾讯 IM 封装成Library</title>
-    <link href="https://hui46226021.github.io/2016/09/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
-    <id>https://hui46226021.github.io/2016/09/18/腾讯IM封装 ShIMLibrary/</id>
+    <link href="https://3431339973.github.io/2016/09/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
+    <id>https://3431339973.github.io/2016/09/18/腾讯IM封装 ShIMLibrary/</id>
     <published>2016-09-18T14:37:23.000Z</published>
     <updated>2017-10-01T12:47:02.213Z</updated>
     
@@ -280,23 +280,23 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="即时通讯" scheme="https://hui46226021.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
+      <category term="即时通讯" scheme="https://3431339973.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
     
-      <category term="腾讯IM" scheme="https://hui46226021.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
+      <category term="腾讯IM" scheme="https://3431339973.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
     
   </entry>
   
   <entry>
     <title>DecorView</title>
-    <link href="https://hui46226021.github.io/2016/09/17/DecorView/"/>
-    <id>https://hui46226021.github.io/2016/09/17/DecorView/</id>
+    <link href="https://3431339973.github.io/2016/09/17/DecorView/"/>
+    <id>https://3431339973.github.io/2016/09/17/DecorView/</id>
     <published>2016-09-17T08:17:33.000Z</published>
     <updated>2017-10-01T12:48:07.585Z</updated>
     
@@ -318,21 +318,21 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="DecorView" scheme="https://hui46226021.github.io/tags/DecorView/"/>
+      <category term="DecorView" scheme="https://3431339973.github.io/tags/DecorView/"/>
     
-      <category term="源码" scheme="https://hui46226021.github.io/tags/%E6%BA%90%E7%A0%81/"/>
+      <category term="源码" scheme="https://3431339973.github.io/tags/%E6%BA%90%E7%A0%81/"/>
     
-      <category term="setContentView" scheme="https://hui46226021.github.io/tags/setContentView/"/>
+      <category term="setContentView" scheme="https://3431339973.github.io/tags/setContentView/"/>
     
   </entry>
   
   <entry>
     <title>Android JSON解析工具ShJsonUtils</title>
-    <link href="https://hui46226021.github.io/2016/07/20/JSON%E8%A7%A3%E6%9E%90/"/>
-    <id>https://hui46226021.github.io/2016/07/20/JSON解析/</id>
+    <link href="https://3431339973.github.io/2016/07/20/JSON%E8%A7%A3%E6%9E%90/"/>
+    <id>https://3431339973.github.io/2016/07/20/JSON解析/</id>
     <published>2016-07-20T13:37:23.000Z</published>
     <updated>2017-10-02T16:51:17.170Z</updated>
     
@@ -354,21 +354,21 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="JSON解析" scheme="https://hui46226021.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
+      <category term="JSON解析" scheme="https://3431339973.github.io/tags/JSON%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title>Android 仿微信 相册多图选择器</title>
-    <link href="https://hui46226021.github.io/2016/07/01/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2016/07/01/Android 仿微信 相册多图选择器/</id>
+    <link href="https://3431339973.github.io/2016/07/01/Android%20%E4%BB%BF%E5%BE%AE%E4%BF%A1%20%E7%9B%B8%E5%86%8C%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>https://3431339973.github.io/2016/07/01/Android 仿微信 相册多图选择器/</id>
     <published>2016-07-01T14:37:23.000Z</published>
     <updated>2017-10-01T12:47:44.779Z</updated>
     
@@ -394,25 +394,25 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="相册" scheme="https://hui46226021.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
+      <category term="相册" scheme="https://3431339973.github.io/tags/%E7%9B%B8%E5%86%8C/"/>
     
-      <category term="微信" scheme="https://hui46226021.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
+      <category term="微信" scheme="https://3431339973.github.io/tags/%E5%BE%AE%E4%BF%A1/"/>
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="多图选择" scheme="https://hui46226021.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
+      <category term="多图选择" scheme="https://3431339973.github.io/tags/%E5%A4%9A%E5%9B%BE%E9%80%89%E6%8B%A9/"/>
     
   </entry>
   
   <entry>
     <title>ShVideoPlay android视频播放器</title>
-    <link href="https://hui46226021.github.io/2016/05/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2016/05/18/ShVideoPlay android视频播放器/</id>
+    <link href="https://3431339973.github.io/2016/05/18/ShVideoPlay%20android%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8/"/>
+    <id>https://3431339973.github.io/2016/05/18/ShVideoPlay android视频播放器/</id>
     <published>2016-05-18T14:37:23.000Z</published>
     <updated>2017-10-01T12:50:41.888Z</updated>
     
@@ -428,21 +428,21 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="视频播放" scheme="https://hui46226021.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
+      <category term="视频播放" scheme="https://3431339973.github.io/tags/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/"/>
     
   </entry>
   
   <entry>
     <title>Android Library项目发布到JCenter最简单的配置方法</title>
-    <link href="https://hui46226021.github.io/2016/05/15/JCenter/"/>
-    <id>https://hui46226021.github.io/2016/05/15/JCenter/</id>
+    <link href="https://3431339973.github.io/2016/05/15/JCenter/"/>
+    <id>https://3431339973.github.io/2016/05/15/JCenter/</id>
     <published>2016-05-15T04:32:21.000Z</published>
     <updated>2017-10-02T16:30:16.186Z</updated>
     
@@ -661,23 +661,23 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Maven" scheme="https://hui46226021.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="https://3431339973.github.io/categories/Maven/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="转贴" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%B4%B4/"/>
+      <category term="转贴" scheme="https://3431339973.github.io/tags/%E8%BD%AC%E8%B4%B4/"/>
     
-      <category term="Maven" scheme="https://hui46226021.github.io/tags/Maven/"/>
+      <category term="Maven" scheme="https://3431339973.github.io/tags/Maven/"/>
     
-      <category term="JCenter" scheme="https://hui46226021.github.io/tags/JCenter/"/>
+      <category term="JCenter" scheme="https://3431339973.github.io/tags/JCenter/"/>
     
   </entry>
   
   <entry>
     <title>Android系统启动流程</title>
-    <link href="https://hui46226021.github.io/2016/04/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
-    <id>https://hui46226021.github.io/2016/04/21/Android系统启动流程/</id>
+    <link href="https://3431339973.github.io/2016/04/21/Android%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/"/>
+    <id>https://3431339973.github.io/2016/04/21/Android系统启动流程/</id>
     <published>2016-04-21T14:37:23.000Z</published>
     <updated>2017-10-02T16:29:18.379Z</updated>
     
@@ -708,21 +708,21 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Android" scheme="https://hui46226021.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/tags/Android/"/>
     
-      <category term="系统" scheme="https://hui46226021.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://3431339973.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>Android 动态加载技术  DexClassLoader和PathClassLoader</title>
-    <link href="https://hui46226021.github.io/2016/03/22/android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
-    <id>https://hui46226021.github.io/2016/03/22/android动态加载/</id>
+    <link href="https://3431339973.github.io/2016/03/22/android%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/"/>
+    <id>https://3431339973.github.io/2016/03/22/android动态加载/</id>
     <published>2016-03-22T10:55:23.000Z</published>
     <updated>2017-10-02T16:24:29.160Z</updated>
     
@@ -761,17 +761,17 @@ PASSWORD;//密码强度 是不是6至12位字母组合
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="Dalvik" scheme="https://hui46226021.github.io/tags/Dalvik/"/>
+      <category term="Dalvik" scheme="https://3431339973.github.io/tags/Dalvik/"/>
     
   </entry>
   
   <entry>
     <title>关于JVM类加载器</title>
-    <link href="https://hui46226021.github.io/2016/03/21/%E5%85%B3%E4%BA%8EJAVA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
-    <id>https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/</id>
+    <link href="https://3431339973.github.io/2016/03/21/%E5%85%B3%E4%BA%8EJAVA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/"/>
+    <id>https://3431339973.github.io/2016/03/21/关于JAVA类加载器/</id>
     <published>2016-03-21T12:37:23.000Z</published>
     <updated>2017-10-02T16:24:31.049Z</updated>
     
@@ -824,19 +824,19 @@ Class对象封装了类在方法区内的数据结构，并且向Java程序员�
     
     </summary>
     
-      <category term="JAVA" scheme="https://hui46226021.github.io/categories/JAVA/"/>
+      <category term="JAVA" scheme="https://3431339973.github.io/categories/JAVA/"/>
     
     
-      <category term="AppClassLoader" scheme="https://hui46226021.github.io/tags/AppClassLoader/"/>
+      <category term="AppClassLoader" scheme="https://3431339973.github.io/tags/AppClassLoader/"/>
     
-      <category term="JVN" scheme="https://hui46226021.github.io/tags/JVN/"/>
+      <category term="JVN" scheme="https://3431339973.github.io/tags/JVN/"/>
     
   </entry>
   
   <entry>
     <title>andfix 增量升级更新 热补丁修复</title>
-    <link href="https://hui46226021.github.io/2016/03/17/andfix/"/>
-    <id>https://hui46226021.github.io/2016/03/17/andfix/</id>
+    <link href="https://3431339973.github.io/2016/03/17/andfix/"/>
+    <id>https://3431339973.github.io/2016/03/17/andfix/</id>
     <published>2016-03-17T14:37:23.000Z</published>
     <updated>2017-10-01T12:47:06.109Z</updated>
     
@@ -936,25 +936,25 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="转载" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
+      <category term="转载" scheme="https://3431339973.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
     
-      <category term="增量升级" scheme="https://hui46226021.github.io/tags/%E5%A2%9E%E9%87%8F%E5%8D%87%E7%BA%A7/"/>
+      <category term="增量升级" scheme="https://3431339973.github.io/tags/%E5%A2%9E%E9%87%8F%E5%8D%87%E7%BA%A7/"/>
     
-      <category term="热补丁修复" scheme="https://hui46226021.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
+      <category term="热补丁修复" scheme="https://3431339973.github.io/tags/%E7%83%AD%E8%A1%A5%E4%B8%81%E4%BF%AE%E5%A4%8D/"/>
     
-      <category term="andfix" scheme="https://hui46226021.github.io/tags/andfix/"/>
+      <category term="andfix" scheme="https://3431339973.github.io/tags/andfix/"/>
     
   </entry>
   
   <entry>
     <title>Android 通过gardle限制引入so库 版本</title>
-    <link href="https://hui46226021.github.io/2016/02/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
-    <id>https://hui46226021.github.io/2016/02/20/Android 通过gardle限制引入so库 版本/</id>
+    <link href="https://3431339973.github.io/2016/02/20/Android%20%E9%80%9A%E8%BF%87gardle%E9%99%90%E5%88%B6%E5%BC%95%E5%85%A5so%E5%BA%93%20%E7%89%88%E6%9C%AC/"/>
+    <id>https://3431339973.github.io/2016/02/20/Android 通过gardle限制引入so库 版本/</id>
     <published>2016-02-20T15:37:23.000Z</published>
     <updated>2017-10-02T16:23:33.828Z</updated>
     
@@ -972,21 +972,21 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Maven" scheme="https://hui46226021.github.io/categories/Maven/"/>
+      <category term="Maven" scheme="https://3431339973.github.io/categories/Maven/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="so库" scheme="https://hui46226021.github.io/tags/so%E5%BA%93/"/>
+      <category term="so库" scheme="https://3431339973.github.io/tags/so%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>整理 iOS 9 适配中出现的坑</title>
-    <link href="https://hui46226021.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
-    <id>https://hui46226021.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
+    <link href="https://3431339973.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
+    <id>https://3431339973.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
     <published>2015-12-18T08:17:33.000Z</published>
     <updated>2017-10-01T12:46:58.339Z</updated>
     
@@ -1001,21 +1001,21 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
+      <category term="IOS" scheme="https://3431339973.github.io/categories/IOS/"/>
     
     
-      <category term="session共享" scheme="https://hui46226021.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
+      <category term="session共享" scheme="https://3431339973.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
     
-      <category term="分布式" scheme="https://hui46226021.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+      <category term="分布式" scheme="https://3431339973.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
-      <category term="IOS 9" scheme="https://hui46226021.github.io/tags/IOS-9/"/>
+      <category term="IOS 9" scheme="https://3431339973.github.io/tags/IOS-9/"/>
     
   </entry>
   
   <entry>
     <title>单个ViewControl适配不同ios版本xib文件实现</title>
-    <link href="https://hui46226021.github.io/2015/12/07/%E5%8D%95%E4%B8%AAViewControl%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8Cios%E7%89%88%E6%9C%ACxib%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://hui46226021.github.io/2015/12/07/单个ViewControl适配不同ios版本xib文件实现/</id>
+    <link href="https://3431339973.github.io/2015/12/07/%E5%8D%95%E4%B8%AAViewControl%E9%80%82%E9%85%8D%E4%B8%8D%E5%90%8Cios%E7%89%88%E6%9C%ACxib%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://3431339973.github.io/2015/12/07/单个ViewControl适配不同ios版本xib文件实现/</id>
     <published>2015-12-07T08:17:33.000Z</published>
     <updated>2017-10-01T12:46:19.311Z</updated>
     
@@ -1032,21 +1032,21 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="IOS" scheme="https://hui46226021.github.io/categories/IOS/"/>
+      <category term="IOS" scheme="https://3431339973.github.io/categories/IOS/"/>
     
     
-      <category term="IOS" scheme="https://hui46226021.github.io/tags/IOS/"/>
+      <category term="IOS" scheme="https://3431339973.github.io/tags/IOS/"/>
     
-      <category term="xib" scheme="https://hui46226021.github.io/tags/xib/"/>
+      <category term="xib" scheme="https://3431339973.github.io/tags/xib/"/>
     
-      <category term="屏幕适配" scheme="https://hui46226021.github.io/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"/>
+      <category term="屏幕适配" scheme="https://3431339973.github.io/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"/>
     
   </entry>
   
   <entry>
     <title>一个Demo学会用Android兼容包新控件</title>
-    <link href="https://hui46226021.github.io/2015/11/23/%E4%B8%80%E4%B8%AADemo%E5%AD%A6%E4%BC%9A%E7%94%A8Android%E5%85%BC%E5%AE%B9%E5%8C%85%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
-    <id>https://hui46226021.github.io/2015/11/23/一个Demo学会用Android兼容包新控件/</id>
+    <link href="https://3431339973.github.io/2015/11/23/%E4%B8%80%E4%B8%AADemo%E5%AD%A6%E4%BC%9A%E7%94%A8Android%E5%85%BC%E5%AE%B9%E5%8C%85%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
+    <id>https://3431339973.github.io/2015/11/23/一个Demo学会用Android兼容包新控件/</id>
     <published>2015-11-23T11:42:23.000Z</published>
     <updated>2017-10-01T12:46:06.994Z</updated>
     
@@ -1090,21 +1090,21 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="转载" scheme="https://hui46226021.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
+      <category term="转载" scheme="https://3431339973.github.io/tags/%E8%BD%AC%E8%BD%BD/"/>
     
-      <category term="support v7 新控件" scheme="https://hui46226021.github.io/tags/support-v7-%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
+      <category term="support v7 新控件" scheme="https://3431339973.github.io/tags/support-v7-%E6%96%B0%E6%8E%A7%E4%BB%B6/"/>
     
   </entry>
   
   <entry>
     <title>Android-PickerView 时间控件，选择权</title>
-    <link href="https://hui46226021.github.io/2015/10/17/Android-PickerView/"/>
-    <id>https://hui46226021.github.io/2015/10/17/Android-PickerView/</id>
+    <link href="https://3431339973.github.io/2015/10/17/Android-PickerView/"/>
+    <id>https://3431339973.github.io/2015/10/17/Android-PickerView/</id>
     <published>2015-10-17T14:37:23.000Z</published>
     <updated>2017-10-02T16:32:13.991Z</updated>
     
@@ -1213,21 +1213,21 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="自定义view" scheme="https://hui46226021.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+      <category term="自定义view" scheme="https://3431339973.github.io/tags/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
     
   </entry>
   
   <entry>
     <title>Android分包MultiDex原理详解</title>
-    <link href="https://hui46226021.github.io/2015/09/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://hui46226021.github.io/2015/09/17/Android分包MultiDex原理详解/</id>
+    <link href="https://3431339973.github.io/2015/09/17/Android%E5%88%86%E5%8C%85MultiDex%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://3431339973.github.io/2015/09/17/Android分包MultiDex原理详解/</id>
     <published>2015-09-17T14:37:23.000Z</published>
     <updated>2017-10-01T12:47:17.117Z</updated>
     
@@ -1334,23 +1334,23 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="原创" scheme="https://hui46226021.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
+      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
     
-      <category term="MultiDex" scheme="https://hui46226021.github.io/tags/MultiDex/"/>
+      <category term="MultiDex" scheme="https://3431339973.github.io/tags/MultiDex/"/>
     
-      <category term="65535" scheme="https://hui46226021.github.io/tags/65535/"/>
+      <category term="65535" scheme="https://3431339973.github.io/tags/65535/"/>
     
   </entry>
   
   <entry>
     <title>谈谈Android ROOT 原理</title>
-    <link href="https://hui46226021.github.io/2015/08/21/%E8%B0%88%E8%B0%88AndroidRoot%E5%8E%9F%E7%90%86/"/>
-    <id>https://hui46226021.github.io/2015/08/21/谈谈AndroidRoot原理/</id>
+    <link href="https://3431339973.github.io/2015/08/21/%E8%B0%88%E8%B0%88AndroidRoot%E5%8E%9F%E7%90%86/"/>
+    <id>https://3431339973.github.io/2015/08/21/谈谈AndroidRoot原理/</id>
     <published>2015-08-21T13:17:28.000Z</published>
     <updated>2017-10-02T11:41:09.337Z</updated>
     
@@ -1421,16 +1421,16 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
     
     </summary>
     
-      <category term="Android" scheme="https://hui46226021.github.io/categories/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
     
     
-      <category term="移动开发" scheme="https://hui46226021.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
     
-      <category term="Android" scheme="https://hui46226021.github.io/tags/Android/"/>
+      <category term="Android" scheme="https://3431339973.github.io/tags/Android/"/>
     
-      <category term="系统" scheme="https://hui46226021.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://3431339973.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="ROOT" scheme="https://hui46226021.github.io/tags/ROOT/"/>
+      <category term="ROOT" scheme="https://3431339973.github.io/tags/ROOT/"/>
     
   </entry>
   
