@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>git 常用命令 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="原创,版本控制,git命令">
+    <meta name="description" content="摘要:记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 常用命令">
+<meta property="og:url" content="https://hui46226021.github.io/2014/01/18/git 常用命令/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:记录">
+<meta property="og:image" content="http://static.oschina.net/uploads/space/2016/0407/210127_mZzO_2405598.png">
+<meta property="og:updated_time" content="2017-10-02T16:26:13.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git 常用命令">
+<meta name="twitter:description" content="摘要:记录">
+<meta name="twitter:image" content="http://static.oschina.net/uploads/space/2016/0407/210127_mZzO_2405598.png">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">git 常用命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">git 常用命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2014-01-18T14:37:23.000Z" itemprop="datePublished" class="page-time">
+  2014-01-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VSC/">VSC</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-git 常用命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">git 常用命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2014年01月18日 22:37" datetime="2014-01-18T14:37:23.000Z"  itemprop="datePublished">2014-01-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/VSC/">VSC</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:记录<br><a id="more"></a></p>
+<p>git config –global user.name “Tony”  //设置名字</p>
+<p>git config –global user.email “tony@gmail.com”   //设置邮箱</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://static.oschina.net/uploads/space/2016/0407/210127_mZzO_2405598.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>git init </p>
+<p>git add AndroidManifest.xml   //添加单个文件</p>
+<p>git add src                               //添加文件夹</p>
+<p>git add .                                   //添加所有文件</p>
+<p>git commit -m “First commit.”   //提交</p>
+<p>我们在ProviderTest项目的根目录下创建一个名为.gitignore的文件，然后编辑这个文件 排除</p>
+<p>git status                                 //查看修改项目</p>
+<p>git diff src/com/example/providertest/MainActivity.java    //查看修改文件的内容</p>
+<p>git checkout src/com/example/providertest/MainActivity.java    //撤销修改的文件 在提交之前</p>
+<p>git reset HEAD src/com/example/providertest/MainActivity.java  //取消添加</p>
+<p>git log                                                             //查看日志</p>
+<p>git log 2e7c0547af28cc1e9f303a4a1126fddbb704281b -1 -p   //查看具体内容</p>
+<p>git branch –a   //查看分支</p>
+<p>git branch version1.0  //创建分支</p>
+<p>git checkout version1.0   //切换分支</p>
+<p>git checkout master</p>
+<p>git merge version1.0   //合并分支</p>
+<p>git branch -D version1.0 //删除分支</p>
+<p>git clone <a href="https://github.com/exmaple/test.git" target="_blank" rel="external">https://github.com/exmaple/test.git</a>  //远程代码下载到本地</p>
+<p>git push origin master   //提交到远程仓库   其中origin部分指定的是远程版本库的Git地址，master部分指定的是同步到哪一个分支</p>
+<p>git fetch origin master  //下载远程代码</p>
+<p>执行这个命令后，就会将远程版本库上的代码同步到本地，不过同步下来的代码并不会合并到任何分支上去，而是会存放在到一个origin/master分支上，这时我们可以通过diff命令来查看远程版本库上到底修改了哪些东西：</p>
+<p>git diff origin/master</p>
+<p>之后再调用merge命令将origin/master分支上的修改合并到主分支上即可，如下所示：</p>
+<p>git merge origin/master</p>
+<p>git pull origin master  //相当于上面两条命令</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git命令/">git命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/">原创</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本控制/">版本控制</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2014/01/18/git 常用命令/&title=《git 常用命令》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2014/01/18/git 常用命令/&title=《git 常用命令》 — 独角兽之路&source=摘要:记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2014/01/18/git 常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git 常用命令》 — 独角兽之路&url=https://hui46226021.github.io/2014/01/18/git 常用命令/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2014/01/18/git 常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2014/10/12/安装ubuntu 配置环境/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">安装ubuntu 配置环境</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="git 常用命令" data-title="git 常用命令" data-url="https://hui46226021.github.io/2014/01/18/git 常用命令/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2014/01/18/git 常用命令/&title=《git 常用命令》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2014/01/18/git 常用命令/&title=《git 常用命令》 — 独角兽之路&source=摘要:记录" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2014/01/18/git 常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《git 常用命令》 — 独角兽之路&url=https://hui46226021.github.io/2014/01/18/git 常用命令/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2014/01/18/git 常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACGElEQVR42u3aQW7DMAwEwPz/0+4LIixJpYDk0SlA3FqTw4Ii9fnE6/myJk+u3/X5xcLAwDiW8SxXsrn1i9dPrv9bsjcMDIz3MKqvz7dVBfTei4GBgbEOwR67+hkDAwOjV9LtxWNgYGCsGbuOqfm3eXBvPotjYGAcyKg26//z80/mGxgYGEcxnuLqFXnroHzGCwMD425GHnB54dgr8qplHwYGBkb1QFttolWvhUV/i4GB8TLGOi571yySArHXhsPAwLibUY3OpMXfG4ImV8S+/tAYGBhXM+aAyUG3d6AtzGMxMDCuY/S2lfN6x9cNs1kMDIzDGb0ScDIAyJ8pFJcYGBhXM+b3rHoZmAd3oWuIgYFxKWNydEwYeSjn8fp1soGBgXEpYxK41UIwGSTML2pgYGDcyphcgJg07KpRHt0ZwcDAuJSRlGt7w3Q+csDAwHgPY77FhD2J4OSHwMDAuJtRvVQxGTHmI9K8SG3eDcHAwDickcdoj1qN6cLwAAMD4wWMXoutOhjoNfWSshUDA+M9jOqYs1di7ho2YGBgvIHxFFcOS2K3GvRf94CBgXE1Y35RbBLKkyZdNaYxMDBOZ1QPor2j72TMmfxAGBgYb2AkpV61WT8fapYvW2BgYGAUv222+ItPYmBgYFQ3uqHIi0nbAhcDA+MQRnUAOdlETv1Juw0DA+NARu9qRT4GKIRmPBxtDjUxMDDOY/wB1ebRP0J/b8MAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

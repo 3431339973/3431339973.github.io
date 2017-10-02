@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 动态加载技术  DexClassLoader和PathClassLoader | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="Dalvik">
+    <meta name="description" content="摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这些文件里的代码逻辑。设计的知识点主要是 andrond的动态加载技术，在这之前可以先了解下关于JAVA的类加载方面的知识传送门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 动态加载技术  DexClassLoader和PathClassLoader">
+<meta property="og:url" content="https://hui46226021.github.io/2016/03/22/android动态加载/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这些文件里的代码逻辑。设计的知识点主要是 andrond的动态加载技术，在这之前可以先了解下关于JAVA的类加载方面的知识传送门">
+<meta property="og:updated_time" content="2017-10-02T16:24:29.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 动态加载技术  DexClassLoader和PathClassLoader">
+<meta name="twitter:description" content="摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这些文件里的代码逻辑。设计的知识点主要是 andrond的动态加载技术，在这之前可以先了解下关于JAVA的类加载方面的知识传送门">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 动态加载技术  DexClassLoader和PathClassLoader</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 动态加载技术  DexClassLoader和PathClassLoader</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-22T10:55:23.000Z" itemprop="datePublished" class="page-time">
+  2016-03-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android动态加载的大致过程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android动态加载的大致过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">遇到问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DexClassLoader-和-PathClassLoader"><span class="post-toc-number">3.</span> <span class="post-toc-text">DexClassLoader 和 PathClassLoader</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载类的过程"><span class="post-toc-number">4.</span> <span class="post-toc-text">加载类的过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义ClassLoader"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">自定义ClassLoader</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-android动态加载"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 动态加载技术  DexClassLoader和PathClassLoader</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月22日 18:55" datetime="2016-03-22T10:55:23.000Z"  itemprop="datePublished">2016-03-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这些文件里的代码逻辑。设计的知识点主要是 andrond的动态加载技术，在这之前可以先了解下关于JAVA的类加载方面的知识<a href="http://zhush.xyz/2016/10/21/%E5%85%B3%E4%BA%8EJAVA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_blank" rel="external">传送门</a><br><a id="more"></a></p>
+<p>Dalvik虚拟机如同其他Java虚拟机一样，在运行程序时首先需要将对应的类加载到内存中。而在Java标准的虚拟机中，类加载可以从class文件中读取，也可以是其他形式的二进制流，因此，我们常常利用这一点，在程序运行时手动加载Class，从而达到代码动态加载执行的目的，动态调用外部的Dex文件则是完全没有问题的。在APK文件中往往有一个或者多个Dex文件，我们写的每一句代码都会被编译到这些文件里面，Android应用运行的时候就是通过执行这些Dex文件完成应用的功能的。虽然一个APK一旦构建出来，我们是无法更换里面的Dex文件的，但是我们可以通过加载外部的Dex文件来实现动态加载，这个外部文件可以放在外部存储，或者从网络下载。</p>
+<h2 id="Android动态加载的大致过程"><a href="#Android动态加载的大致过程" class="headerlink" title="Android动态加载的大致过程"></a>Android动态加载的大致过程</h2><p>无论上面的哪种动态加载，其实基本原理都是在程序运行时加载一些外部的可执行的文件，然后调用这些文件的某个方法执行业务逻辑。需要说明的是，因为文件是可执行的（so库或者dex包，也就是一种动态链接库），出于安全问题，Android并不允许直接加载手机外部存储这类noexec（不可执行）存储路径上的可执行文件。</p>
+<p>对于这些外部的可执行文件，在Android应用中调用它们前，都要先把他们拷贝到data/packagename/内部储存文件路径，确保库不会被第三方应用恶意修改或拦截，然后再将他们加载到当前的运行环境并调用需要的方法执行相应的逻辑，从而实现动态调用。</p>
+<p>动态加载的大致过程就是：</p>
+<ul>
+<li>把可执行文件（dex/jar/apk）拷贝到应用APP内部存储；</li>
+<li>加载可执行文件；</li>
+<li>调用具体的方法执行业务逻辑；</li>
+</ul>
+<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>然而Dalvik虚拟机毕竟不算是标准的Java虚拟机，因此在类加载机制上，它们有相同的地方，也有不同之处。我们必须区别对待<br>例如，在使用标准Java虚拟机时，我们经常自定义继承自ClassLoader的类加载器。然后通过defineClass方法来从一个二进制流中加载Class。然而，这在Android里是行不通的，大家就没必要走弯路了。参看源码我们知道，Android中ClassLoader的defineClass方法具体是调用VMClassLoader的defineClass本地静态方法。而这个本地方法除了抛出一个“UnsupportedOperationException”之外，什么都没做，甚至连返回值都为空</p>
+<h2 id="DexClassLoader-和-PathClassLoader"><a href="#DexClassLoader-和-PathClassLoader" class="headerlink" title="DexClassLoader 和 PathClassLoader"></a>DexClassLoader 和 PathClassLoader</h2><p>在Android中，ClassLoader是一个抽象类，实际开发过程中，我们一般是使用其具体的子类DexClassLoader、PathClassLoader这些类加载器来加载类的，它们的不同之处是：</p>
+<ul>
+<li>DexClassLoader可以加载jar/apk/dex，可以从SD卡中加载未安装的apk；</li>
+<li>PathClassLoader只能加载系统中已经安装过的apk；  </li>
+</ul>
+<h2 id="加载类的过程"><a href="#加载类的过程" class="headerlink" title="加载类的过程"></a>加载类的过程</h2><p>上面还只是创建了类加载器的实例，其中创建了一个DexFile实例，用来保存dex文件，我们猜想这个实例就是用来加载类的。</p>
+<p>Android中，ClassLoader用loadClass方法来加载我们需要的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> Class&lt;?&gt; loadClass(String className) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">        <span class="keyword">return</span> loadClass(className, <span class="keyword">false</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt; loadClass(String className, <span class="keyword">boolean</span> resolve) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">        Class&lt;?&gt; clazz = findLoadedClass(className);</div><div class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</div><div class="line">            ClassNotFoundException suppressed = <span class="keyword">null</span>;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                clazz = parent.loadClass(className, <span class="keyword">false</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                suppressed = e;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    clazz = findClass(className);</div><div class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                    e.addSuppressed(suppressed);</div><div class="line">                    <span class="keyword">throw</span> e;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> clazz;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>loadClass方法调用了findClass方法，而BaseDexClassLoader重载了这个方法，得到BaseDexClassLoader看看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">        Class clazz = pathList.findClass(name);</div><div class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(name);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> clazz;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>结果还是调用了DexPathList的findClass</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Class <span class="title">findClass</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">      <span class="keyword">for</span> (Element element : dexElements) &#123;</div><div class="line">          DexFile dex = element.dexFile;</div><div class="line">          <span class="keyword">if</span> (dex != <span class="keyword">null</span>) &#123;</div><div class="line">              Class clazz = dex.loadClassBinaryName(name, definingContext);</div><div class="line">              <span class="keyword">if</span> (clazz != <span class="keyword">null</span>) &#123;</div><div class="line">                  <span class="keyword">return</span> clazz;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>这里遍历了之前所有的DexFile实例，其实也就是遍历了所有加载过的dex文件，再调用loadClassBinaryName方法一个个尝试能不能加载想要的类，真是简单粗暴</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Class <span class="title">loadClassBinaryName</span><span class="params">(String name, ClassLoader loader)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> defineClass(name, loader, mCookie);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> Class <span class="title">defineClass</span><span class="params">(String name, ClassLoader loader, <span class="keyword">int</span> cookie)</span></span>;</div></pre></td></tr></table></figure>
+<h3 id="自定义ClassLoader"><a href="#自定义ClassLoader" class="headerlink" title="自定义ClassLoader"></a>自定义ClassLoader</h3><p>平时进行动态加载开发的时候，使用DexClassLoader就够了。但我们也可以创建自己的类去继承ClassLoader，需要注意的是loadClass方法并不是final类型的，所以我们可以重载loadClass方法并改写类的加载逻辑。</p>
+<p>通过前面我们分析知道，ClassLoader双亲代理的实现很大一部分就是在loadClass方法里，我们可以通过重写loadClass方法避开双亲代理的框架，这样一来就可以在重新加载已经加载过的类，也可以在加载类的时候注入一些代码。这是一种Hack的开发方式，采用这种开发方式的程序稳定性可能比较差，但是却可以实现一些“黑科技”的功能。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dalvik/">Dalvik</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/22/android动态加载/&title=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/22/android动态加载/&title=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&source=摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/22/android动态加载/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/22/android动态加载/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/22/android动态加载/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/21/Android系统启动流程/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android系统启动流程</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/21/关于JAVA类加载器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于JVM类加载器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="android动态加载" data-title="Android 动态加载技术  DexClassLoader和PathClassLoader" data-url="https://hui46226021.github.io/2016/03/22/android动态加载/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/22/android动态加载/&title=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/22/android动态加载/&title=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&source=摘要:android的插件开发，例如主题APK  AAPK去加载BAPK的资源，重点就是 在程序运行的时候，加载一些程序自身原本不存在的可执行文件并运行这..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/22/android动态加载/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 动态加载技术  DexClassLoader和PathClassLoader》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/22/android动态加载/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/22/android动态加载/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQXLCMAwF0N7/0nSmW0j6JYVOUZ5XDJg4zwuNZPnrKx6Pn/H8+Wjm8+itdfHAwMD4WMbjdFQfffTqyZOPfo22BgMD4waMJMieL5M/obpuFJQxMDAwTuckI98ODAwMjHnATRLBpKDNk0UMDAyMXqCcFJ/VEvfiWhwDA+MDGZPGwLs//1F/AwMD4x8zHsXRO/pP1h29FQYGxmrGUYDLS8de0na+Yq+dgIGBsZWRJ2r5r705vW3FwMC4AyNf8rwZMG8hXDAHAwNjNWPSUKwe3CctzNG/MDAwVjOqqV71cL+XbjYP9TAwMNYxeiE1XzJ50V4ox8DAuAOj0D0oNgnyb6pB9sU3GBgYt2Gcl53VJuUkKSy3NjEwMG7GyB86aRLkB/3J5mJgYOxm9ErNScI3CbjlTiwGBsYKRnJMVg2C1bQyb4IWanEMDIzVjDwg9hLKtzQhMDAwbsZIePPj/sk2vdggDAyM1Yx8yby4rR6i5dsRHeFhYGCsY/RevVfuVq9xFNbCwMC4AaMaoedJXm/jDp+AgYGxmtE7vu8FzbzErV6cxcDA2M14FMfkoL935SsK9xgYGKsZ+bi2BO29aBLEMTAwtjKuDbJ5qK02PkcJIgYGxgpGcqxfnZmUx72gj4GBgdErF6vXwnrzD7cDAwMDI75UUVi4uEHR5TAMDIzVjPwyRO/yxFW8XwIuBgbGUsa8gEy+ueqKxgiDgYHxeYxvQivwLjGatkkAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

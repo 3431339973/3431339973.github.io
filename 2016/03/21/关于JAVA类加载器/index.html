@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>关于JVM类加载器 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="AppClassLoader,JVN">
+    <meta name="description" content="摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于JVM类加载器">
+<meta property="og:url" content="https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201109/25/0_131691377413Tr.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201009/25/0_1285381395C6iW.gif">
+<meta property="og:image" content="http://hi.csdn.net/attachment/201109/25/0_1316916841uQvx.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20140101125755203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvamlhbmd3ZWkwOTEwNDEwMDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2017-10-02T16:24:31.049Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于JVM类加载器">
+<meta name="twitter:description" content="摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧">
+<meta name="twitter:image" content="http://hi.csdn.net/attachment/201109/25/0_131691377413Tr.gif">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于JVM类加载器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于JVM类加载器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-21T12:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-03-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#首先来了解一下字节码和class文件的区别："><span class="post-toc-number">1.</span> <span class="post-toc-text">首先来了解一下字节码和class文件的区别：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类的加载过程"><span class="post-toc-number"></span> <span class="post-toc-text">类的加载过程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java虚拟机中类加载器："><span class="post-toc-number"></span> <span class="post-toc-text">Java虚拟机中类加载器：</span></a>
+        </nav>
+    </aside>
+    
+<article id="post-关于JAVA类加载器"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于JVM类加载器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年03月21日 20:37" datetime="2016-03-21T12:37:23.000Z"  itemprop="datePublished">2016-03-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JAVA/">JAVA</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧<br><a id="more"></a></p>
+<h3 id="首先来了解一下字节码和class文件的区别："><a href="#首先来了解一下字节码和class文件的区别：" class="headerlink" title="首先来了解一下字节码和class文件的区别："></a>首先来了解一下字节码和class文件的区别：</h3><p>我们知道，新建一个java对象的时候，JVM要将这个对象对应的字节码加载到内存中，这个字节码的原始信息存放在classpath(就是我们新建Java工程的bin目录下)指定的目录下的.class文件,类加载需要将.class文件导入到硬盘中，经过一些处理之后变成字节码在加载到内存中。</p>
+<p>顾名思义，类加载器（class loader）用来加载 Java 类到 Java 虚拟机中。一般来说，Java 虚拟机使用 Java 类的方式如下：Java 源程序（.java 文件）在经过 Java 编译器编译之后就被转换成 Java 字节代码（.class 文件）。类加载器负责读取 Java 字节代码，并转换成 java.lang.Class类的一个实例。每个这样的实例用来表示一个 Java 类。通过此实例的 newInstance()方法就可以创建出该类的一个对象。实际的情况可能更加复杂，比如 Java 字节代码可能是通过工具动态生成的，也可能是通过网络下载的。<br>基本上所有的类加载器都是 java.lang.ClassLoader类的一个实例</p>
+<h2 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h2><p>来自 <a href="http://blog.csdn.net/gjanyanlig/article/details/6818655/" target="_blank" rel="external">http://blog.csdn.net/gjanyanlig/article/details/6818655/</a><br>JVM将类加载过程分为三个步骤：装载（Load），链接（Link）和初始化(Initialize)链接又分为三个步骤，如下图所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://hi.csdn.net/attachment/201109/25/0_131691377413Tr.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>1) 装载：查找并加载类的二进制数据；<br>2)链接：<br>验证：确保被加载类的正确性；<br>准备：为类的静态变量分配内存，并将其初始化为默认值；<br>解析：把类中的符号引用转换为直接引用；<br>3)初始化：为类的静态变量赋予正确的初始值；<br>          那为什么我要有验证这一步骤呢？首先如果由编译器生成的class文件，它肯定是符合JVM字节码格式的，但是万一有高手自己写一个class文件，让JVM加载并运行，用于恶意用途，就不妙了，因此这个class文件要先过验证这一关，不符合的话不会让它继续执行的，也是为了安全考虑吧。<br>        准备阶段和初始化阶段看似有点牟盾，其实是不牟盾的，如果类中有语句：private static int a = 10，它的执行过程是这样的，首先字节码文件被加载到内存后，先进行链接的验证这一步骤，验证通过后准备阶段，给a分配内存，因为变量a是static的，所以此时a等于int类型的默认初始值0，即a=0,然后到解析（后面在说），到初始化这一步骤时，才把a的真正的值10赋给a,此时a=10。</p>
+<ol>
+<li>类的初始化<br> 类什么时候才被初始化：<br>1）创建类的实例，也就是new一个对象<br>2）访问某个类或接口的静态变量，或者对该静态变量赋值<br>3）调用类的静态方法<br>4）反射（Class.forName(“com.lyj.load”)）<br>5）初始化一个类的子类（会首先初始化子类的父类）<br>6）JVM启动时标明的启动类，即文件名和类名相同的那个类<pre><code>只有这6中情况才会导致类的类的初始化。
+</code></pre>  类的初始化步骤：<pre><code>1）如果这个类还没有被加载和链接，那先进行加载和链接
+2）假如这个类存在直接父类，并且这个类还没有被初始化（注意：在一个类加载器中，类只能初始化一次），那就初始化直接的父类（不适用于接口）
+ 3)加入类中存在初始化语句（如static变量和static块），那就依次执行这些初始化语句。
+</code></pre></li>
+</ol>
+<p>3.类的加载<br>       类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个这个类的java.lang.Class对象，用来封装类在方法区类的对象。看下面2图</p>
+<p><img src="http://hi.csdn.net/attachment/201009/25/0_1285381395C6iW.gif" alt=""><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://hi.csdn.net/attachment/201109/25/0_1316916841uQvx.gif" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<pre><code> 类的加载的最终产品是位于堆区中的Class对象
+Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口
+</code></pre><p>加载类的方式有以下几种：<br> 1）从本地系统直接加载<br>2）通过网络下载.class文件<br>3）从zip，jar等归档文件中加载.class文件<br>4）从专有数据库中提取.class文件<br>5）将Java源文件动态编译为.class文件（服务器）</p>
+<h2 id="Java虚拟机中类加载器："><a href="#Java虚拟机中类加载器：" class="headerlink" title="Java虚拟机中类加载器："></a>Java虚拟机中类加载器：</h2><p>java虚拟机中主要又3个系统类加载器，BootStrap,ExtClassLoader,AppClassLoader，同时也可以安装多个 其他的加载器</p>
+<p>BootStrap,使用C/C++代码写的，是第一个类加载器，已经封装到JVM内核中了，而ExtClassLoader和AppClassLoader是Java类，其他的类加载器也都是JAVA写的。</p>
+<p>看一下类加载器的属性结构图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://img.blog.csdn.net/20140101125755203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvamlhbmd3ZWkwOTEwNDEwMDAz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Java虚拟机中的所有类加载器采用具有父子关系的树形结构进行组织，在实例化每个类加载器对象的时候，需要为其指定一个父级类加载器对象或者默认采用系统类加载器为其父级类加载<br>类加载器的委托机制：<br>当Java虚拟机要加载第一个类的时候，到底派出哪个类加载器去加载呢？<br>(1). 首先当前线程的类加载器去加载线程中的第一个类(当前线程的类加载器：Thread类中有一个get/setContextClassLoader(ClassLoader cl);方法，可以获取/指定本线程中的类加载器)<br>(2). 如果类A中引用了类B,Java虚拟机将使用加载类A的类加载器来加载类B<br>(3). 还可以直接调用ClassLoader.loadClass(String className)方法来指定某个类加载器去加载某个类<br>每个类加载器加载类时，又先委托给其上级类加载器当所有祖宗类加载器没有加载到类，回到发起者类加载器，还加载不了，则会抛出ClassNotFoundException,不是再去找发起者类加载器的儿子，因为没有getChild()方法。例如：如上图所示： MyClassLoader-&gt;AppClassLoader-&gt;Ext-&gt;ClassLoader-&gt;BootStrap.自定定义的MyClassLoader1首先会先委托给AppClassLoader,AppClassLoader会委托给ExtClassLoader,ExtClassLoader会委托给BootStrap，这时候BootStrap就去加载，如果加载成功，就结束了。如果加载失败，就交给ExtClassLoader去加载，如果ExtClassLoader加载成功了，就结束了，如果加载失败就交给AppClassLoader加载，如果加载成功，就结束了，如果加载失败，就交给自定义的MyClassLoader1类加载器加载，如果加载失败，就报ClassNotFoundException异常，结束。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://hui46226021.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AppClassLoader/">AppClassLoader</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVN/">JVN</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&title=《关于JVM类加载器》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&title=《关于JVM类加载器》 — 独角兽之路&source=摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于JVM类加载器》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/22/android动态加载/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android 动态加载技术  DexClassLoader和PathClassLoader</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/17/andfix/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">andfix 增量升级更新 热补丁修复</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="关于JAVA类加载器" data-title="关于JVM类加载器" data-url="https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&title=《关于JVM类加载器》 — 独角兽之路&pic=https://hui46226021.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&title=《关于JVM类加载器》 — 独角兽之路&source=摘要:最近需要弄android的 插件开发，那就先从JAVA的类加载器开始吧" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于JVM类加载器》 — 独角兽之路&url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/&via=https://hui46226021.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://hui46226021.github.io/2016/03/21/关于JAVA类加载器/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awW4bMQwEUP//T7tAr7WdGUpMUuDtqajtlZ4OpELy8Yif598n+fT58fn3V+++8+6dj40HDw8Pb7T1ZLF3CyT/377t8/fzQ8TDw8Pb4+Xhvv303YZyzOfD+sKCh4eH96O89gabw04u3Hh4eHj/F6+42sbpJE8eeHh4eD/LawPxDJME/TwxXK614OHh4XURu2iA/YZ/L/b38PDw8A666m0RIQ/uOSBPBi/ej4eHh7fAa7ebB+i8oTVrhiXlYzw8PLwNXn6RbcP6bKzq8yHWO8HDw8Nb451vvUXm+M8p4Ys34+Hh4S3z2mU2asl5U61ODHh4eHiXeO2Pk5fmAwFtmpmVRfDw8PA2eLNxq1vh/uQQo1Xw8PDwFnh5wM2vuUlqadtds/IEHh4e3l1eHnBb9oXwPVodDw8Pb5s3C77tYnlJIkkhR3kPDw8P7xKvHSDYG8CaHdkX5RI8PDy8q7zkq3nRIVmyPaykyPv2Uzw8PLw1Xj40MLsQ322D5akIDw8Pb4M3K63OxgLaRtps9WgyAg8PD++YdxKaT0q6s3JGWxTGw8PDu8vLf5A06WfX8bZHV6QuPDw8vDVefs1tj+OoiFCu/mItPDw8vG/hbdzZZ4dSlxtOJg7w8PDwynrsxgJteTcaBRglITw8PLy7vPOtn2yxPdA8seHh4eF9Jy8PyicDB2137hk8L9h4eHh4C7z87/e2SXYyVpWnkOT6joeHh3eX9yyfWb8+Cfrt0UQlZjw8PLwFXnvxbRtj7UhWXsLIDwUPDw9vg5ckg7a0ml+F7/5lUGc/PDw8vAPeLBm07atZ0H+cPHh4eHg/yku2nheC2/JEUjJ+sQoeHh7er+G1W7xV5E1KG8MrNR4eHt6lNlh+UT4P5cn76ySEh4eHt8A7GQg4LxzMxrauDQ3g4eHhdbw/TgZpzrTyUPwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
