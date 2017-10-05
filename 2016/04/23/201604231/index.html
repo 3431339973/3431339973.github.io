@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>关于一个Activity的视图加载 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,Surface">
+    <meta name="description" content="摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在onCreat方法了调用了setContentView，那我们来分析下他吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于一个Activity的视图加载">
+<meta property="og:url" content="https://3431339973.github.io/2016/04/23/201604231/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在onCreat方法了调用了setContentView，那我们来分析下他吧">
+<meta property="og:image" content="http://bmob-cdn-14158.b0.upaiyun.com/2017/10/04/bcc6df51409d50a480955fd270bb04ec.jpg">
+<meta property="og:updated_time" content="2017-10-04T15:09:37.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于一个Activity的视图加载">
+<meta name="twitter:description" content="摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在onCreat方法了调用了setContentView，那我们来分析下他吧">
+<meta name="twitter:image" content="http://bmob-cdn-14158.b0.upaiyun.com/2017/10/04/bcc6df51409d50a480955fd270bb04ec.jpg">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于一个Activity的视图加载</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于一个Activity的视图加载</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-23T14:42:27.000Z" itemprop="datePublished" class="page-time">
+  2016-04-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#setContentView"><span class="post-toc-number">1.</span> <span class="post-toc-text">setContentView</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Window是什么"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Window是什么?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继续setContentView（windows的方法）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">继续setContentView（windows的方法）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#关于contentParent-的addView-view-params-方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">关于contentParent 的addView(view, params)方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-201604231"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于一个Activity的视图加载</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月23日 22:42" datetime="2016-04-23T14:42:27.000Z"  itemprop="datePublished">2016-04-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在onCreat方法了调用了setContentView，那我们来分析下他吧<br><a id="more"></a></p>
+<h1 id="setContentView"><a href="#setContentView" class="headerlink" title="setContentView"></a>setContentView</h1><p>activity里重载了很多个setContentView方法，我们只分析一个就行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">    getWindow().setContentView(view);</div><div class="line">    initWindowDecorActionBar();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> Window <span class="title">getWindow</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> mWindow;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到  其实是调用了mWindow的setContentView 方法，window我们都知道，他是一个屏幕的最低层，那我们点进去接着往下看<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Window</span> </span>&#123;</div><div class="line"><span class="comment">/** Flag for the "options panel" feature.  This is enabled by default. */</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FEATURE_OPTIONS_PANEL = <span class="number">0</span>;</div><div class="line"><span class="comment">/** Flag for the "no title" feature, turning off the title at the top</span></div><div class="line"> *  of the screen. */</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FEATURE_NO_TITLE = <span class="number">1</span>;</div><div class="line"><span class="comment">/** Flag for the progress indicator feature */</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FEATURE_PROGRESS = <span class="number">2</span>;</div><div class="line"><span class="comment">/** Flag for having an icon on the left side of th</span></div><div class="line"></div><div class="line">........</div></pre></td></tr></table></figure></p>
+<p>咦，这window原来是个抽象类，那他到底是个什么类型，我们在回到activity看看他是如何初始化的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Context context, ActivityThread aThread,</span></span></div><div class="line">        Instrumentation instr, IBinder token, <span class="keyword">int</span> ident,</div><div class="line">        Application application, Intent intent, ActivityInfo info,</div><div class="line">        CharSequence title, Activity parent, String id,</div><div class="line">        NonConfigurationInstances lastNonConfigurationInstances,</div><div class="line">        Configuration config, IVoiceInteractor voiceInteractor) &#123;</div><div class="line">    attachBaseContext(context);</div><div class="line"></div><div class="line">    mFragments.attachActivity(<span class="keyword">this</span>, mContainer, <span class="keyword">null</span>);</div><div class="line">    <span class="comment">//这里初始化了 window</span></div><div class="line">    mWindow = PolicyManager.makeNewWindow(<span class="keyword">this</span>);</div><div class="line">    mWindow.setCallback(<span class="keyword">this</span>);</div><div class="line">    mWindow.setOnWindowDismissedCallback(<span class="keyword">this</span>);</div><div class="line">    mWindow.getLayoutInflater().setPrivateFactory(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">if</span> (info.softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED) &#123;</div><div class="line">        mWindow.setSoftInputMode(info.softInputMode);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (info.uiOptions != <span class="number">0</span>) &#123;</div><div class="line">        mWindow.setUiOptions(info.uiOptions);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Window是什么"><a href="#Window是什么" class="headerlink" title="Window是什么?"></a>Window是什么?</h2><p>该方法在ActivityThread的performLaunchActivity方法被调用，就是创建一个activity的方法。 这回找到了 mWindow  是如何初始化的，但是还是看不出他什么个什么 实例化对象，而且又出来一个新东西 PolicyManager.makeNewWindow(this);的PolicyManager 是个什么玩意？<br>我没开一探究竟 \frameworks\base\core\java\com\android\internal\policy\PolicyManager</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">PolicyManager</span> </span>&#123;</div><div class="line">    <span class="comment">//会通过这个 反射创建 IPolicy实例</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String POLICY_IMPL_CLASS_NAME =</div><div class="line">        <span class="string">"com.android.internal.policy.impl.Policy"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> IPolicy sPolicy;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        <span class="comment">// Pull in the actual implementation of the policy at run-time</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class policyClass = Class.forName(POLICY_IMPL_CLASS_NAME);</div><div class="line">            sPolicy = (IPolicy)policyClass.newInstance();</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">                    POLICY_IMPL_CLASS_NAME + <span class="string">" could not be loaded"</span>, ex);</div><div class="line">        &#125; <span class="keyword">catch</span> (InstantiationException ex) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">                    POLICY_IMPL_CLASS_NAME + <span class="string">" could not be instantiated"</span>, ex);</div><div class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException ex) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">                    POLICY_IMPL_CLASS_NAME + <span class="string">" could not be instantiated"</span>, ex);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Cannot instantiate this class</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">PolicyManager</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// The static methods to spawn new policy-specific objects</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Window <span class="title">makeNewWindow</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sPolicy.makeNewWindow(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> LayoutInflater <span class="title">makeNewLayoutInflater</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sPolicy.makeNewLayoutInflater(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> WindowManagerPolicy <span class="title">makeNewWindowManager</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sPolicy.makeNewWindowManager();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FallbackEventHandler <span class="title">makeNewFallbackEventHandler</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> sPolicy.makeNewFallbackEventHandler(context);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>嗯，这个类就这么几行代码 里面有个关键的东西sPolicy 继续走（注意：前方高能你将进入水下的冰山了）<br>根据上面的 POLICY_IMPL_CLASS_NAME 获取到了Policy 我没来看一下他</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Policy</span> <span class="keyword">implements</span> <span class="title">IPolicy</span> </span>&#123;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"PhonePolicy"</span>;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] preload_classes = &#123;</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneLayoutInflater"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow$1"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow$DialogMenuCallback"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow$DecorView"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow$PanelFeatureState"</span>,</div><div class="line">    <span class="string">"com.android.internal.policy.impl.PhoneWindow$PanelFeatureState$SavedState"</span>,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">static</span> &#123;</div><div class="line">    <span class="comment">// For performance reasons, preload some policy specific classes when</span></div><div class="line">    <span class="comment">// the policy gets loaded.</span></div><div class="line">    <span class="keyword">for</span> (String s : preload_classes) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Class.forName(s);</div><div class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</div><div class="line">            Log.e(TAG, <span class="string">"Could not preload class for phone policy: "</span> + s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//返回了 Window</span></div><div class="line"><span class="function"><span class="keyword">public</span> Window <span class="title">makeNewWindow</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PhoneWindow(context);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> LayoutInflater <span class="title">makeNewLayoutInflater</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PhoneLayoutInflater(context);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> WindowManagerPolicy <span class="title">makeNewWindowManager</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PhoneWindowManager();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> FallbackEventHandler <span class="title">makeNewFallbackEventHandler</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PhoneFallbackEventHandler(context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码也不多 但是可以看到 makeNewWindow 里干了什么，他new 了一个 PhoneWindow  还有 makeNewWindowManager 里new 了一个PhoneWindowManager<br>这下我们知道 activity里的getWindow 到底获取到了个 什么东西.</p>
+<h2 id="继续setContentView（windows的方法）"><a href="#继续setContentView（windows的方法）" class="headerlink" title="继续setContentView（windows的方法）"></a>继续setContentView（windows的方法）</h2><p>刚才在看activity的时候已经知道 其setContentView方法 其实调用的window的setContentView方法 ，现在我们也知道了这个 window其实是一个 PhoneWindow,来上代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">private</span> DecorView mDecor;</div><div class="line">   </div><div class="line"><span class="keyword">private</span> ViewGroup mContentParent;</div><div class="line"></div><div class="line"><span class="keyword">private</span> ViewGroup mContentRoot;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">    setContentView(view, <span class="keyword">new</span> ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContentView</span><span class="params">(View view, ViewGroup.LayoutParams params)</span> </span>&#123;</div><div class="line">    <span class="comment">// Note: FEATURE_CONTENT_TRANSITIONS may be set in the process of installing the window</span></div><div class="line">    <span class="comment">// decor, when theme attributes and the like are crystalized. Do not check the feature</span></div><div class="line">    <span class="comment">// before this happens.</span></div><div class="line">    <span class="comment">//判断 mContentParent 没有则创建</span></div><div class="line">    <span class="keyword">if</span> (mContentParent == <span class="keyword">null</span>) &#123;</div><div class="line">        installDecor();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!hasFeature(FEATURE_CONTENT_TRANSITIONS)) &#123;</div><div class="line">        mContentParent.removeAllViews();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (hasFeature(FEATURE_CONTENT_TRANSITIONS)) &#123;</div><div class="line">        view.setLayoutParams(params);</div><div class="line">        <span class="keyword">final</span> Scene newScene = <span class="keyword">new</span> Scene(mContentParent, view);</div><div class="line">        transitionTo(newScene);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//将传进来的view添加到 mContentParent</span></div><div class="line">        mContentParent.addView(view, params);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">final</span> Callback cb = getCallback();</div><div class="line">    <span class="keyword">if</span> (cb != <span class="keyword">null</span> &amp;&amp; !isDestroyed()) &#123;</div><div class="line">        cb.onContentChanged();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其实这里就干了两件事 </p>
+<ul>
+<li>判断 mContentParent 没有则创建 </li>
+<li>然后把传进来的view添加到 mContentParent</li>
+</ul>
+<p>我们再来看看 installDecor 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">installDecor</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mDecor == <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="comment">//创建 DecorView </span></div><div class="line">        mDecor = generateDecor();</div><div class="line">        mDecor.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);</div><div class="line">        mDecor.setIsRootNamespace(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">if</span> (!mInvalidatePanelMenuPosted &amp;&amp; mInvalidatePanelMenuFeatures != <span class="number">0</span>) &#123;</div><div class="line">            mDecor.postOnAnimation(mInvalidatePanelMenuRunnable);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (mContentParent == <span class="keyword">null</span>) &#123;</div><div class="line">    <span class="comment">//通过 DecorView 得到mContentParent</span></div><div class="line">        mContentParent = generateLayout(mDecor);</div><div class="line"></div><div class="line">     。。。。。。。其他赋值操作</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续看 generateDecor 和generateLayout 函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//generateDecor 很简单 就是 new 了个DecorView</span></div><div class="line"> <span class="function"><span class="keyword">protected</span> DecorView <span class="title">generateDecor</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> DecorView(getContext(), -<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">protected</span> ViewGroup <span class="title">generateLayout</span><span class="params">(DecorView decor)</span> </span>&#123;</div><div class="line">    <span class="comment">// Apply data from current theme.</span></div><div class="line">    TypedArray a = getWindowStyle();</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">false</span>) &#123;</div><div class="line">        System.out.println(<span class="string">"From style:"</span>);</div><div class="line">        String s = <span class="string">"Attrs:"</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; R.styleable.Window.length; i++) &#123;</div><div class="line">            s = s + <span class="string">" "</span> + Integer.toHexString(R.styleable.Window[i]) + <span class="string">"="</span></div><div class="line">                    + a.getString(i);</div><div class="line">        &#125;</div><div class="line">        System.out.println(s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    mIsFloating = a.getBoolean(R.styleable.Window_windowIsFloating, <span class="keyword">false</span>);</div><div class="line">    <span class="keyword">int</span> flagsToUpdate = (FLAG_LAYOUT_IN_SCREEN|FLAG_LAYOUT_INSET_DECOR)</div><div class="line">            &amp; (~getForcedWindowFlags());</div><div class="line">    <span class="keyword">if</span> (mIsFloating) &#123;</div><div class="line">        setLayout(WRAP_CONTENT, WRAP_CONTENT);</div><div class="line">        setFlags(<span class="number">0</span>, flagsToUpdate);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">.....一堆 赋值操作</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    mDecor.startChanging();</div><div class="line">    <span class="comment">//标题栏</span></div><div class="line">    View in = mLayoutInflater.inflate(layoutResource, <span class="keyword">null</span>);</div><div class="line">    decor.addView(in, <span class="keyword">new</span> ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT));</div><div class="line">    mContentRoot = (ViewGroup) in;</div><div class="line">    <span class="comment">//contentParent 由findViewById 返回</span></div><div class="line">    ViewGroup contentParent = (ViewGroup)findViewById(ID_ANDROID_CONTENT);</div><div class="line">    <span class="keyword">if</span> (contentParent == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Window couldn't find content container view"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">.......</div><div class="line"></div><div class="line">    <span class="keyword">return</span> contentParent;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>generateDecor 很简单 就是 new 了个DecorView ，而DecorView 实际上就是个 Framelayout.<br>generateLayout 函数很长 差不多300多行 我们只挑重点的看  </p>
+<ul>
+<li>主要是给DecorView 添加了标题栏</li>
+<li>通过findViewById 获取到 contentParent ，这个findViewById 其实是调用了DecorView的这个findViewById<br>如图<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://bmob-cdn-14158.b0.upaiyun.com/2017/10/04/bcc6df51409d50a480955fd270bb04ec.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure> 
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>setContentView 其实是调用window的setContentView</li>
+<li>window 是通过PolicyManager 获取到的PhoneWindow对象</li>
+<li>window 的setContentView 创建了DecorView （Framelayout）</li>
+<li>window 的setContentView 创建了DecorView </li>
+<li>通过DecorView 创建了contentParent</li>
+<li>把setContentView传过来的View add到contentParent 上</li>
+</ul>
+<h1 id="关于contentParent-的addView-view-params-方法"><a href="#关于contentParent-的addView-view-params-方法" class="headerlink" title="关于contentParent 的addView(view, params)方法"></a>关于contentParent 的addView(view, params)方法</h1><p>下回再说吧，又该睡了</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Surface/">Surface</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/04/23/201604231/&title=《关于一个Activity的视图加载》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/04/23/201604231/&title=《关于一个Activity的视图加载》 — 独角兽之路&source=摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在on..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/04/23/201604231/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于一个Activity的视图加载》 — 独角兽之路&url=https://3431339973.github.io/2016/04/23/201604231/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/04/23/201604231/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/15/JCenter/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android Library项目发布到JCenter最简单的配置方法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/22/201604221/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于一个Activity的启动</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="201604231" data-title="关于一个Activity的视图加载" data-url="https://3431339973.github.io/2016/04/23/201604231/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/04/23/201604231/&title=《关于一个Activity的视图加载》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/04/23/201604231/&title=《关于一个Activity的视图加载》 — 独角兽之路&source=摘要:我们了解到activity是如何启动的，启动后下一步就应该是渲染activity的视图了，我们都知道一个activity张上面样子 取决于我们在on..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/04/23/201604231/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于一个Activity的视图加载》 — 独角兽之路&url=https://3431339973.github.io/2016/04/23/201604231/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/04/23/201604231/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aQY7CMAwFUO5/aWaLBJRvux2pycsK0dLmZWES249HPJ5v4/jq6z351ddvHlcMDAyM2zKeh+P90clrjqnV9x7fg4GBsQ/jeCrfpnUc95Krx09O5oaBgYHx7XO+ycunnm8TMTAwMI6nfu431UCPgYGxM6OaFOuB88PthWdxDAyMGzLyrPv/f76kvoGBgXErxrM4Jk+YlEJ/PBkDA2NpRq+EOQmj1cXKt6QYGBirMuapseSVeRkgufrhXRgYGNswrmjqqib686CPgYGxD+OK1opqIO4l+r/ej4GBsSij0NBQ3LpVp1JNwGFgYOzD6B04e+m5Ki8P6xgYGKsyepu5ZFWqx9oJEgMDYx9GL9RWk3RJsE5C7YcaLAYGxqKMXojsJdHmjRfRFhMDA2M5RrUYUCgltpJr5bXHwMDYgJFv1CblgXm7GAYGxs6MK9q88uXI7/lxFQMDY2lGPnJM3kDWO8pOmskwMDBWYvS2dDmy1ylRPjxjYGAsxJi0VuSlzWqpMm81w8DA2I1xVsvF/DCclzEwMDB2YPTSWHn6flS16JUzMTAwFmL00l7J8TIvVZ7AxsDAWJrRC3bVQ2Y185cs0Ki+gYGBcUNGNcjm4XV+PE7SfBgYGPswqkn/s6ZY/Qf4+isMDAyMuDDQ++1pu1cMDAyMYlhMDrfVBcLAwNiZ0SsGTFrHeg1kp6XbMDAwbsWYB+VJK1i1wDAqamJgYNyP8QdswDziDACoyAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

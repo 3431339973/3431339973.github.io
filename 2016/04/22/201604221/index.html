@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>关于一个Activity的启动 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,Surface">
+    <meta name="description" content="摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近打算认真看看这里面的故事。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于一个Activity的启动">
+<meta property="og:url" content="https://3431339973.github.io/2016/04/22/201604221/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近打算认真看看这里面的故事。">
+<meta property="og:updated_time" content="2017-10-03T15:42:00.750Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于一个Activity的启动">
+<meta name="twitter:description" content="摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近打算认真看看这里面的故事。">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">关于一个Activity的启动</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">关于一个Activity的启动</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-04-22T15:37:23.000Z" itemprop="datePublished" class="page-time">
+  2016-04-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Surface"><span class="post-toc-number">1.</span> <span class="post-toc-text">Surface</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建一个Activity"><span class="post-toc-number">2.</span> <span class="post-toc-text">创建一个Activity</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ActivityThread"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">ActivityThread</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-201604221"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">关于一个Activity的启动</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年04月22日 23:37" datetime="2016-04-22T15:37:23.000Z"  itemprop="datePublished">2016-04-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近打算认真看看这里面的故事。<br><a id="more"></a></p>
+<h2 id="Surface"><a href="#Surface" class="headerlink" title="Surface"></a>Surface</h2><p>不论是使用Skia绘制二维图像，还是使用OpenGl绘制三维图像，最终Application都要和Surface交互，Surface就像个画布，儿APP就在画布上作画。</p>
+<h2 id="创建一个Activity"><a href="#创建一个Activity" class="headerlink" title="创建一个Activity"></a>创建一个Activity</h2><h3 id="ActivityThread"><a href="#ActivityThread" class="headerlink" title="ActivityThread"></a>ActivityThread</h3><p>代码路径 frameworks\base\core\java\android\app\ActivityThread<br>怎么创建一个Activity?如果了解android系统的启动过程， 应该知道 在zygote 在相应 ActivityManagerService 请求后 会创建一个子进程,这个进程就启动 ActivityThread 的main方法</p>
+<p>在ActivityThread 里有个处理消息的方法 handleLaunchActivity 看名字 也应该知道 他是 处理 启动 Activity用的，他在 一个Handle 里被调用 或者 被 handleRelaunchActivity（重启）被调用，其实handleRelaunchActivity也是 在Handle 里被调用，这个Handle还调用了很多 例如handlePauseActivity，handleStopActivity，handleWindowVisibility<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (DEBUG_MESSAGES) Slog.v(TAG, <span class="string">"&gt;&gt;&gt; handling: "</span> + codeToString(msg.what));</div><div class="line">     <span class="keyword">switch</span> (msg.what) &#123;</div><div class="line">         <span class="keyword">case</span> LAUNCH_ACTIVITY: &#123;</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityStart"</span>);</div><div class="line">             <span class="keyword">final</span> ActivityClientRecord r = (ActivityClientRecord) msg.obj;</div><div class="line"></div><div class="line">             r.packageInfo = getPackageInfoNoCheck(</div><div class="line">                     r.activityInfo.applicationInfo, r.compatInfo);</div><div class="line">             handleLaunchActivity(r, <span class="keyword">null</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">         &#125; <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> RELAUNCH_ACTIVITY: &#123;</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityRestart"</span>);</div><div class="line">             ActivityClientRecord r = (ActivityClientRecord)msg.obj;</div><div class="line">             handleRelaunchActivity(r);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">         &#125; <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> PAUSE_ACTIVITY:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityPause"</span>);</div><div class="line">             handlePauseActivity((IBinder)msg.obj, <span class="keyword">false</span>, (msg.arg1&amp;<span class="number">1</span>) != <span class="number">0</span>, msg.arg2,</div><div class="line">                     (msg.arg1&amp;<span class="number">2</span>) != <span class="number">0</span>);</div><div class="line">             maybeSnapshot();</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> PAUSE_ACTIVITY_FINISHING:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityPause"</span>);</div><div class="line">             handlePauseActivity((IBinder)msg.obj, <span class="keyword">true</span>, (msg.arg1&amp;<span class="number">1</span>) != <span class="number">0</span>, msg.arg2,</div><div class="line">                     (msg.arg1&amp;<span class="number">1</span>) != <span class="number">0</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> STOP_ACTIVITY_SHOW:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityStop"</span>);</div><div class="line">             handleStopActivity((IBinder)msg.obj, <span class="keyword">true</span>, msg.arg2);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> STOP_ACTIVITY_HIDE:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityStop"</span>);</div><div class="line">             handleStopActivity((IBinder)msg.obj, <span class="keyword">false</span>, msg.arg2);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SHOW_WINDOW:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityShowWindow"</span>);</div><div class="line">             handleWindowVisibility((IBinder)msg.obj, <span class="keyword">true</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> HIDE_WINDOW:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityHideWindow"</span>);</div><div class="line">             handleWindowVisibility((IBinder)msg.obj, <span class="keyword">false</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> RESUME_ACTIVITY:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityResume"</span>);</div><div class="line">             handleResumeActivity((IBinder) msg.obj, <span class="keyword">true</span>, msg.arg1 != <span class="number">0</span>, <span class="keyword">true</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SEND_RESULT:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityDeliverResult"</span>);</div><div class="line">             handleSendResult((ResultData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DESTROY_ACTIVITY:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityDestroy"</span>);</div><div class="line">             handleDestroyActivity((IBinder)msg.obj, msg.arg1 != <span class="number">0</span>,</div><div class="line">                     msg.arg2, <span class="keyword">false</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> BIND_APPLICATION:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"bindApplication"</span>);</div><div class="line">             AppBindData data = (AppBindData)msg.obj;</div><div class="line">             handleBindApplication(data);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> EXIT_APPLICATION:</div><div class="line">             <span class="keyword">if</span> (mInitialApplication != <span class="keyword">null</span>) &#123;</div><div class="line">                 mInitialApplication.onTerminate();</div><div class="line">             &#125;</div><div class="line">             Looper.myLooper().quit();</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> NEW_INTENT:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityNewIntent"</span>);</div><div class="line">             handleNewIntent((NewIntentData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> RECEIVER:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"broadcastReceiveComp"</span>);</div><div class="line">             handleReceiver((ReceiverData)msg.obj);</div><div class="line">             maybeSnapshot();</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> CREATE_SERVICE:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"serviceCreate"</span>);</div><div class="line">             handleCreateService((CreateServiceData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> BIND_SERVICE:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"serviceBind"</span>);</div><div class="line">             handleBindService((BindServiceData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> UNBIND_SERVICE:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"serviceUnbind"</span>);</div><div class="line">             handleUnbindService((BindServiceData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SERVICE_ARGS:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"serviceStart"</span>);</div><div class="line">             handleServiceArgs((ServiceArgsData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> STOP_SERVICE:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"serviceStop"</span>);</div><div class="line">             handleStopService((IBinder)msg.obj);</div><div class="line">             maybeSnapshot();</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> CONFIGURATION_CHANGED:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"configChanged"</span>);</div><div class="line">             mCurDefaultDisplayDpi = ((Configuration)msg.obj).densityDpi;</div><div class="line">             handleConfigurationChanged((Configuration)msg.obj, <span class="keyword">null</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> CLEAN_UP_CONTEXT:</div><div class="line">             ContextCleanupInfo cci = (ContextCleanupInfo)msg.obj;</div><div class="line">             cci.context.performFinalCleanup(cci.who, cci.what);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> GC_WHEN_IDLE:</div><div class="line">             scheduleGcIdler();</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DUMP_SERVICE:</div><div class="line">             handleDumpService((DumpComponentInfo)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> LOW_MEMORY:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"lowMemory"</span>);</div><div class="line">             handleLowMemory();</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> ACTIVITY_CONFIGURATION_CHANGED:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"activityConfigChanged"</span>);</div><div class="line">             handleActivityConfigurationChanged((IBinder)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> PROFILER_CONTROL:</div><div class="line">             handleProfilerControl(msg.arg1 != <span class="number">0</span>, (ProfilerInfo)msg.obj, msg.arg2);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> CREATE_BACKUP_AGENT:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"backupCreateAgent"</span>);</div><div class="line">             handleCreateBackupAgent((CreateBackupAgentData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DESTROY_BACKUP_AGENT:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"backupDestroyAgent"</span>);</div><div class="line">             handleDestroyBackupAgent((CreateBackupAgentData)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SUICIDE:</div><div class="line">             Process.killProcess(Process.myPid());</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> REMOVE_PROVIDER:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"providerRemove"</span>);</div><div class="line">             completeRemoveProvider((ProviderRefCount)msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> ENABLE_JIT:</div><div class="line">             ensureJitEnabled();</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DISPATCH_PACKAGE_BROADCAST:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"broadcastPackage"</span>);</div><div class="line">             handleDispatchPackageBroadcast(msg.arg1, (String[])msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SCHEDULE_CRASH:</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> RemoteServiceException((String)msg.obj);</div><div class="line">         <span class="keyword">case</span> DUMP_HEAP:</div><div class="line">             handleDumpHeap(msg.arg1 != <span class="number">0</span>, (DumpHeapData)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DUMP_ACTIVITY:</div><div class="line">             handleDumpActivity((DumpComponentInfo)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> DUMP_PROVIDER:</div><div class="line">             handleDumpProvider((DumpComponentInfo)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SLEEPING:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"sleeping"</span>);</div><div class="line">             handleSleeping((IBinder)msg.obj, msg.arg1 != <span class="number">0</span>);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> SET_CORE_SETTINGS:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"setCoreSettings"</span>);</div><div class="line">             handleSetCoreSettings((Bundle) msg.obj);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> UPDATE_PACKAGE_COMPATIBILITY_INFO:</div><div class="line">             handleUpdatePackageCompatibilityInfo((UpdateCompatibilityData)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> TRIM_MEMORY:</div><div class="line">             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER, <span class="string">"trimMemory"</span>);</div><div class="line">             handleTrimMemory(msg.arg1);</div><div class="line">             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> UNSTABLE_PROVIDER_DIED:</div><div class="line">             handleUnstableProviderDied((IBinder)msg.obj, <span class="keyword">false</span>);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> REQUEST_ASSIST_CONTEXT_EXTRAS:</div><div class="line">             handleRequestAssistContextExtras((RequestAssistContextExtras)msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> TRANSLUCENT_CONVERSION_COMPLETE:</div><div class="line">             handleTranslucentConversionComplete((IBinder)msg.obj, msg.arg1 == <span class="number">1</span>);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> INSTALL_PROVIDER:</div><div class="line">             handleInstallProvider((ProviderInfo) msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> ON_NEW_ACTIVITY_OPTIONS:</div><div class="line">             Pair&lt;IBinder, ActivityOptions&gt; pair = (Pair&lt;IBinder, ActivityOptions&gt;) msg.obj;</div><div class="line">             onNewActivityOptions(pair.first, pair.second);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> CANCEL_VISIBLE_BEHIND:</div><div class="line">             handleCancelVisibleBehind((IBinder) msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> BACKGROUND_VISIBLE_BEHIND_CHANGED:</div><div class="line">             handleOnBackgroundVisibleBehindChanged((IBinder) msg.obj, msg.arg1 &gt; <span class="number">0</span>);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">         <span class="keyword">case</span> ENTER_ANIMATION_COMPLETE:</div><div class="line">             handleEnterAnimationComplete((IBinder) msg.obj);</div><div class="line">             <span class="keyword">break</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">if</span> (DEBUG_MESSAGES) Slog.v(TAG, <span class="string">"&lt;&lt;&lt; done: "</span> + codeToString(msg.what));</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>贴了这么多代码 ，发现 其实这里也并不重要，知识接受到消息后根据不同的消息 来处理不同的请求。不过咱们要讨论的是Activity的启动，所以重点还是要看一下 handleLaunchActivity 方法，先上代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleLaunchActivity</span><span class="params">(ActivityClientRecord r, Intent customIntent)</span> </span>&#123;</div><div class="line">    <span class="comment">// If we are getting ready to gc after going to the background, well</span></div><div class="line">    <span class="comment">// we are back active so skip it.</span></div><div class="line">    unscheduleGcIdler();</div><div class="line">    mSomeActivitiesChanged = <span class="keyword">true</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (r.profilerInfo != <span class="keyword">null</span>) &#123;</div><div class="line">        mProfiler.setProfiler(r.profilerInfo);</div><div class="line">        mProfiler.startProfiling();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Make sure we are running with the most recent config.</span></div><div class="line">    handleConfigurationChanged(<span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (localLOGV) Slog.v(</div><div class="line">        TAG, <span class="string">"Handling launch of "</span> + r);</div><div class="line">    <span class="comment">// 第一步  这里返回了一个  activity对象</span></div><div class="line">    Activity a = performLaunchActivity(r, customIntent);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (a != <span class="keyword">null</span>) &#123;</div><div class="line">        r.createdConfig = <span class="keyword">new</span> Configuration(mConfiguration);</div><div class="line">        Bundle oldState = r.state;</div><div class="line">        <span class="comment">//如果不为空 就调用了handleResumeActivity 方法</span></div><div class="line">        handleResumeActivity(r.token, <span class="keyword">false</span>, r.isForward,</div><div class="line">                !r.activity.mFinished &amp;&amp; !r.startsNotResumed);</div><div class="line">    。。。。。。。。。。。。。。。</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在handleLaunchActivity 里做了两件大事 </p>
+<ul>
+<li>通过 performLaunchActivity 获取到了 一个 Activity 对象</li>
+<li>就调用了handleResumeActivity 方法<br>先分析下 performLaunchActivity 方法<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> Activity <span class="title">performLaunchActivity</span><span class="params">(ActivityClientRecord r, Intent customIntent)</span> </span>&#123;</div><div class="line">      <span class="comment">// System.out.println("##### [" + System.currentTimeMillis() + "] ActivityThread.performLaunchActivity(" + r + ")");</span></div><div class="line"></div><div class="line">      ActivityInfo aInfo = r.activityInfo;</div><div class="line">      <span class="keyword">if</span> (r.packageInfo == <span class="keyword">null</span>) &#123;</div><div class="line">          r.packageInfo = getPackageInfo(aInfo.applicationInfo, r.compatInfo,</div><div class="line">                  Context.CONTEXT_INCLUDE_CODE);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      ComponentName component = r.intent.getComponent();</div><div class="line">      <span class="keyword">if</span> (component == <span class="keyword">null</span>) &#123;</div><div class="line">          component = r.intent.resolveActivity(</div><div class="line">              mInitialApplication.getPackageManager());</div><div class="line">          r.intent.setComponent(component);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (r.activityInfo.targetActivity != <span class="keyword">null</span>) &#123;</div><div class="line">          component = <span class="keyword">new</span> ComponentName(r.activityInfo.packageName,</div><div class="line">                  r.activityInfo.targetActivity);</div><div class="line">      &#125;</div><div class="line">  </div><div class="line">      <span class="comment">//上部分 主要完成了一些准备工作 </span></div><div class="line">      <span class="comment">//下面开始 创建activity</span></div><div class="line">      Activity activity = <span class="keyword">null</span>;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          java.lang.ClassLoader cl = r.packageInfo.getClassLoader();</div><div class="line">          <span class="comment">//通过 Intent 带过来的activity名字 和 类加载器 创建出了activity对象</span></div><div class="line">          activity = mInstrumentation.newActivity(</div><div class="line">                  cl, component.getClassName(), r.intent);</div><div class="line">          StrictMode.incrementExpectedActivityCount(activity.getClass());</div><div class="line">          r.intent.setExtrasClassLoader(cl);</div><div class="line">          r.intent.prepareToEnterProcess();</div><div class="line">          <span class="keyword">if</span> (r.state != <span class="keyword">null</span>) &#123;</div><div class="line">              r.state.setClassLoader(cl);</div><div class="line">          &#125;</div><div class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">          <span class="keyword">if</span> (!mInstrumentation.onException(activity, e)) &#123;</div><div class="line">              <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">                  <span class="string">"Unable to instantiate activity "</span> + component</div><div class="line">                  + <span class="string">": "</span> + e.toString(), e);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="comment">//接下来就是 设置activity的一些 属性的操作 例如某些状态 ，内部引用什么的 ，加载主题什么的</span></div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">          Application app = r.packageInfo.makeApplication(<span class="keyword">false</span>, mInstrumentation);</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (localLOGV) Slog.v(TAG, <span class="string">"Performing launch of "</span> + r);</div><div class="line">          <span class="keyword">if</span> (localLOGV) Slog.v(</div><div class="line">                  TAG, r + <span class="string">": app="</span> + app</div><div class="line">                  + <span class="string">", appName="</span> + app.getPackageName()</div><div class="line">                  + <span class="string">", pkg="</span> + r.packageInfo.getPackageName()</div><div class="line">                  + <span class="string">", comp="</span> + r.intent.getComponent().toShortString()</div><div class="line">                  + <span class="string">", dir="</span> + r.packageInfo.getAppDir());</div><div class="line"></div><div class="line">          <span class="keyword">if</span> (activity != <span class="keyword">null</span>) &#123;</div><div class="line">              Context appContext = createBaseContextForActivity(r, activity);</div><div class="line">              CharSequence title = r.activityInfo.loadLabel(appContext.getPackageManager());</div><div class="line">              Configuration config = <span class="keyword">new</span> Configuration(mCompatConfiguration);</div><div class="line">              <span class="keyword">if</span> (DEBUG_CONFIGURATION) Slog.v(TAG, <span class="string">"Launching activity "</span></div><div class="line">                      + r.activityInfo.name + <span class="string">" with config "</span> + config);</div><div class="line">              activity.attach(appContext, <span class="keyword">this</span>, getInstrumentation(), r.token,</div><div class="line">                      r.ident, app, r.intent, r.activityInfo, title, r.parent,</div><div class="line">                      r.embeddedID, r.lastNonConfigurationInstances, config,</div><div class="line">                      r.voiceInteractor);</div><div class="line"></div><div class="line">              <span class="keyword">if</span> (customIntent != <span class="keyword">null</span>) &#123;</div><div class="line">                  activity.mIntent = customIntent;</div><div class="line">              &#125;</div><div class="line">              r.lastNonConfigurationInstances = <span class="keyword">null</span>;</div><div class="line">              activity.mStartedActivity = <span class="keyword">false</span>;</div><div class="line">              <span class="keyword">int</span> theme = r.activityInfo.getThemeResource();</div><div class="line">              <span class="keyword">if</span> (theme != <span class="number">0</span>) &#123;</div><div class="line">                  activity.setTheme(theme);</div><div class="line">              &#125;</div><div class="line"></div><div class="line">              activity.mCalled = <span class="keyword">false</span>;</div><div class="line">              <span class="comment">//这里执行完 会调用 Activity 的OnCreate 方法</span></div><div class="line">              <span class="keyword">if</span> (r.isPersistable()) &#123;</div><div class="line">                  mInstrumentation.callActivityOnCreate(activity, r.state, r.persistentState);</div><div class="line">              &#125; <span class="keyword">else</span> &#123;</div><div class="line">                  mInstrumentation.callActivityOnCreate(activity, r.state);</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">if</span> (!activity.mCalled) &#123;</div><div class="line">                  <span class="keyword">throw</span> <span class="keyword">new</span> SuperNotCalledException(</div><div class="line">                      <span class="string">"Activity "</span> + r.intent.getComponent().toShortString() +</div><div class="line">                      <span class="string">" did not call through to super.onCreate()"</span>);</div><div class="line">              &#125;</div><div class="line">              r.activity = activity;</div><div class="line">              r.stopped = <span class="keyword">true</span>;</div><div class="line">              <span class="keyword">if</span> (!r.activity.mFinished) &#123;</div><div class="line">                  activity.performStart();</div><div class="line">                  r.stopped = <span class="keyword">false</span>;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">if</span> (!r.activity.mFinished) &#123;</div><div class="line">                  <span class="keyword">if</span> (r.isPersistable()) &#123;</div><div class="line">                      <span class="keyword">if</span> (r.state != <span class="keyword">null</span> || r.persistentState != <span class="keyword">null</span>) &#123;</div><div class="line">                          mInstrumentation.callActivityOnRestoreInstanceState(activity, r.state,</div><div class="line">                                  r.persistentState);</div><div class="line">                      &#125;</div><div class="line">                  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (r.state != <span class="keyword">null</span>) &#123;</div><div class="line">                      mInstrumentation.callActivityOnRestoreInstanceState(activity, r.state);</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">              <span class="keyword">if</span> (!r.activity.mFinished) &#123;</div><div class="line">                  activity.mCalled = <span class="keyword">false</span>;</div><div class="line">                  <span class="keyword">if</span> (r.isPersistable()) &#123;</div><div class="line">                      mInstrumentation.callActivityOnPostCreate(activity, r.state,</div><div class="line">                              r.persistentState);</div><div class="line">                  &#125; <span class="keyword">else</span> &#123;</div><div class="line">                      mInstrumentation.callActivityOnPostCreate(activity, r.state);</div><div class="line">                  &#125;</div><div class="line">                  <span class="keyword">if</span> (!activity.mCalled) &#123;</div><div class="line">                      <span class="keyword">throw</span> <span class="keyword">new</span> SuperNotCalledException(</div><div class="line">                          <span class="string">"Activity "</span> + r.intent.getComponent().toShortString() +</div><div class="line">                          <span class="string">" did not call through to super.onPostCreate()"</span>);</div><div class="line">                  &#125;</div><div class="line">              &#125;</div><div class="line">          &#125;</div><div class="line">          r.paused = <span class="keyword">true</span>;</div><div class="line"></div><div class="line">          mActivities.put(r.token, r);</div><div class="line"></div><div class="line">      &#125; <span class="keyword">catch</span> (SuperNotCalledException e) &#123;</div><div class="line">          <span class="keyword">throw</span> e;</div><div class="line"></div><div class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">          <span class="keyword">if</span> (!mInstrumentation.onException(activity, e)) &#123;</div><div class="line">              <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(</div><div class="line">                  <span class="string">"Unable to start activity "</span> + component</div><div class="line">                  + <span class="string">": "</span> + e.toString(), e);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">return</span> activity;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>总结一下 performLaunchActivity</p>
+<ul>
+<li>通过intent 带过来的名字 通过反射 创建了activity对象 （<em>**到墙上 </em>^_^*）</li>
+<li>完成了 activity的一些属性赋值</li>
+<li>通过mInstrumentation.callActivityOnCreate 调用了 activity的OnCreate 方法</li>
+</ul>
+<p>就这样 activity 创建了 并且调用了其OnCreate方法，那么在OnCreate  方法里都干了什么，作为一个android开发者，你心里没电逼数吗？<br>好吧，往下看 我们来分析下 handleResumeActivity 方法，不给我说你忘了，上面可刚刚说完 handleLaunchActivity 干的第二件大事就是 日了这家伙。</p>
+<p>来来 关门放代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">handleResumeActivity</span><span class="params">(IBinder token,</span></span></div><div class="line">           <span class="keyword">boolean</span> clearHide, <span class="keyword">boolean</span> isForward, <span class="keyword">boolean</span> reallyResume) &#123;</div><div class="line">       <span class="comment">// If we are getting ready to gc after going to the background, well</span></div><div class="line">       <span class="comment">// we are back active so skip it.</span></div><div class="line">  。。。。。。。。。。</div><div class="line">           <span class="keyword">if</span> (r.window == <span class="keyword">null</span> &amp;&amp; !a.mFinished &amp;&amp; willBeVisible) &#123;</div><div class="line">               <span class="comment">//通过activity获取到window对象</span></div><div class="line">               r.window = r.activity.getWindow();</div><div class="line">               <span class="comment">//获取了DecorView  </span></div><div class="line">               View decor = r.window.getDecorView();</div><div class="line">               decor.setVisibility(View.INVISIBLE);</div><div class="line">               <span class="comment">//获取视图管理</span></div><div class="line">               ViewManager wm = a.getWindowManager();</div><div class="line">               WindowManager.LayoutParams l = r.window.getAttributes();</div><div class="line">               a.mDecor = decor;</div><div class="line">               l.type = WindowManager.LayoutParams.TYPE_BASE_APPLICATION;</div><div class="line">               l.softInputMode |= forwardBit;</div><div class="line">               <span class="comment">//将DecorView 弄到了这里面</span></div><div class="line">               <span class="keyword">if</span> (a.mVisibleFromClient) &#123;</div><div class="line">                   a.mWindowAdded = <span class="keyword">true</span>;</div><div class="line">                   wm.addView(decor, l);</div><div class="line">               &#125;</div><div class="line">       。。。。。。。。。。。。。。</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>我们可以看到  window  DecorView 方法  那他们是什么时候创建的呢，这些都是跟视图有关的东西，视图好想是在 activity的onCreat里 调用setContentView才有的，靠那还得回去 看activity的setContentView,哎，反正现在activity不都启动了吗。视图渲染就明天再说吧，洗洗睡了</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Surface/">Surface</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/04/22/201604221/&title=《关于一个Activity的启动》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/04/22/201604221/&title=《关于一个Activity的启动》 — 独角兽之路&source=摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/04/22/201604221/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于一个Activity的启动》 — 独角兽之路&url=https://3431339973.github.io/2016/04/22/201604221/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/04/22/201604221/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/04/23/201604231/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">关于一个Activity的视图加载</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/04/21/Android系统启动流程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android系统启动流程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="201604221" data-title="关于一个Activity的启动" data-url="https://3431339973.github.io/2016/04/22/201604221/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/04/22/201604221/&title=《关于一个Activity的启动》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/04/22/201604221/&title=《关于一个Activity的启动》 — 独角兽之路&source=摘要:写了两年android  每天都接触activity,activity的生命周期记得滚怪烂熟，那一个activity到底是怎么展示到屏幕上的那，最近..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/04/22/201604221/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《关于一个Activity的启动》 — 独角兽之路&url=https://3431339973.github.io/2016/04/22/201604221/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/04/22/201604221/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aQW7DMAwEwPz/0+m1F7u7olMg0vhUFK6t8WErknq94usdXFf3//5N/q7XJy4MDIyvZSSLu1ru2luSt+drw8DAOIdxH3xXr8+XmwdxEtMYGBgY94+7D8f7+9eCHgMDA2MSuPfLXdtiYmBgYEyK2KQdlgRrG9wP1+IYGBhfyGib9f/580fmGxgYGF/FeJdXHohrW8P30oWBgbE3Iw+4trnWbvLabR8GBsZpjCT42qHmpOBMxqXRMzEwMLZgtEci2kNdbaN/bUuKgYGxNyPZbK0NDNYK19EIEwMDY2tGHpSTZtkDDbV7JAYGxtaMtcDNIzUJ1rxkLVpsGBgYWzDWtmv54bCnovwPEgYGxmGMdqDYtsnyYUDR/sPAwNiakUfkZCs5OXhRH7PAwMA4jLEWuKNTHktxjIGBcQKjHUPmIZt/pvyTXcYuBgbG1owc0xaW8/K1/lsMDIztGPkj2iUmvMlhiz+6hhgYGBsxknidB+JkYFl8RAwMjAMYCaAdNLYF8KiFh4GBcQDjgYMOZZMu+UBFaY2BgXEAIz9m+olJ4to2sf6/gYGB8YWMedsrWdZkixk1+DAwMLZmPNU4u19uEruTyMbAwDiBkYRs2w7LwWvDAwwMjDMZeTnatvvzYxYP1OIYGBgYZZi290wOZGBgYGCsHZLIC9R5CY2BgXECIyli20K37fatFdIYGBgnMOb7rqcGn23BjIGBcQDjB77l+gg9IheyAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 应用的安装和卸载PackageManagerService | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,PackageManagerService">
+    <meta name="description" content="摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 应用的安装和卸载PackageManagerService">
+<meta property="og:url" content="https://3431339973.github.io/2016/01/12/201601121/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？">
+<meta property="og:updated_time" content="2017-10-05T10:49:57.191Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 应用的安装和卸载PackageManagerService">
+<meta name="twitter:description" content="摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 应用的安装和卸载PackageManagerService</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 应用的安装和卸载PackageManagerService</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-12T13:55:27.000Z" itemprop="datePublished" class="page-time">
+  2016-01-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PackageManagerService"><span class="post-toc-number">1.</span> <span class="post-toc-text">PackageManagerService</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android应用两大类"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android应用两大类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1：复制文件"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1：复制文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#卸载应用"><span class="post-toc-number">3.</span> <span class="post-toc-text">卸载应用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-201601121"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 应用的安装和卸载PackageManagerService</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年01月12日 21:55" datetime="2016-01-12T13:55:27.000Z"  itemprop="datePublished">2016-01-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？<br><a id="more"></a></p>
+<h2 id="PackageManagerService"><a href="#PackageManagerService" class="headerlink" title="PackageManagerService"></a>PackageManagerService</h2><p>Android 系统的应用管理主要通过PackageManagerService来完成<br>PackageManagerService 启动时会扫描所有的APK文件 和JAR包 把他们的信息读出来保存到内存中，这样系统就能很快的找到各个应用和组件的信息<br>在android 5.0 以前 ，PackageManagerService会监听安装了应用的目录，一旦目录发生了变化，他讲重新扫描目录，完成自动安装，但是在5.0后 PackageManagerService 不会在监听，这是因为5.0后的目录结构发生了变化。5.0以前/data/app或者/system/app 下面直接存放的是应用APK，而5.0后存放的是应用名称的目录，目录下才是APK 还有个lib的目录 存放的so</p>
+<h2 id="Android应用两大类"><a href="#Android应用两大类" class="headerlink" title="Android应用两大类"></a>Android应用两大类</h2><ul>
+<li>系统应用<br>系统应用是设备内置的应用，通常情况下不能删除，存放在/system/app目录下，4.4以后 又出现了一个/system/priv-app/。两者的区别在于 app下存放的是普通的系统级应用  如 电话，相机等，而priv-app下存放的是 偏底层的系统应用如 系统页面，系统设置 等等</li>
+<li>普通应用<br>普通应用是 用户安装的应用 在/data/app 目录下，同时可以安装的sd卡上</li>
+</ul>
+<p>##安装应用</p>
+<h3 id="1：复制文件"><a href="#1：复制文件" class="headerlink" title="1：复制文件"></a>1：复制文件</h3><p>调用PackageManager的installPackage()方法来开始安装过程，第一阶段就是把应用复制到/data/app目录下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">installPackage</span><span class="params">(String originPath, IPackageInstallObserver2 observer,</span></span></div><div class="line">        <span class="keyword">int</span> installFlags, String installerPackageName, VerificationParams verificationParams,</div><div class="line">        String packageAbiOverride) &#123;</div><div class="line">        <span class="comment">//传入了当前用户</span></div><div class="line">    installPackageAsUser(originPath, observer, installFlags, installerPackageName, verificationParams,</div><div class="line">            packageAbiOverride, UserHandle.getCallingUserId());</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">installPackageAsUser</span><span class="params">(String originPath, IPackageInstallObserver2 observer,</span></span></div><div class="line">        <span class="keyword">int</span> installFlags, String installerPackageName, VerificationParams verificationParams,</div><div class="line">        String packageAbiOverride, <span class="keyword">int</span> userId) &#123;</div><div class="line">            <span class="comment">//检查调用进程权限</span></div><div class="line">    mContext.enforceCallingOrSelfPermission(android.Manifest.permission.INSTALL_PACKAGES, <span class="keyword">null</span>);</div><div class="line">        <span class="comment">//检查进程的用户是否有权限安装</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> callingUid = Binder.getCallingUid();</div><div class="line">    enforceCrossUserPermission(callingUid, userId, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="string">"installPackageAsUser"</span>);</div><div class="line">    <span class="comment">//检查制定用户是否被限制安装</span></div><div class="line">    <span class="keyword">if</span> (isUserRestricted(userId, UserManager.DISALLOW_INSTALL_APPS)) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (observer != <span class="keyword">null</span>) &#123;</div><div class="line">                observer.onPackageInstalled(<span class="string">""</span>, INSTALL_FAILED_USER_RESTRICTED, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (RemoteException re) &#123;</div><div class="line">        &#125;</div><div class="line">    。。。。。。。。。。。。。</div><div class="line">    。。。。。。。。。。。。。</div><div class="line">    <span class="comment">//发送消息</span></div><div class="line">    <span class="keyword">final</span> Message msg = mHandler.obtainMessage(INIT_COPY);</div><div class="line">    msg.obj = <span class="keyword">new</span> InstallParams(origin, observer, installFlags,</div><div class="line">            installerPackageName, verificationParams, user, packageAbiOverride);</div><div class="line">    mHandler.sendMessage(msg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>installPackage() 方法里先是做了一些检查工作，例如检查进程的用户是否有权限安装，最后向PackageHandler 发送了下次，然后执行安装，执行安装其实就是调用 HandlerParams的startCopy方法，看名字也知道 要开始复制了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">HandlerParams</span> </span>&#123;</div><div class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_RETRIES = <span class="number">4</span>;</div><div class="line"></div><div class="line">      <span class="comment">/**</span></div><div class="line">       * Number of times startCopy() has been attempted and had a non-fatal</div><div class="line">       * error.</div><div class="line">       */</div><div class="line">      <span class="keyword">private</span> <span class="keyword">int</span> mRetries = <span class="number">0</span>;</div><div class="line"></div><div class="line">      <span class="comment">/** User handle for the user requesting the information or installation. */</span></div><div class="line">      <span class="keyword">private</span> <span class="keyword">final</span> UserHandle mUser;</div><div class="line"></div><div class="line">      HandlerParams(UserHandle user) &#123;</div><div class="line">          mUser = user;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="function">UserHandle <span class="title">getUser</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">return</span> mUser;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">startCopy</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">boolean</span> res;</div><div class="line">          <span class="keyword">try</span> &#123;</div><div class="line">              <span class="keyword">if</span> (DEBUG_INSTALL) Slog.i(TAG, <span class="string">"startCopy "</span> + mUser + <span class="string">": "</span> + <span class="keyword">this</span>);</div><div class="line">              <span class="comment">//如果重试查过4次 就发送通知</span></div><div class="line">              <span class="keyword">if</span> (++mRetries &gt; MAX_RETRIES) &#123;</div><div class="line">                  Slog.w(TAG, <span class="string">"Failed to invoke remote methods on default container service. Giving up"</span>);</div><div class="line">                  mHandler.sendEmptyMessage(MCS_GIVE_UP);</div><div class="line">                  handleServiceError();</div><div class="line">                  <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">              &#125; <span class="keyword">else</span> &#123;</div><div class="line">                  <span class="comment">//执行复制</span></div><div class="line">                  handleStartCopy();</div><div class="line">                  res = <span class="keyword">true</span>;</div><div class="line">              &#125;</div><div class="line">          &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</div><div class="line">              <span class="keyword">if</span> (DEBUG_INSTALL) Slog.i(TAG, <span class="string">"Posting install MCS_RECONNECT"</span>);</div><div class="line">              mHandler.sendEmptyMessage(MCS_RECONNECT);</div><div class="line">              res = <span class="keyword">false</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="comment">//执行装载</span></div><div class="line">          handleReturnCode();</div><div class="line">          <span class="keyword">return</span> res;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>HandlerParams  是个抽象类，他的handleStartCopy 方法 和handleReturnCode 在InstallParams 里实现。<br>由于代码较长具体代码不贴了又兴趣的，可以研究下 ，到了这里apk<br>的复制算是完成了，然后进行下一步</p>
+<p>###:2：装载应用<br>在上一步 最后调用了 handleReturnCode 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handleReturnCode</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// If mArgs is null, then MCS couldn't be reached. When it</span></div><div class="line">        <span class="comment">// reconnects, it will try again to install. At that point, this</span></div><div class="line">        <span class="comment">// will succeed.</span></div><div class="line">        <span class="keyword">if</span> (mArgs != <span class="keyword">null</span>) &#123;</div><div class="line">            processPendingInstall(mArgs, mRet);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processPendingInstall</span><span class="params">(<span class="keyword">final</span> InstallArgs args, <span class="keyword">final</span> <span class="keyword">int</span> currentStatus)</span> </span>&#123;</div><div class="line">    <span class="comment">// Queue up an async operation since the package installation may take a little while.</span></div><div class="line">    mHandler.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//防止重复调用</span></div><div class="line">            mHandler.removeCallbacks(<span class="keyword">this</span>);</div><div class="line">             <span class="comment">// Result object to be returned</span></div><div class="line">            PackageInstalledInfo res = <span class="keyword">new</span> PackageInstalledInfo();</div><div class="line">            res.returnCode = currentStatus;</div><div class="line">            res.uid = -<span class="number">1</span>;</div><div class="line">            res.pkg = <span class="keyword">null</span>;</div><div class="line">            res.removedInfo = <span class="keyword">new</span> PackageRemovedInfo();</div><div class="line">            <span class="keyword">if</span> (res.returnCode == PackageManager.INSTALL_SUCCEEDED) &#123;</div><div class="line">                <span class="comment">//如果安装成功了</span></div><div class="line">                args.doPreInstall(res.returnCode);</div><div class="line">                <span class="keyword">synchronized</span> (mInstallLock) &#123;</div><div class="line">                    <span class="comment">//装载APP</span></div><div class="line">                    installPackageLI(args, res);</div><div class="line">                &#125;</div><div class="line">                args.doPostInstall(res.returnCode, res.uid);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">    。。。。。。。。</div><div class="line">            <span class="keyword">if</span> (!doRestore) &#123;</div><div class="line">                <span class="comment">// No restore possible, or the Backup Manager was mysteriously not</span></div><div class="line">                <span class="comment">// available -- just fire the post-install work request directly.</span></div><div class="line">                <span class="keyword">if</span> (DEBUG_INSTALL) Log.v(TAG, <span class="string">"No restore - queue post-install for "</span> + token);</div><div class="line">                <span class="comment">//发送完成消息</span></div><div class="line">                Message msg = mHandler.obtainMessage(POST_INSTALL, token, <span class="number">0</span>);</div><div class="line">                mHandler.sendMessage(msg);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这个方法里主要调用了 installPackageLI 方法 来装载APP<br>installPackageLI 也比较长 主要就是 解析的apk文件创建了 判断是老应用还是新应用  如果是新应用就调用<br>installNewPackageLI来创建各种目录 跟文件</p>
+<p>其实安装过程中还需要往PackageManagerService 里写入很多 缓存数据等等 这里就不分析了</p>
+<h2 id="卸载应用"><a href="#卸载应用" class="headerlink" title="卸载应用"></a>卸载应用</h2><p>PackageManagerService 的卸载方法是 deletePackage()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deletePackage</span><span class="params">(<span class="keyword">final</span> String packageName,</span></span></div><div class="line">        <span class="keyword">final</span> IPackageDeleteObserver2 observer, <span class="keyword">final</span> <span class="keyword">int</span> userId, <span class="keyword">final</span> <span class="keyword">int</span> flags) &#123;</div><div class="line">    mContext.enforceCallingOrSelfPermission(</div><div class="line">            android.Manifest.permission.DELETE_PACKAGES, <span class="keyword">null</span>);</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> uid = Binder.getCallingUid();</div><div class="line">    <span class="keyword">if</span> (UserHandle.getUserId(uid) != userId) &#123;</div><div class="line">        mContext.enforceCallingPermission(</div><div class="line">                android.Manifest.permission.INTERACT_ACROSS_USERS_FULL,</div><div class="line">                <span class="string">"deletePackage for user "</span> + userId);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (isUserRestricted(userId, UserManager.DISALLOW_UNINSTALL_APPS)) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            observer.onPackageDeleted(packageName,</div><div class="line">                    PackageManager.DELETE_FAILED_USER_RESTRICTED, <span class="keyword">null</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (RemoteException re) &#123;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">boolean</span> uninstallBlocked = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">if</span> ((flags &amp; PackageManager.DELETE_ALL_USERS) != <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">int</span>[] users = sUserManager.getUserIds();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; users.length; ++i) &#123;</div><div class="line">            <span class="keyword">if</span> (getBlockUninstallForUser(packageName, users[i])) &#123;</div><div class="line">                uninstallBlocked = <span class="keyword">true</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        uninstallBlocked = getBlockUninstallForUser(packageName, userId);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (uninstallBlocked) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            observer.onPackageDeleted(packageName, PackageManager.DELETE_FAILED_OWNER_BLOCKED,</div><div class="line">                    <span class="keyword">null</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (RemoteException re) &#123;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (DEBUG_REMOVE) &#123;</div><div class="line">        Slog.d(TAG, <span class="string">"deletePackageAsUser: pkg="</span> + packageName + <span class="string">" user="</span> + userId);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// Queue up an async operation since the package deletion may take a little while.</span></div><div class="line">    mHandler.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            mHandler.removeCallbacks(<span class="keyword">this</span>);</div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> returnCode = deletePackageX(packageName, userId, flags);</div><div class="line">            <span class="keyword">if</span> (observer != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    observer.onPackageDeleted(packageName, returnCode, <span class="keyword">null</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</div><div class="line">                    Log.i(TAG, <span class="string">"Observer no longer exists."</span>);</div><div class="line">                &#125; <span class="comment">//end catch</span></div><div class="line">            &#125; <span class="comment">//end if</span></div><div class="line">        &#125; <span class="comment">//end run</span></div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其实就是删除安装时 生成的apk  和目录  ，同时也删除了 PackageManagerService 里的信息</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PackageManagerService/">PackageManagerService</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/01/12/201601121/&title=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/01/12/201601121/&title=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&source=摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/01/12/201601121/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&url=https://3431339973.github.io/2016/01/12/201601121/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/01/12/201601121/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/01/14/201601141/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android是怎么把点击屏幕，或者是实体按键 的事件分发到对应的View上的</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/18/整理 iOS 9 适配中出现的坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">整理 iOS 9 适配中出现的坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="201601121" data-title="Android 应用的安装和卸载PackageManagerService" data-url="https://3431339973.github.io/2016/01/12/201601121/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/01/12/201601121/&title=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/01/12/201601121/&title=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&source=摘要:android系统的应用安装包是APK格式，这个APK格式如何安装到android设备的呢？" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/01/12/201601121/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 应用的安装和卸载PackageManagerService》 — 独角兽之路&url=https://3431339973.github.io/2016/01/12/201601121/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/01/12/201601121/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aS3KDQAwFQO5/aWebDfhJgqSYaVYuyjbTLFT6HUd8fYLr7Pu/7+TPOp64MDAwXstIDjc51tk/XD89PxsGBsY+jOvAd01Kjpu/juRlYWBgYCSM6uc81GJgYGDMGXnyl9zpPRcDA2NPRh74qsVtXqBe//9ttTgGBsYLGdVm/V9+fmS+gYGB8SrGp3hNQmq1GVc4FQYGxtKMeYHaa7pVVzei8QMGBsbSjCTwJQlcUqD21sKSOxgYGKsykkSt2jKrLk/0UtLTDBcDA2M5xqR0nAwPeu280QgTAwNjacYTQXNS0J6eBAMDYzNGtdGWh9ReMI0GnBgYGIsyqsPIHn7SmItCPwYGxjaMahOtN07IhwEJBgMDYwdGc4khSOyqCWX+4sprFhgYGAsxykGtlUoeravwWwwMjKUZ+Riyd8R8VJCf7UvYxcDAWI5RWGuIW/aTINsMxBgYGIsyJmPLarCuFrGFkQMGBsZmjLy9lY8nq4lg/loxMDB2ZlTHA5PFi4T6JfXEwMDYgNF7TA7Li+E83TzuelsYGBgvYUyCafXBvbWzZhGLgYHxckav7ZW3z3oDg/IiLAYGxtKM6rBwcqC7BgzRzggGBsZyjDzI5gExCdCT4QEGBsaejN7KV4/6z7U4BgbGBoxkkFBdleiNMG+YLWBgYCzKyBv9eYGar3Q8khpiYGC8hJEPA57r9vUKaQwMjB0YvZCXD0HnKeBtQ00MDIz3MX4AcbCJh64vlmcAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
