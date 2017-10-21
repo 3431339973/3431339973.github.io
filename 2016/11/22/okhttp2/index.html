@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Okhttp源码分析学习（2）5个拦截器 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="BridgeInterceptor,RetryAndFollowUpInterceptor,CacheInterceptor,ConnectInterceptor,CallServerInterceptor">
+    <meta name="description" content="摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Okhttp源码分析学习（2）5个拦截器">
+<meta property="og:url" content="https://3431339973.github.io/2016/11/22/okhttp2/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器">
+<meta property="og:updated_time" content="2017-10-21T11:47:05.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Okhttp源码分析学习（2）5个拦截器">
+<meta name="twitter:description" content="摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
+                <i class="icon icon-lg icon-drupal"></i>
+                oschina
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Okhttp源码分析学习（2）5个拦截器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Okhttp源码分析学习（2）5个拦截器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-22T14:15:31.000Z" itemprop="datePublished" class="page-time">
+  2016-11-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RetryAndFollowUpInterceptor"><span class="post-toc-number">1.</span> <span class="post-toc-text">RetryAndFollowUpInterceptor</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BridgeInterceptor"><span class="post-toc-number">2.</span> <span class="post-toc-text">BridgeInterceptor</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CacheInterceptor"><span class="post-toc-number">3.</span> <span class="post-toc-text">CacheInterceptor</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ConnectInterceptor"><span class="post-toc-number">4.</span> <span class="post-toc-text">ConnectInterceptor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#newStream"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">newStream</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#framedConnection"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">framedConnection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#findConnection"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">findConnection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#connect"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">connect</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#connectSocket"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">connectSocket</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#establishProtocol"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">establishProtocol</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CallServerInterceptor"><span class="post-toc-number">5.</span> <span class="post-toc-text">CallServerInterceptor</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-okhttp2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Okhttp源码分析学习（2）5个拦截器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016年11月22日 22:15" datetime="2016-11-22T14:15:31.000Z"  itemprop="datePublished">2016-11-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器</p>
+<a id="more"></a>
+<p>各种拦截器</p>
+<h2 id="RetryAndFollowUpInterceptor"><a href="#RetryAndFollowUpInterceptor" class="headerlink" title="RetryAndFollowUpInterceptor"></a>RetryAndFollowUpInterceptor</h2><p>直接上代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    Request request = chain.request();</div><div class="line">    <span class="comment">//初始化连接对象            </span></div><div class="line">    streamAllocation = <span class="keyword">new</span> StreamAllocation(</div><div class="line">        client.connectionPool(), createAddress(request.url()));</div><div class="line"></div><div class="line">    <span class="keyword">int</span> followUpCount = <span class="number">0</span>;</div><div class="line">    Response priorResponse = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;  </div><div class="line">      <span class="keyword">if</span> (canceled) &#123;</div><div class="line">        streamAllocation.release();</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Canceled"</span>);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Response response = <span class="keyword">null</span>;</div><div class="line">      <span class="keyword">boolean</span> releaseConnection = <span class="keyword">true</span>;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">      <span class="comment">//继续下一个拦截器</span></div><div class="line">        response = ((RealInterceptorChain) chain).proceed(request, streamAllocation, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        releaseConnection = <span class="keyword">false</span>;</div><div class="line">      &#125; <span class="keyword">catch</span> (RouteException e) &#123;</div><div class="line">        <span class="comment">// The attempt to connect via a route failed. The request will not have been sent.</span></div><div class="line">        <span class="keyword">if</span> (!recover(e.getLastConnectException(), <span class="keyword">true</span>, request)) <span class="keyword">throw</span> e.getLastConnectException();</div><div class="line">        releaseConnection = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">        <span class="comment">// An attempt to communicate with a server failed. The request may have been sent.</span></div><div class="line">        <span class="keyword">if</span> (!recover(e, <span class="keyword">false</span>, request)) <span class="keyword">throw</span> e;</div><div class="line">        releaseConnection = <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">      &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        <span class="comment">// We're throwing an unchecked exception. Release any resources.</span></div><div class="line">        <span class="keyword">if</span> (releaseConnection) &#123;</div><div class="line">          streamAllocation.streamFailed(<span class="keyword">null</span>);</div><div class="line">          streamAllocation.release();</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="comment">// Attach the prior response if it exists. Such responses never have a body.</span></div><div class="line">      <span class="keyword">if</span> (priorResponse != <span class="keyword">null</span>) &#123;</div><div class="line">        response = response.newBuilder()</div><div class="line">            .priorResponse(priorResponse.newBuilder()</div><div class="line">                .body(<span class="keyword">null</span>)</div><div class="line">                .build())</div><div class="line">            .build();</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      Request followUp = followUpRequest(response);</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (followUp == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (!forWebSocket) &#123;</div><div class="line">          streamAllocation.release();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> response;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      closeQuietly(response.body());</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (++followUpCount &gt; MAX_FOLLOW_UPS) &#123;</div><div class="line">        streamAllocation.release();</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ProtocolException(<span class="string">"Too many follow-up requests: "</span> + followUpCount);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (followUp.body() <span class="keyword">instanceof</span> UnrepeatableRequestBody) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> HttpRetryException(<span class="string">"Cannot retry streamed HTTP body"</span>, response.code());</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (!sameConnection(response, followUp.url())) &#123;</div><div class="line">        streamAllocation.release();</div><div class="line">        streamAllocation = <span class="keyword">new</span> StreamAllocation(</div><div class="line">            client.connectionPool(), createAddress(followUp.url()));</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (streamAllocation.stream() != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Closing the body of "</span> + response</div><div class="line">            + <span class="string">" didn't close its backing stream. Bad interceptor?"</span>);</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      request = followUp;</div><div class="line">      priorResponse = response;</div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>实例化StreamAllocation，初始化一个Socket连接对象，获取到输入／输出流（）基于Okio<br>开启循环，执行下一个调用链（拦截器），等待返回结果（Response）<br>如果发生错误，判断是否继续请求，否：退出<br>检查响应是否符合要求，是：返回<br>关闭响应结果<br>判断是否达到最大限制数，是：退出<br>检查是否有相同连接，是：释放，重建连接<br>重复以上流程</p>
+<h2 id="BridgeInterceptor"><a href="#BridgeInterceptor" class="headerlink" title="BridgeInterceptor"></a>BridgeInterceptor</h2><p>本拦截器的主要功能是：处理请求头（header），将自定义的头和协议必须的头合在一起，如果有自定义使用自定义的，没有就生成默认头<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    Request userRequest = chain.request();</div><div class="line">    Request.Builder requestBuilder = userRequest.newBuilder();</div><div class="line"></div><div class="line">    RequestBody body = userRequest.body();</div><div class="line">    <span class="keyword">if</span> (body != <span class="keyword">null</span>) &#123;</div><div class="line">      MediaType contentType = body.contentType();</div><div class="line">      <span class="keyword">if</span> (contentType != <span class="keyword">null</span>) &#123;</div><div class="line">        requestBuilder.header(<span class="string">"Content-Type"</span>, contentType.toString());</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      <span class="keyword">long</span> contentLength = body.contentLength();</div><div class="line">      <span class="keyword">if</span> (contentLength != -<span class="number">1</span>) &#123;</div><div class="line">        requestBuilder.header(<span class="string">"Content-Length"</span>, Long.toString(contentLength));</div><div class="line">        requestBuilder.removeHeader(<span class="string">"Transfer-Encoding"</span>);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        requestBuilder.header(<span class="string">"Transfer-Encoding"</span>, <span class="string">"chunked"</span>);</div><div class="line">        requestBuilder.removeHeader(<span class="string">"Content-Length"</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (userRequest.header(<span class="string">"Host"</span>) == <span class="keyword">null</span>) &#123;</div><div class="line">      requestBuilder.header(<span class="string">"Host"</span>, hostHeader(userRequest.url(), <span class="keyword">false</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (userRequest.header(<span class="string">"Connection"</span>) == <span class="keyword">null</span>) &#123;</div><div class="line">      requestBuilder.header(<span class="string">"Connection"</span>, <span class="string">"Keep-Alive"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// If we add an "Accept-Encoding: gzip" header field we're responsible for also decompressing</span></div><div class="line">    <span class="comment">// the transfer stream.</span></div><div class="line">    <span class="keyword">boolean</span> transparentGzip = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">if</span> (userRequest.header(<span class="string">"Accept-Encoding"</span>) == <span class="keyword">null</span>) &#123;</div><div class="line">      transparentGzip = <span class="keyword">true</span>;</div><div class="line">      requestBuilder.header(<span class="string">"Accept-Encoding"</span>, <span class="string">"gzip"</span>);</div><div class="line">    &#125;</div><div class="line"><span class="comment">// 创建Okhpptclitent时候配置的cookieJar，</span></div><div class="line">    List&lt;Cookie&gt; cookies = cookieJar.loadForRequest(userRequest.url());</div><div class="line">    <span class="keyword">if</span> (!cookies.isEmpty()) &#123;</div><div class="line">      requestBuilder.header(<span class="string">"Cookie"</span>, cookieHeader(cookies));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (userRequest.header(<span class="string">"User-Agent"</span>) == <span class="keyword">null</span>) &#123;</div><div class="line">      requestBuilder.header(<span class="string">"User-Agent"</span>, Version.userAgent());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//  以上为请求前的头处理  下面是调用接下来的拦截器</span></div><div class="line"></div><div class="line">    Response networkResponse = chain.proceed(requestBuilder.build());</div><div class="line"><span class="comment">// 以下是请求完成，拿到返回后的头处理</span></div><div class="line">    HttpHeaders.receiveHeaders(cookieJar, userRequest.url(), networkResponse.headers());</div><div class="line"></div><div class="line">    Response.Builder responseBuilder = networkResponse.newBuilder()</div><div class="line">        .request(userRequest);</div><div class="line">    <span class="comment">//前面解析完header后，判断服务器是否支持gzip压缩格式，如果支持将交给Okio处理</span></div><div class="line">    <span class="keyword">if</span> (transparentGzip</div><div class="line">        &amp;&amp; <span class="string">"gzip"</span>.equalsIgnoreCase(networkResponse.header(<span class="string">"Content-Encoding"</span>))</div><div class="line">        &amp;&amp; HttpHeaders.hasBody(networkResponse)) &#123;</div><div class="line">      GzipSource responseBody = <span class="keyword">new</span> GzipSource(networkResponse.body().source());</div><div class="line">      Headers strippedHeaders = networkResponse.headers().newBuilder()</div><div class="line">          .removeAll(<span class="string">"Content-Encoding"</span>)</div><div class="line">          .removeAll(<span class="string">"Content-Length"</span>)</div><div class="line">          .build();</div><div class="line">      responseBuilder.headers(strippedHeaders);</div><div class="line">      responseBuilder.body(<span class="keyword">new</span> RealResponseBody(strippedHeaders, Okio.buffer(responseBody)));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> responseBuilder.build();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="CacheInterceptor"><a href="#CacheInterceptor" class="headerlink" title="CacheInterceptor"></a>CacheInterceptor</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    Response cacheCandidate = cache != <span class="keyword">null</span></div><div class="line">        ? cache.get(chain.request())</div><div class="line">        : <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="keyword">long</span> now = System.currentTimeMillis();</div><div class="line"></div><div class="line">    CacheStrategy strategy = <span class="keyword">new</span> CacheStrategy.Factory(now, chain.request(), cacheCandidate).get();</div><div class="line">    Request networkRequest = strategy.networkRequest;</div><div class="line">    Response cacheResponse = strategy.cacheResponse;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (cache != <span class="keyword">null</span>) &#123;</div><div class="line">      cache.trackResponse(strategy);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (cacheCandidate != <span class="keyword">null</span> &amp;&amp; cacheResponse == <span class="keyword">null</span>) &#123;</div><div class="line">      closeQuietly(cacheCandidate.body()); <span class="comment">// The cache candidate wasn't applicable. Close it.</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// If we're forbidden from using the network and the cache is insufficient, fail.</span></div><div class="line">    <span class="keyword">if</span> (networkRequest == <span class="keyword">null</span> &amp;&amp; cacheResponse == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Response.Builder()</div><div class="line">          .request(chain.request())</div><div class="line">          .protocol(Protocol.HTTP_1_1)</div><div class="line">          .code(<span class="number">504</span>)</div><div class="line">          .message(<span class="string">"Unsatisfiable Request (only-if-cached)"</span>)</div><div class="line">          .body(EMPTY_BODY)</div><div class="line">          .sentRequestAtMillis(-<span class="number">1L</span>)</div><div class="line">          .receivedResponseAtMillis(System.currentTimeMillis())</div><div class="line">          .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// If we don't need the network, we're done.</span></div><div class="line">    <span class="keyword">if</span> (networkRequest == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">return</span> cacheResponse.newBuilder()</div><div class="line">          .cacheResponse(stripBody(cacheResponse))</div><div class="line">          .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Response networkResponse = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      networkResponse = chain.proceed(networkRequest);</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">      <span class="comment">// If we're crashing on I/O or otherwise, don't leak the cache body.</span></div><div class="line">      <span class="keyword">if</span> (networkResponse == <span class="keyword">null</span> &amp;&amp; cacheCandidate != <span class="keyword">null</span>) &#123;</div><div class="line">        closeQuietly(cacheCandidate.body());</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// If we have a cache response too, then we're doing a conditional get.</span></div><div class="line">    <span class="keyword">if</span> (cacheResponse != <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (validate(cacheResponse, networkResponse)) &#123;</div><div class="line">        Response response = cacheResponse.newBuilder()</div><div class="line">            .headers(combine(cacheResponse.headers(), networkResponse.headers()))</div><div class="line">            .cacheResponse(stripBody(cacheResponse))</div><div class="line">            .networkResponse(stripBody(networkResponse))</div><div class="line">            .build();</div><div class="line">        networkResponse.body().close();</div><div class="line"></div><div class="line">        <span class="comment">// Update the cache after combining headers but before stripping the</span></div><div class="line">        <span class="comment">// Content-Encoding header (as performed by initContentStream()).</span></div><div class="line">        cache.trackConditionalCacheHit();</div><div class="line">        cache.update(cacheResponse, response);</div><div class="line">        <span class="keyword">return</span> response;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        closeQuietly(cacheResponse.body());</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    Response response = networkResponse.newBuilder()</div><div class="line">        .cacheResponse(stripBody(cacheResponse))</div><div class="line">        .networkResponse(stripBody(networkResponse))</div><div class="line">        .build();</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (HttpHeaders.hasBody(response)) &#123;</div><div class="line">      CacheRequest cacheRequest = maybeCache(response, networkResponse.request(), cache);</div><div class="line">      response = cacheWritingResponse(cacheRequest, response);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> response;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>就是先走自己的缓存策略，如果又缓存就直接返回了  Response，如果没有就进入下个拦截器</p>
+<h2 id="ConnectInterceptor"><a href="#ConnectInterceptor" class="headerlink" title="ConnectInterceptor"></a>ConnectInterceptor</h2><p>倒数第二个拦截器—连接拦截器，这才是真正的开始向服务端发起进攻</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> okhttp3.internal.connection;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> okhttp3.Interceptor;</div><div class="line"><span class="keyword">import</span> okhttp3.OkHttpClient;</div><div class="line"><span class="keyword">import</span> okhttp3.Request;</div><div class="line"><span class="keyword">import</span> okhttp3.Response;</div><div class="line"><span class="keyword">import</span> okhttp3.internal.http.HttpStream;</div><div class="line"><span class="keyword">import</span> okhttp3.internal.http.RealInterceptorChain;</div><div class="line"></div><div class="line"><span class="comment">/** Opens a connection to the target server and proceeds to the next interceptor. */</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectInterceptor</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">final</span> OkHttpClient client;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ConnectInterceptor</span><span class="params">(OkHttpClient client)</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>.client = client;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    RealInterceptorChain realChain = (RealInterceptorChain) chain;</div><div class="line">    Request request = realChain.request();</div><div class="line">    StreamAllocation streamAllocation = realChain.streamAllocation();</div><div class="line"></div><div class="line">    <span class="comment">// We need the network to satisfy this request. Possibly for validating a conditional GET.</span></div><div class="line">    <span class="keyword">boolean</span> doExtensiveHealthChecks = !request.method().equals(<span class="string">"GET"</span>);</div><div class="line">    <span class="comment">//实例化httpcodec，如果是http2.0实例化Http1Stream否则Http2Stream</span></div><div class="line">    HttpStream httpStream = streamAllocation.newStream(client, doExtensiveHealthChecks);</div><div class="line">    RealConnection connection = streamAllocation.connection();</div><div class="line"></div><div class="line">    <span class="keyword">return</span> realChain.proceed(request, streamAllocation, httpStream, connection);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对没错 就这么几行代码，处的逻辑很简单，因为已经转嫁到其他的类对象上去了。前面我们提到过RealInterceptorChain构造函数有四个重要的属性（Request、StreamAllocation， HttpStream、Connection）第一个不用说一开始就必须有，第二个是在重试拦截器中实例化的，第三、第四就是在本节中腰实例化出来的。StreamAllocation 我们知道是在第一个拦截器创建。</p>
+<h3 id="newStream"><a href="#newStream" class="headerlink" title="newStream"></a>newStream</h3><p>深入看一下 newStream 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> HttpStream <span class="title">newStream</span><span class="params">(OkHttpClient client, <span class="keyword">boolean</span> doExtensiveHealthChecks)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> connectTimeout = client.connectTimeoutMillis();</div><div class="line">  <span class="keyword">int</span> readTimeout = client.readTimeoutMillis();</div><div class="line">  <span class="keyword">int</span> writeTimeout = client.writeTimeoutMillis();</div><div class="line">  <span class="keyword">boolean</span> connectionRetryEnabled = client.retryOnConnectionFailure();</div><div class="line"></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">  <span class="comment">//判断之前是否又连接</span></div><div class="line">    RealConnection resultConnection = findHealthyConnection(connectTimeout, readTimeout,</div><div class="line">        writeTimeout, connectionRetryEnabled, doExtensiveHealthChecks);</div><div class="line"></div><div class="line">    HttpStream resultStream;</div><div class="line">    <span class="keyword">if</span> (resultConnection.framedConnection != <span class="keyword">null</span>) &#123;</div><div class="line">      resultStream = <span class="keyword">new</span> Http2xStream(client, <span class="keyword">this</span>, resultConnection.framedConnection);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      resultConnection.socket().setSoTimeout(readTimeout);</div><div class="line">      resultConnection.source.timeout().timeout(readTimeout, MILLISECONDS);</div><div class="line">      resultConnection.sink.timeout().timeout(writeTimeout, MILLISECONDS);</div><div class="line">      resultStream = <span class="keyword">new</span> Http1xStream(</div><div class="line">          client, <span class="keyword">this</span>, resultConnection.source, resultConnection.sink);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (connectionPool) &#123;</div><div class="line">      stream = resultStream;</div><div class="line">      <span class="keyword">return</span> resultStream;</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RouteException(e);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里就是获取连接 根据framedConnection 创建 HttpStream</p>
+<h3 id="framedConnection"><a href="#framedConnection" class="headerlink" title="framedConnection"></a>framedConnection</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> RealConnection <span class="title">findHealthyConnection</span><span class="params">(<span class="keyword">int</span> connectTimeout, <span class="keyword">int</span> readTimeout,</span></span></div><div class="line">    <span class="keyword">int</span> writeTimeout, <span class="keyword">boolean</span> connectionRetryEnabled, <span class="keyword">boolean</span> doExtensiveHealthChecks)</div><div class="line">    <span class="keyword">throws</span> IOException &#123;</div><div class="line">  <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">    RealConnection candidate = findConnection(connectTimeout, readTimeout, writeTimeout,</div><div class="line">        connectionRetryEnabled);</div><div class="line"></div><div class="line">    <span class="comment">// If this is a brand new connection, we can skip the extensive health checks.</span></div><div class="line">    <span class="keyword">synchronized</span> (connectionPool) &#123;</div><div class="line">      <span class="keyword">if</span> (candidate.successCount == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> candidate;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Do a (potentially slow) check to confirm that the pooled connection is still good. If it</span></div><div class="line">    <span class="comment">// isn't, take it out of the pool and start again.</span></div><div class="line">    <span class="keyword">if</span> (!candidate.isHealthy(doExtensiveHealthChecks)) &#123;</div><div class="line">      noNewStreams();</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> candidate;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>看findConnection 方法</p>
+<h3 id="findConnection"><a href="#findConnection" class="headerlink" title="findConnection"></a>findConnection</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> RealConnection <span class="title">findConnection</span><span class="params">(<span class="keyword">int</span> connectTimeout, <span class="keyword">int</span> readTimeout, <span class="keyword">int</span> writeTimeout,</span></span></div><div class="line">      <span class="keyword">boolean</span> connectionRetryEnabled) <span class="keyword">throws</span> IOException &#123;</div><div class="line">    Route selectedRoute;</div><div class="line">    <span class="keyword">synchronized</span> (connectionPool) &#123;</div><div class="line">      <span class="keyword">if</span> (released) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"released"</span>);</div><div class="line">      <span class="keyword">if</span> (stream != <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"stream != null"</span>);</div><div class="line">      <span class="keyword">if</span> (canceled) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Canceled"</span>);</div><div class="line">    <span class="comment">// 使用已存在的连接</span></div><div class="line">      RealConnection allocatedConnection = <span class="keyword">this</span>.connection;</div><div class="line">      <span class="keyword">if</span> (allocatedConnection != <span class="keyword">null</span> &amp;&amp; !allocatedConnection.noNewStreams) &#123;</div><div class="line">        <span class="keyword">return</span> allocatedConnection;</div><div class="line">      &#125;</div><div class="line">        <span class="comment">//从连接池里获取</span></div><div class="line">      <span class="comment">// Attempt to get a connection from the pool.</span></div><div class="line">      RealConnection pooledConnection = Internal.instance.get(connectionPool, address, <span class="keyword">this</span>);</div><div class="line">      <span class="keyword">if</span> (pooledConnection != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">this</span>.connection = pooledConnection;</div><div class="line">        <span class="keyword">return</span> pooledConnection;</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      selectedRoute = route;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (selectedRoute == <span class="keyword">null</span>) &#123;</div><div class="line">      selectedRoute = routeSelector.next();</div><div class="line">      <span class="keyword">synchronized</span> (connectionPool) &#123;</div><div class="line">        route = selectedRoute;</div><div class="line">        refusedStreamCount = <span class="number">0</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//以上都不符合，创建一个连接</span></div><div class="line">    RealConnection newConnection = <span class="keyword">new</span> RealConnection(selectedRoute);</div><div class="line">    acquire(newConnection);</div><div class="line"></div><div class="line">    <span class="keyword">synchronized</span> (connectionPool) &#123;</div><div class="line">    <span class="comment">//放入线程池</span></div><div class="line">      Internal.instance.put(connectionPool, newConnection);</div><div class="line">      <span class="keyword">this</span>.connection = newConnection;</div><div class="line">      <span class="keyword">if</span> (canceled) <span class="keyword">throw</span> <span class="keyword">new</span> IOException(<span class="string">"Canceled"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newConnection.connect(connectTimeout, readTimeout, writeTimeout, address.connectionSpecs(),</div><div class="line">        connectionRetryEnabled);</div><div class="line">    routeDatabase().connected(newConnection.route());</div><div class="line"></div><div class="line">    <span class="keyword">return</span> newConnection;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><p>建立一个新连接<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> connectTimeout, <span class="keyword">int</span> readTimeout, <span class="keyword">int</span> writeTimeout,</span></span></div><div class="line">     List&lt;ConnectionSpec&gt; connectionSpecs, <span class="keyword">boolean</span> connectionRetryEnabled) &#123;</div><div class="line">   <span class="keyword">if</span> (protocol != <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"already connected"</span>);</div><div class="line"></div><div class="line">   RouteException routeException = <span class="keyword">null</span>;</div><div class="line">   ConnectionSpecSelector connectionSpecSelector = <span class="keyword">new</span> ConnectionSpecSelector(connectionSpecs);</div><div class="line"></div><div class="line">   <span class="keyword">if</span> (route.address().sslSocketFactory() == <span class="keyword">null</span>) &#123;</div><div class="line">     <span class="keyword">if</span> (!connectionSpecs.contains(ConnectionSpec.CLEARTEXT)) &#123;</div><div class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> RouteException(<span class="keyword">new</span> UnknownServiceException(</div><div class="line">           <span class="string">"CLEARTEXT communication not enabled for client"</span>));</div><div class="line">     &#125;</div><div class="line">     String host = route.address().url().host();</div><div class="line">     <span class="keyword">if</span> (!Platform.get().isCleartextTrafficPermitted(host)) &#123;</div><div class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> RouteException(<span class="keyword">new</span> UnknownServiceException(</div><div class="line">           <span class="string">"CLEARTEXT communication to "</span> + host + <span class="string">" not permitted by network security policy"</span>));</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line">      <span class="comment">//开始连接</span></div><div class="line">   <span class="keyword">while</span> (protocol == <span class="keyword">null</span>) &#123;</div><div class="line">     <span class="keyword">try</span> &#123;</div><div class="line">       <span class="keyword">if</span> (route.requiresTunnel()) &#123;</div><div class="line">       <span class="comment">// 如果要求通道模式，建立通道连接，通常不是这种</span></div><div class="line">         buildTunneledConnection(connectTimeout, readTimeout, writeTimeout,</div><div class="line">             connectionSpecSelector);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">         <span class="comment">// 一般都走这条逻辑了，实际上很简单就是socket的连接</span></div><div class="line">         buildConnection(connectTimeout, readTimeout, writeTimeout, connectionSpecSelector);</div><div class="line">       &#125;</div><div class="line">     &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">       closeQuietly(socket);</div><div class="line">       closeQuietly(rawSocket);</div><div class="line">       socket = <span class="keyword">null</span>;</div><div class="line">       rawSocket = <span class="keyword">null</span>;</div><div class="line">       source = <span class="keyword">null</span>;</div><div class="line">       sink = <span class="keyword">null</span>;</div><div class="line">       handshake = <span class="keyword">null</span>;</div><div class="line">       protocol = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (routeException == <span class="keyword">null</span>) &#123;</div><div class="line">         routeException = <span class="keyword">new</span> RouteException(e);</div><div class="line">       &#125; <span class="keyword">else</span> &#123;</div><div class="line">         routeException.addConnectException(e);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="keyword">if</span> (!connectionRetryEnabled || !connectionSpecSelector.connectionFailed(e)) &#123;</div><div class="line">         <span class="keyword">throw</span> routeException;</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">buildConnection</span><span class="params">(<span class="keyword">int</span> connectTimeout, <span class="keyword">int</span> readTimeout, <span class="keyword">int</span> writeTimeout,</span></span></div><div class="line">    ConnectionSpecSelector connectionSpecSelector) <span class="keyword">throws</span> IOException &#123;</div><div class="line">   <span class="comment">//建立连接</span></div><div class="line">  connectSocket(connectTimeout, readTimeout);</div><div class="line">  <span class="comment">//简历协议</span></div><div class="line">  establishProtocol(readTimeout, writeTimeout, connectionSpecSelector);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于这两个方法 咱们一个一个看 </p>
+<h3 id="connectSocket"><a href="#connectSocket" class="headerlink" title="connectSocket"></a>connectSocket</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">connectSocket</span><span class="params">(<span class="keyword">int</span> connectTimeout, <span class="keyword">int</span> readTimeout)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">   Proxy proxy = route.proxy();</div><div class="line">   Address address = route.address();</div><div class="line"></div><div class="line">   rawSocket = proxy.type() == Proxy.Type.DIRECT || proxy.type() == Proxy.Type.HTTP</div><div class="line">       ? address.socketFactory().createSocket()</div><div class="line">       : <span class="keyword">new</span> Socket(proxy);</div><div class="line">   </div><div class="line">   rawSocket.setSoTimeout(readTimeout);</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">       <span class="comment">//连接Socket</span></div><div class="line">     Platform.get().connectSocket(rawSocket, route.socketAddress(), connectTimeout);</div><div class="line">   &#125; <span class="keyword">catch</span> (ConnectException e) &#123;</div><div class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> ConnectException(<span class="string">"Failed to connect to "</span> + route.socketAddress());</div><div class="line">   &#125;</div><div class="line">   <span class="comment">//得到 输入流  和输出流 </span></div><div class="line">   source = Okio.buffer(Okio.source(rawSocket));</div><div class="line">   sink = Okio.buffer(Okio.sink(rawSocket));</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>connectSocket 方法简历了连接，得到了一个输入流和输出流，当然 可以看到  关于流这里 交给了okio来处理，关于okio 以后在说</p>
+<h3 id="establishProtocol"><a href="#establishProtocol" class="headerlink" title="establishProtocol"></a>establishProtocol</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">establishProtocol</span><span class="params">(<span class="keyword">int</span> readTimeout, <span class="keyword">int</span> writeTimeout,</span></span></div><div class="line">    ConnectionSpecSelector connectionSpecSelector) <span class="keyword">throws</span> IOException &#123;</div><div class="line">    <span class="comment">//判断是不是 https  如果是 就在上面在套一层</span></div><div class="line">  <span class="keyword">if</span> (route.address().sslSocketFactory() != <span class="keyword">null</span>) &#123;</div><div class="line">    connectTls(readTimeout, writeTimeout, connectionSpecSelector);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    protocol = Protocol.HTTP_1_1;</div><div class="line">    socket = rawSocket;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (protocol == Protocol.SPDY_3 || protocol == Protocol.HTTP_2) &#123;</div><div class="line">    socket.setSoTimeout(<span class="number">0</span>); <span class="comment">// Framed connection timeouts are set per-stream.</span></div><div class="line"></div><div class="line">    FramedConnection framedConnection = <span class="keyword">new</span> FramedConnection.Builder(<span class="keyword">true</span>)</div><div class="line">        .socket(socket, route.address().url().host(), source, sink)</div><div class="line">        .protocol(protocol)</div><div class="line">        .listener(<span class="keyword">this</span>)</div><div class="line">        .build();</div><div class="line">    framedConnection.start();</div><div class="line"></div><div class="line">    <span class="comment">// Only assign the framed connection once the preface has been sent successfully.</span></div><div class="line">    <span class="keyword">this</span>.allocationLimit = framedConnection.maxConcurrentStreams();</div><div class="line">    <span class="keyword">this</span>.framedConnection = framedConnection;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">this</span>.allocationLimit = <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="CallServerInterceptor"><a href="#CallServerInterceptor" class="headerlink" title="CallServerInterceptor"></a>CallServerInterceptor</h2><p>到了  就是最后一个拦截器，这里包括了 发送请求，和返回最终的 response<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> Response <span class="title">intercept</span><span class="params">(Chain chain)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">    HttpStream httpStream = ((RealInterceptorChain) chain).httpStream();</div><div class="line">    StreamAllocation streamAllocation = ((RealInterceptorChain) chain).streamAllocation();</div><div class="line">    Request request = chain.request();</div><div class="line"></div><div class="line">    <span class="keyword">long</span> sentRequestMillis = System.currentTimeMillis();</div><div class="line">    <span class="comment">//写入http 头，两个httpStream具体实现不一样  不过都交给 okio来处理</span></div><div class="line">    httpStream.writeRequestHeaders(request);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (HttpMethod.permitsRequestBody(request.method()) &amp;&amp; request.body() != <span class="keyword">null</span>) &#123;</div><div class="line">      Sink requestBodyOut = httpStream.createRequestBody(request, request.body().contentLength());</div><div class="line">      BufferedSink bufferedRequestBody = Okio.buffer(requestBodyOut);</div><div class="line">      request.body().writeTo(bufferedRequestBody);</div><div class="line">      bufferedRequestBody.close();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//完成请求</span></div><div class="line">    httpStream.finishRequest();</div><div class="line">    <span class="comment">//读取响应头</span></div><div class="line">    Response response = httpStream.readResponseHeaders()</div><div class="line">        .request(request)</div><div class="line">        .handshake(streamAllocation.connection().handshake())</div><div class="line">        .sentRequestAtMillis(sentRequestMillis)</div><div class="line">        .receivedResponseAtMillis(System.currentTimeMillis())</div><div class="line">        .build();</div><div class="line">    <span class="comment">//读取响应body</span></div><div class="line">    <span class="keyword">if</span> (!forWebSocket || response.code() != <span class="number">101</span>) &#123;</div><div class="line">      response = response.newBuilder()</div><div class="line">          .body(httpStream.openResponseBody(response))</div><div class="line">          .build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="string">"close"</span>.equalsIgnoreCase(response.request().header(<span class="string">"Connection"</span>))</div><div class="line">        || <span class="string">"close"</span>.equalsIgnoreCase(response.header(<span class="string">"Connection"</span>))) &#123;</div><div class="line">      streamAllocation.noNewStreams();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> code = response.code();</div><div class="line">    <span class="keyword">if</span> ((code == <span class="number">204</span> || code == <span class="number">205</span>) &amp;&amp; response.body().contentLength() &gt; <span class="number">0</span>) &#123;</div><div class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> ProtocolException(</div><div class="line">          <span class="string">"HTTP "</span> + code + <span class="string">" had non-zero Content-Length: "</span> + response.body().contentLength());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> response;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>这里就是先获取上个拦截器的连接，然后 获取到 上个拦截器的httpStream 里面不又生成的那些流吗，然后写入头，写入请求体，在读取头 读取体</p>
+<p>###好了，对于OKhttp就先分析这些了，写的像流水账一样</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BridgeInterceptor/">BridgeInterceptor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CacheInterceptor/">CacheInterceptor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CallServerInterceptor/">CallServerInterceptor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ConnectInterceptor/">ConnectInterceptor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RetryAndFollowUpInterceptor/">RetryAndFollowUpInterceptor</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/22/okhttp2/&title=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/22/okhttp2/&title=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&source=摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/11/22/okhttp2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&url=https://3431339973.github.io/2016/11/22/okhttp2/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/11/22/okhttp2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/01/01/Retrofit2.0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Retrofit2.0 - 网络请求库 注解 详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/11/21/okhttp1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Okhttp源码分析学习</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="okhttp2" data-title="Okhttp源码分析学习（2）5个拦截器" data-url="https://3431339973.github.io/2016/11/22/okhttp2/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/22/okhttp2/&title=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/22/okhttp2/&title=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&source=摘要:昨天分析okhttp的请求流程，今天来分析下这几个拦截器" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2016/11/22/okhttp2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习（2）5个拦截器》 — 独角兽之路&url=https://3431339973.github.io/2016/11/22/okhttp2/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2016/11/22/okhttp2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACO0lEQVR42u3aS27DMAxFUe9/0y7QUYFGxn2kW0DU9ShIHFtHA0L8XBe+7u/r+Zvfv/685/l+/uTWJUOGjG0Z9+P1zFjdufrv6l8rBlmbDBkyzmHwx/HFkftrYVqGDBkyyCLSz8+HSx7oZciQIYMH3FqA7myHDBkyZJAkNg2aBM9T4tdycRkyZGzISIv1//n5D/sbMmTI2IRxhxcvjaVHw9aqZMiQMZqRDlKQ1mOa7qaluuWTZciQMZTBwygfvEhJtW1FoVaGDBkjGGkprTaKkRbOSLCWIUOGDJ468sNibSAjKMbJkCFjKIOX0tISW60lmYbjD1VDGTJkjGaQpfMUNw2stQELGTJknMNIxx1qS0wDcRD6ZciQMZqRJrGdIJs2A9J2hQwZMqYyyHI7o1p88IKX5GTIkHEaIx08rf2aNj55K/SqPVqGDBlbMWrBrnbIq7UB0BbIkCHjGAZ5fb+dWSvABQNhMmTIOIzBE8janWmjdBmCZciQMZrBE9c0QL/Vcgi2Q4YMGUMZPIHkaWonsPL/xidcGTJkbM7ojEHwoyTZPhJwPzxZhgwZoxm8+NU5StbeQoYzZMiQcQLjDi+erNZGVIt1fhkyZIxmpGGulojy8txbbQYZMmTMY/DRB/J6PjZRC7jLrZEhQ8YBjM5xLR0U4wfK4FAoQ4YMGY2if2csI3imDBkyZLTbk2hsApfqWkdDGTJkbMsgSWxtnOvdRkIw4yZDhoxBjFrIS9uKfOk80Lf6GzJkyNiD8QURGp6c/tdEdAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
