@@ -13,7 +13,7 @@
     
     
     
-    <title>Okhttp源码分析学习 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <title>Okhttp源码分析学习（1）请求流程 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#2caa29">
@@ -22,13 +22,13 @@
     <meta name="keywords" content="Android,Okhttp,源码解析">
     <meta name="description" content="摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Okhttp源码分析学习">
+<meta property="og:title" content="Okhttp源码分析学习（1）请求流程">
 <meta property="og:url" content="https://3431339973.github.io/2016/11/21/okhttp1/index.html">
 <meta property="og:site_name" content="独角兽之路">
 <meta property="og:description" content="摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient">
-<meta property="og:updated_time" content="2017-10-21T11:44:29.195Z">
+<meta property="og:updated_time" content="2017-10-21T13:02:57.923Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Okhttp源码分析学习">
+<meta name="twitter:title" content="Okhttp源码分析学习（1）请求流程">
 <meta name="twitter:description" content="摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient">
     
         <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
@@ -89,13 +89,6 @@
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="https://my.oschina.net/zhushihui/blog" target="_blank" >
-                <i class="icon icon-lg icon-drupal"></i>
-                oschina
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
               <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
                 <i class="icon icon-lg icon-weibo"></i>
                 新浪微博
@@ -127,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Okhttp源码分析学习</div>
+        <div class="flex-col header-title ellipsis">Okhttp源码分析学习（1）请求流程</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -149,7 +142,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">Okhttp源码分析学习</h1>
+        <h1 class="title">Okhttp源码分析学习（1）请求流程</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-11-21T13:55:27.000Z" itemprop="datePublished" class="page-time">
@@ -181,7 +174,7 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Okhttp源码分析学习</h1>
+        <h1 class="post-card-title">Okhttp源码分析学习（1）请求流程</h1>
         <div class="post-meta">
             <time class="post-time" title="2016年11月21日 21:55" datetime="2016-11-21T13:55:27.000Z"  itemprop="datePublished">2016-11-21</time>
 
@@ -267,7 +260,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -277,7 +270,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习》 — 独角兽之路&source=摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&source=摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -287,7 +280,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习》 — 独角兽之路&url=https://3431339973.github.io/2016/11/21/okhttp1/&via=https://3431339973.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&url=https://3431339973.github.io/2016/11/21/okhttp1/&via=https://3431339973.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -337,7 +330,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="okhttp1" data-title="Okhttp源码分析学习" data-url="https://3431339973.github.io/2016/11/21/okhttp1/"></div>
+    <div class="ds-thread" data-thread-key="okhttp1" data-title="Okhttp源码分析学习（1）请求流程" data-url="https://3431339973.github.io/2016/11/21/okhttp1/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -419,7 +412,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -429,7 +422,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习》 — 独角兽之路&source=摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2016/11/21/okhttp1/&title=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&source=摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -439,7 +432,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.11');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习》 — 独角兽之路&url=https://3431339973.github.io/2016/11/21/okhttp1/&via=https://3431339973.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Okhttp源码分析学习（1）请求流程》 — 独角兽之路&url=https://3431339973.github.io/2016/11/21/okhttp1/&via=https://3431339973.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

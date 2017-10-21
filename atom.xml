@@ -308,11 +308,11 @@ PASSWORD;//密码强度 是不是6至12位字母组合
   </entry>
   
   <entry>
-    <title>Okhttp源码分析学习</title>
+    <title>Okhttp源码分析学习（1）请求流程</title>
     <link href="https://3431339973.github.io/2016/11/21/okhttp1/"/>
     <id>https://3431339973.github.io/2016/11/21/okhttp1/</id>
     <published>2016-11-21T13:55:27.000Z</published>
-    <updated>2017-10-21T11:44:29.195Z</updated>
+    <updated>2017-10-21T13:02:57.923Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:okhttp是安卓端最火热的轻量级框架,由移动支付Square公司贡献,用于替换api23以后被移除的HttpClient</p>
 <a id="more"></a>
