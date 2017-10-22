@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>ShAndroidHttpService 在android设备上跑一个Http服务器 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="Android,http">
+    <meta name="description" content="摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连接，所以干脆在android设备上也跑了一个service 给服务端提供http接口来调用，所以封装了这个库，为了让后端人员能直接上手，所以配置方法，和注解，都模仿了SpringMVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ShAndroidHttpService 在android设备上跑一个Http服务器">
+<meta property="og:url" content="https://3431339973.github.io/2017/03/21/20170312/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连接，所以干脆在android设备上也跑了一个service 给服务端提供http接口来调用，所以封装了这个库，为了让后端人员能直接上手，所以配置方法，和注解，都模仿了SpringMVC">
+<meta property="og:updated_time" content="2017-10-22T12:08:58.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ShAndroidHttpService 在android设备上跑一个Http服务器">
+<meta name="twitter:description" content="摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连接，所以干脆在android设备上也跑了一个service 给服务端提供http接口来调用，所以封装了这个库，为了让后端人员能直接上手，所以配置方法，和注解，都模仿了SpringMVC">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ShAndroidHttpService 在android设备上跑一个Http服务器</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ShAndroidHttpService 在android设备上跑一个Http服务器</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-21T09:35:17.000Z" itemprop="datePublished" class="page-time">
+  2017-03-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ShAndroidHttpService"><span class="post-toc-number">1.</span> <span class="post-toc-text">ShAndroidHttpService</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ShInterceptor-拦截器"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ShInterceptor  拦截器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Controller-Action"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Controller  Action</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Controller"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">@Controller</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RequestMapping"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">@RequestMapping</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#传递参数"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">传递参数</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-20170312"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ShAndroidHttpService 在android设备上跑一个Http服务器</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017年03月21日 17:35" datetime="2017-03-21T09:35:17.000Z"  itemprop="datePublished">2017-03-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连接，所以干脆在android设备上也跑了一个service 给服务端提供http接口来调用，所以封装了这个库，为了让后端人员能直接上手，所以配置方法，和注解，都模仿了SpringMVC</p>
+<a id="more"></a>
+<h1 id="ShAndroidHttpService"><a href="#ShAndroidHttpService" class="headerlink" title="ShAndroidHttpService"></a>ShAndroidHttpService</h1><p>Android http服务器</p>
+<p>Download the latest JAR or grab via Maven:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>code.zsh.sh.com.shandroidhttpservice<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>httplib<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>or Gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'code.zsh.sh.com.shandroidhttpservice:httplib:1.0.0'</span></div></pre></td></tr></table></figure></p>
+<p>启动http服务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">WebServer  webServer = <span class="keyword">new</span> WebServer(PORT);</div><div class="line">        <span class="comment">//配置controller 集合</span></div><div class="line">        webServer.setControllerName(getClassName(CONTROLLER));</div><div class="line">        <span class="comment">//配置拦截器 集合</span></div><div class="line">        webServer.setInterceptPName(getClassName(INTERCEPTS));</div><div class="line">        webServer.setDaemon(<span class="keyword">true</span>);</div><div class="line">        webServer.start();</div></pre></td></tr></table></figure>
+<h2 id="ShInterceptor-拦截器"><a href="#ShInterceptor-拦截器" class="headerlink" title="ShInterceptor  拦截器"></a>ShInterceptor  拦截器</h2><p>继承ShInterceptor  实现preHandle 和postHandle 方法<br>前着在收到请求前调用  后者在完成请求后调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpIntercepts</span> <span class="keyword">implements</span> <span class="title">ShInterceptor</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpRequest request, HttpResponse response, HttpContext context)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            String target = URLDecoder.decode(request.getRequestLine().getUri(),</div><div class="line">                    <span class="string">"UTF-8"</span>);</div><div class="line"></div><div class="line">            Log.e(<span class="string">"url="</span>, target);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postHandle</span><span class="params">(HttpRequest request, HttpResponse response, HttpContext context)</span> </span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Controller-Action"><a href="#Controller-Action" class="headerlink" title="Controller  Action"></a>Controller  Action</h2><h3 id="Controller"><a href="#Controller" class="headerlink" title="@Controller"></a>@Controller</h3><p>改controller的作用域，</p>
+<h3 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h3><p>调用的action<br>下面的写法最终生成的地址  xxx.xxx.xxx.xxx:xxxx/api/getphoneinof<br>返回值以json类型返回<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span>(space = <span class="string">"/api"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@RequestMapping</span>(path = <span class="string">"/getphoneinof"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> ResultModel <span class="title">getPhoneInof</span><span class="params">()</span>  </span>&#123;</div><div class="line">         ResultModel resultModel = <span class="keyword">new</span> ResultModel(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">return</span> resultModel;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h3><p>在方法的前面加上@Requestparam 即可<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(path = <span class="string">"/toast"</span>)</div><div class="line"> <span class="function"><span class="keyword">public</span> ResultModel <span class="title">toast</span><span class="params">(@Requestparam(<span class="string">"message"</span>)</span> String message)  </span>&#123;</div><div class="line">     ResultModel resultModel = <span class="keyword">new</span> ResultModel(<span class="keyword">true</span>);</div><div class="line">     MainActivity.mainActivity.toast(message);</div><div class="line">     <span class="keyword">return</span> resultModel;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>项目地址 <a href="https://github.com/hui46226021/ShAndroidHttpService" target="_blank" rel="external">https://github.com/hui46226021/ShAndroidHttpService</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2017/03/21/20170312/&title=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2017/03/21/20170312/&title=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&source=摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2017/03/21/20170312/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&url=https://3431339973.github.io/2017/03/21/20170312/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2017/03/21/20170312/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/17/ShFormLayout/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android表单映射框架 SHFormLayout 快速生成表单布局</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="20170312" data-title="ShAndroidHttpService 在android设备上跑一个Http服务器" data-url="https://3431339973.github.io/2017/03/21/20170312/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2017</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2017/03/21/20170312/&title=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2017/03/21/20170312/&title=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&source=摘要:最近公司在开发一款类似智能家居的硬件项目，需要内网和服务器做交互，同时也需要服务器去操作客户端硬件，考虑到服务器终端。各方面性能比较差，也不想用长连..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2017/03/21/20170312/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ShAndroidHttpService 在android设备上跑一个Http服务器》 — 独角兽之路&url=https://3431339973.github.io/2017/03/21/20170312/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2017/03/21/20170312/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aQW7DMAwEwP7/0ynQaxt7SaYBQo1OQWBDGh8WEqmvr3g8fsb1/79//x6TuV4wMDAwPpbxuBz5Ep89n7/VmwsDA+McRhKmyZPPlt77vzAjBgYGRit8k+VWgxsDAwMj36Ilp8j8GQwMDIyEkQTfJF6TTeGbzuIYGBgfyKgW69/5+x/7GxgYGB/CmMdoHoLXsTsKdwwMjNWM63ZjHrtJ82C+NbyJYwwMjKWM5IU8dquk/FrYzT8YGBgHMKqLS65HTAK0HNkYGBgHMPLm4mQb12s2RK0FDAyM1Yw81KrH2uoHmjREMTAwdjMm8TpZ4qQL+QcJAwNjNaNXIHtVg7O33bxZLQYGxjpGz50cNfNiXK/EhoGBcQ5jcpEiKZD12gCTIMbAwNjKSA6W1SfnrYLy5TMMDIyljLxtOZ+4utFMmhB/VA0xMDBWM6obvuo9h97nKOxqMTAwVjOuoy2/qVFtT75sRgwMjNWMXvj2FpQfiSfHaQwMjH2MyWWIamiOGpN5yGJgYCxlTGKxt9Ak0JPN5c2dEQwMjBWMebWqWqrLj7XJp8HAwDiB8SiOXjNgsvWM3sLAwFjNyMekNFYd+eEZAwPjHEYSstVv0LzgFQTu04+FgYFxAKM6We84Wm0eFDaFGBgYGEXq/HJquTyHgYGBMQjKebEs2jhiYGAcwEgOscmRstrCrPJuAhcDA2MpY9IYyC+TlctnxSYBBgbGUsY3ManwLqrWW1kAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
