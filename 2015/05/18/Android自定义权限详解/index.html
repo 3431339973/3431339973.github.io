@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android自定义权限详解 自定义权限为什么无效果 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,系统">
+    <meta name="description" content="摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义权限详解 自定义权限为什么无效果">
+<meta property="og:url" content="https://3431339973.github.io/2015/05/18/Android自定义权限详解/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。">
+<meta property="og:updated_time" content="2018-03-02T16:11:27.005Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android自定义权限详解 自定义权限为什么无效果">
+<meta name="twitter:description" content="摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android自定义权限详解 自定义权限为什么无效果</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android自定义权限详解 自定义权限为什么无效果</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-05-18T13:37:23.000Z" itemprop="datePublished" class="page-time">
+  2015-05-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#声明自定义权限"><span class="post-toc-number">1.</span> <span class="post-toc-text">声明自定义权限</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#permission标签的属性"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">permission标签的属性</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用自定义权限"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用自定义权限</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意：APK在是在安装过程中申请权限，如果-先安装B应用-，在安装A应用，那么自定义权限将无效。"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意：APK在是在安装过程中申请权限，如果 先安装B应用 ，在安装A应用，那么自定义权限将无效。</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android自定义权限详解"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android自定义权限详解 自定义权限为什么无效果</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年05月18日 21:37" datetime="2015-05-18T13:37:23.000Z"  itemprop="datePublished">2015-05-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。<br><a id="more"></a></p>
+<h2 id="声明自定义权限"><a href="#声明自定义权限" class="headerlink" title="声明自定义权限"></a>声明自定义权限</h2><p>如果A应用需要被B应用访问，可以在A应用中声明 自定义权限，然后在B应用中申请该权限</p>
+<p>在A应用Manifest文件中 声明权限</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">permission</span></span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"com.zsh.code.TEST"</span></div><div class="line">        <span class="attr">android:description</span>=<span class="string">"custom permissions"</span></div><div class="line">        <span class="attr">android:permissionGroup</span>=<span class="string">"com.zsh.code-group.TEST"</span></div><div class="line">        <span class="attr">android:protectionLevel</span>=<span class="string">"normal"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>注意该标签 和<apolication>同级  千万不要将其放在application标签下</apolication></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"appid"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">permission...</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">application...</span>&gt;</span></div><div class="line">       </div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="permission标签的属性"><a href="#permission标签的属性" class="headerlink" title="permission标签的属性"></a>permission标签的属性</h4><ol>
+<li>name，该标签就是权限的名字。 </li>
+<li>description，该标签就是权限的介绍。 </li>
+<li>permissionGroup，非必填属性，可以将权限放在一个组中，但对于自定义权限，尽量不要设置此属性了。 </li>
+<li>protectionLevel，指定保护级别。</li>
+</ol>
+<p>Android将权限分为若干个保护级别，normal, dangerous, signature等。normal就是正常权限，该权限并不会给用户或者设备的隐私带来风险；dangerous就是危险权限，该级别的权限通常会给用户的数据或设备的隐私带来风险；signature指的是，只有相同签名的应用才能使用该权限</p>
+<h2 id="使用自定义权限"><a href="#使用自定义权限" class="headerlink" title="使用自定义权限"></a>使用自定义权限</h2><p>以一个Activity为例<br>如果一个activity需要被其他应用访问 需要把 exported 设置成true</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".ui.MainActivity"</span></div><div class="line">            <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">            <span class="attr">android:exported</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:screenOrientation</span>=<span class="string">"portrait"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>这样该activity就能被其他应用调用了</p>
+<p>加上已声明的权限 android:permission</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".ui.MainActivity"</span></div><div class="line">            <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">            <span class="attr">android:exported</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:permission</span>=<span class="string">"com.zsh.code.TEST"</span></div><div class="line">            <span class="attr">android:screenOrientation</span>=<span class="string">"portrait"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>在B应用中申请权限</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span>  <span class="attr">android:name</span>=<span class="string">"com.zsh.code.TEST"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>这样 就可以在B应用中 访问A应用的MainActivity</p>
+<h2 id="注意：APK在是在安装过程中申请权限，如果-先安装B应用-，在安装A应用，那么自定义权限将无效。"><a href="#注意：APK在是在安装过程中申请权限，如果-先安装B应用-，在安装A应用，那么自定义权限将无效。" class="headerlink" title="注意：APK在是在安装过程中申请权限，如果 先安装B应用 ，在安装A应用，那么自定义权限将无效。"></a>注意：APK在是在安装过程中申请权限，如果 先安装B应用 ，在安装A应用，那么自定义权限将无效。</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&title=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&title=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&source=摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2015/05/18/Android自定义权限详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/06/17/windowIsTranslucent 和windowAnimationStyle冲突/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">windowIsTranslucent 和windowAnimationStyle冲突</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/05/17/Android动画 详解(二 帧动画 属性动画 )/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android动画 详解(二 帧动画 属性动画 )</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android自定义权限详解" data-title="Android自定义权限详解 自定义权限为什么无效果" data-url="https://3431339973.github.io/2015/05/18/Android自定义权限详解/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2018</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&title=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&title=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&source=摘要:在android开发中，会碰到将组件对外暴漏的情况，具体哪些应用可以访问，可以自定义权限增加限制。" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2015/05/18/Android自定义权限详解/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android自定义权限详解 自定义权限为什么无效果》 — 独角兽之路&url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2015/05/18/Android自定义权限详解/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awW7jMAwE0P7/T+9eF9jGmSGlNoeXU+C2tp4LiMKQX1/x58+Lz78/ffWb/9/n+crzPb9ufPDw8PAOLf35AQkyWe7z9fwlvnwFeHh4eNd4ydacf3/1+jYFIH8WHh4e3mfyng/Nz8ffZENvCw8eHh7eJ/OSRSdH56QwJHfAw8PD+y1eGwTkx+I2UJjFGQeyFjw8PLyYl3eRPuf7lf4eHh4e3rqr3g4BzEKHPMCtV4uHh4d3gbdZaPK3m/GsU4EIHh4e3lle0nzan9lnJedAbIGHh4d3mTfb9Dfh7KYgRWMKeHh4eBd4bSM/ub4ZDtg029709/Dw8PAO8TZN93bRs6W3wXFRVfDw8PCO8jaNqxyWxwr5uNWb/h4eHh7eUd6+AbZvhuVjBNF1PDw8vAu8dgtuQ4pZkJEHzXXigoeHh3eIVzTj46bUps22GR0o/m94eHh4a97sYflBfN8Mm0XMeHh4eGd5bVw7m02YRRjtet5UPDw8PLxrvBbW9ujbQtIWmHroCg8PD+8oL281bVpi7VG+KCd4eHh413ibBlgbAbeDCO2qvgkj8PDw8H6El2/9bWbcwmbxxKprh4eHh/f+hFzEo+3w03MhOTUvVkQeeHh4eId4+eG4DRE292wHDqJsGA8PD+8ybzZilT9l1hhrwxE8PDy827x2ufkQwCbwXa0HDw8P78d5+7A1LwZFcysvWnh4eHjXeLNm/yxy3ZSK+oOHh4d3lDdrTW2GpfKN/kD7DQ8PD+8Cb7PHtgHBZrAgf0HHSggeHh5e2Vvf3LodFDh1rC/6e3h4eHiHePlwVXvknY1hHQtT8PDw8D6GN2uS5WVj9lK+uY6Hh4f3Ybz8sJsMK+xDjWIaCw8PD2/NmzW9khg3/81NnPGmMODh4eEd5c225ja6fcafXQMeHh7eNd5fjNq7YBl+qkIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

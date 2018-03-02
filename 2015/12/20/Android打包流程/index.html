@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android打包流程 | 独角兽之路 | 到了汉堡，我们每天必须演足8小时</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2caa29">
+    
+    
+    <meta name="keywords" content="移动开发,Android,系统">
+    <meta name="description" content="摘要:Android 里给我们提供了 很多 用来打包的工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android打包流程">
+<meta property="og:url" content="https://3431339973.github.io/2015/12/20/Android打包流程/index.html">
+<meta property="og:site_name" content="独角兽之路">
+<meta property="og:description" content="摘要:Android 里给我们提供了 很多 用来打包的工具">
+<meta property="og:image" content="https://raw.githubusercontent.com/hui46226021/MVPDemo/master/MVPDemo/1441907-8a2c24bbb71c2cbf.png">
+<meta property="og:updated_time" content="2018-03-02T16:07:15.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android打包流程">
+<meta name="twitter:description" content="摘要:Android 里给我们提供了 很多 用来打包的工具">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/hui46226021/MVPDemo/master/MVPDemo/1441907-8a2c24bbb71c2cbf.png">
+    
+        <link rel="alternative" href="/atom.xml" title="独角兽之路" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.11">
+    <script>window.lazyScripts=[]</script>
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Harlan Zhush</h5>
+          <a href="mailto:405086805@qq.com" title="405086805@qq.com" class="mail">405086805@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/hui46226021" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://weibo.com/u/5532995399?is_all=1" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                新浪微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/book"  >
+                <i class="icon icon-lg icon-book"></i>
+                读书
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-address-card"></i>
+                关于我
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android打包流程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android打包流程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-20T04:37:23.000Z" itemprop="datePublished" class="page-time">
+  2015-12-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-打包资源文件-生成R文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">1.打包资源文件 生成R文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-处理aidl文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">2.处理aidl文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-编译所有java代码"><span class="post-toc-number">3.</span> <span class="post-toc-text">3.编译所有java代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-转换class文件-生成classes-dex"><span class="post-toc-number">4.</span> <span class="post-toc-text">4.转换class文件 生成classes.dex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-打包APK文件"><span class="post-toc-number">5.</span> <span class="post-toc-text">5.打包APK文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-签名文件"><span class="post-toc-number">6.</span> <span class="post-toc-text">6.签名文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-对签名后的APK文件-对其处理"><span class="post-toc-number">7.</span> <span class="post-toc-text">7.对签名后的APK文件 对其处理</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Android打包流程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android打包流程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015年12月20日 12:37" datetime="2015-12-20T04:37:23.000Z"  itemprop="datePublished">2015-12-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>摘要:Android 里给我们提供了 很多 用来打包的工具<br><a id="more"></a></p>
+<p>资料来自《Android软件安全与逆向分析》</p>
+<p>Android应用打包过程一共分为以下七步</p>
+<h2 id="1-打包资源文件-生成R文件"><a href="#1-打包资源文件-生成R文件" class="headerlink" title="1.打包资源文件 生成R文件"></a>1.打包资源文件 生成R文件</h2><p>通过aapt工具（位于sdk/platform-tools），主要调用aapt源码下的Resurce.cpp文件</p>
+<ul>
+<li>buildResource()  函数检查AndroidManifest.xml的合法性</li>
+<li>makeFileResources()  对res下的目录进行处理</li>
+<li>ResourceTable.cpp —-compieResourceFile()  编译res和asserts文件 生成resource.arsc </li>
+<li>pareeAndAddENTRY()  生成R.java文件</li>
+<li>compileXmlFile() 对res下的xml文件进行加密处理</li>
+</ul>
+<h2 id="2-处理aidl文件"><a href="#2-处理aidl文件" class="headerlink" title="2.处理aidl文件"></a>2.处理aidl文件</h2><p>通过aidl文件生成相应的java文件，如果没有使用到aidl会跳过该步骤 </p>
+<h2 id="3-编译所有java代码"><a href="#3-编译所有java代码" class="headerlink" title="3.编译所有java代码"></a>3.编译所有java代码</h2><p>通过调用javac 命令编译所有src下的java代码，生成class文件</p>
+<h2 id="4-转换class文件-生成classes-dex"><a href="#4-转换class文件-生成classes-dex" class="headerlink" title="4.转换class文件 生成classes.dex"></a>4.转换class文件 生成classes.dex</h2><p>android 运行的是dex文件 通过dx工具（位于sdk/platform-tools）将所有class文件转换成一个classes.dex,这阶段可以 压缩常量池，消除冗余信息等</p>
+<h2 id="5-打包APK文件"><a href="#5-打包APK文件" class="headerlink" title="5.打包APK文件"></a>5.打包APK文件</h2><p>打包工具为apkbuilder（sdk/tools） 实际用到的是AplBuilderMain.java文件</p>
+<h2 id="6-签名文件"><a href="#6-签名文件" class="headerlink" title="6.签名文件"></a>6.签名文件</h2><p>一种是使用JDK提供的jarsigner工具签名，一种是使用android提供的signapk工具</p>
+<h2 id="7-对签名后的APK文件-对其处理"><a href="#7-对签名后的APK文件-对其处理" class="headerlink" title="7.对签名后的APK文件 对其处理"></a>7.对签名后的APK文件 对其处理</h2><p>使用的工具是zipalign(位于build/tools/zipalign),主要目的是 使APK包中的所有资源文件距离文件起始偏移为4字节整数倍，这样通过内存映射访问apk<br>文件时速度更快<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/hui46226021/MVPDemo/master/MVPDemo/1441907-8a2c24bbb71c2cbf.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+
+        
+    </div>
+    <footer>
+        <a href="https://3431339973.github.io">
+            <img src="/img/avatar.jpg" alt="Harlan Zhush">
+            Harlan Zhush
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/移动开发/">移动开发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2015/12/20/Android打包流程/&title=《Android打包流程》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2015/12/20/Android打包流程/&title=《Android打包流程》 — 独角兽之路&source=摘要:Android 里给我们提供了 很多 用来打包的工具" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2015/12/20/Android打包流程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android打包流程》 — 独角兽之路&url=https://3431339973.github.io/2015/12/20/Android打包流程/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2015/12/20/Android打包流程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/21/Android手动打包/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">手动打包APKshell脚本</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/12/18/整理 iOS 9 适配中出现的坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">整理 iOS 9 适配中出现的坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android打包流程" data-title="Android打包流程" data-url="https://3431339973.github.io/2015/12/20/Android打包流程/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.11');
+
+
+</script>
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~ 请随意
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>独角兽之路 &copy; 2013 - 2018</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://3431339973.github.io/2015/12/20/Android打包流程/&title=《Android打包流程》 — 独角兽之路&pic=https://3431339973.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://3431339973.github.io/2015/12/20/Android打包流程/&title=《Android打包流程》 — 独角兽之路&source=摘要:Android 里给我们提供了 很多 用来打包的工具" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3431339973.github.io/2015/12/20/Android打包流程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android打包流程》 — 独角兽之路&url=https://3431339973.github.io/2015/12/20/Android打包流程/&via=https://3431339973.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://3431339973.github.io/2015/12/20/Android打包流程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aSY7CMBAFUO5/6fQWKU3yy2WQYr+sEMrgF6TCNbxe8XG8He/fnD+fzz9f++mq6+8nHBgYGI9lHJfHJ0b+4Ot7JuckLwUDA2MHxvXiquEyCcHX7HJQxsDAwCiek4fX5D4YGBgYHUaS6M7iYWBgYCRJ7NiD89Q0SW4n5OIYGBgPZORV999//kp/AwMD41GMo3hU79PfYkarwsDAWJrRSVDnNiyr2z4MDIx9GGMjDtXktjqikbRL//kdMDAwNmYkQTlfdDKEUQ3ZGBgYazPmjk10SmbVYB31YzEwMJZgJOFvVmOysxm9ed0YGBhLM8YKZ3lQri502tIxMDCWY+TtxvzBSVmt2nK4WSEGBsbSjOpCkxtVk9tqqe4Gj4GBsSijE0b7W8N85CL6HTAwMBZi5Bd0ymTVzV91c4mBgbE2o0rqDHXlDYOxEI+BgbEPIxl96AxydQpt02ZGMDAwHsjotxKr6ejYMMdNYxUDA2MDRqdwNla2y+8cNRgwMDC2YVTnrPKw2MdEW0MMDIwtGf3gWx25qG5GMTAw9mTk31Q3c3kgLrczMTAwFmX0y/15mM6HJ8rPxcDAWJpRDXPVEn+1qdlPnjEwMFZlzBqbqKajybYyT7AxMDB2YIwFvk5aO/YPEA1bYGBgbM/oDG91mg03VAwMDIyhjd1gp6JYFsTAwNiHMTexnDVG9pVyGwYGxgMZ1RGHWZu55KVMbmpiYGA8j/EHNQKodkXb/hQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.11"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.11" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

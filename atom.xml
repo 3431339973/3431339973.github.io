@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3431339973.github.io/"/>
-  <updated>2017-10-22T12:08:58.511Z</updated>
+  <updated>2018-03-02T16:13:38.178Z</updated>
   <id>https://3431339973.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>腾讯关键耍流氓后gradle起不来进程</title>
+    <link href="https://3431339973.github.io/2017/04/18/%E8%85%BE%E8%AE%AF%E5%85%B3%E9%94%AE%E8%80%8D%E6%B5%81%E6%B0%93%E5%90%8Egradle%E8%B5%B7%E4%B8%8D%E6%9D%A5%E8%BF%9B%E7%A8%8B/"/>
+    <id>https://3431339973.github.io/2017/04/18/腾讯关键耍流氓后gradle起不来进程/</id>
+    <published>2017-04-18T13:37:23.000Z</published>
+    <updated>2018-03-02T16:13:38.178Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要:今天早上手贱，不知道啥时候电脑上出现个腾讯电脑管家的图标，心想着 既然来了就是缘分，随手就清理下垃圾，点了下优化。然后就卸了。之后打开android studio打算开始工作。可是 项目运行不起来了。</p>
+<p>gradle报错<br><a id="more"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Gradle sync failed: Unable to start the daemon process.</div><div class="line">		This problem might be caused by incorrect configuration of the daemon.</div><div class="line">		For example, an unrecognized jvm option is used.</div><div class="line">		Please refer to the user guide chapter on the daemon at https://docs.gradle.org/3.3/userguide/gradle_daemon.html</div><div class="line">		Please read the following process output to find out more:</div><div class="line">		-----------------------</div><div class="line">		Consult IDE log for more details (Help | Show Log) (7s 617ms)</div></pre></td></tr></table></figure>
+<p>确实是之前没遇到过，凭经看 看是gradle进程运行不起来，又提示JVM相关错误，心想应该是 那里内存不够了<br>之后 百度下 ，别说！答案还不少，看来很多人都遇到过这种错误。看了几篇博客，更验证了我的想法，没错 内存的问题。修开访法基本都是<br>在gradle.properties里添加 org.gradle.jvmargs=-Xmx512m 等等，但是但是但是 我修改后 完全没有用，有点慌了  下午领导还要演示呢 ，怎么办 怎么办。<br>病急乱投医，卸了as重装，没用<br>删了gradle 重下，没用<br>重启电脑，没有<br>一阵激情过后<br>——————————————————————————————————</p>
+<p>我是不是得看看错误日志，不然在这吓忙活啥，果断找到 .gradle下的 日志文件</p>
+<p>看到报错第地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">10:38:44.426 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertised daemon context: DefaultDaemonContext[uid=85cf539f-07f3-4690-85c7-5d370f783767,javaHome=C:\Program Files\Android\Android Studio2\jre,daemonRegistryDir=F:\.gradle\daemon,pid=4280,idleTimeout=10800000,daemonOpts=-Xmx1536m,-Dfile.encoding=GBK,-Duser.country=CN,-Duser.language=zh,-Duser.variant]</div><div class="line">10:38:44.427 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon address: [4930f1ca-e060-49ef-907d-0fad236aad1c port:49617, addresses:[/127.0.0.1]], context: DefaultDaemonContext[uid=85cf539f-07f3-4690-85c7-5d370f783767,javaHome=C:\Program Files\Android\Android Studio2\jre,daemonRegistryDir=F:\.gradle\daemon,pid=4280,idleTimeout=10800000,daemonOpts=-Xmx1536m,-Dfile.encoding=GBK,-Duser.country=CN,-Duser.language=zh,-Duser.variant]</div><div class="line">10:38:44.438 [ERROR] [system.err] </div><div class="line">10:38:44.438 [ERROR] [system.err] FAILURE: Build failed with an exception.</div><div class="line">10:38:44.439 [ERROR] [system.err] </div><div class="line">10:38:44.439 [ERROR] [system.err] * What went wrong:</div><div class="line">10:38:44.439 [ERROR] [system.err] java.net.SocketException: Bad address: Cannot bind</div><div class="line">10:38:44.439 [ERROR] [system.err] </div><div class="line">10:38:44.439 [ERROR] [system.err] * Try:</div><div class="line">10:38:44.439 [ERROR] [system.err] Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.</div><div class="line">10:38:44.440 [ERROR] [system.err] </div><div class="line">10:38:44.440 [ERROR] [system.err] * Get more help at https://help.gradle.org</div><div class="line">Daemon vm is shutting down... The daemon has exited normally or was terminated in response to a user interrupt.</div><div class="line">10:38:44.442 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Removing daemon address: [4930f1ca-e060-49ef-907d-0fad236aad1c port:49617, addresses:[/127.0.0.1]]</div><div class="line">10:38:44.443 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] VM shutdown hook was unable to remove the daemon address from the registry. It will be cleaned up later.</div><div class="line">org.gradle.api.UncheckedIOException: java.net.SocketException: Bad address: Cannot bind</div><div class="line">	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:57)</div><div class="line">	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:40)</div><div class="line">	at org.gradle.cache.internal.FileLockCommunicator.&lt;init&gt;(FileLockCommunicator.java:49)</div><div class="line">	at org.gradle.cache.internal.locklistener.DefaultFileLockContentionHandler.getCommunicator(DefaultFileLockContentionHandler.java:153)</div><div class="line">	at org.gradle.cache.internal.locklistener.DefaultFileLockContentionHandler.reservePort(DefaultFileLockContentionHandler.java:145)</div><div class="line">	at org.gradle.cache.internal.DefaultFileLockManager.lock(DefaultFileLockManager.java:91)</div><div class="line">	at org.gradle.cache.internal.DefaultFileLockManager.lock(DefaultFileLockManager.java:79)</div><div class="line">	at org.gradle.cache.internal.OnDemandFileAccess.updateFile(OnDemandFileAccess.java:45)</div><div class="line">	at org.gradle.cache.internal.SimpleStateCache.update(SimpleStateCache.java:80)</div><div class="line">	at org.gradle.cache.internal.FileIntegrityViolationSuppressingPersistentStateCacheDecorator$1.create(FileIntegrityViolationSuppressingPersistentStateCacheDecorator.java:46)</div><div class="line">	at org.gradle.cache.internal.FileIntegrityViolationSuppressingPersistentStateCacheDecorator.doUpdate(FileIntegrityViolationSuppressingPersistentStateCacheDecorator.java:63)</div><div class="line">	at org.gradle.cache.internal.FileIntegrityViolationSuppressingPersistentStateCacheDecorator.update(FileIntegrityViolationSuppressingPersistentStateCacheDecorator.java:43)</div><div class="line">	at org.gradle.launcher.daemon.registry.PersistentDaemonRegistry.remove(PersistentDaemonRegistry.java:127)</div><div class="line">	at org.gradle.launcher.daemon.server.Daemon$1.run(Daemon.java:127)</div><div class="line">	at org.gradle.process.internal.shutdown.ShutdownHookActionRegister$GradleShutdownHook.run(ShutdownHookActionRegister.java:41)</div><div class="line">	at java.lang.Thread.run(Thread.java:745)</div><div class="line">Caused by: java.net.SocketException: Bad address: Cannot bind</div><div class="line">	at java.net.DualStackPlainDatagramSocketImpl.socketBind(Native Method)</div><div class="line">	at java.net.DualStackPlainDatagramSocketImpl.bind0(DualStackPlainDatagramSocketImpl.java:84)</div><div class="line">	at java.net.AbstractPlainDatagramSocketImpl.bind(AbstractPlainDatagramSocketImpl.java:93)</div><div class="line">	at java.net.DatagramSocket.bind(DatagramSocket.java:392)</div><div class="line">	at java.net.DatagramSocket.&lt;init&gt;(DatagramSocket.java:242)</div><div class="line">	at java.net.DatagramSocket.&lt;init&gt;(DatagramSocket.java:299)</div><div class="line">	at org.gradle.cache.internal.FileLockCommunicator.&lt;init&gt;(FileLockCommunicator.java:47)</div><div class="line">	... 13 more</div></pre></td></tr></table></figure>
+<p>这里面提示 java.net.SocketException: Bad address: Cannot bind</p>
+<p>是socket连接上的错误 看到错误地址的端口是 49617，难道是有什么进程 根他冲突了吗，果断 cmd 去查端口，结果是没找到。<br>继续看日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">VM shutdown hook was unable to remove the daemon address from the registry. It will be cleaned up later.</div></pre></td></tr></table></figure>
+<p>然后 腾讯关机搞我的注册表了吗，排查下，最后也是没看出下什么名堂。<br>看着表眼看快下午了 等不了了，既然是socket的错误，是不是腾讯管家 搞了我的网络配置。他能搞哪 猜不出来，不管了 恢复下  </p>
+<p>cmd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netsh winsock reset</div></pre></td></tr></table></figure>
+<p>提示重启电脑生效，重启电脑，启动as，编译通过。</p>
+<p>最后就想嘱咐下，好奇害死猫 千万别手贱 去尝试那些 流氓软件</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要:今天早上手贱，不知道啥时候电脑上出现个腾讯电脑管家的图标，心想着 既然来了就是缘分，随手就清理下垃圾，点了下优化。然后就卸了。之后打开android studio打算开始工作。可是 项目运行不起来了。&lt;/p&gt;
+&lt;p&gt;gradle报错&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
+    
+    
+      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="Android" scheme="https://3431339973.github.io/tags/Android/"/>
+    
+      <category term="系统" scheme="https://3431339973.github.io/tags/%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>ShAndroidHttpService 在android设备上跑一个Http服务器</title>
@@ -1356,35 +1398,6 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="Android" scheme="https://3431339973.github.io/tags/Android/"/>
     
       <category term="PackageManagerService" scheme="https://3431339973.github.io/tags/PackageManagerService/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>整理 iOS 9 适配中出现的坑</title>
-    <link href="https://3431339973.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
-    <id>https://3431339973.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
-    <published>2015-12-18T08:17:33.000Z</published>
-    <updated>2017-10-01T12:46:58.339Z</updated>
-    
-    <content type="html"><![CDATA[<p>摘要: 整理 iOS 9 适配中出现的坑</p>
-<a id="more"></a>
-<p><a href="http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;摘要: 整理 iOS 9 适配中出现的坑&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="IOS" scheme="https://3431339973.github.io/categories/IOS/"/>
-    
-    
-      <category term="session共享" scheme="https://3431339973.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
-    
-      <category term="分布式" scheme="https://3431339973.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-      <category term="IOS 9" scheme="https://3431339973.github.io/tags/IOS-9/"/>
     
   </entry>
   
