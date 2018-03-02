@@ -401,48 +401,6 @@ PASSWORD;//密码强度 是不是6至12位字母组合
   </entry>
   
   <entry>
-    <title>腾讯 IM 封装成Library</title>
-    <link href="https://3431339973.github.io/2016/09/18/%E8%85%BE%E8%AE%AFIM%E5%B0%81%E8%A3%85%20ShIMLibrary/"/>
-    <id>https://3431339973.github.io/2016/09/18/腾讯IM封装 ShIMLibrary/</id>
-    <published>2016-09-18T14:37:23.000Z</published>
-    <updated>2017-10-01T12:47:02.213Z</updated>
-    
-    <content type="html"><![CDATA[<p>把腾讯 IM 封装成Library<br><a id="more"></a></p>
-<h1 id="IM-Demo"><a href="#IM-Demo" class="headerlink" title="IM_Demo"></a>IM_Demo</h1><h2 id="把腾讯-IM-封装成Library"><a href="#把腾讯-IM-封装成Library" class="headerlink" title="把腾讯 IM 封装成Library"></a>把腾讯 IM 封装成Library</h2><p>依照Demo主项目</p>
-<p>先到腾讯IM 管理平台创建应用  <a href="https://www.qcloud.com/document/product/269/1504" target="_blank" rel="external">传送门</a></p>
-<ul>
-<li>1.导入JrImLibrary</li>
-<li>2.复制 主项目下im 下面的三个类</li>
-<li>3.在Application 中初始化IM模块</li>
-<li>4.替换string.xml 下面的 sdk_appid 和 account_type</li>
-<li>5.还有部分功能 没有实现 例如 上传图片，和搜索用户（考虑在主项目里实现）</li>
-<li>6.服务器端 签名生成 JAVA 代码  [下载地址] (<a href="https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary/raw/master/java_native.rar</a>)</li>
-</ul>
-<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/1.gif" alt=""> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/2.gif" alt=""></p>
-<p> <img src="https://raw.githubusercontent.com/hui46226021/ShIMLibrary/master/3.gif" alt=""></p>
-<p> 源码地址:<a href="https://github.com/hui46226021/ShIMLibrary" target="_blank" rel="external">https://github.com/hui46226021/ShIMLibrary</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;把腾讯 IM 封装成Library&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Android" scheme="https://3431339973.github.io/categories/Android/"/>
-    
-    
-      <category term="移动开发" scheme="https://3431339973.github.io/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="原创" scheme="https://3431339973.github.io/tags/%E5%8E%9F%E5%88%9B/"/>
-    
-      <category term="即时通讯" scheme="https://3431339973.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
-    
-      <category term="腾讯IM" scheme="https://3431339973.github.io/tags/%E8%85%BE%E8%AE%AFIM/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Android JSON解析工具ShJsonUtils</title>
     <link href="https://3431339973.github.io/2016/07/20/JSON%E8%A7%A3%E6%9E%90/"/>
     <id>https://3431339973.github.io/2016/07/20/JSON解析/</id>
@@ -1398,6 +1356,35 @@ private void toast() {        Toast.makeText(this, &quot;old&quot;, Toast.LENGTH
       <category term="Android" scheme="https://3431339973.github.io/tags/Android/"/>
     
       <category term="PackageManagerService" scheme="https://3431339973.github.io/tags/PackageManagerService/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>整理 iOS 9 适配中出现的坑</title>
+    <link href="https://3431339973.github.io/2015/12/18/%E6%95%B4%E7%90%86%20iOS%209%20%E9%80%82%E9%85%8D%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E5%9D%91/"/>
+    <id>https://3431339973.github.io/2015/12/18/整理 iOS 9 适配中出现的坑/</id>
+    <published>2015-12-18T08:17:33.000Z</published>
+    <updated>2017-10-01T12:46:58.339Z</updated>
+    
+    <content type="html"><![CDATA[<p>摘要: 整理 iOS 9 适配中出现的坑</p>
+<a id="more"></a>
+<p><a href="http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1" target="_blank" rel="external">http://www.cocoachina.com/ios/20151012/13715.html#0-tsina-1-57205-397232819ff9a47a7b7e80a40613cfe1</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;摘要: 整理 iOS 9 适配中出现的坑&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="IOS" scheme="https://3431339973.github.io/categories/IOS/"/>
+    
+    
+      <category term="session共享" scheme="https://3431339973.github.io/tags/session%E5%85%B1%E4%BA%AB/"/>
+    
+      <category term="分布式" scheme="https://3431339973.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="IOS 9" scheme="https://3431339973.github.io/tags/IOS-9/"/>
     
   </entry>
   
