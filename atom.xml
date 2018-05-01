@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3431339973.github.io/"/>
-  <updated>2018-03-02T16:13:38.178Z</updated>
+  <updated>2018-05-01T18:04:19.071Z</updated>
   <id>https://3431339973.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>腾讯关键耍流氓后gradle起不来进程</title>
+    <title>腾讯管家耍流氓后gradle起不来进程</title>
     <link href="https://3431339973.github.io/2017/04/18/%E8%85%BE%E8%AE%AF%E5%85%B3%E9%94%AE%E8%80%8D%E6%B5%81%E6%B0%93%E5%90%8Egradle%E8%B5%B7%E4%B8%8D%E6%9D%A5%E8%BF%9B%E7%A8%8B/"/>
     <id>https://3431339973.github.io/2017/04/18/腾讯关键耍流氓后gradle起不来进程/</id>
     <published>2017-04-18T13:37:23.000Z</published>
-    <updated>2018-03-02T16:13:38.178Z</updated>
+    <updated>2018-05-01T18:04:19.071Z</updated>
     
     <content type="html"><![CDATA[<p>摘要:今天早上手贱，不知道啥时候电脑上出现个腾讯电脑管家的图标，心想着 既然来了就是缘分，随手就清理下垃圾，点了下优化。然后就卸了。之后打开android studio打算开始工作。可是 项目运行不起来了。</p>
 <p>gradle报错<br><a id="more"></a></p>
